@@ -1,127 +1,372 @@
-# SQL-injectie
+# SQL Injection: Beveiliging
 
-Aan het eind van deze tekst maken we [oefening nummer 2](oefeningen/sql-oefening2.md).
+SQL injection is één van de meest voorkomende en gevaarlijkste beveiligingslekken in webapplicaties. In dit deel leer je wat SQL injection is, waarom het gevaarlijk is, en vooral: **hoe je het voorkomt** met de patterns die je al hebt geleerd.
 
-In de vorige paragraaf is er kennis opgedaan omtrent met wijzigen van gegevens uit een database door SQL-statements uit te voeren binnen een Python-file. Dat is gedaan door het e-mailadres hardcoded in te voeren gevolgd door een voorwaarde (`WHERE...`). Het zou meer in de lijn der verwachting liggen om gebruikt te maken van variabelen en de waarde van een variabele te gebruiken bij het wijzigen van een record.
+!!! warning "OWASP Top 10"
+    SQL injection staat al jaren in de [OWASP Top 10](https://owasp.org/www-project-top-ten/) van meest kritieke webapplicatie beveiligingsrisico's. Dit is essentiële kennis voor elke webdeveloper.
 
-Dat zou er zo uit kunnen zien:
+## Wat is SQL injection?
 
-```ipython
-In [1]: new_email = 'anotherupdate@update.com'
-In [2]: phone = 1234567
-In [3]: update_sql = f"UPDATE contacts SET email = '{new_email}' WHERE phone = {phone}"
+SQL injection is een aanval waarbij een kwaadwillende gebruiker SQL code injecteert via user input. Dit kan leiden tot:
+
+- **Data diefstal**: Toegang tot alle data in de database
+- **Data verlies**: Verwijderen van tabellen of records
+- **Ongeautoriseerde toegang**: Inloggen als andere gebruikers
+- **Complete compromise**: Overame van de database server
+
+### Voorbeeld: onveilige code
+
+Stel je hebt een login functie die user input direct in SQL zet:
+
+```python
+import sqlite3
+
+def login_unsafe(username: str, password: str) -> bool:
+    """GEVAARLIJK - gebruik dit NOOIT!"""
+    conn = sqlite3.connect("users.db")
+
+    # FOUT: f-string met user input in SQL!
+    query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
+
+    cursor = conn.execute(query)
+    user = cursor.fetchone()
+    conn.close()
+
+    return user is not None
+
+# Normale login
+result = login_unsafe("jan", "geheim123")  # Werkt normaal
+
+# SQL injection attack!
+result = login_unsafe("admin' --", "whatever")
+# Query wordt: SELECT * FROM users WHERE username = 'admin' --' AND password = 'whatever'
+# De -- maakt de rest commentaar, dus password check wordt overgeslagen!
 ```
 
-Dit werkt allemaal prima, zoals we hiervoor al gezien hebben. Maar wat gebeurt er nu als we een gebruiker in staat stellen zelf zijn telefoonnummer in te toetsen?
+De aanvaller kan nu inloggen als admin **zonder het wachtwoord te weten**!
 
-```ipython hl_lines="2"
-In [4]: phone = input('Voer uw nummer in ')
-Voer uw nummer in 123456
+### Andere aanvallen
 
-In [5]: update_sql = f"UPDATE contacts SET email = '{new_email}'
-...: WHERE phone = {phone}"
+SQL injection kan ook gebruikt worden voor:
 
-In [6]: update_sql
-Out[6]: "UPDATE contacts SET email = 'anotherupdate@update.com' WHERE phone =  123456"
+**Data diefstal:**
+```python
+# User input: ' OR '1'='1
+query = f"SELECT * FROM users WHERE username = '{user_input}'"
+# Wordt: SELECT * FROM users WHERE username = '' OR '1'='1'
+# Dit returnt ALLE gebruikers!
 ```
 
-Ook dit zal het gewenste resultaat opleveren.
-
-## Meerdere regels updaten
-
-Python is heel pienter in de omgang met SQL en stelt gebruikers in staat meerdere SQL-statements na elkaar te laten uitvoeren. Daarvoor kan het commando `executescript()` uitgevoerd worden. Een aantal wijzigingen in de code:
-
-```ipython hl_lines="4 10 11"
-In [7]: new_email = 'newemail@update.com'
-In [8]: phone = input("Please enter your phone number")
-
-Please enter your phone number 12345; drop table contacts;
-
-In [9]: update_sql = f"UPDATE contacts SET email = '{new_email}' WHERE phone = {phone}"
-
-In [10]: update_sql
-Out[10]: "UPDATE contacts SET email = 'newemail@update.com'
-   WHERE phone =  12345; drop table contacts;"
-
-In [11]: update_cursor = db.cursor()
-In [12]: update_cursor.executescript(update_sql)
-
----------------------------------------------------------------------------
-OperationalError                          Traceback (most recent call last)
-<ipython-input-12-431cdd50b1d0> in <module>
-      1 update_cursor = db.cursor()
-----> 2 update_cursor.executescript(update_sql)
-
-OperationalError: no such table: contacts
-
+**Data vernietiging:**
+```python
+# User input: '; DROP TABLE users; --
+query = f"DELETE FROM messages WHERE id = {message_id}"
+# Zou kunnen worden: DELETE FROM messages WHERE id = 1; DROP TABLE users; --
+# (Dit werkt gelukkig niet altijd, maar het risico bestaat)
 ```
 
-Omdat de methode `executescript()` een gebruiker dus in staat stelt meerdere SQL-statements uit de laten voeren is het mogelijk een dusdanig commando op te geven dat de hele tabel is verdwenen. En dat kan heel vervelende consequenties hebben voor een organisatie, bijvoorbeeld wanneer de gehele orderportefeuille gewist wordt. Gelukkig bestaat de file [`contacts.py`](bestanden/contacts.py) nog en kan de tabel zonder al te veel moeite weer in ere hersteld worden.
+## De oplossing: placeholders
 
-Wat er nu net gedemonstreerd is, staat bekend als een *SQL-injectie* aanval. Een aanvaller injecteert dan een statement in de ‘gewone’ SQL-code. Vroeger was het zo eenvoudig als hier net getoond is, maar tegenwoordig moet er meer moeite voor gedaan worden.
+Je hebt de oplossing al gezien in eerdere delen: **placeholders** (`?`). Dit is de **enige veilige manier** om user input in SQL te gebruiken.
 
-Zoals gezegd, administrators en programmeurs zijn zich bewust van dit probleem en dus bestaat het fenomeen nog steeds, maar er veel meer specialistische kennis nodig van SQL en database om een succesvolle aanval in te kunnen zetten.
+### Veilige login functie
 
-Ook hier is het in scène gezet (`executescript()`) om duidelijk te maken hoe de SQL-injection kan plaatsvinden. De methode `executescript()` wordt weer terug geschaald naar de methode `execute()`. Het volgende voorbeeld maakt dit duidelijk:
+```python
+import sqlite3
+from sqlite3 import Row
 
-```ipython
-In [1]: new_email = 'newmail@update.com'
-In [2]: phone = input("Voer uw nummer in: ")
+def login_safe(username: str, password: str) -> bool:
+    """Veilige login met placeholders."""
+    with sqlite3.connect("users.db") as conn:
+        conn.row_factory = Row
 
-Voer uw nummer in: 1234; drop table contacts;
+        # VEILIG: gebruik placeholders!
+        cursor = conn.execute(
+            "SELECT * FROM users WHERE username = ? AND password = ?",
+            (username, password)
+        )
 
-In [3]: update_sql = f"UPDATE contacts SET email = '{new_email}' WHERE phone = {phone}"
-In [4]: update_cursor = db.cursor()
-In [5]: update_cursor.execute(update_sql)
+        user = cursor.fetchone()
+        return user is not None
 
----------------------------------------------------------------------------
-Warning                                   Traceback (most recent call last)
-<ipython-input-4-9d2f5feb0b58> in <module>
-      1 update_sql = f"UPDATE contacts SET email = '{new_email}' WHERE phone = {phone}"
-      2 update_cursor = db.cursor()
-----> 3 update_cursor.execute(update_sql)
+# Normale login werkt
+result = login_safe("jan", "geheim123")
 
-Warning: You can only execute one statement at a time.
+# SQL injection attack wordt onschadelijk gemaakt
+result = login_safe("admin' --", "whatever")
+# De ' wordt geëscaped, wordt gezocht naar username "admin' --"
+# Geen gevaar!
 ```
 
-De tabel bestaat nog en er verschijnt alleen een waarschuwing dat het niet mogelijk is meerdere SQL-statements na elkaar uit te voeren.
+### Waarom placeholders veilig zijn
 
-## Placeholders
+Placeholders zorgen voor **automatische escaping** van speciale karakters:
 
-Het verwijderen van de tabel is weliswaar tegengegaan, maar er is wel een foutmelding ontstaan waardoor de wijziging niet is doorgevoerd. Hoe kan dit beter? Door gebruik te maken van *placeholders*  en *parameter substitution*.
+```python
+def search_users_safe(search_term: str) -> list[Row]:
+    """Zoek gebruikers veilig."""
+    with sqlite3.connect("users.db") as conn:
+        conn.row_factory = Row
 
-Een voorbeeld om dit duidelijk te maken.
+        # Gevaarlijke input wordt automatisch geëscaped
+        cursor = conn.execute(
+            "SELECT * FROM users WHERE username LIKE ?",
+            (f"%{search_term}%",)
+        )
 
-```ipython
-In [6]: new_email = "newemail@update.com"
-In [7]: phone = input("Voer uw nummer in: ")
+        return cursor.fetchall()
 
-Voer uw nummer in: 1234; drop table contact;
-
-In [8]: update_sql = "UPDATE contacts SET email = ? WHERE phone = ?"
-
-In [9]: update_sql
-Out[9]: 'UPDATE contacts SET email = ? WHERE phone = ?'
-
-In [10]: update_cursor = db.cursor()
-In [11]: update_cursor.execute(update_sql, (new_email, phone))
-In [12]: print(f"{update_cursor.rowcount} rows updated")
-
-0 rows updated
+# SQL injection poging
+users = search_users_safe("'; DROP TABLE users; --")
+# Zoekt letterlijk naar de string "'; DROP TABLE users; --"
+# Geen SQL code executie!
 ```
 
-In het `UPDATE`-statement zijn de waarde van de kolommen `email` en `phone` vervangen door een vraagteken. Dat zijn de *placeholders*. Bij het uitvoeren van de wijziging worden de variabelen als parameters opgevoerd. De methode `execute()` krijgt nu als tweede parameter een tupel mee waarin de waarden zitten waardoor de vraagtekens vervangen moeten worden. Tijdens deze vervanging worden alle bijzonder tekens, zoals een puntkomma, *geëscaped*: dat wil zeggen dat ze onschadelijk worden gemaakt, zodat ze niet meer als database-commando worden gezien, maar gewoon als tekst.
+De database driver escapet automatisch:
+- Enkele quotes (`'`) → `\'`
+- Dubbele quotes (`"`) → `\"`
+- Puntkomma's (`;`)
+- Backslashes (`\`)
 
-Feitelijk betekent dit dat het update statement er na het invoeren van de kwalijke waarde (`1234;drop table contacts`) als volgt uit komt te zien:
+## Common mistakes (zelfs met placeholders!)
 
-```text
-UPDATE contacts SET email='newmail@update.com'
-WHERE phone='1234\;drop table contacts\;';
+Er zijn een paar situaties waar placeholders **niet werken**. Pas hier extra op:
+
+### 1. Table/column names
+
+Placeholders werken NIET voor tabel- of kolomnamen:
+
+```python
+# FOUT - dit werkt niet!
+table_name = "users"
+cursor.execute("SELECT * FROM ?", (table_name,))  # ERROR
+
+# Oplossing: whitelist validatie
+ALLOWED_TABLES = ["users", "products", "orders"]
+
+def get_all_from_table(table_name: str) -> list[Row]:
+    """Haal data op met veilige tabel selectie."""
+    if table_name not in ALLOWED_TABLES:
+        raise ValueError(f"Invalid table: {table_name}")
+
+    with sqlite3.connect("shop.db") as conn:
+        conn.row_factory = Row
+        # Nu is f-string veilig omdat we gevalideerd hebben
+        cursor = conn.execute(f"SELECT * FROM {table_name}")
+        return cursor.fetchall()
 ```
 
-Dat resulteert in een update van nul regels, want er is niemand in de database die zo'n raar telefoonnummer heeft.
+### 2. ORDER BY direction
 
-Maak nu [oefening nummer 2](oefeningen/sql-oefening2.md).
+```python
+# FOUT - ORDER BY richting kan niet als placeholder
+cursor.execute("SELECT * FROM users ORDER BY name ?", ("DESC",))  # ERROR
+
+# Oplossing: valideer input
+def get_users_sorted(desc: bool = False) -> list[Row]:
+    """Haal gebruikers gesorteerd op."""
+    # Controleer zelf welke waarde er komt
+    order = "DESC" if desc else "ASC"
+
+    with sqlite3.connect("users.db") as conn:
+        conn.row_factory = Row
+        # Nu is f-string veilig
+        cursor = conn.execute(f"SELECT * FROM users ORDER BY name {order}")
+        return cursor.fetchall()
+```
+
+### 3. LIMIT en OFFSET
+
+Deze werken meestal WEL als placeholders, maar niet in alle SQL databases:
+
+```python
+# SQLite: dit werkt
+def get_users_paginated(limit: int, offset: int) -> list[Row]:
+    """Paginatie met placeholders (veilig in SQLite)."""
+    with sqlite3.connect("users.db") as conn:
+        conn.row_factory = Row
+        cursor = conn.execute(
+            "SELECT * FROM users LIMIT ? OFFSET ?",
+            (limit, offset)
+        )
+        return cursor.fetchall()
+```
+
+## Volledige veilige database class
+
+Hier is een complete voorbeeld met alle veilige patterns:
+
+```python
+import sqlite3
+from sqlite3 import Row
+
+class UserDatabase:
+    """Veilige user database met SQL injection bescherming."""
+
+    def __init__(self, db_path: str = "users.db"):
+        self.db_path = db_path
+        self._create_table()
+
+    def _create_table(self) -> None:
+        """Maak users tabel aan."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS users (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT NOT NULL UNIQUE,
+                    email TEXT NOT NULL,
+                    password TEXT NOT NULL
+                )
+            """)
+            conn.commit()
+
+    def add_user(self, username: str, email: str, password: str) -> int:
+        """Voeg user toe (altijd veilig met placeholders)."""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.execute(
+                "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
+                (username, email, password)
+            )
+            conn.commit()
+            return cursor.lastrowid
+
+    def login(self, username: str, password: str) -> Row | None:
+        """Login user (veilig tegen SQL injection)."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = Row
+            cursor = conn.execute(
+                "SELECT * FROM users WHERE username = ? AND password = ?",
+                (username, password)
+            )
+            return cursor.fetchone()
+
+    def search_users(self, search_term: str) -> list[Row]:
+        """Zoek users (veilig met placeholder in LIKE)."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = Row
+            cursor = conn.execute(
+                "SELECT id, username, email FROM users WHERE username LIKE ?",
+                (f"%{search_term}%",)
+            )
+            return cursor.fetchall()
+
+    def update_email(self, user_id: int, new_email: str) -> bool:
+        """Update email (veilig met placeholders)."""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.execute(
+                "UPDATE users SET email = ? WHERE id = ?",
+                (new_email, user_id)
+            )
+            conn.commit()
+            return cursor.rowcount > 0
+
+    def delete_user(self, user_id: int) -> bool:
+        """Verwijder user (veilig met placeholder)."""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.execute(
+                "DELETE FROM users WHERE id = ?",
+                (user_id,)
+            )
+            conn.commit()
+            return cursor.rowcount > 0
 
 
+# Gebruik (veilig tegen alle SQL injection pogingen)
+db = UserDatabase()
 
+# Normale gebruik
+db.add_user("jan", "jan@email.nl", "geheim123")
+
+# SQL injection pogingen worden onschadelijk gemaakt
+db.add_user("'; DROP TABLE users; --", "evil@hacker.com", "whatever")
+# Dit maakt gewoon een user met username "'; DROP TABLE users; --"
+# Geen gevaar!
+
+# Veilig inloggen
+user = db.login("jan", "geheim123")
+if user:
+    print(f"Ingelogd als {user['username']}")
+
+# Veilig zoeken
+users = db.search_users("'; DELETE FROM users; --")
+# Zoekt letterlijk naar die string, geen SQL executie
+```
+
+## Flask en SQL injection
+
+In Flask applicaties is SQL injection een groot risico omdat je direct met user input werkt:
+
+```python
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/search')
+def search():
+    # User input komt uit URL parameters
+    query = request.args.get('q', '')
+
+    # GEVAARLIJK - NOOIT DOEN!
+    # results = conn.execute(f"SELECT * FROM products WHERE name LIKE '%{query}%'")
+
+    # VEILIG - altijd placeholders gebruiken
+    with sqlite3.connect("shop.db") as conn:
+        conn.row_factory = Row
+        cursor = conn.execute(
+            "SELECT * FROM products WHERE name LIKE ?",
+            (f"%{query}%",)
+        )
+        results = cursor.fetchall()
+
+    return render_template('search.html', results=results)
+```
+
+Later met SQLAlchemy (Week 6) krijg je deze beveiliging automatisch:
+
+```python
+# SQLAlchemy (Week 6) - automatisch veilig
+products = session.query(Product).filter(
+    Product.name.like(f"%{query}%")
+).all()
+# Placeholders worden automatisch gebruikt!
+```
+
+## Best practices samenvatting
+
+✅ **DOE WEL:**
+- Gebruik **altijd** placeholders (`?`) voor values
+- Gebruik context managers (`with`)
+- Valideer input bij table/column names (whitelist)
+- Gebruik type hints
+- Test met bekende SQL injection strings
+
+❌ **DOE NIET:**
+- F-strings of string concatenatie met user input in SQL
+- User input direct in SQL queries
+- `executescript()` met user input
+- Vertrouwen op client-side validatie alleen
+
+## Samenvatting
+
+Je hebt geleerd:
+
+- **Wat SQL injection is** en waarom het gevaarlijk is
+- **Placeholders gebruiken** als enige veilige methode
+- **Common mistakes** (table names, ORDER BY, etc.)
+- **Veilige patterns** voor alle CRUD operaties
+- **Flask specifieke risico's** en oplossingen
+- **Best practices** voor veilige database code
+
+**Volgende stap:** In [Deel 6](sql-deel6.md) leer je over exception handling bij database operaties.
+
+**Oefening:** Maak nu [oefening 2](oefeningen/sql-oefening2.md) over SQL injection.
+
+!!! tip "Test je beveiliging"
+    Test je applicaties altijd met deze input strings:
+    ```
+    ' OR '1'='1
+    ' OR '1'='1' --
+    '; DROP TABLE users; --
+    1' AND '1'='2
+    ```
+    Als deze niet gewoon als letterlijke strings behandeld worden, heb je een probleem!
