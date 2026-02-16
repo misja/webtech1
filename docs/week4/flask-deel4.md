@@ -1,8 +1,10 @@
-# Flask – Templates
+# Flask – Templates met Jinja2
 
-Tot dusverre is de HTML-pagina alleen handmatig aangestuurd via een Python-string. Het ligt meer in de lijn der verwachtingen om een weergave te realiseren op basis van HTML-sjablonen. Flask zoekt automatisch naar HTML-sjablonen in de sjabloondirectory, `templates`. Later wordt nader ingegaan op de wijze hoe grotere applicaties kunnen worden gescheiden om meerdere sjabloondirectory's te hebben.
+Tot nu toe heb je HTML als Python strings geretourneerd. Dat werkt voor kleine voorbeelden, maar voor echte webapplicaties gebruik je **templates** - HTML bestanden met placeholders voor dynamische data.
 
-Sjablonen kunnen eenvoudig worden weergeven door de functie `render_template` uit flask te importeren en vervolgens een .html-bestand te retourneren vanuit onze view-functie.
+Flask gebruikt **Jinja2** als template engine. Jinja2 laat je variabelen, loops, conditionals en meer gebruiken in HTML. Dit scheidt presentatie (HTML) van logica (Python).
+
+Flask zoekt automatisch naar templates in de `templates/` directory in je project root.
 
 ## Tijd voor een voorbeeld
 

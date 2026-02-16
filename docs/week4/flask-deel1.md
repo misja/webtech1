@@ -37,9 +37,19 @@ Flask wordt dus een microframework genoemd. Het is ontworpen om de kern van de a
 
 Flask is specifiek voor Python gebouwd. Verder is het gemakkelijk om met Flask aan de slag te gaan, omdat het geen enorme leercurve heeft. Bovendien is het erg expliciet, wat de leesbaarheid vergroot. Er zijn slechts een aantal coderegels nodig om een "Hello World" -app te creëren. Daarover zometeen meer.
 
-Het wordt dus een microframework genoemd, maar dat betekent niet dat de gehele app in één enkel Python-bestand ondergebracht hoeft te worden. Vaak is het gewenst en nodig meerdere bestanden te gebruiken voor grote en complexe programma’s.
+Het wordt dus een microframework genoemd, maar dat betekent niet dat de gehele app in één enkel Python-bestand ondergebracht hoeft te worden. Vaak is het gewenst en nodig meerdere bestanden te gebruiken voor grote en complexe programma's.
 
 Flask is één van de meest populaire webframeworks; het is up-to-date en modern. Bovendien is de functionaliteit op eenvoudige wijze uit te breiden.
 
-Maar voordat er met ontwikkelen begonnen kan worden, is het nodig Flask te installeren omdat het niet standaard als module wordt meegenomen bij het installeren van Python.
+## Flask in deze cursus
+
+In deze cursus leer je Flask stap voor stap:
+
+- **Week 4**: Flask basics (routes, templates, Jinja2)
+- **Week 5**: Flask + Forms (gebruikersinput afhandelen)
+- **Week 6**: Flask + SQLAlchemy (databases met ORM)
+
+Je gebruikt dezelfde moderne tools (`uv`, `pyproject.toml`) als bij Week 2 (OOP) en Week 3 (SQL). Dit bereidt je voor op professionele webdevelopment!
+
+**Volgende stap:** In [Deel 2](flask-deel2.md) leer je hoe je Flask installeert met **uv** - dezelfde tool als bij OOP.
 
