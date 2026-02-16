@@ -1,25 +1,13 @@
 # SQLite in Python
 
-In het vak Databases heb je geleerd werken met PostgreSQL - een krachtige relationele database. Voor webapplicaties gebruik je vaak dezelfde database, maar voor development, testing en kleine applicaties is **SQLite** een handige en lichtgewicht alternatief.
+In het vak Databases heb je geleerd werken met PostgreSQL. In deze module gebruik je **SQLite** - een lichtgewicht database die als een enkel bestand werkt en built-in bij Python zit. Geen server setup nodig.
 
-## Waarom SQLite?
+!!! note "SQL syntax verschillen"
+    SQLite gebruikt grotendeels dezelfde SQL syntax als PostgreSQL, met enkele verschillen:
 
-SQLite verschilt op belangrijke punten van PostgreSQL:
-
-| Aspect | PostgreSQL | SQLite |
-|--------|-----------|--------|
-| **Server** | Aparte database server | Geen server - gewoon een bestand |
-| **Setup** | Installatie + configuratie | Built-in met Python |
-| **Gebruik** | Productie webapplicaties | Development, testing, kleine apps |
-| **Concurrency** | Veel gelijktijdige gebruikers | Beperkt (file locking) |
-| **SQL dialect** | PostgreSQL SQL | SQLite SQL (kleine verschillen) |
-
-!!! note "SQLite vs PostgreSQL SQL"
-    De SQL syntax is grotendeels hetzelfde. Kleine verschillen:
-
-    - SQLite heeft minder datatypes (TEXT, INTEGER, REAL, BLOB)
+    - Minder datatypes (TEXT, INTEGER, REAL, BLOB in plaats van VARCHAR, TIMESTAMP, etc.)
     - Geen `ALTER TABLE` voor het wijzigen van kolommen
-    - Type validatie is minder strikt
+    - Minder strikte type validatie
 
 ## SQLite CLI (kort)
 
