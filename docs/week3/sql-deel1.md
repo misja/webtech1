@@ -40,12 +40,4 @@ Handige punt-commando's (vergelijkbaar met `\d` commando's in psql):
 
     **Download:** [sqlitebrowser.org](https://sqlitebrowser.org/)
 
-## SQLite in Python
-
-Python heeft `sqlite3` built-in. In het volgende deel leer je hoe je SQLite gebruikt vanuit Python met moderne patterns zoals:
-
-- Type annotations
-- Context managers (`with` statements)
-- Proper error handling
-
-**Volgende stap:** In [Deel 2](sql-deel2.md) ga je direct aan de slag met SQLite in Python.
+**Volgende stap:** [Deel 2](sql-deel2.md) - SQLite vanuit Python.

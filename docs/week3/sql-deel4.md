@@ -422,6 +422,6 @@ Je hebt geleerd:
 - Type hints en docstrings consequent toepassen
 - Alle patterns combineren (context managers, placeholders, row_factory)
 
-**Volgende stap:** In [Deel 5](sql-deel5.md) leer je over SQL injection en hoe je je code beveiligt.
+**Volgende stap:** [Deel 5](sql-deel5.md) - SQL injection preventie.
 
 **Tip:** Gebruik deze MusicDatabase class als template voor je eigen database classes in Flask applicaties!

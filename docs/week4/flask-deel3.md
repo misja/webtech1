@@ -1,7 +1,5 @@
 # Flask – Basale Werking
 
-In dit deel leer je de fundamenten van Flask: hoe routes werken, hoe je dynamische URLs maakt, en hoe je de debug mode gebruikt. We gebruiken moderne Python patterns met type hints.
-
 Aan het eind van deze tekst maken we [oefening 1](oefeningen/flask-oefening1.md).
 
 ## Hoe werkt Flask?
@@ -142,7 +140,7 @@ Als je naar een route gaat die niet bestaat (bijv. `http://127.0.0.1:5000/nope`)
 
 ![Pagina die niet bestaat](imgs/bestaat-niet.png)
 
-Later leer je hoe je custom error pages maakt.
+Je kunt custom error pages maken voor 404s.
 
 ## Dynamische routes
 
@@ -343,7 +341,7 @@ def otherPage() -> str:  # Niet Pythonic!
 
 ## Voorbereiding op Templates (Deel 4)
 
-HTML in Python strings is niet handig voor grotere pagina's. Straks leer je **Jinja2 templates**:
+HTML in Python strings is niet handig voor grotere pagina's. Met **Jinja2 templates** scheid je HTML van Python:
 
 ```python
 # Nu (deel 3):
@@ -401,7 +399,7 @@ Je hebt geleerd:
 - **Debug mode**: Auto-reload en interactieve debugger
 - **Best practices**: Type hints, docstrings, consistent naming
 
-**Volgende stap:** In [Deel 4](flask-deel4.md) leer je **templates** gebruiken met Jinja2 om HTML en Python te scheiden.
+**Volgende stap:** [Deel 4](flask-deel4.md) - Jinja2 templates.
 
 **Oefening:** Maak nu [oefening 1](oefeningen/flask-oefening1.md).
 

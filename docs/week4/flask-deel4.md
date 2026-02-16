@@ -503,7 +503,7 @@ def products() -> str:
 {% endblock %}
 ```
 
-Later (Week 6) leer je **SQLAlchemy** - dan wordt dit nog makkelijker!
+Met SQLAlchemy wordt dit nog makkelijker - dat zie je in Week 6.
 
 ## Best practices
 
@@ -574,4 +574,4 @@ Je hebt geleerd:
 - **Template inheritance**: `{% extends "base.html" %}`
 - **Type hints**: `-> str` voor render_template returns
 
-**Volgende stap:** In Week 5 leer je **Flask Forms** - gebruikersinput afhandelen met WTForms.
+**Volgende stap:** Week 5 - Flask Forms en WTForms.

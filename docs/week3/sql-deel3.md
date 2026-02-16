@@ -1,6 +1,6 @@
 # SQLite in Python: JOINs en Queries
 
-In het vorige deel heb je gewerkt met een eenvoudige contacts database. Nu gaan we werken met een realistische database met meerdere tabellen en **JOIN** queries. Je kent JOINs al van het vak Databases - hier leer je hoe je ze gebruikt vanuit Python.
+De music database heeft meerdere tabellen (artists, albums, songs) die met elkaar verbonden zijn via foreign keys. Met **JOIN** queries haal je data uit meerdere tabellen tegelijk op.
 
 ## De music database
 
@@ -443,6 +443,6 @@ Je hebt geleerd:
 - **Views** maken en gebruiken (optioneel)
 - Placeholders gebruiken voor SQL injection preventie
 
-**Volgende stap:** In [Deel 4](sql-deel4.md) leer je werken met een complete MusicDatabase class die alle functionaliteit combineert.
+**Volgende stap:** [Deel 4](sql-deel4.md) - Complete database class.
 
 **Oefening:** Maak nu [oefening 1](oefeningen/sql-oefening1.md).

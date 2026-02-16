@@ -1,6 +1,6 @@
 # Exception Handling bij Database Operaties
 
-Bij het werken met databases kunnen allerlei fouten optreden: database niet gevonden, constraint violations, connection errors, etc. In dit deel leer je hoe je deze fouten **netjes afvangt** en afhandelt in plaats van je applicatie te laten crashen.
+Bij het werken met databases kunnen allerlei fouten optreden: database niet gevonden, constraint violations, connection errors, etc.
 
 ## Waarom exception handling belangrijk is
 

@@ -1,6 +1,6 @@
 # SQL Injection: Beveiliging
 
-SQL injection is één van de meest voorkomende en gevaarlijkste beveiligingslekken in webapplicaties. In dit deel leer je wat SQL injection is, waarom het gevaarlijk is, en vooral: **hoe je het voorkomt** met de patterns die je al hebt geleerd.
+SQL injection is één van de meest voorkomende en gevaarlijkste beveiligingslekken in webapplicaties.
 
 !!! warning "OWASP Top 10"
     SQL injection staat al jaren in de [OWASP Top 10](https://owasp.org/www-project-top-ten/) van meest kritieke webapplicatie beveiligingsrisico's. Dit is essentiële kennis voor elke webdeveloper.
@@ -347,7 +347,7 @@ Je hebt geleerd:
 - **Flask specifieke risico's** en oplossingen
 - **Best practices** voor veilige database code
 
-**Volgende stap:** In [Deel 6](sql-deel6.md) leer je over exception handling bij database operaties.
+**Volgende stap:** [Deel 6](sql-deel6.md) - Database error handling.
 
 **Oefening:** Maak nu [oefening 2](oefeningen/sql-oefening2.md) over SQL injection.
 

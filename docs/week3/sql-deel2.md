@@ -1,6 +1,6 @@
 # SQLite in Python: Basics
 
-Je kent SQL al van het vak Databases. In dit deel leer je hoe je SQLite gebruikt vanuit Python met de `sqlite3` library. We gebruiken moderne Python patterns: type annotations, context managers en proper error handling.
+Python heeft de `sqlite3` library built-in. Hieronder zie je hoe je een database connectie maakt, queries uitvoert, en data ophaalt.
 
 ## Database connectie
 
@@ -395,4 +395,4 @@ Je hebt geleerd:
 - Context managers (`with`) voor automatic cleanup
 - Type annotations en moderne Python patterns
 
-**Volgende stap:** In [Deel 3](sql-deel3.md) werk je met een grotere database en leer je JOIN queries.
+**Volgende stap:** [Deel 3](sql-deel3.md) - JOINs met meerdere tabellen.

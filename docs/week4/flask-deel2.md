@@ -356,5 +356,5 @@ Je hebt geleerd:
 - **Project structuur** met `pyproject.toml` en `uv.lock`
 - **Development workflow** zonder handmatige virtual environment activatie
 
-**Volgende stap:** In [Deel 3](flask-deel3.md) leer je de basale werking van Flask met routes, decorators en dynamische URLs.
+**Volgende stap:** [Deel 3](flask-deel3.md) - Routes en dynamische URLs.
 
