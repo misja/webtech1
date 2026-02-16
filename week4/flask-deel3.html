@@ -3748,7 +3748,6 @@
 
 
 <h1 id="flask-basale-werking">Flask – Basale Werking<a class="headerlink" href="#flask-basale-werking" title="Link naar deze sectie">¶</a></h1>
-<p>In dit deel leer je de fundamenten van Flask: hoe routes werken, hoe je dynamische URLs maakt, en hoe je de debug mode gebruikt. We gebruiken moderne Python patterns met type hints.</p>
 <p>Aan het eind van deze tekst maken we <a href="oefeningen/flask-oefening1.html">oefening 1</a>.</p>
 <h2 id="hoe-werkt-flask">Hoe werkt Flask?<a class="headerlink" href="#hoe-werkt-flask" title="Link naar deze sectie">¶</a></h2>
 <p>Vanuit vogelvluchtperspectief werkt Flask als volgt:</p>
@@ -3859,7 +3858,7 @@
 <h2 id="404-pagina-niet-gevonden">404 - Pagina niet gevonden<a class="headerlink" href="#404-pagina-niet-gevonden" title="Link naar deze sectie">¶</a></h2>
 <p>Als je naar een route gaat die niet bestaat (bijv. <code>http://127.0.0.1:5000/nope</code>), krijg je een 404 error:</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/bestaat-niet.png" data-desc-position="bottom"><img alt="Pagina die niet bestaat" src="imgs/bestaat-niet.png"></a></p>
-<p>Later leer je hoe je custom error pages maakt.</p>
+<p>Je kunt custom error pages maken voor 404s.</p>
 <h2 id="dynamische-routes">Dynamische routes<a class="headerlink" href="#dynamische-routes" title="Link naar deze sectie">¶</a></h2>
 <p>Wat als je honderden cursisten hebt, elk met hun eigen profielpagina? Je wilt niet voor elke cursist een aparte route schrijven!</p>
 <p><strong>Oplossing:</strong> Dynamische routes met URL parameters.</p>
@@ -4014,7 +4013,7 @@
 </span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="k">return</span> <span class="s2">"&lt;p&gt;Content&lt;/p&gt;"</span>
 </span></code></pre></div>
 <h2 id="voorbereiding-op-templates-deel-4">Voorbereiding op Templates (Deel 4)<a class="headerlink" href="#voorbereiding-op-templates-deel-4" title="Link naar deze sectie">¶</a></h2>
-<p>HTML in Python strings is niet handig voor grotere pagina's. Straks leer je <strong>Jinja2 templates</strong>:</p>
+<p>HTML in Python strings is niet handig voor grotere pagina's. Met <strong>Jinja2 templates</strong> scheid je HTML van Python:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Nu (deel 3):</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -4063,7 +4062,7 @@
 <li><strong>Debug mode</strong>: Auto-reload en interactieve debugger</li>
 <li><strong>Best practices</strong>: Type hints, docstrings, consistent naming</li>
 </ul>
-<p><strong>Volgende stap:</strong> In <a href="flask-deel4.html">Deel 4</a> leer je <strong>templates</strong> gebruiken met Jinja2 om HTML en Python te scheiden.</p>
+<p><strong>Volgende stap:</strong> <a href="flask-deel4.html">Deel 4</a> - Jinja2 templates.</p>
 <p><strong>Oefening:</strong> Maak nu <a href="oefeningen/flask-oefening1.html">oefening 1</a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Modern Flask pattern</p>
