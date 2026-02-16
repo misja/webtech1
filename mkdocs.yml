@@ -6,49 +6,87 @@ use_directory_urls: false
 
 theme:
   name: 'material'
-  palette:
-    primary: 'blue grey'
-    accent: 'orange'
+  language: 'nl'
   icon:
     logo: 'material/library'
-  language: 'nl'
-  include_sidebar: false
-extra_css:
-  - css/extra.css
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: 'blue grey'
+      accent: 'orange'
+      toggle:
+        icon: material/brightness-7
+        name: Schakel naar donkere modus
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: 'blue grey'
+      accent: 'orange'
+      toggle:
+        icon: material/brightness-4
+        name: Schakel naar lichte modus
+  features:
+    # Navigation
+    - navigation.instant        # Snelle navigatie zonder page reload
+    - navigation.instant.prefetch  # Prefetch pages on hover
+    - navigation.tracking       # URL updates met active anchor
+    - navigation.top            # Back-to-top button
+    - navigation.path           # Breadcrumb navigatie
+    - navigation.indexes        # Section index pages
+    # Search
+    - search.suggest            # Search suggestions
+    - search.highlight          # Highlight search terms
+    # Content
+    - content.code.copy         # Copy button bij code blocks
+    - content.code.annotate     # Code annotations
 
 markdown_extensions:
-  - markdown.extensions.codehilite:
-      guess_lang: False
-      linenums: True
-  - markdown.extensions.toc:
+  # Python Markdown extensions
+  - abbr                        # Abbreviations met tooltips
+  - admonition                  # Admonition blocks
+  - attr_list                   # HTML attributes op Markdown elementen (nodig voor images, buttons, etc.)
+  - def_list                    # Definition lists
+  - footnotes                   # Footnotes
+  - md_in_html                  # Markdown in HTML blocks
+  - tables                      # Tables
+  - toc:                        # Table of contents
       permalink: true
+      permalink_title: Link naar deze sectie
       toc_depth: 3
-  - markdown.extensions.def_list
-  - markdown.extensions.admonition
-  - markdown.extensions.footnotes
-  - pymdownx.arithmatex
-  - pymdownx.betterem:
+  # PyMdown Extensions
+  - pymdownx.arithmatex:        # Math formulas
+      generic: true
+  - pymdownx.betterem:          # Verbeterde emphasis
       smart_enable: all
-  - pymdownx.caret
-  - pymdownx.critic
-  - pymdownx.details
-  - pymdownx.emoji:
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
-  - pymdownx.inlinehilite
-  - pymdownx.magiclink
-  - pymdownx.mark
-  - pymdownx.smartsymbols
-  - pymdownx.superfences
-  - pymdownx.tasklist:
+  - pymdownx.caret              # Superscript en insert
+  - pymdownx.critic             # Track changes
+  - pymdownx.details            # Collapsible admonitions
+  - pymdownx.emoji:             # Emoji support
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:         # Code highlighting (vervangt codehilite)
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite       # Inline code highlighting
+  - pymdownx.keys               # Keyboard keys
+  - pymdownx.magiclink          # Auto-link URLs
+  - pymdownx.mark               # Highlight text
+  - pymdownx.smartsymbols       # Smart symbols
+  - pymdownx.superfences        # Code blocks (vervangt fenced_code)
+  - pymdownx.tabbed:            # Content tabs
+      alternate_style: true
+  - pymdownx.tasklist:          # Task lists
       custom_checkbox: true
-  - pymdownx.tilde
-  - pymdownx.tabbed
-
-extra_javascript:
-  - js/imgs.js
-
-nav:
+  - pymdownx.tilde              # Subscript en delete
 
 plugins:
+  - search:                     # Search plugin met Nederlandse config
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])'
+      lang: nl
+  - glightbox                   # Image zoom/lightbox (vervangt custom modal JS/CSS)
   - mknotebooks:
       execute: false
+
+nav:
