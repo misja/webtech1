@@ -1,0 +1,18 @@
+[project]
+name = "webtech1-docs"
+version = "0.1.0"
+description = "Documentatie voor Webtechnologie 1 cursus - Hanze HBO-ICT"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mkdocs>=1.6.0",
+    "mkdocs-material>=9.5.0",
+    "pymdown-extensions>=10.11.0",
+    "mknotebooks>=0.8.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipython>=8.12.0",
+    "nbdime>=4.0.0",
+]
