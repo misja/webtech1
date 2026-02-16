@@ -1,24 +1,78 @@
-# Databasebeheer in Python
+# SQLite in Python
 
-In het informatietijdperk waarin de wereld momenteel verkeert, spelen gegevens een enorme rol. Er worden ongelofelijk veel gegevens onderling uitgewisseld, denk maar eens aan de sociale media. Een uurtje online vergt al gauw 100MB nog zonder dat er allerlei films en video ge-upload of gestreamd worden. Daarnaast heeft het  online bestellen van goederen een enorme vlucht genomen. 
+**Leestijd: ~10 minuten**
 
-Kleding, eten, films, reizen, ... alles kan online geboekt worden. En aan het bedrijfsleven de taak dat allemaal in goede banen te leiden. In essentie is de hele wereld bezig met het maken, opslaan en ophalen van gegevens!  En er komt nog heel wat bij kijken om dat allemaal in goede banen te leiden. Hier komt een databasebeheersysteem (DBMS) uitstekend van pas.
+In het vak Databases heb je geleerd werken met PostgreSQL - een krachtige relationele database. Voor webapplicaties gebruik je vaak dezelfde database, maar voor development, testing en kleine applicaties is **SQLite** een handige en lichtgewicht alternatief.
 
-Een DBMS is een softwaresysteem waarmee gegevens uit een database geselecteerd kunnen worden, worden toegevoegd, gewijzigd en verwijderd. Bovendien bevat de software items waarmee de database onderhouden kan worden. Te denken valt hier aan het opzetten van een nieuwe database, het bepalen welke restricties erop toegepast moeten worden en onder meer wordt hiermee geregeld welke rechten de verschillende gebruikers mogen hebben. Dergelijke  systemen variëren in grootte, van kleine systemen die gewoon op een pc draaien tot grotere systemen die op mainframes geïnstalleerd zijn.
+## Waarom SQLite?
 
-De focus ligt uiteraard op Python, maar deze programmeertaal is uitstekend in staat  om te communiceren met databases. Er zijn veel verschillende DBMS-systemen, zoals [MySQL](https://www.mysql.com/), [Oracle](https://www.oracle.com/database/), [Firebird](http://firebirdsql.org/) en nog veel meer.
+SQLite verschilt op belangrijke punten van PostgreSQL:
 
-Hier is gekozen voor [SQLite](https://sqlite.org/index.html). Dit is een open-source, volledig functioneel, op zichzelf staand, op SQL gebaseerd lichtgewicht databasebeheersysteem. Gegevens kunnen gewoon in een bestand worden opgeslagen. SQL-query’s kunnen op SQLite-tabellen worden uitgevoerd om de gewenste acties netjes tot een goed einde te brengen.
+| Aspect | PostgreSQL | SQLite |
+|--------|-----------|--------|
+| **Server** | Aparte database server | Geen server - gewoon een bestand |
+| **Setup** | Installatie + configuratie | Built-in met Python |
+| **Gebruik** | Productie webapplicaties | Development, testing, kleine apps |
+| **Concurrency** | Veel gelijktijdige gebruikers | Beperkt (file locking) |
+| **SQL dialect** | PostgreSQL SQL | SQLite SQL (kleine verschillen) |
 
-Het mooie is bovendien dat SQLite met Python mee geïnstalleerd is. Is er iets misgegaan tijdens de installatie kan de laatste versie gedownload worden van https://www.sqlite.org/index.html .
+**Voordelen voor deze cursus:**
+- Geen server setup nodig
+- Database = gewoon een `.sqlite` bestand
+- Makkelijk te backuppen (kopieer het bestand)
+- Ideaal voor Flask development
 
-Om met SQLite te kunnen werken moet in de command-line het commando `sqlite3` ingetoetst worden waarna het programma wordt geopend.
+!!! note "SQLite vs PostgreSQL SQL"
+    De SQL syntax is grotendeels hetzelfde. Kleine verschillen:
+
+    - SQLite heeft minder datatypes (TEXT, INTEGER, REAL, BLOB)
+    - Geen `ALTER TABLE` voor het wijzigen van kolommen
+    - Type validatie is minder strikt
+
+    Later (bij SQLAlchemy) gebruik je een ORM die deze verschillen abstraheert.
+
+## SQLite CLI (kort)
+
+Je kunt SQLite via de command-line gebruiken (vergelijkbaar met `psql` voor PostgreSQL):
 
 ```console
-hostname:user$ sqlite3
-SQLite version 3.32.3 2020-06-18 14:16:19
+$ sqlite3 test.db
+SQLite version 3.39.5
 Enter ".help" for usage hints.
-Connected to a transient in-memory database.
-Use ".open FILENAME" to reopen on a persistent database.
-sqlite> 
+sqlite> .tables
+sqlite> .quit
 ```
+
+Handige punt-commando's (vergelijkbaar met `\d` commando's in psql):
+
+| Commando | Betekenis |
+|----------|-----------|
+| `.tables` | Toon alle tabellen |
+| `.schema` | Toon tabelstructuur |
+| `.quit` | Afsluiten |
+
+**Maar**: In deze cursus gebruik je SQLite vooral vanuit **Python**, niet via de CLI. De focus ligt op het integreren van databases in Flask applicaties.
+
+!!! tip "Visueel werken met DB Browser for SQLite"
+    Als je liever visueel werkt (vergelijkbaar met pgAdmin voor PostgreSQL), gebruik dan [DB Browser for SQLite](https://sqlitebrowser.org/).
+
+    **Voordelen:**
+    - Tabellen visueel bekijken en bewerken
+    - SQL queries runnen met syntax highlighting
+    - Database structure inspecteren
+    - Handig tijdens Flask development om snel data te checken
+
+    **Download:** [sqlitebrowser.org](https://sqlitebrowser.org/)
+
+    Dit is optioneel - je kunt alles ook via Python of de CLI doen. DB Browser is vooral handig voor debugging tijdens development.
+
+## SQLite in Python
+
+Python heeft `sqlite3` built-in. In het volgende deel leer je hoe je SQLite gebruikt vanuit Python met moderne patterns zoals:
+
+- Type annotations
+- Context managers (`with` statements)
+- Proper error handling
+- Voorbereiding op SQLAlchemy
+
+**Volgende stap:** In [Deel 2](sql-deel2.md) ga je direct aan de slag met SQLite in Python.
