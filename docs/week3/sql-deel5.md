@@ -321,16 +321,6 @@ def search():
     return render_template('search.html', results=results)
 ```
 
-Later met SQLAlchemy (Week 6) krijg je deze beveiliging automatisch:
-
-```python
-# SQLAlchemy (Week 6) - automatisch veilig
-products = session.query(Product).filter(
-    Product.name.like(f"%{query}%")
-).all()
-# Placeholders worden automatisch gebruikt!
-```
-
 ## Best practices samenvatting
 
 ✅ **DOE WEL:**

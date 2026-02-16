@@ -330,7 +330,7 @@ Een **view** is een virtuele tabel - een opgeslagen query die je kunt gebruiken 
 - **Abstraction layer**: Database structuur verbergen voor gebruikers
 
 !!! note "Views in modern Python apps"
-    In Python/Flask apps gebruik je views minder vaak. Met SQLAlchemy (Week 6) schrijf je queries direct in Python en gebruik je geen SQL views meer.
+    In Python/Flask apps gebruik je views minder vaak. Met een ORM zoals SQLAlchemy schrijf je queries direct in Python en gebruik je geen SQL views meer.
 
     Views zijn wel handig als je een database deelt met andere applicaties of rapportage tools.
 
@@ -431,36 +431,6 @@ Dr Feelgood: Down At The Doctors (op Private Practice)
     """)
     ```
 
-## Voorbereiding op SQLAlchemy
-
-De patterns die je hier leert, komen terug bij SQLAlchemy (Week 6):
-
-| sqlite3 pattern | SQLAlchemy equivalent |
-|----------------|----------------------|
-| **JOIN queries** | Relationships tussen models |
-| **Placeholders (`?`)** | Automatisch escaped parameters |
-| **row_factory = Row** | SQLAlchemy Row objects (standaard) |
-| **Context managers** | Session management |
-| **Views** | Queries in Python (niet SQL views) |
-
-**Waarom dit leren?** Begrijpen hoe JOINs werken helpt je begrijpen wat SQLAlchemy doet. Bijvoorbeeld:
-
-```python
-# Wat je nu schrijft (sqlite3):
-cursor.execute("""
-    SELECT ar.name, al.name
-    FROM artists ar
-    JOIN albums al ON ar._id = al.artist
-""")
-
-# Wordt later (SQLAlchemy):
-for artist in session.query(Artist):
-    for album in artist.albums:  # Automatische JOIN!
-        print(f"{artist.name}: {album.name}")
-```
-
-SQLAlchemy abstraheert de SQL weg, maar onder de motorkap gebruikt het precies dezelfde JOINs.
-
 ## Samenvatting
 
 Je hebt geleerd:
@@ -472,7 +442,6 @@ Je hebt geleerd:
 - **LIKE** operator voor tekst zoeken met wildcards
 - **Views** maken en gebruiken (optioneel)
 - Placeholders gebruiken voor SQL injection preventie
-- Link tussen sqlite3 patterns en SQLAlchemy
 
 **Volgende stap:** In [Deel 4](sql-deel4.md) leer je werken met een complete MusicDatabase class die alle functionaliteit combineert.
 

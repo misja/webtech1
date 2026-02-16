@@ -486,4 +486,4 @@ Je hebt geleerd:
 
 **Tip:** Test altijd je error handling! Probeer bewust fouten te veroorzaken (duplicates, missing tables, etc.) om te zien of je code netjes reageert.
 
-**Volgende stap:** Je hebt nu alle SQLite basics! In Week 6 leer je SQLAlchemy - een ORM die veel van deze error handling automatisch doet.
+**Volgende stap:** Je hebt nu alle SQLite basics! Met deze patterns kun je veilig databases gebruiken in Flask applicaties.
