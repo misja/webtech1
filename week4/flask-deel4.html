@@ -3880,12 +3880,6 @@
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>└── templates/           # Voor HTML templates
 </span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    └── basic.html
 </span></code></pre></div>
-<p><strong>Waarom <code>static/</code>?</strong>
-- Voor bestanden die niet veranderen: CSS, afbeeldingen, JavaScript
-- Flask serveert deze automatisch via <code>/static/</code> URL</p>
-<p><strong>Waarom <code>templates/</code>?</strong>
-- Voor HTML bestanden met Jinja2 syntax
-- Flask rendert deze met dynamische data</p>
 <h2 id="je-eerste-template">Je eerste template<a class="headerlink" href="#je-eerste-template" title="Link naar deze sectie">¶</a></h2>
 <h3 id="stap-1-maak-een-html-template">Stap 1: Maak een HTML template<a class="headerlink" href="#stap-1-maak-een-html-template" title="Link naar deze sectie">¶</a></h3>
 <p>Maak <code>templates/basic.html</code>:</p>
@@ -4158,11 +4152,6 @@
 </span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
 </span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>{% endblock %}
 </span></code></pre></div>
-<p><strong>Voordelen:</strong>
-- ✅ Navigatie en footer slechts 1x gedefinieerd
-- ✅ Consistent design over alle pagina's
-- ✅ Makkelijk onderhoud (wijzig base.html → alle pagina's upgedatet)
-- ✅ DRY: Don't Repeat Yourself</p>
 <h2 id="complete-voorbeeld-met-types">Complete voorbeeld met types<a class="headerlink" href="#complete-voorbeeld-met-types" title="Link naar deze sectie">¶</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
@@ -4327,10 +4316,8 @@
 <li><strong>Filters</strong>: <code>{{ naam|upper }}</code>, <code>{{ prijs|round(2) }}</code></li>
 <li><strong>Template inheritance</strong>: <code>{% extends "base.html" %}</code></li>
 <li><strong>Type hints</strong>: <code>-&gt; str</code> voor render_template returns</li>
-<li><strong>Link met SQL</strong>: Database data in templates tonen</li>
 </ul>
 <p><strong>Volgende stap:</strong> In Week 5 leer je <strong>Flask Forms</strong> - gebruikersinput afhandelen met WTForms.</p>
-<p><strong>Tip:</strong> Gebruik template inheritance vanaf het begin - het scheelt veel werk later!</p>
 
 
 

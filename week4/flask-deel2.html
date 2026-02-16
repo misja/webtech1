@@ -2158,17 +2158,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#wat-is-uv" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Wat is uv?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#uv-installeren" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2398,28 +2387,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#voordelen-van-deze-setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Voordelen van deze setup
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#link-met-week-3-sql" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Link met Week 3 (SQL)
-      
-    </span>
-  </a>
   
 </li>
       
@@ -3533,17 +3500,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#wat-is-uv" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Wat is uv?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#uv-installeren" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3777,28 +3733,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#voordelen-van-deze-setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Voordelen van deze setup
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#link-met-week-3-sql" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Link met Week 3 (SQL)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#troubleshooting" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3936,14 +3870,7 @@
 
 
 <h1 id="flask-project-setup-met-uv">Flask – Project Setup met uv<a class="headerlink" href="#flask-project-setup-met-uv" title="Link naar deze sectie">¶</a></h1>
-<p>In deze sectie leer je hoe je een modern Flask project opzet met <strong>uv</strong> - een snelle Python package manager die we ook bij OOP (Week 2) hebben gebruikt. Dezelfde tools, dezelfde workflow!</p>
-<h2 id="wat-is-uv">Wat is uv?<a class="headerlink" href="#wat-is-uv" title="Link naar deze sectie">¶</a></h2>
-<p><strong>uv</strong> is een extreem snelle Python package en project manager, geschreven in Rust. Het combineert de functionaliteit van pip, venv, en andere tools in één simpele interface.</p>
-<p><strong>Voordelen van uv:</strong>
-- ⚡ <strong>Supersnel</strong>: 10-100x sneller dan pip
-- 🎯 <strong>Eenvoudig</strong>: Eén tool voor alles (packages, virtual environments, project management)
-- 🔒 <strong>Betrouwbaar</strong>: Automatische dependency resolution en lock files
-- 🎓 <strong>Consistent</strong>: Je gebruikt dezelfde tool als bij OOP (Week 2)</p>
+<p><strong>uv</strong> is een snelle Python package en project manager, geschreven in Rust. Het combineert de functionaliteit van pip, venv, en andere tools in één simpele interface.</p>
 <h2 id="uv-installeren">uv installeren<a class="headerlink" href="#uv-installeren" title="Link naar deze sectie">¶</a></h2>
 <p>Als je uv nog niet hebt geïnstalleerd van Week 2, installeer het dan nu:</p>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">pip install uv</span>
@@ -4188,60 +4115,35 @@
 </span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="go">uv sync</span>
 </span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="go">uv run app.py</span>
 </span></code></pre></div><p></p>
-<h2 id="voordelen-van-deze-setup">Voordelen van deze setup<a class="headerlink" href="#voordelen-van-deze-setup" title="Link naar deze sectie">¶</a></h2>
-<p>✅ <strong>Geen activatie nodig</strong>: <code>uv run</code> doet alles automatisch
-✅ <strong>Reproduceerbaar</strong>: <code>uv.lock</code> zorgt dat iedereen dezelfde versies heeft
-✅ <strong>Snel</strong>: uv is 10-100x sneller dan pip
-✅ <strong>Eenvoudig</strong>: Eén tool voor alles
-✅ <strong>Modern</strong>: Dezelfde workflow als Week 2 (OOP) en Week 3 (SQL)
-✅ <strong>Professioneel</strong>: Gebruikt door bedrijven en open source projecten</p>
-<h2 id="link-met-week-3-sql">Link met Week 3 (SQL)<a class="headerlink" href="#link-met-week-3-sql" title="Link naar deze sectie">¶</a></h2>
-<p>In Week 3 heb je geleerd werken met SQLite databases. Straks ga je Flask combineren met databases:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
-</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
-</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
-</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>
-</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/products"</span><span class="p">)</span>
-</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">products</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="w">    </span><span class="sd">"""Haal producten op uit database."""</span>
-</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>    <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">"shop.db"</span><span class="p">)</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
-</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>        <span class="n">conn</span><span class="o">.</span><span class="n">row_factory</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Row</span>
-</span><span id="__span-26-11"><a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a>        <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM products"</span><span class="p">)</span>
-</span><span id="__span-26-12"><a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a>        <span class="n">products</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-</span><span id="__span-26-13"><a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a>
-</span><span id="__span-26-14"><a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">"products.html"</span><span class="p">,</span> <span class="n">products</span><span class="o">=</span><span class="n">products</span><span class="p">)</span>
-</span></code></pre></div>
-<p>Later (Week 6) leer je <strong>SQLAlchemy</strong> - een ORM die database operaties nog makkelijker maakt!</p>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link naar deze sectie">¶</a></h2>
 <h3 id="uv-command-not-found">"uv: command not found"<a class="headerlink" href="#uv-command-not-found" title="Link naar deze sectie">¶</a></h3>
 <p>Installeer uv eerst:
-</p><div class="language-console highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">pip install uv</span>
+</p><div class="language-console highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go">pip install uv</span>
 </span></code></pre></div><p></p>
 <h3 id="python-version-mismatch">"Python version mismatch"<a class="headerlink" href="#python-version-mismatch" title="Link naar deze sectie">¶</a></h3>
 <p>Check je Python versie:
-</p><div class="language-console highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="go">python --version</span>
-</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="go">uv python list</span>
+</p><div class="language-console highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">python --version</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="go">uv python list</span>
 </span></code></pre></div><p></p>
 <p>Installeer een specifieke Python versie met uv:
-</p><div class="language-console highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go">uv python install 3.12</span>
+</p><div class="language-console highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="go">uv python install 3.12</span>
 </span></code></pre></div><p></p>
 <h3 id="package-conflict">"Package conflict"<a class="headerlink" href="#package-conflict" title="Link naar deze sectie">¶</a></h3>
 <p>Sync dependencies opnieuw:
-</p><div class="language-console highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">uv sync --refresh</span>
+</p><div class="language-console highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go">uv sync --refresh</span>
 </span></code></pre></div><p></p>
 <h3 id="virtual-environment-handmatig-activeren-soms-nodig-voor-editors">Virtual environment handmatig activeren (soms nodig voor editors)<a class="headerlink" href="#virtual-environment-handmatig-activeren-soms-nodig-voor-editors" title="Link naar deze sectie">¶</a></h3>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="gp"># </span>macOS/Linux
-</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="go">source .venv/bin/activate</span>
-</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>
-</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="gp"># </span>Windows<span class="w"> </span>PowerShell
-</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="go">.\.venv\Scripts\Activate.ps1</span>
-</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>
-</span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="gp"># </span>Windows<span class="w"> </span>CMD
-</span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="go">.\.venv\Scripts\activate.bat</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="gp"># </span>macOS/Linux
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="go">source .venv/bin/activate</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="gp"># </span>Windows<span class="w"> </span>PowerShell
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="go">.\.venv\Scripts\Activate.ps1</span>
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>
+</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="gp"># </span>Windows<span class="w"> </span>CMD
+</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="go">.\.venv\Scripts\activate.bat</span>
 </span></code></pre></div>
 <p>Deactiveren:
-</p><div class="language-console highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">deactivate</span>
+</p><div class="language-console highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">deactivate</span>
 </span></code></pre></div><p></p>
 <p>Maar normaal gesproken gebruik je gewoon <code>uv run</code> en hoef je niets te activeren!</p>
 <h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
@@ -4252,10 +4154,8 @@
 <li><strong>Flask app runnen</strong> met <code>uv run app.py</code></li>
 <li><strong>Project structuur</strong> met <code>pyproject.toml</code> en <code>uv.lock</code></li>
 <li><strong>Development workflow</strong> zonder handmatige virtual environment activatie</li>
-<li><strong>Link tussen Flask en SQL</strong> (Week 3)</li>
 </ul>
 <p><strong>Volgende stap:</strong> In <a href="flask-deel3.html">Deel 3</a> leer je de basale werking van Flask met routes, decorators en dynamische URLs.</p>
-<p><strong>Tip:</strong> Deze setup gebruik je de rest van de cursus. Alle Flask projecten, ook met databases (Week 6), gebruiken uv!</p>
 
 
 

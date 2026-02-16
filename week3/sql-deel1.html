@@ -1719,17 +1719,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#waarom-sqlite" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Waarom SQLite?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#sqlite-cli-kort" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3228,17 +3217,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#waarom-sqlite" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Waarom SQLite?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#sqlite-cli-kort" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3326,52 +3304,14 @@
 
 
 <h1 id="sqlite-in-python">SQLite in Python<a class="headerlink" href="#sqlite-in-python" title="Link naar deze sectie">¶</a></h1>
-<p>In het vak Databases heb je geleerd werken met PostgreSQL - een krachtige relationele database. Voor webapplicaties gebruik je vaak dezelfde database, maar voor development, testing en kleine applicaties is <strong>SQLite</strong> een handige en lichtgewicht alternatief.</p>
-<h2 id="waarom-sqlite">Waarom SQLite?<a class="headerlink" href="#waarom-sqlite" title="Link naar deze sectie">¶</a></h2>
-<p>SQLite verschilt op belangrijke punten van PostgreSQL:</p>
-<table>
-<thead>
-<tr>
-<th>Aspect</th>
-<th>PostgreSQL</th>
-<th>SQLite</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Server</strong></td>
-<td>Aparte database server</td>
-<td>Geen server - gewoon een bestand</td>
-</tr>
-<tr>
-<td><strong>Setup</strong></td>
-<td>Installatie + configuratie</td>
-<td>Built-in met Python</td>
-</tr>
-<tr>
-<td><strong>Gebruik</strong></td>
-<td>Productie webapplicaties</td>
-<td>Development, testing, kleine apps</td>
-</tr>
-<tr>
-<td><strong>Concurrency</strong></td>
-<td>Veel gelijktijdige gebruikers</td>
-<td>Beperkt (file locking)</td>
-</tr>
-<tr>
-<td><strong>SQL dialect</strong></td>
-<td>PostgreSQL SQL</td>
-<td>SQLite SQL (kleine verschillen)</td>
-</tr>
-</tbody>
-</table>
+<p>In het vak Databases heb je geleerd werken met PostgreSQL. In deze module gebruik je <strong>SQLite</strong> - een lichtgewicht database die als een enkel bestand werkt en built-in bij Python zit. Geen server setup nodig.</p>
 <div class="admonition note">
-<p class="admonition-title">SQLite vs PostgreSQL SQL</p>
-<p>De SQL syntax is grotendeels hetzelfde. Kleine verschillen:</p>
+<p class="admonition-title">SQL syntax verschillen</p>
+<p>SQLite gebruikt grotendeels dezelfde SQL syntax als PostgreSQL, met enkele verschillen:</p>
 <ul>
-<li>SQLite heeft minder datatypes (TEXT, INTEGER, REAL, BLOB)</li>
+<li>Minder datatypes (TEXT, INTEGER, REAL, BLOB in plaats van VARCHAR, TIMESTAMP, etc.)</li>
 <li>Geen <code>ALTER TABLE</code> voor het wijzigen van kolommen</li>
-<li>Type validatie is minder strikt</li>
+<li>Minder strikte type validatie</li>
 </ul>
 </div>
 <h2 id="sqlite-cli-kort">SQLite CLI (kort)<a class="headerlink" href="#sqlite-cli-kort" title="Link naar deze sectie">¶</a></h2>
