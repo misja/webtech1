@@ -1,16 +1,6 @@
 # Flask – Project Setup met uv
 
-In deze sectie leer je hoe je een modern Flask project opzet met **uv** - een snelle Python package manager die we ook bij OOP (Week 2) hebben gebruikt. Dezelfde tools, dezelfde workflow!
-
-## Wat is uv?
-
-**uv** is een extreem snelle Python package en project manager, geschreven in Rust. Het combineert de functionaliteit van pip, venv, en andere tools in één simpele interface.
-
-**Voordelen van uv:**
-- ⚡ **Supersnel**: 10-100x sneller dan pip
-- 🎯 **Eenvoudig**: Eén tool voor alles (packages, virtual environments, project management)
-- 🔒 **Betrouwbaar**: Automatische dependency resolution en lock files
-- 🎓 **Consistent**: Je gebruikt dezelfde tool als bij OOP (Week 2)
+**uv** is een snelle Python package en project manager, geschreven in Rust. Het combineert de functionaliteit van pip, venv, en andere tools in één simpele interface.
 
 ## uv installeren
 
@@ -307,38 +297,6 @@ uv sync
 uv run app.py
 ```
 
-## Voordelen van deze setup
-
-✅ **Geen activatie nodig**: `uv run` doet alles automatisch
-✅ **Reproduceerbaar**: `uv.lock` zorgt dat iedereen dezelfde versies heeft
-✅ **Snel**: uv is 10-100x sneller dan pip
-✅ **Eenvoudig**: Eén tool voor alles
-✅ **Modern**: Dezelfde workflow als Week 2 (OOP) en Week 3 (SQL)
-✅ **Professioneel**: Gebruikt door bedrijven en open source projecten
-
-## Link met Week 3 (SQL)
-
-In Week 3 heb je geleerd werken met SQLite databases. Straks ga je Flask combineren met databases:
-
-```python
-import sqlite3
-from flask import Flask, render_template
-
-app = Flask(__name__)
-
-@app.route("/products")
-def products() -> str:
-    """Haal producten op uit database."""
-    with sqlite3.connect("shop.db") as conn:
-        conn.row_factory = sqlite3.Row
-        cursor = conn.execute("SELECT * FROM products")
-        products = cursor.fetchall()
-
-    return render_template("products.html", products=products)
-```
-
-Later (Week 6) leer je **SQLAlchemy** - een ORM die database operaties nog makkelijker maakt!
-
 ## Troubleshooting
 
 ### "uv: command not found"
@@ -397,8 +355,6 @@ Je hebt geleerd:
 - **Flask app runnen** met `uv run app.py`
 - **Project structuur** met `pyproject.toml` en `uv.lock`
 - **Development workflow** zonder handmatige virtual environment activatie
-- **Link tussen Flask en SQL** (Week 3)
 
 **Volgende stap:** In [Deel 3](flask-deel3.md) leer je de basale werking van Flask met routes, decorators en dynamische URLs.
 
-**Tip:** Deze setup gebruik je de rest van de cursus. Alle Flask projecten, ook met databases (Week 6), gebruiken uv!

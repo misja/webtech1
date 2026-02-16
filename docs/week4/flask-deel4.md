@@ -30,14 +30,6 @@ mijn-flask-app/
     └── basic.html
 ```
 
-**Waarom `static/`?**
-- Voor bestanden die niet veranderen: CSS, afbeeldingen, JavaScript
-- Flask serveert deze automatisch via `/static/` URL
-
-**Waarom `templates/`?**
-- Voor HTML bestanden met Jinja2 syntax
-- Flask rendert deze met dynamische data
-
 ## Je eerste template
 
 ### Stap 1: Maak een HTML template
@@ -389,12 +381,6 @@ Voor grotere apps wil je niet steeds hetzelfde HTML herhalen. Gebruik **template
 {% endblock %}
 ```
 
-**Voordelen:**
-- ✅ Navigatie en footer slechts 1x gedefinieerd
-- ✅ Consistent design over alle pagina's
-- ✅ Makkelijk onderhoud (wijzig base.html → alle pagina's upgedatet)
-- ✅ DRY: Don't Repeat Yourself
-
 ## Complete voorbeeld met types
 
 ```python
@@ -587,8 +573,5 @@ Je hebt geleerd:
 - **Filters**: `{{ naam|upper }}`, `{{ prijs|round(2) }}`
 - **Template inheritance**: `{% extends "base.html" %}`
 - **Type hints**: `-> str` voor render_template returns
-- **Link met SQL**: Database data in templates tonen
 
 **Volgende stap:** In Week 5 leer je **Flask Forms** - gebruikersinput afhandelen met WTForms.
-
-**Tip:** Gebruik template inheritance vanaf het begin - het scheelt veel werk later!
