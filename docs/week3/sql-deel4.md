@@ -1,119 +1,448 @@
-# SQL in Python
+# Complete Database Class: MusicDatabase
 
-Hoogste tijd om SQL te gebruiken in Python. Het mooie van Python is dat bij de installatie automatisch SQLite3 wordt aangemaakt. In een vorige paragraaf is al kennis gemaakt met de tabel `contacts`. Bij wijze van voorbeeld zullen we deze tabel met behulp van Python opnieuw aanmaken en van een aantal records voorzien. Aansluitend zullen we vanuit een Python-programma de gegevens uit de database lezen.
+In de vorige delen heb je afzonderlijke functies gezien voor database operaties. Nu gaan we alles combineren in een **database class** - een moderne, herbruikbare oplossing voor het werken met de music database.
 
-## import sqlite3
+## Waarom een database class?
 
-Als een Python-file gekoppeld dient te worden aan een SQLite-database, moet als eerste SQLite geïmporteerd worden. De tweede stap is bekend te maken met welke database de Python-file gekoppeld gaat worden. Hieronder worden beide stappen weergegeven:
+Een database class biedt verschillende voordelen:
+
+- **Encapsulation**: Alle database logica op één plek
+- **Herbruikbaarheid**: Makkelijk te gebruiken in verschillende scripts
+- **Consistency**: Altijd dezelfde patterns (context managers, placeholders, etc.)
+- **Onderhoudbaarheid**: Aanpassingen hoef je maar op één plek te maken
+
+Deze aanpak komt overeen met hoe je later met SQLAlchemy werkt.
+
+## De complete MusicDatabase class
+
+Hier is een complete implementatie met alle patterns die je tot nu toe hebt geleerd:
+
+```python
+import sqlite3
+from sqlite3 import Row
+from typing import Optional
 
 
-```ipython
-In [1]: import sqlite3
-In [2]: db = sqlite3.connect("contacts.sqlite")
+class MusicDatabase:
+    """Database manager voor de music.sqlite database.
+
+    Deze class biedt methoden voor het ophalen van artiesten, albums en songs
+    uit de music database, inclusief JOIN queries.
+
+    Attributes:
+        db_path (str): Pad naar de SQLite database file.
+    """
+
+    def __init__(self, db_path: str = "music.sqlite"):
+        """Initialiseer de database manager.
+
+        Args:
+            db_path: Pad naar de database file (default: "music.sqlite")
+        """
+        self.db_path = db_path
+
+    def _get_connection(self) -> sqlite3.Connection:
+        """Maak database connectie met row_factory ingesteld.
+
+        Returns:
+            sqlite3.Connection: Database connectie object
+        """
+        conn = sqlite3.connect(self.db_path)
+        conn.row_factory = Row
+        return conn
+
+    # ==================== ARTISTS ====================
+
+    def get_all_artists(self, order_by: str = "name") -> list[Row]:
+        """Haal alle artiesten op, gesorteerd.
+
+        Args:
+            order_by: Kolom om op te sorteren (default: "name")
+
+        Returns:
+            Lijst met alle artiesten
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute(f"SELECT * FROM artists ORDER BY {order_by}")
+            return cursor.fetchall()
+
+    def get_artist_by_id(self, artist_id: int) -> Optional[Row]:
+        """Haal één artiest op op basis van ID.
+
+        Args:
+            artist_id: ID van de artiest
+
+        Returns:
+            Artiest record of None als niet gevonden
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute(
+                "SELECT * FROM artists WHERE _id = ?",
+                (artist_id,)
+            )
+            return cursor.fetchone()
+
+    def search_artists(self, search_term: str) -> list[Row]:
+        """Zoek artiesten op basis van naam.
+
+        Args:
+            search_term: Zoekterm voor artiest naam
+
+        Returns:
+            Lijst met matchende artiesten
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute(
+                "SELECT * FROM artists WHERE name LIKE ? ORDER BY name",
+                (f"%{search_term}%",)
+            )
+            return cursor.fetchall()
+
+    # ==================== ALBUMS ====================
+
+    def get_all_albums(self) -> list[Row]:
+        """Haal alle albums op met artiest informatie."""
+        with self._get_connection() as conn:
+            cursor = conn.execute("""
+                SELECT
+                    al._id,
+                    al.name AS album,
+                    ar.name AS artist
+                FROM albums al
+                JOIN artists ar ON al.artist = ar._id
+                ORDER BY ar.name, al.name
+            """)
+            return cursor.fetchall()
+
+    def get_albums_by_artist(self, artist_id: int) -> list[Row]:
+        """Haal alle albums op van een specifieke artiest.
+
+        Args:
+            artist_id: ID van de artiest
+
+        Returns:
+            Lijst met albums van deze artiest
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute(
+                "SELECT * FROM albums WHERE artist = ? ORDER BY name",
+                (artist_id,)
+            )
+            return cursor.fetchall()
+
+    # ==================== SONGS ====================
+
+    def get_songs_by_album(self, album_id: int) -> list[Row]:
+        """Haal alle songs op van een specifiek album.
+
+        Args:
+            album_id: ID van het album
+
+        Returns:
+            Lijst met songs van dit album, gesorteerd op track nummer
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute(
+                "SELECT * FROM songs WHERE album = ? ORDER BY track",
+                (album_id,)
+            )
+            return cursor.fetchall()
+
+    def search_songs(self, search_term: str) -> list[Row]:
+        """Zoek songs inclusief artiest en album informatie.
+
+        Args:
+            search_term: Zoekterm voor song titel
+
+        Returns:
+            Lijst met matchende songs met volledige informatie
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute("""
+                SELECT
+                    ar.name AS artist,
+                    al.name AS album,
+                    s.track,
+                    s.title
+                FROM songs s
+                JOIN albums al ON s.album = al._id
+                JOIN artists ar ON al.artist = ar._id
+                WHERE s.title LIKE ?
+                ORDER BY ar.name, al.name, s.track
+            """, (f"%{search_term}%",))
+            return cursor.fetchall()
+
+    # ==================== CATALOG ====================
+
+    def get_artist_catalog(self, artist_id: int) -> dict:
+        """Haal complete catalogus op voor een artiest.
+
+        Args:
+            artist_id: ID van de artiest
+
+        Returns:
+            Dictionary met artiest info, albums en songs
+        """
+        artist = self.get_artist_by_id(artist_id)
+        if not artist:
+            return {}
+
+        albums = self.get_albums_by_artist(artist_id)
+
+        # Haal songs op per album
+        catalog = {
+            "artist": artist["name"],
+            "artist_id": artist_id,
+            "albums": []
+        }
+
+        for album in albums:
+            songs = self.get_songs_by_album(album["_id"])
+            catalog["albums"].append({
+                "album_name": album["name"],
+                "album_id": album["_id"],
+                "songs": [
+                    {"track": song["track"], "title": song["title"]}
+                    for song in songs
+                ]
+            })
+
+        return catalog
+
+    # ==================== STATISTICS ====================
+
+    def get_statistics(self) -> dict:
+        """Haal database statistieken op.
+
+        Returns:
+            Dictionary met statistieken
+        """
+        with self._get_connection() as conn:
+            stats = {}
+
+            # Tel artiesten
+            cursor = conn.execute("SELECT COUNT(*) as count FROM artists")
+            stats["total_artists"] = cursor.fetchone()["count"]
+
+            # Tel albums
+            cursor = conn.execute("SELECT COUNT(*) as count FROM albums")
+            stats["total_albums"] = cursor.fetchone()["count"]
+
+            # Tel songs
+            cursor = conn.execute("SELECT COUNT(*) as count FROM songs")
+            stats["total_songs"] = cursor.fetchone()["count"]
+
+            return stats
+
+
+# ==================== GEBRUIK ====================
+
+if __name__ == "__main__":
+    db = MusicDatabase()
+
+    # Toon statistieken
+    stats = db.get_statistics()
+    print("=== Music Database Statistics ===")
+    print(f"Artiesten: {stats['total_artists']}")
+    print(f"Albums: {stats['total_albums']}")
+    print(f"Songs: {stats['total_songs']}\n")
+
+    # Zoek artiesten
+    print("=== Artiesten met 'black' in de naam ===")
+    artists = db.search_artists("black")
+    for artist in artists:
+        print(f"- {artist['name']}")
+
+    print()
+
+    # Haal complete catalogus op
+    print("=== Catalogus van AC/DC (artist_id=3) ===")
+    catalog = db.get_artist_catalog(3)
+    if catalog:
+        print(f"Artiest: {catalog['artist']}\n")
+        for album in catalog["albums"]:
+            print(f"Album: {album['album_name']}")
+            for song in album["songs"]:
+                print(f"  {song['track']:2d}. {song['title']}")
+            print()
+
+    # Zoek songs
+    print("=== Songs met 'love' in de titel ===")
+    songs = db.search_songs("love")
+    for song in songs[:5]:  # Toon eerste 5
+        print(f"{song['artist']}: {song['title']} (op {song['album']})")
 ```
 
-Met dit commando wordt de database aangemaakt (als je op je filesystem kijkt, zie je dat het bestand [`contacts.sqlite`](bestanden/contacts.sqlite) is aangemaakt). Omdat de database nog geen tabellen heeft, moeten we deze eerst aanmaken. Om sql in Python uit te voeren, maken we gebruik van het commando `execute`.
+## Gebruik van de class
 
-```ipython
-In [3]: db.execute("CREATE TABLE IF NOT EXISTS contacts(name text, phone integer, email text)")
-Out[3]: <sqlite3.Cursor at 0x10bf95f10>
+### Basis gebruik
+
+```python
+# Maak een database instance
+db = MusicDatabase()
+
+# Haal alle artiesten op
+artists = db.get_all_artists()
+for artist in artists:
+    print(f"{artist['_id']}: {artist['name']}")
+
+# Zoek specifiek
+beatles_songs = db.search_songs("revolution")
+for song in beatles_songs:
+    print(f"{song['title']} door {song['artist']}")
 ```
 
-!!! Info "Checken of de tabel al bestaat"
-    De toevoeging `IF NOT EXISTS` zorgt ervoor dat er geen foutmelding verschijnt op het moment dat er al een tabel met dezelfde naam is. Deze regel wordt dan door het programma genegeerd.
+### Catalogus ophalen
 
-Nu voeren we twee records toe:
+```python
+# Haal alle albums en songs op voor een artiest
+catalog = db.get_artist_catalog(artist_id=42)
 
-```ipython
-In [4]: db.execute("INSERT INTO contacts VALUES ('Bart', 1234567, 'bart@org.nl')")
-In [4]: db.execute("INSERT INTO contacts VALUES ('Henk', 7654321, 'henk@org.nl')")
+print(f"Artiest: {catalog['artist']}")
+for album in catalog['albums']:
+    print(f"\nAlbum: {album['album_name']}")
+    for song in album['songs']:
+        print(f"  Track {song['track']}: {song['title']}")
 ```
 
-Om er zeker van te zijn dat de gegevens zijn opgeslagen, maken we gebruik van het commando `commit`. Dit herken je, als het goed is, uit de periode 1, waar het ging over *transacties*.
+### Eigen database pad
 
-```ipython
-In [5]: db.commit()
+```python
+# Gebruik een andere database file
+db = MusicDatabase("path/to/other/music.sqlite")
 ```
 
-## Cursors
+## Design patterns in de class
 
-Om in Python met data te kunnen werken, moeten we gebruik maken van een *cursor*.  Een database-cursor is een techniek die het mogelijk maakt om over regels in een result-set te itereren. Je kunt je een cursor voorstellen als een pijltje naar een specifieke regel in zo'n result-set. Met behulp van die pijl kun je de huidige record ophalen, aanpassen of verwijderen.
+Deze class demonstreert verschillende belangrijke patterns:
 
-![Database cursor](imgs/cursor.png)
+### 1. Private helper method
 
-Om met een cursor te kunnen werken, moet je het volgende stappenplan volgen:
-
-1. Definieer een cursor die gekoppeld is aan de database-connectie (`cursor=db.cursor()`)
-2. Open die cursor en hang daar een result-set aan (`cursor.execute(...)`)
-3. Haal regel voor regel de data op en gebruik dat in je lokale programmeeromgeving (`cursor.fetchone()`)
-4. Sluit de cursor wanneer je hiermee klaar bent (`cursor.close()`)
-
-We zullen dat stappenplan hieronder met voorbeelden verder toelichten.
-
-
-## Opvragen van data
-
-Na het runnen van deze regels is de database aangemaakt en zijn de records toegevoegd. Een testje is te zien of de gegevens ook daadwerkelijk zijn verwerkt. Daarvoor moeten we dus gebruik maken van een cursor:
-
-```ipython
-In [6]: cursor = db.cursor()
-
-In [7]: cursor.execute("SELECT * FROM contacts")
-Out[7]: <sqlite3.Cursor at 0x10c06bab0>
+```python
+def _get_connection(self) -> sqlite3.Connection:
+    """Helper method die niet bedoeld is voor extern gebruik."""
+    # ...
 ```
 
-De opgevraagde rijen zijn nu benaderbaar via de cursor. We kunnen hier gebruik maken van een `for`-lus om deze gegevens één voor één af te drukken.
+De underscore `_` geeft aan dat dit een interne method is.
 
-```ipython
-In [8]: for row in cursor:
-   ...:     print(row)
+### 2. Type hints overal
 
-('Bart', 1234567, 'bart@org.nl')
-('Henk', 7654321, 'henk@org.nl')
+```python
+def get_artist_by_id(self, artist_id: int) -> Optional[Row]:
+    #                           ↑ input type    ↑ return type
 ```
 
-Het resultaat van de query is een tupel. Het is daarom ook mogelijk om individuele gegevens afzonderlijk naar het scherm te schrijven.
+### 3. Docstrings met Args en Returns
 
-```ipython
-In [9]: for name, phone, email in cursor:
-   ...:     print(name  )
-   ...:     print(phone)
-   ...:     print(email)
-   ...:     print ('---------')
+```python
+def search_artists(self, search_term: str) -> list[Row]:
+    """Zoek artiesten op basis van naam.
 
-Bart
-1234567
-bart@org.nl
----------
-Henk
-7654321
-henk@org.nl
----------
+    Args:
+        search_term: Zoekterm voor artiest naam
+
+    Returns:
+        Lijst met matchende artiesten
+    """
 ```
 
-Moeten de gegevens als een lijst getoond worden is daar de methode `fetchall()` voor beschikbaar.
+### 4. Context managers
 
-```ipython
-In [10]: cursor.fetchall()
-Out[10]:
-[('Bart', 1234567, 'bart@org.nl'),
- ('Henk', 7654321, 'henk@org.nl'),
+```python
+with self._get_connection() as conn:
+    # Gebruik connection
+    # Automatische cleanup
 ```
 
-Merk op dat het resultaat van de bovenstaande methode een *list* is: er zitten blokhaken (`[` een `]`) omheen.
+### 5. Placeholders tegen SQL injection
 
-!!! Info "Het resetten van de cursor"
-    De bovenstaande code werkt niet zonder meer. Om het resultaat opnieuw te krijgen moeten we de cursor *resetten* of de query opnieuw uitvoeren. We gaan hieronder uitgebreid in op die cursor.
-
-Een andere handige methode is `fetchone()`. Deze methode haalt de huidige regel op en verplaatst de cursor naar de volgende regel. Op deze manier kun je door je resultaten heen itereren totdat de methode geen resultaat meer teruggeeft:
-
-```ipython
-In [11]: cursor.fetchone()
-Out[11]: ('Bart', 1234567, 'bart@org.nl')
-
-In [12]: cursor.fetchone()
-Out[12]: ('Henk', 7654321, 'henk@org.nl')
-
-In [13]: cursor.fetchone()
+```python
+cursor.execute(
+    "SELECT * FROM artists WHERE name LIKE ?",
+    (f"%{search_term}%",)  # Veilig!
+)
 ```
 
+## Uitbreidingen (optioneel)
+
+Je kunt de class uitbreiden met extra functionaliteit:
+
+### Data toevoegen
+
+```python
+def add_artist(self, name: str) -> int:
+    """Voeg een nieuwe artiest toe."""
+    with self._get_connection() as conn:
+        cursor = conn.execute(
+            "INSERT INTO artists (name) VALUES (?)",
+            (name,)
+        )
+        conn.commit()
+        return cursor.lastrowid
+```
+
+### Data wijzigen
+
+```python
+def update_song_title(self, song_id: int, new_title: str) -> bool:
+    """Update de titel van een song."""
+    with self._get_connection() as conn:
+        cursor = conn.execute(
+            "UPDATE songs SET title = ? WHERE _id = ?",
+            (new_title, song_id)
+        )
+        conn.commit()
+        return cursor.rowcount > 0
+```
+
+### Error handling
+
+```python
+def get_artist_by_id(self, artist_id: int) -> Optional[Row]:
+    """Haal artiest op met error handling."""
+    try:
+        with self._get_connection() as conn:
+            cursor = conn.execute(
+                "SELECT * FROM artists WHERE _id = ?",
+                (artist_id,)
+            )
+            return cursor.fetchone()
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+        return None
+```
+
+## Van sqlite3 naar SQLAlchemy
+
+Deze MusicDatabase class lijkt al veel op hoe je later met SQLAlchemy werkt:
+
+```python
+# Wat je nu schrijft (sqlite3):
+db = MusicDatabase()
+artists = db.get_all_artists()
+
+# Wordt later (SQLAlchemy):
+session = Session()
+artists = session.query(Artist).all()
+```
+
+Beide gebruiken een class-based approach met methods voor database operaties. Het grote verschil:
+
+- **sqlite3**: Je schrijft SQL, class is een wrapper
+- **SQLAlchemy**: Je schrijft Python, SQL wordt automatisch gegenereerd
+
+## Samenvatting
+
+Je hebt geleerd:
+
+- Een complete database class bouwen
+- Methods organiseren per entiteit (artists, albums, songs)
+- Private helper methods gebruiken (`_get_connection`)
+- Complexe data structuren returnen (catalogus dictionary)
+- Type hints en docstrings consequent toepassen
+- Alle patterns combineren (context managers, placeholders, row_factory)
+
+**Volgende stap:** In [Deel 5](sql-deel5.md) leer je over SQL injection en hoe je je code beveiligt.
+
+**Tip:** Gebruik deze MusicDatabase class als template voor je eigen database classes in Flask applicaties!

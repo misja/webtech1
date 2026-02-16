@@ -1,7 +1,5 @@
 # SQLite in Python: Basics
 
-**Leestijd: ~25 minuten**
-
 Je kent SQL al van het vak Databases. In dit deel leer je hoe je SQLite gebruikt vanuit Python met de `sqlite3` library. We gebruiken moderne Python patterns: type annotations, context managers en proper error handling.
 
 ## Database connectie

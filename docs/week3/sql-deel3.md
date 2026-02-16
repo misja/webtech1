@@ -1,204 +1,479 @@
-# De muziek databases
+# SQLite in Python: JOINs en Queries
 
-Het werken met een database die bestaat uit een enkele tabel met 3 of 4 records is niet heel erg zinvol. Het gaat dan sneller om een gegeven op te zoeken dan door er een query aan te wijden. Daarom maken we vanaf nu gebruik van een andere database [`music.sqlite`](bestanden/music.sqlite). Deze database bevat een aantal bekende tabellen die ook bij het werken met OOP aan bod zijn gekomen: artists, albums en songs. Alleen bevat deze database nog veel meer data.
+In het vorige deel heb je gewerkt met een eenvoudige contacts database. Nu gaan we werken met een realistische database met meerdere tabellen en **JOIN** queries. Je kent JOINs al van het vak Databases - hier leer je hoe je ze gebruikt vanuit Python.
 
-Aan het eind van dit document maken we [oefening 1](oefeningen/sql-oefening1.md).
+## De music database
 
-## kennismaken een aardigheidje
+Download de [`music.sqlite`](bestanden/music.sqlite) database. Deze bevat drie tabellen die je ook bij OOP hebt gezien, maar nu met veel meer data:
 
-De database is te vinden [via deze link](bestanden/music.sqlite). Neem de database over en bewaar deze op je laptop. Het simpelst is om deze database een plekje te geven in de directory waarin ook SQLite3 te vinden is. De database kan dan automatisch geopend worden zonder dat de directory gewijzigd hoeft te worden.
+- `artists` - Artiesten (201 records)
+- `albums` - Albums (439 records)
+- `songs` - Songs (5350 records)
 
-```console
-hostname:user$ sqlite3 music.sqlite
-SQLite version 3.24.0 2018-06-04 14:10:15
-Enter ".help" for usage hints.
-sqlite> .tables
-albums   artists  songs
-sqlite>
+### Database structuur inspecteren
+
+Laten we eerst de database verkennen vanuit Python:
+
+```python
+import sqlite3
+from sqlite3 import Row
+
+def inspect_database(db_path: str = "music.sqlite") -> None:
+    """Toon database structuur en basisstatistieken."""
+    with sqlite3.connect(db_path) as conn:
+        conn.row_factory = Row
+
+        # Haal schema informatie op
+        cursor = conn.execute("""
+            SELECT name, sql
+            FROM sqlite_master
+            WHERE type='table'
+        """)
+
+        print("Database tabellen:\n")
+        for table in cursor.fetchall():
+            print(f"Tabel: {table['name']}")
+
+            # Tel records per tabel
+            count_cursor = conn.execute(f"SELECT COUNT(*) as count FROM {table['name']}")
+            count = count_cursor.fetchone()['count']
+            print(f"Aantal records: {count}\n")
+
+# Gebruik
+inspect_database()
 ```
 
-Er is nog een bijzonderheid met SQLite. Om dat te laten zien, eerst een gedeeltelijk overzicht van de tabel `artists`:
+Output:
+```
+Database tabellen:
 
-```console
-sqlite> .headers on
-sqlite> SELECT  * FROM artists LIMIT 195,15;
-_id|name
-196|Deep Purple
-197|T.Rex
-198|Tom Petty & The Heartbreakers
-199|Thomas Tallis
-200|Stevie Ray Vaughan
-201|Chemical Brothers
-sqlite>
+Tabel: artists
+Aantal records: 201
+
+Tabel: albums
+Aantal records: 439
+
+Tabel: songs
+Aantal records: 5350
 ```
 
-Zoals je ziet is de maximale waarde van de kolom `_id` 201. Dit is tevens de primaire sleutel van deze tabel. Wat gebeurt er nu wanneer we een nieuwe record toevoegen?
+!!! info "PRIMARY KEY AUTOINCREMENT"
+    SQLite vult automatisch de primary key kolom `_id` in wanneer je een nieuwe record toevoegt:
 
-```console
-sqlite> INSERT into artists(name) VALUES ('Travis');
-sqlite> SELECT  * FROM artists LIMIT 200,5;
-_id|name
-201|Chemical Brothers
-202|Travis
-sqlite>
+    ```python
+    cursor = conn.execute("INSERT INTO artists (name) VALUES (?)", ("Travis",))
+    new_id = cursor.lastrowid  # 202
+    ```
+
+    Dit werkt hetzelfde als PostgreSQL's `SERIAL` type.
+
+## Eenvoudige queries
+
+Laten we beginnen met een paar eenvoudige queries om weer in te komen:
+
+```python
+def get_album_by_id(album_id: int, db_path: str = "music.sqlite") -> Row | None:
+    """Haal één album op op basis van ID."""
+    with sqlite3.connect(db_path) as conn:
+        conn.row_factory = Row
+        cursor = conn.execute(
+            "SELECT * FROM albums WHERE _id = ?",
+            (album_id,)
+        )
+        return cursor.fetchone()
+
+# Gebruik
+album = get_album_by_id(167)
+if album:
+    print(f"Album {album['_id']}: {album['name']}")
 ```
 
-SQLite vult automatisch een waarde voor de primaire sleutel in. Er hoeft niets bijzonders voor gedaan worden zoals in andere database-engines.
-
-## Er weer even inkomen
-Vraag: wat is de titel van het album met nummer 167?
-
-```console
-sqlite> SELECT name FROM albums WHERE _id=167;
-name
-Blurring The Edges
-sqlite>
+Output:
+```
+Album 167: Blurring The Edges
 ```
 
-De records worden standaard gerangschikt op index; hier is dat op de kolom `_id`. Dat kan wel aangepast worden. Dit is het commando om de rijen uit de tabel `artists` te sorteren op naam in omgekeerde volgorde:
+### Sorteren met ORDER BY
 
-```console 
-sqlite> SELECT * FROM artists
-   ...> ORDER BY name desc;
-_id|name
-23|ZZ Top
-179|Yngwie Malmsteen
-148|Yardbirds
-... (202 regels in totaal)
+Je kunt resultaten sorteren met `ORDER BY`:
+
+```python
+def get_artists_sorted(db_path: str = "music.sqlite", desc: bool = False) -> list[Row]:
+    """Haal alle artiesten op, gesorteerd op naam."""
+    with sqlite3.connect(db_path) as conn:
+        conn.row_factory = Row
+
+        order = "DESC" if desc else "ASC"
+        cursor = conn.execute(f"SELECT * FROM artists ORDER BY name {order}")
+
+        return cursor.fetchall()
+
+# Gebruik
+artists = get_artists_sorted(desc=True)
+for artist in artists[:5]:  # Toon eerste 5
+    print(f"{artist['_id']}: {artist['name']}")
 ```
 
-Dit is allemaal nog niet zo spectaculair en een beetje onoverzichtelijk. Om de albums te tonen met de naam van de artist zijn meerdere query’s nodig om het resultaat te kunnen achterhalen. Dat kan handiger. Uit de lessen ‘Databases 1’ uit periode 1 is hopelijk blijven hangen dat er dan met één of meerdere *joins* gewerkt moet worden.
+Output:
+```
+23: ZZ Top
+179: Yngwie Malmsteen
+148: Yardbirds
+97: Yes
+14: Who
+```
 
-Als eerste voorbeeld het SQL-statement dat de tracks en titels van de songs laat zien met daarachter de naam van het album waarop de song voorkomt.
+!!! warning "SQL injection bij ORDER BY"
+    In het voorbeeld hierboven gebruiken we f-string voor `order` (`ASC`/`DESC`). Dit is veilig omdat we de waarde zelf controleren (boolean → "ASC" of "DESC").
 
-```console
-sqlite> select s.track, s.title, a.name
-...> from songs s
-...> join albums a on s.album = a._id;
-track|title|name
-2|I Can't Quit You Baby|BBC Sessions
-1|Taking the Easy Way Out Again|Rhinos Winos and Lunatics
-6|Let's Have A Party|Private Practice
-7|Flaming Telepaths|Champions Of Rock
-11|Yearnin'|The Big Come Up
+    Doe dit NOOIT met user input:
+    ```python
+    # GEVAARLIJK - SQL injection risico!
+    order = input("ASC or DESC? ")
+    cursor.execute(f"SELECT * FROM artists ORDER BY name {order}")
+    ```
+
+## JOINs: meerdere tabellen combineren
+
+Tot nu toe hebben we met één tabel gewerkt. Maar de echte kracht van SQL komt pas bij JOINs. Je kent dit al van PostgreSQL - in Python werkt het precies hetzelfde.
+
+### Simpele JOIN: Songs met Albums
+
+Laten we songs combineren met albums om te zien op welk album elke song staat:
+
+```python
+def get_songs_with_albums(db_path: str = "music.sqlite") -> list[Row]:
+    """Haal alle songs op met hun album naam."""
+    with sqlite3.connect(db_path) as conn:
+        conn.row_factory = Row
+
+        cursor = conn.execute("""
+            SELECT s.track, s.title, a.name AS album_name
+            FROM songs s
+            JOIN albums a ON s.album = a._id
+            ORDER BY s.title
+        """)
+
+        return cursor.fetchall()
+
+# Gebruik
+songs = get_songs_with_albums()
+for song in songs[:5]:  # Toon eerste 5
+    print(f"Track {song['track']}: {song['title']} (op {song['album_name']})")
+```
+
+Output:
+```
+Track 4: #1 Zero (op The Colour And The Shape)
+Track 1: 'Desolation Row' (op Desire)
+Track 1: '74-'75 (op Sheer Heart Attack)
+Track 6: (I Can't Get No) Satisfaction (op The Big Come Up)
+Track 2: (I Can't Get No) Satisfaction (op Singles Collection: The London Years)
+```
+
+!!! info "JOIN syntax"
+    De JOIN syntax is identiek aan PostgreSQL:
+
+    ```sql
+    SELECT kolommen
+    FROM tabel1 alias1
+    JOIN tabel2 alias2 ON alias1.foreign_key = alias2.primary_key
+    ```
+
+    - `s` en `a` zijn **aliases** (afkortingen)
+    - `ON` specificeert de relatie tussen tabellen
+    - `a.name AS album_name` geeft de kolom een duidelijke naam
+
+### JOIN met WHERE: Artiesten met Albums
+
+Nu gaan we artiesten ophalen met hun albums, alfabetisch gerangschikt:
+
+```python
+def get_artists_with_albums(db_path: str = "music.sqlite") -> list[Row]:
+    """Haal alle artiesten op met hun albums."""
+    with sqlite3.connect(db_path) as conn:
+        conn.row_factory = Row
+
+        cursor = conn.execute("""
+            SELECT ar.name AS artist, al.name AS album
+            FROM artists ar
+            JOIN albums al ON ar._id = al.artist
+            ORDER BY ar.name, al.name
+        """)
+
+        return cursor.fetchall()
+
+# Gebruik
+artists_albums = get_artists_with_albums()
+for item in artists_albums[:10]:  # Toon eerste 10
+    print(f"{item['artist']}: {item['album']}")
+```
+
+Output:
+```
+1000 Maniacs: Our Time in Eden
+10cc: The Best Of The Early Years
+AC DC: For Those About To Rock (We Salute You)
+AC DC: If You Want Blood You've Got It
+Aerosmith: Night In The Ruts
+Aerosmith: Rocks
+Alice Cooper: Beast Of Alice Cooper
 ...
-... (5350 regels in totaal)
 ```
 
-Volgende vraag: een overzicht van de artiesten met hun albums alfabetisch gerangschikt op de naam van de artiest.
+### Dubbele JOIN: Artiesten, Albums, Songs
 
-```console hl_lines="3"
-sqlite> SELECT ar.name, al.name
-...> FROM artists ar JOIN albums al ON ar._id = al.artist
-...> ORDER BY ar.name;
-name|name
-1000 Maniacs|Our Time in Eden
-10cc|The Best Of The Early Years
-AC DC|For Those About To Rock (We Salute You)
-AC DC|If You Want Blood You've Got It
-Aerosmith|Night In The Ruts
-... (439 regels)
+Nu wordt het interessanter: we combineren alle drie de tabellen. Hiervoor hebben we **twee JOINs** nodig:
+
+```python
+def get_complete_music_catalog(db_path: str = "music.sqlite") -> list[Row]:
+    """Haal alle songs op met artiest en album informatie."""
+    with sqlite3.connect(db_path) as conn:
+        conn.row_factory = Row
+
+        cursor = conn.execute("""
+            SELECT
+                ar.name AS artist,
+                al.name AS album,
+                s.track,
+                s.title
+            FROM songs s
+            JOIN albums al ON s.album = al._id
+            JOIN artists ar ON al.artist = ar._id
+            ORDER BY ar.name, al.name, s.track
+        """)
+
+        return cursor.fetchall()
+
+# Gebruik
+catalog = get_complete_music_catalog()
+for item in catalog[:10]:
+    print(f"{item['artist']} - {item['album']} - Track {item['track']}: {item['title']}")
 ```
 
-Nog wat ingewikkelder vraag: een overzicht met de naam van de artiest, de naam van de albums, en van de songs de track en de titel. Let op dat er hier tweemaal een join gebruikt dient te worden.
-
-```console
-sqlite> SELECT ar.name, al.name, s.track, s.title
-...> FROM songs s JOIN albums al ON s.album=s._id
-...> JOIN artists ar ON al.artist=ar._id
-...> ORDER BY ar.name, al.name, s.title;
-name|name|track|title
-1000 Maniacs|Our Time in Eden|1|Backwater
-1000 Maniacs|Our Time in Eden|4|Echoes In The Dark
-1000 Maniacs|Our Time in Eden|1|The Diamond Overture
-1000 Maniacs|Our Time in Eden|10|Walking in the Wild
-10cc|The Best Of The Early Years|1|Backwater
-... (1756 regels)
+Output:
+```
+1000 Maniacs - Our Time in Eden - Track 1: These Are Days
+1000 Maniacs - Our Time in Eden - Track 2: Eat For Two
+1000 Maniacs - Our Time in Eden - Track 3: Candy Everybody Wants
+1000 Maniacs - Our Time in Eden - Track 4: Tolerance
+...
 ```
 
-!!! Info "Een betere teksteditor"
-    Het is best een uitgebreid SQL-statement dat is ingevoerd bij SQLite. De kans op fouten is daarbij erg groot, met als gevolg dat het commando opnieuw ingetoetst moet worden. De code kan ook in een teksteditor (bijvoorbeeld Notepad++ of VS Code) getypt worden en later gekopieerd worden naar SQLite om uitgevoerd te worden. Scheelt vaak een hoop tijd en ergernis.
+!!! tip "Meerdere JOINs"
+    Bij meerdere JOINs werk je **van binnen naar buiten**:
 
+    1. `songs` JOIN `albums` (via `s.album = al._id`)
+    2. `albums` JOIN `artists` (via `al.artist = ar._id`)
 
-Gevraagd: een overzicht met de naam van de artiest, de naam van de albums, en van de songs de track en de titel, alleen nu met de voorwaarde erbij dat het woord 'doctor' in de titel van de song moet voorkomen.
+    Dit is hetzelfde als bij PostgreSQL. De volgorde maakt uit!
 
+### JOIN met WHERE: Zoeken in resultaten
 
-```console
-sqlite> SELECT ar.name, al.name, s.track, s.title
-...> FROM songs s JOIN albums al ON s.album=al._id
-...> JOIN artists ar ON al.artist=ar._id
-...> WHERE s.title LIKE '%doctor%'
-...> ORDER BY ar.name, al.name, s.title;
-name|name|track|title
-Black Sabbath|Technical Ecstasy|6|Rock 'N' Roll Doctor
-Dr Feelgood|Malpractice|11|You Shouldn't Call The Doctor (If You Can't Afford The Bills)
-Dr Feelgood|Private Practice|1|Down At The Doctors
-Fleetwood Mac|The Best of|11|Doctor Brown
-Hawkwind|25 Years On|5|Flying Doctor
-... (13 regels)
+We kunnen ook filteren op JOIN resultaten met een `WHERE` clausule. Bijvoorbeeld: zoek alle songs met "doctor" in de titel:
+
+```python
+def search_songs_by_title(
+    search_term: str,
+    db_path: str = "music.sqlite"
+) -> list[Row]:
+    """Zoek songs op basis van titel, inclusief artiest en album info."""
+    with sqlite3.connect(db_path) as conn:
+        conn.row_factory = Row
+
+        cursor = conn.execute("""
+            SELECT
+                ar.name AS artist,
+                al.name AS album,
+                s.track,
+                s.title
+            FROM songs s
+            JOIN albums al ON s.album = al._id
+            JOIN artists ar ON al.artist = ar._id
+            WHERE s.title LIKE ?
+            ORDER BY ar.name, al.name, s.title
+        """, (f"%{search_term}%",))
+
+        return cursor.fetchall()
+
+# Gebruik
+doctor_songs = search_songs_by_title("doctor")
+print(f"Gevonden {len(doctor_songs)} songs met 'doctor' in de titel:\n")
+for song in doctor_songs:
+    print(f"{song['artist']}: {song['title']} (op {song['album']})")
 ```
 
-## Views
+Output:
+```
+Gevonden 13 songs met 'doctor' in de titel:
 
-Het laatste onderwerp voordat SQLite gekoppeld gaat worden met Python zijn de views. Een view is niets meer dan een virtuele tabel, waarin gegevens afgeschermd kunnen worden voor buitenstaanders. Stel er is een tabel `medewerkers`. Niet iedereen hoeft alle gegevens van iedere werknemer te kunnen bekijken. Een kolom als `salaris` zou niet zonder meer beschikbaar moeten zijn. Daarom kan er een view aangemaakt worden die gevoelige informatie verbergt voor onbevoegden.
-
-Om de werking van een view te demonstreren wordt nu van het laatst besproken SQL-statement een view aangemaakt, zonder de `WHERE`-clausule, met de naam `vArtistList`. De kleine letter `v` aan het begin van de naam van de view is een prefix om aan te geven dat het hier een view betreft.
-
-```console
-sqlite> create view vArtistsList AS
-...> SELECT ar.name, al.name, s.track, s.title
-...> FROM songs s JOIN albums al ON s.album=al._id
-...> JOIN artists ar ON al.artist=ar._id
-...> WHERE s.title LIKE '%doctor%'
-...> ORDER BY ar.name, al.name, s.title;
-sqlite>
-sqlite> .schema
-CREATE TABLE songs (_id INTEGER PRIMARY KEY, track INTEGER, title TEXT NOT NULL, album INTEGER);
-CREATE TABLE albums (_id INTEGER PRIMARY KEY, name TEXT NOT NULL, artist INTEGER);
-CREATE TABLE artists (_id INTEGER PRIMARY KEY, name TEXT NOT NULL);
-CREATE VIEW vArtistsList as Select ar.name, al.name, s.track, s.title from songs s join albums al on s.album=al._id join artists ar on al.artist=ar._id where s.title like '%doctor%' order by ar.name, al.name, s.title
-/* vAristsList(name,"name:1",track,title) */;
-sqlite>
+Black Sabbath: Rock 'N' Roll Doctor (op Technical Ecstasy)
+Dr Feelgood: You Shouldn't Call The Doctor (If You Can't Afford The Bills) (op Malpractice)
+Dr Feelgood: Down At The Doctors (op Private Practice)
+Fleetwood Mac: Doctor Brown (op The Best of)
+...
 ```
 
-Het is nu een klein kunstje om de gegevens van de view te tonen. Dat gaat weer lukken met een `SELECT`-statement:
+!!! info "LIKE operator en wildcard"
+    - `LIKE '%doctor%'` zoekt overal in de string
+    - `%` is een wildcard (= 0 of meer karakters)
+    - We gebruiken `?` placeholder met `f"%{search_term}%"` voor veiligheid
 
-```console
-sqlite> SELECT *
-...> FROM vArtistsList;
-name|name:1|track|title
-Black Sabbath|Technical Ecstasy|6|Rock 'N' Roll Doctor
-Dr Feelgood|Malpractice|11|You Shouldn't Call The Doctor (If You Can't Afford The Bills)
-Dr Feelgood|Private Practice|1|Down At The Doctors
-Fleetwood Mac|The Best of|11|Doctor Brown
-... (diezelfde 13 regels)
+    Dit is identiek aan PostgreSQL's `LIKE` operator.
+
+## Views (optioneel)
+
+Een **view** is een virtuele tabel - een opgeslagen query die je kunt gebruiken alsof het een echte tabel is. Views worden gebruikt voor:
+
+- **Security**: Gevoelige kolommen verbergen (zoals salaris)
+- **Simplificatie**: Complexe queries herbruikbaar maken
+- **Abstraction layer**: Database structuur verbergen voor gebruikers
+
+!!! note "Views in modern Python apps"
+    In Python/Flask apps gebruik je views minder vaak. Met SQLAlchemy (Week 6) schrijf je queries direct in Python en gebruik je geen SQL views meer.
+
+    Views zijn wel handig als je een database deelt met andere applicaties of rapportage tools.
+
+### View maken en gebruiken in Python
+
+Laten we een view maken voor de "doctor songs" query van eerder:
+
+```python
+def create_doctor_songs_view(db_path: str = "music.sqlite") -> None:
+    """Maak een view voor songs met 'doctor' in de titel."""
+    with sqlite3.connect(db_path) as conn:
+        # Verwijder view als deze al bestaat
+        conn.execute("DROP VIEW IF EXISTS vDoctorSongs")
+
+        # Maak nieuwe view
+        conn.execute("""
+            CREATE VIEW vDoctorSongs AS
+            SELECT
+                ar.name AS artist,
+                al.name AS album,
+                s.track,
+                s.title
+            FROM songs s
+            JOIN albums al ON s.album = al._id
+            JOIN artists ar ON al.artist = ar._id
+            WHERE s.title LIKE '%doctor%'
+            ORDER BY ar.name, al.name, s.title
+        """)
+
+        conn.commit()
+        print("View 'vDoctorSongs' aangemaakt")
+
+def query_view(view_name: str, db_path: str = "music.sqlite") -> list[Row]:
+    """Haal data op uit een view."""
+    with sqlite3.connect(db_path) as conn:
+        conn.row_factory = Row
+        cursor = conn.execute(f"SELECT * FROM {view_name}")
+        return cursor.fetchall()
+
+# Gebruik
+create_doctor_songs_view()
+
+# Query de view alsof het een tabel is
+doctor_songs = query_view("vDoctorSongs")
+for song in doctor_songs:
+    print(f"{song['artist']}: {song['title']}")
 ```
 
-Nu worden alle gegevens getoond met `SELECT * from vArtistList`. Het is nog mooier als er op kolomnaam gezocht kan worden of dat de kolommen een duidelijke koptekst hebben. Daarvoor is een kleine aanpassing nodig. De view wordt eerst verwijderd en daarna opnieuw lichtelijk gewijzigd, aangemaakt.
-
-```console
-sqlite> drop view vAristsList;
-sqlite> create view vArtistsList AS
-...> SELECT ar.name as artist, al.name as album, s.track as track, s.title as title
-...> FROM songs s JOIN albums al ON s.album=al._id
-...> JOIN artists ar ON al.artist=ar._id
-...> WHERE s.title LIKE '%doctor%'
-...> ORDER BY ar.name, al.name, s.title;
+Output:
+```
+View 'vDoctorSongs' aangemaakt
+Black Sabbath: Rock 'N' Roll Doctor
+Dr Feelgood: You Shouldn't Call The Doctor (If You Can't Afford The Bills)
+Dr Feelgood: Down At The Doctors
+Fleetwood Mac: Doctor Brown
+...
 ```
 
-En deze aanpassing heeft tot gevolg dat het opvragen van gegevens uit de view ook anders gaat. De aangepaste kolomnamen moeten nu gebruikt worden om resultaat te kunnen zien.
+### View met filter
 
-```console
-sqlite> SELECT * FROM vArtistsList
-...> WHERE artist LIKE '%feelgood%';
-artist|album|track|title
-Dr Feelgood|Malpractice|11|You Shouldn't Call The Doctor (If You Can't Afford The Bills)
-Dr Feelgood|Private Practice|1|Down At The Doctors
-sqlite>
+Je kunt de view ook filteren, net als een normale tabel:
+
+```python
+def search_in_view(
+    view_name: str,
+    artist_filter: str,
+    db_path: str = "music.sqlite"
+) -> list[Row]:
+    """Zoek in een view met extra filtering."""
+    with sqlite3.connect(db_path) as conn:
+        conn.row_factory = Row
+        cursor = conn.execute(
+            f"SELECT * FROM {view_name} WHERE artist LIKE ?",
+            (f"%{artist_filter}%",)
+        )
+        return cursor.fetchall()
+
+# Gebruik
+feelgood_songs = search_in_view("vDoctorSongs", "feelgood")
+for song in feelgood_songs:
+    print(f"{song['artist']}: {song['title']} (op {song['album']})")
 ```
 
-Het kan gebeuren dat er een aantal zaken misgaan bij het uitvoeren van SQL-statements, zoals het verwijderen van een grote hoeveelheid records uit de tabellen. SQLite heeft daar een prima oplossing voor ingebouwd, het commando `.restore`. Hiermee wordt de inhoud van de database teruggezet naar de laatste versie die in het bestand is opgeslagen.
+Output:
+```
+Dr Feelgood: You Shouldn't Call The Doctor (If You Can't Afford The Bills) (op Malpractice)
+Dr Feelgood: Down At The Doctors (op Private Practice)
+```
 
-Maak nu [oefening 1](oefeningen/sql-oefening1.md).
+!!! tip "Views bekijken"
+    Je kunt alle views in de database opvragen:
 
+    ```python
+    cursor = conn.execute("""
+        SELECT name, sql
+        FROM sqlite_master
+        WHERE type='view'
+    """)
+    ```
 
+## Voorbereiding op SQLAlchemy
+
+De patterns die je hier leert, komen terug bij SQLAlchemy (Week 6):
+
+| sqlite3 pattern | SQLAlchemy equivalent |
+|----------------|----------------------|
+| **JOIN queries** | Relationships tussen models |
+| **Placeholders (`?`)** | Automatisch escaped parameters |
+| **row_factory = Row** | SQLAlchemy Row objects (standaard) |
+| **Context managers** | Session management |
+| **Views** | Queries in Python (niet SQL views) |
+
+**Waarom dit leren?** Begrijpen hoe JOINs werken helpt je begrijpen wat SQLAlchemy doet. Bijvoorbeeld:
+
+```python
+# Wat je nu schrijft (sqlite3):
+cursor.execute("""
+    SELECT ar.name, al.name
+    FROM artists ar
+    JOIN albums al ON ar._id = al.artist
+""")
+
+# Wordt later (SQLAlchemy):
+for artist in session.query(Artist):
+    for album in artist.albums:  # Automatische JOIN!
+        print(f"{artist.name}: {album.name}")
+```
+
+SQLAlchemy abstraheert de SQL weg, maar onder de motorkap gebruikt het precies dezelfde JOINs.
+
+## Samenvatting
+
+Je hebt geleerd:
+
+- Database structuur inspecteren met `sqlite_master`
+- **JOINs** gebruiken om meerdere tabellen te combineren
+- Simpele JOIN (2 tabellen), dubbele JOIN (3 tabellen)
+- **WHERE** clausules combineren met JOINs
+- **LIKE** operator voor tekst zoeken met wildcards
+- **Views** maken en gebruiken (optioneel)
+- Placeholders gebruiken voor SQL injection preventie
+- Link tussen sqlite3 patterns en SQLAlchemy
+
+**Volgende stap:** In [Deel 4](sql-deel4.md) leer je werken met een complete MusicDatabase class die alle functionaliteit combineert.
+
+**Oefening:** Maak nu [oefening 1](oefeningen/sql-oefening1.md).
