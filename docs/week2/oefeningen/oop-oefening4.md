@@ -111,7 +111,7 @@ Nu komt het allemaal samen. Maak een `Bestelling` dataclass die alle andere obje
    - Return dictionary met alle details (zie voorbeeld)
 
 !!! warning "Return dict, geen print"
-    De `bereken_totaal()` methode moet een **dictionary** teruggeven met alle bedragen. Zo is de data **JSON-ready** voor webapplicaties!
+    De `bereken_totaal()` methode moet een **dictionary** teruggeven met alle bedragen. Zo kun je de data gemakkelijk aan templates doorgeven!
 
 ### Startcode
 
@@ -219,15 +219,13 @@ Totaal: €742.94
 !!! note "Gratis verzending boven €50"
     Let op: de verzendkosten zijn €0.00 omdat het subtotaal na korting boven de €50 is!
 
-## Extra uitdaging: JSON export (optioneel)
+## Extra uitdaging: Data overzicht (optioneel)
 
-Voeg een methode `export_json() -> str` toe aan `Bestelling` die de volledige bestelling als JSON string teruggeeft:
+Voeg een methode `maak_overzicht() -> dict` toe aan `Bestelling` die een volledig overzicht van de bestelling teruggeeft:
 
 ```python
-import json
-
-def export_json(self) -> str:
-    """Export bestelling als JSON string (web-ready)."""
+def maak_overzicht(self) -> dict:
+    """Maak een dict met alle bestellingsgegevens."""
     totaal_info = self.bereken_totaal()
 
     data = {
@@ -244,20 +242,20 @@ def export_json(self) -> str:
         "totaal": totaal_info
     }
 
-    return json.dumps(data, indent=2)
+    return data
 ```
 
 Test:
 ```python
-json_str = bestelling.export_json()
-print(json_str)
+overzicht = bestelling.maak_overzicht()
+print(overzicht)
 ```
 
 ## Checklist
 
 - [ ] Alle dataclasses gebruiken `@dataclass`
 - [ ] `Bestelling` gebruikt compositie (bevat andere objecten)
-- [ ] `bereken_totaal()` geeft dict terug (JSON-ready)
+- [ ] `bereken_totaal()` geeft dict terug voor templates
 - [ ] `Optional[Kortingscode]` gebruikt
 - [ ] `list[Product]` met `field(default_factory=list)`
 - [ ] Gratis verzending boven €50 werkt
@@ -267,7 +265,7 @@ print(json_str)
 ## Wat je geleerd hebt
 
 - **Compositie**: Objecten die andere objecten bevatten (has-a relatie)
-- **Return dicts**: Gestructureerde data teruggeven (JSON-ready)
+- **Return dicts**: Gestructureerde data voor templates
 - **Optional**: Voor attributen die None kunnen zijn
 - **Complex data modeling**: Realistische webshop structuur
 

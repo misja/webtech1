@@ -114,6 +114,148 @@ Het interessante van methoden is dat ze ook berekeningen kunnen doen:
 - Heldere uitleg zonder overdrijving
 - Praktische voorbeelden
 
+## Didactische Principes
+
+### 1. Gecontroleerde conceptintroductie
+
+**Probleem:** Studenten worden overspoeld wanneer te veel nieuwe concepten tegelijk worden geïntroduceerd.
+
+**Regel:** Introduceer maximaal 1-2 nieuwe concepten per sectie. Leg nieuwe syntax altijd uit voordat je het gebruikt.
+
+**Voorbeelden:**
+
+**@dataclass decorator - GOED:**
+```markdown
+## Dataclasses
+
+Python heeft een handige manier om klassen te maken die vooral data bevatten: **dataclasses**.
+
+Je gebruikt de `@dataclass` decorator (een speciale aanduiding boven de klasse) om aan te geven dat dit een dataclass is:
+
+\```python
+from dataclasses import dataclass
+
+@dataclass
+class Product:
+    naam: str
+    prijs: float
+\```
+
+De `@dataclass` zorgt ervoor dat Python automatisch een `__init__` methode maakt...
+```
+
+**@dataclass decorator - FOUT:**
+```markdown
+## Dataclasses
+
+\```python
+from dataclasses import dataclass
+
+@dataclass  # Geen uitleg wat @ is
+class Product:
+    naam: str
+    prijs: float
+\```
+```
+
+**Volg deze volgorde:**
+1. Leg uit WAAROM (voordeel/doel)
+2. Leg uit WAT (nieuwe syntax/concept)
+3. Toon HOE (code voorbeeld)
+4. Voorkom stapeling (niet: decorators + type hints + dataclasses + field() tegelijk)
+
+### 2. Syntax uitleg bij eerste gebruik
+
+**Verplichte uitleg voor:**
+- **Decorators** (`@dataclass`, `@app.route`, `@staticmethod`)
+- **Special methods** (`__init__`, `__str__`, `__repr__`)
+- **Type syntax** (`list[Product]`, `Optional[str]`, `dict[str, int]`)
+- **Imports** waarom je iets importeert
+
+**Voorbeeld - Decorator bij eerste gebruik:**
+```markdown
+De `@` syntax (decorator) is een manier om een klasse of functie uit te breiden met extra functionaliteit. Je hoeft nu niet precies te begrijpen hoe decorators werken - belangrijk is dat `@dataclass` ervoor zorgt dat Python automatisch code voor je schrijft.
+```
+
+**Gebruik admonitions voor syntax uitleg:**
+```markdown
+!!! info "Wat betekent `@dataclass`?"
+    De `@` voor `dataclass` is een **decorator**. Dit is een manier om aan Python te vertellen: "behandel deze klasse speciaal". De decorator zorgt automatisch voor `__init__`, `__repr__` en meer.
+```
+
+### 3. Focus: Traditionele webapplicaties
+
+**Deze cursus richt zich op traditionele server-side web apps**, niet op moderne API/SPA architectuur.
+
+**Technologie stack:**
+- Flask met Jinja2 templates (server-side rendering)
+- HTML forms (POST requests)
+- SQLAlchemy ORM
+- WTForms voor formulieren
+
+**Gebruik dus:**
+- "Gestructureerde data voor templates" ✅
+- "Dicts kun je in templates gebruiken" ✅
+- `render_template()` voor voorbeelden ✅
+
+**Vermijd:**
+- "JSON-ready data" ❌ (tenzij je JSON echt nodig hebt)
+- `jsonify()` voorbeelden ❌ (niet relevant voor deze cursus)
+- "API endpoints" ❌
+- "REST API" terminologie ❌
+
+**Uitzonderingen** waar JSON wel past:
+- `asdict()` voor debugging/inspectie
+- Data export functionaliteit (optioneel)
+- AJAX calls (indien behandeld in latere modules)
+
+**Voorbeeld - GOED:**
+```python
+def bereken_totaal(self) -> dict:
+    """
+    Bereken totaal en geef gestructureerde data terug.
+
+    Returns:
+        dict met subtotaal, korting en totaal - handig voor templates
+    """
+    return {
+        "subtotaal": self.subtotaal,
+        "korting": self.korting,
+        "totaal": self.subtotaal - self.korting
+    }
+```
+
+```markdown
+In een Flask route kun je deze dict doorgeven aan je template:
+
+\```python
+@app.route('/bestelling/<int:id>')
+def toon_bestelling(id):
+    bestelling = Bestelling.query.get(id)
+    totaal_info = bestelling.bereken_totaal()
+    return render_template('bestelling.html',
+                         bestelling=bestelling,
+                         totaal=totaal_info)
+\```
+```
+
+**Voorbeeld - FOUT:**
+```python
+def bereken_totaal(self) -> dict:
+    """Bereken totaal. Geeft JSON-ready dict terug."""  # ❌ JSON noemen
+    return {...}
+```
+
+```markdown
+In een Flask API endpoint:  # ❌ Geen APIs in deze cursus
+
+\```python
+@app.route('/api/bestelling/<int:id>')  # ❌
+def get_bestelling(id):
+    return jsonify(bestelling.bereken_totaal())  # ❌
+\```
+```
+
 ## Technische Principes
 
 ### 1. Moderne Python vanaf het begin
@@ -341,17 +483,31 @@ uv run mkdocs build
 
 Voordat je content indient:
 
+**Schrijfstijl:**
 - [ ] Geschreven naar student toe (je/jij, geen we/wij)
 - [ ] Geen docentenperspectief (weeknummers, cursusstructuur)
-- [ ] Type annotations overal in code voorbeelden
-- [ ] Return values in plaats van print in business logic
 - [ ] Nederlandse termen waar mogelijk (klassen, methoden, objecten)
 - [ ] Geen emoji of AI tells
 - [ ] Admonitions alleen voor belangrijke concepten
 - [ ] Realistische voorbeelddata
+
+**Didactiek:**
+- [ ] Max 1-2 nieuwe concepten per sectie
+- [ ] Nieuwe syntax uitgelegd bij eerste gebruik (decorators, special methods, etc.)
+- [ ] Geen te veel nieuwe concepten tegelijk gestapeld
+- [ ] Logische volgorde: WAAROM → WAT → HOE
+
+**Code:**
+- [ ] Type annotations overal in code voorbeelden
+- [ ] Return values in plaats van print in business logic
 - [ ] Docstrings in code voorbeelden
-- [ ] Link naar SQLAlchemy/Flask waar relevant (zonder jargon)
 - [ ] Code is web-ready (separation of concerns)
+
+**Flask context:**
+- [ ] Focus op traditionele web apps (niet API's/JSON)
+- [ ] "Template-ready" niet "JSON-ready" (tenzij JSON echt nodig is)
+- [ ] `render_template()` voorbeelden, niet `jsonify()` (tenzij API relevant is)
+- [ ] Link naar SQLAlchemy/Flask waar relevant (zonder jargon)
 
 ## Flask Terminologie
 

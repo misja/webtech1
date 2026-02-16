@@ -92,7 +92,7 @@ print(f"Totaal: €{wagen.bereken_totaal():.2f}")
 
 ## Return dicts voor gestructureerde data
 
-In webapplicaties wil je vaak gestructureerde data teruggeven (voor JSON responses):
+In webapplicaties wil je vaak gestructureerde data teruggeven aan templates:
 
 ```python
 from dataclasses import dataclass
@@ -149,13 +149,23 @@ print(f"Totaal: €{totaal_info['totaal']:.2f}")
 ```
 
 !!! info "Waarom dicts teruggeven?"
-    Dicts zijn **JSON-ready**. In Flask kun je ze direct teruggeven:
+    Dicts zijn handig voor templates. In Flask kun je ze doorgeven aan Jinja2 templates:
 
     ```python
-    @app.route('/api/bestelling/<int:id>')
-    def get_bestelling(id):
+    @app.route('/bestelling/<int:id>')
+    def toon_bestelling(id):
         bestelling = Bestelling.query.get(id)
-        return jsonify(bestelling.bereken_totaal())
+        totaal_info = bestelling.bereken_totaal()
+        return render_template('bestelling.html',
+                             bestelling=bestelling,
+                             totaal=totaal_info)
+    ```
+
+    In het template (`bestelling.html`) kun je dan de dict gebruiken:
+    ```html
+    <p>Subtotaal: €{{ totaal.subtotaal }}</p>
+    <p>Korting: -€{{ totaal.korting }}</p>
+    <p>Totaal: €{{ totaal.totaal }}</p>
     ```
 
 ## Complexe compositie: Complete bestelling
@@ -221,7 +231,7 @@ class Bestelling:
         Bereken complete totaal met alle kortingen en kosten.
 
         Returns:
-            dict met alle bedragen (JSON-ready)
+            dict met alle bedragen - handig voor templates
         """
         subtotaal = self.bereken_subtotaal()
 
@@ -322,13 +332,12 @@ print(f"{post.title} door {post.author.username}")
     - `bestelling.klant` → `bestellingen.klant_id` (foreign key naar `klanten.id`)
     - Objecten bevatten objecten → Tabellen verwijzen naar tabellen
 
-## JSON export voor API's
+## Gestructureerde data voor templates
 
-Voor webapplicaties wil je vaak je data als JSON exporteren:
+Voor webapplicaties wil je vaak je data in een gestructureerde vorm aan templates doorgeven:
 
 ```python
-import json
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass
 
 @dataclass
 class Klant:
@@ -345,20 +354,16 @@ class Bestelling:
     klant: Klant
     producten: list[Product]
 
-    def export_json(self) -> str:
-        """Export als JSON string."""
-        data = {
-            "klant": {
-                "naam": self.klant.naam,
-                "email": self.klant.email
-            },
-            "producten": [
-                {"naam": p.naam, "prijs": p.prijs}
-                for p in self.producten
-            ],
-            "aantal_producten": len(self.producten)
+    def bereken_overzicht(self) -> dict:
+        """Maak een overzicht voor de template."""
+        subtotaal = sum(p.prijs for p in self.producten)
+        return {
+            "klant_naam": self.klant.naam,
+            "aantal_producten": len(self.producten),
+            "subtotaal": subtotaal,
+            "btw": subtotaal * 0.21,
+            "totaal": subtotaal * 1.21
         }
-        return json.dumps(data, indent=2)
 
 # Test
 jan = Klant("Jan Jansen", "jan@email.nl")
@@ -370,40 +375,40 @@ bestelling = Bestelling(
     ]
 )
 
-print(bestelling.export_json())
+overzicht = bestelling.bereken_overzicht()
+print(overzicht)
 ```
 
 Output:
-```json
+```python
 {
-  "klant": {
-    "naam": "Jan Jansen",
-    "email": "jan@email.nl"
-  },
-  "producten": [
-    {"naam": "Laptop", "prijs": 799.99},
-    {"naam": "Muis", "prijs": 25.5}
-  ],
-  "aantal_producten": 2
+    'klant_naam': 'Jan Jansen',
+    'aantal_producten': 2,
+    'subtotaal': 825.49,
+    'btw': 173.35,
+    'totaal': 998.84
 }
 ```
 
-!!! tip "Dataclass → dict"
-    Je kunt ook `asdict()` gebruiken om een dataclass automatisch naar een dict te converteren:
+!!! tip "Dataclass → dict voor debugging"
+    Je kunt `asdict()` gebruiken om een dataclass automatisch naar een dict te converteren. Dit is vooral handig voor debugging:
 
     ```python
     from dataclasses import asdict
 
     klant_dict = asdict(jan)
+    print(klant_dict)
     # {'naam': 'Jan Jansen', 'email': 'jan@email.nl'}
     ```
 
-## Praktijk: Flask API endpoint
+    Let op: in productiecode maak je meestal zelf specifieke dicts met alleen de data die je template nodig heeft.
+
+## Praktijk: Flask routes met templates
 
 Hier zie je hoe dit in een echte Flask applicatie werkt:
 
 ```python
-from flask import Flask, jsonify
+from flask import Flask, render_template
 from dataclasses import dataclass
 
 app = Flask(__name__)
@@ -414,38 +419,42 @@ class Product:
     naam: str
     prijs: float
 
-# In-memory "database" (week 6: echte database!)
+# In-memory "database" (later: echte database!)
 producten = [
     Product(1, "Laptop", 799.99),
     Product(2, "Muis", 25.50),
     Product(3, "Toetsenbord", 89.99)
 ]
 
-@app.route('/api/producten')
-def get_producten():
-    """Geef alle producten terug als JSON."""
-    return jsonify([
-        {"id": p.id, "naam": p.naam, "prijs": p.prijs}
-        for p in producten
-    ])
+@app.route('/producten')
+def toon_producten():
+    """Toon alle producten in een template."""
+    return render_template('producten.html', producten=producten)
 
-@app.route('/api/producten/<int:product_id>')
-def get_product(product_id):
-    """Geef één product terug."""
+@app.route('/product/<int:product_id>')
+def toon_product(product_id):
+    """Toon één product."""
     product = next((p for p in producten if p.id == product_id), None)
 
     if product:
-        return jsonify({
-            "id": product.id,
-            "naam": product.naam,
-            "prijs": product.prijs
-        })
+        return render_template('product.html', product=product)
     else:
-        return jsonify({"error": "Product niet gevonden"}), 404
+        return "Product niet gevonden", 404
 ```
 
-!!! note "Return values → JSON"
-    Zie je waarom we altijd **return values** gebruiken en niet **print**? In een API moet je data teruggeven aan de client, niet naar de console printen.
+In je template (`producten.html`) kun je dan de objecten gebruiken:
+
+```html
+<h1>Producten</h1>
+<ul>
+{% for product in producten %}
+    <li>{{ product.naam }} - €{{ product.prijs }}</li>
+{% endfor %}
+</ul>
+```
+
+!!! note "Return values → Templates"
+    Zie je waarom we altijd **return values** gebruiken en niet **print**? In een Flask route moet je data doorgeven aan je template, niet naar de console printen.
 
 ## Separation of concerns
 
@@ -472,14 +481,14 @@ def toon_bestelling(id):
     bestelling = get_bestelling(id)  # Haal op
     totaal_info = bestelling.bereken_totaal()  # Bereken
 
-    # Presenteer als HTML of JSON
+    # Presenteer in template
     return render_template('bestelling.html',
                          bestelling=bestelling,
-                         totaal=totaal_info['totaal'])
+                         totaal=totaal_info)
 ```
 
 !!! info "Waarom scheiden?"
-    - Business logic is herbruikbaar (API, CLI, tests)
+    - Business logic is herbruikbaar (webapplicatie, CLI, tests)
     - Makkelijker te testen (geen Flask nodig voor tests)
     - Duidelijke verantwoordelijkheden
 
@@ -490,9 +499,8 @@ Controleer of je het volgende beheerst:
 - [ ] Compositie: objecten die andere objecten bevatten
 - [ ] `list[Object]` met `field(default_factory=list)`
 - [ ] `Optional[]` voor attributen die None kunnen zijn
-- [ ] Methoden die dicts teruggeven (JSON-ready)
+- [ ] Methoden die dicts teruggeven voor templates
 - [ ] Begrijpen: compositie in code = foreign keys in database
-- [ ] JSON export met `json.dumps()` of `jsonify()`
 - [ ] Separation of concerns: business logic vs presentation
 
 ## Samenvatting
@@ -501,18 +509,17 @@ In dit deel heb je geleerd:
 
 - **Compositie**: Objecten die andere objecten bevatten (heeft-een relatie)
 - **Type hints**: `list[Product]`, `Optional[Klant]`
-- **Return dicts**: Gestructureerde data voor JSON responses
-- **JSON export**: Data klaarmaken voor API's
+- **Return dicts**: Gestructureerde data voor templates
 - **Database preview**: Compositie = foreign keys
 - **Separation of concerns**: Business logic apart van presentation
 
 **Je kunt nu:**
 
 - Complexe datastructuren modelleren met objecten
-- Web-ready code schrijven die JSON kan teruggeven
+- Web-ready code schrijven die data aan templates doorgeeft
 - Begrijpen hoe SQLAlchemy relaties werkt (foreign keys)
-- Code schrijven die geschikt is voor Flask API's
+- Code schrijven die geschikt is voor Flask applicaties
 
-**Volgende stap:** In week 6 ga je dit toepassen met SQLAlchemy. Je modellen krijgen foreign keys en relationships om tabellen aan elkaar te koppelen.
+**Volgende stap:** Later ga je dit toepassen met SQLAlchemy. Je modellen krijgen foreign keys en relationships om tabellen aan elkaar te koppelen.
 
 **Oefening:** Maak [Oefening 4](oefeningen/oop-oefening4.md) om compositie te oefenen met een compleet bestellingssysteem.

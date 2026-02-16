@@ -18,7 +18,9 @@ Dit werkt prima, maar er is veel **boilerplate**: je typt elke attribuutnaam dri
 
 ## Dataclasses: minder code, zelfde resultaat
 
-Python biedt een elegantere manier met de `@dataclass` decorator:
+Python biedt een elegantere manier voor data-klassen: **dataclasses**.
+
+Je herkent een dataclass aan de `@dataclass` **decorator** (het `@`-symbool) boven de klasse:
 
 ```python
 from dataclasses import dataclass
@@ -30,10 +32,16 @@ class Product:
     voorraad: int = 0
 ```
 
-Dit genereert automatisch:
-- Een `__init__` methode
-- Een `__repr__` methode (voor debugging)
-- Een `__eq__` methode (voor vergelijkingen)
+!!! info "Wat betekent `@dataclass`?"
+    De `@` syntax is een **decorator** - een speciale aanduiding die functionaliteit toevoegt aan je klasse.
+
+    Je hoeft nu niet precies te begrijpen hoe decorators werken. Belangrijk is dat `@dataclass` ervoor zorgt dat Python automatisch een aantal methoden voor je genereert:
+
+    - `__init__()` - constructor met alle attributen als parameters
+    - `__repr__()` - nette string representatie voor debugging
+    - `__eq__()` - vergelijking tussen objecten
+
+    Dit scheelt veel typwerk en voorkomt fouten. Later zie je meer decorators zoals `@app.route` in Flask.
 
 Je gebruikt de klasse precies hetzelfde:
 
@@ -43,15 +51,6 @@ print(laptop.naam)        # "Laptop"
 print(laptop.prijs)       # 799.99
 print(laptop)             # Product(naam='Laptop', prijs=799.99, voorraad=5)
 ```
-
-!!! info "Wat doet @dataclass?"
-    De `@dataclass` decorator is een **class decorator** die tijdens het laden van je code automatisch methoden genereert. Je krijgt gratis:
-
-    - `__init__()` - constructor
-    - `__repr__()` - string representatie voor debugging
-    - `__eq__()` - vergelijking tussen objecten
-
-    Dit scheelt veel typwerk en voorkomt fouten.
 
 ## Methoden toevoegen aan dataclasses
 
