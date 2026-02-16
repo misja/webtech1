@@ -1931,17 +1931,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#voorbereiding-op-sqlalchemy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Voorbereiding op SQLAlchemy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#samenvatting" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3529,17 +3518,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#voorbereiding-op-sqlalchemy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Voorbereiding op SQLAlchemy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#samenvatting" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3900,7 +3878,7 @@
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Views in modern Python apps</p>
-<p>In Python/Flask apps gebruik je views minder vaak. Met SQLAlchemy (Week 6) schrijf je queries direct in Python en gebruik je geen SQL views meer.</p>
+<p>In Python/Flask apps gebruik je views minder vaak. Met een ORM zoals SQLAlchemy schrijf je queries direct in Python en gebruik je geen SQL views meer.</p>
 <p>Views zijn wel handig als je een database deelt met andere applicaties of rapportage tools.</p>
 </div>
 <h3 id="view-maken-en-gebruiken-in-python">View maken en gebruiken in Python<a class="headerlink" href="#view-maken-en-gebruiken-in-python" title="Link naar deze sectie">¶</a></h3>
@@ -3987,52 +3965,6 @@
 </span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="s2">"""</span><span class="p">)</span>
 </span></code></pre></div>
 </div>
-<h2 id="voorbereiding-op-sqlalchemy">Voorbereiding op SQLAlchemy<a class="headerlink" href="#voorbereiding-op-sqlalchemy" title="Link naar deze sectie">¶</a></h2>
-<p>De patterns die je hier leert, komen terug bij SQLAlchemy (Week 6):</p>
-<table>
-<thead>
-<tr>
-<th>sqlite3 pattern</th>
-<th>SQLAlchemy equivalent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>JOIN queries</strong></td>
-<td>Relationships tussen models</td>
-</tr>
-<tr>
-<td><strong>Placeholders (<code>?</code>)</strong></td>
-<td>Automatisch escaped parameters</td>
-</tr>
-<tr>
-<td><strong>row_factory = Row</strong></td>
-<td>SQLAlchemy Row objects (standaard)</td>
-</tr>
-<tr>
-<td><strong>Context managers</strong></td>
-<td>Session management</td>
-</tr>
-<tr>
-<td><strong>Views</strong></td>
-<td>Queries in Python (niet SQL views)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Waarom dit leren?</strong> Begrijpen hoe JOINs werken helpt je begrijpen wat SQLAlchemy doet. Bijvoorbeeld:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Wat je nu schrijft (sqlite3):</span>
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="s2">    SELECT ar.name, al.name</span>
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="s2">    FROM artists ar</span>
-</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="s2">    JOIN albums al ON ar._id = al.artist</span>
-</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="s2">"""</span><span class="p">)</span>
-</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>
-</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="c1"># Wordt later (SQLAlchemy):</span>
-</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="k">for</span> <span class="n">artist</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Artist</span><span class="p">):</span>
-</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>    <span class="k">for</span> <span class="n">album</span> <span class="ow">in</span> <span class="n">artist</span><span class="o">.</span><span class="n">albums</span><span class="p">:</span>  <span class="c1"># Automatische JOIN!</span>
-</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">artist</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">album</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span></code></pre></div>
-<p>SQLAlchemy abstraheert de SQL weg, maar onder de motorkap gebruikt het precies dezelfde JOINs.</p>
 <h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
 <p>Je hebt geleerd:</p>
 <ul>
@@ -4043,7 +3975,6 @@
 <li><strong>LIKE</strong> operator voor tekst zoeken met wildcards</li>
 <li><strong>Views</strong> maken en gebruiken (optioneel)</li>
 <li>Placeholders gebruiken voor SQL injection preventie</li>
-<li>Link tussen sqlite3 patterns en SQLAlchemy</li>
 </ul>
 <p><strong>Volgende stap:</strong> In <a href="sql-deel4.html">Deel 4</a> leer je werken met een complete MusicDatabase class die alle functionaliteit combineert.</p>
 <p><strong>Oefening:</strong> Maak nu <a href="oefeningen/sql-oefening1.html">oefening 1</a>.</p>

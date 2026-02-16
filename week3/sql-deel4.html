@@ -1997,17 +1997,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#van-sqlite3-naar-sqlalchemy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Van sqlite3 naar SQLAlchemy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#samenvatting" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3605,17 +3594,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#van-sqlite3-naar-sqlalchemy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Van sqlite3 naar SQLAlchemy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#samenvatting" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3701,7 +3679,6 @@
 <li><strong>Consistency</strong>: Altijd dezelfde patterns (context managers, placeholders, etc.)</li>
 <li><strong>Onderhoudbaarheid</strong>: Aanpassingen hoef je maar op één plek te maken</li>
 </ul>
-<p>Deze aanpak komt overeen met hoe je later met SQLAlchemy werkt.</p>
 <h2 id="de-complete-musicdatabase-class">De complete MusicDatabase class<a class="headerlink" href="#de-complete-musicdatabase-class" title="Link naar deze sectie">¶</a></h2>
 <p>Hier is een complete implementatie met alle patterns die je tot nu toe hebt geleerd:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
@@ -4059,21 +4036,6 @@
 </span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Database error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>        <span class="k">return</span> <span class="kc">None</span>
 </span></code></pre></div>
-<h2 id="van-sqlite3-naar-sqlalchemy">Van sqlite3 naar SQLAlchemy<a class="headerlink" href="#van-sqlite3-naar-sqlalchemy" title="Link naar deze sectie">¶</a></h2>
-<p>Deze MusicDatabase class lijkt al veel op hoe je later met SQLAlchemy werkt:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># Wat je nu schrijft (sqlite3):</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">db</span> <span class="o">=</span> <span class="n">MusicDatabase</span><span class="p">()</span>
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">artists</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_all_artists</span><span class="p">()</span>
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1"># Wordt later (SQLAlchemy):</span>
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="n">artists</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Artist</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-</span></code></pre></div>
-<p>Beide gebruiken een class-based approach met methods voor database operaties. Het grote verschil:</p>
-<ul>
-<li><strong>sqlite3</strong>: Je schrijft SQL, class is een wrapper</li>
-<li><strong>SQLAlchemy</strong>: Je schrijft Python, SQL wordt automatisch gegenereerd</li>
-</ul>
 <h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
 <p>Je hebt geleerd:</p>
 <ul>
