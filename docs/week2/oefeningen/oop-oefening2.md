@@ -122,49 +122,6 @@ Muis verwijderd
 Nieuw totaal: €889.98
 ```
 
-## Extra uitdaging: Pydantic validatie (optioneel)
-
-Installeer eerst Pydantic (als je dit wilt proberen):
-
-```bash
-uv pip install pydantic
-# of: pip install pydantic
-```
-
-Pas je `Product` aan om Pydantic validatie te gebruiken:
-
-```python
-from pydantic import BaseModel, Field
-
-class Product(BaseModel):
-    naam: str = Field(min_length=1)
-    prijs: float = Field(gt=0)  # gt = greater than
-    voorraad: int = Field(ge=0, default=0)  # ge = greater or equal
-    beschrijving: str | None = None
-
-    def verkoop(self, aantal: int) -> bool:
-        if self.voorraad >= aantal:
-            self.voorraad -= aantal
-            return True
-        return False
-
-    def voorraad_waarde(self) -> float:
-        return self.prijs * self.voorraad
-```
-
-Test de validatie:
-
-```python
-# Dit werkt:
-laptop = Product(naam="Laptop", prijs=799.99, voorraad=5)
-
-# Dit geeft een ValidationError:
-try:
-    kapot = Product(naam="", prijs=-10, voorraad=5)
-except ValueError as e:
-    print(f"Validatie fout: {e}")
-```
-
 ## Checklist
 
 Controleer voordat je klaar bent:
@@ -175,7 +132,6 @@ Controleer voordat je klaar bent:
 - [ ] `field(default_factory=list)` gebruikt voor items
 - [ ] Alle methoden hebben return type annotations
 - [ ] Code werkt met de testcode
-- [ ] (Optioneel) Pydantic validatie werkend
 
 ## Wat je geleerd hebt
 
@@ -183,6 +139,5 @@ Controleer voordat je klaar bent:
 - `Optional[]` voor waarden die None kunnen zijn
 - `list[Type]` voor typed lists
 - `field(default_factory=list)` voor mutable defaults
-- (Optioneel) Pydantic voor auto-validatie
 
 **Tip:** Deze patterns zie je later terug in SQLAlchemy modellen!

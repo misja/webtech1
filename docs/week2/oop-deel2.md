@@ -145,44 +145,6 @@ print(f"Totaal: €{wagen.bereken_totaal():.2f}")
 
     **Waarom?** Een gewoon `= []` zou gedeeld worden tussen alle instanties (Python quirk). Met `default_factory` krijgt elke instantie zijn eigen lege lijst.
 
-## Validatie met Pydantic
-
-Dataclasses valideren je data niet automatisch. Voor validatie kun je **Pydantic** gebruiken:
-
-```python
-from pydantic import BaseModel, Field, field_validator
-
-class Product(BaseModel):
-    naam: str = Field(min_length=1)
-    prijs: float = Field(gt=0)  # gt = greater than
-    voorraad: int = Field(ge=0, default=0)  # ge = greater or equal
-
-    @field_validator('prijs')
-    @classmethod
-    def prijs_positief(cls, v: float) -> float:
-        if v <= 0:
-            raise ValueError('Prijs moet positief zijn')
-        return v
-
-
-# Dit werkt:
-laptop = Product(naam="Laptop", prijs=799.99, voorraad=5)
-
-# Dit geeft een foutmelding:
-try:
-    kapot = Product(naam="", prijs=-10, voorraad=5)
-except ValueError as e:
-    print(f"Validatiefout: {e}")
-# Output: Validatiefout: String should have at least 1 character
-```
-
-!!! info "Pydantic vs Dataclasses"
-    **Dataclasses:** Eenvoudig, built-in Python, geen validatie
-
-    **Pydantic:** Externe library, automatische validatie, type coercion, JSON serialization
-
-    **Voor deze cursus:** Dataclasses is genoeg voor nu. Pydantic zie je later bij API's (FastAPI).
-
 ## Preview: Database modellen
 
 Database modellen (die je later gaat maken) lijken erg op dataclasses:
@@ -300,7 +262,6 @@ Je hebt nu gezien:
 - **Dataclasses**: Minder boilerplate voor data containers met `@dataclass`
 - **Type hints**: `Optional[str]`, `list[Product]` voor complexere types
 - **field()**: Voor mutable defaults met `default_factory`
-- **Pydantic**: Optionele validatie library
 - **Preview**: Database modellen volgen hetzelfde patroon
 
 ### Belangrijkste voordelen dataclasses

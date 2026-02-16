@@ -327,7 +327,7 @@ Studenten moeten vanaf het begin leren dat:
 
 **Progressie:**
 1. **Deel 1:** Basic classes met type annotations
-2. **Deel 2:** Dataclasses + validatie (Pydantic)
+2. **Deel 2:** Dataclasses
 3. **Deel 3:** Inheritance basics
 4. **Deel 4:** Object relaties
 
