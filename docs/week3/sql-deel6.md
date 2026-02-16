@@ -165,7 +165,7 @@ else:
 
 ## Complete database class met error handling
 
-Hier is een volledige class met proper exception handling:
+Hier is een volledige class met exception handling:
 
 ```python
 import sqlite3
