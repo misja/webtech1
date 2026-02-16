@@ -1,7 +1,5 @@
 # SQLite in Python
 
-**Leestijd: ~10 minuten**
-
 In het vak Databases heb je geleerd werken met PostgreSQL - een krachtige relationele database. Voor webapplicaties gebruik je vaak dezelfde database, maar voor development, testing en kleine applicaties is **SQLite** een handige en lichtgewicht alternatief.
 
 ## Waarom SQLite?
@@ -16,20 +14,12 @@ SQLite verschilt op belangrijke punten van PostgreSQL:
 | **Concurrency** | Veel gelijktijdige gebruikers | Beperkt (file locking) |
 | **SQL dialect** | PostgreSQL SQL | SQLite SQL (kleine verschillen) |
 
-**Voordelen voor deze cursus:**
-- Geen server setup nodig
-- Database = gewoon een `.sqlite` bestand
-- Makkelijk te backuppen (kopieer het bestand)
-- Ideaal voor Flask development
-
 !!! note "SQLite vs PostgreSQL SQL"
     De SQL syntax is grotendeels hetzelfde. Kleine verschillen:
 
     - SQLite heeft minder datatypes (TEXT, INTEGER, REAL, BLOB)
     - Geen `ALTER TABLE` voor het wijzigen van kolommen
     - Type validatie is minder strikt
-
-    Later (bij SQLAlchemy) gebruik je een ORM die deze verschillen abstraheert.
 
 ## SQLite CLI (kort)
 
@@ -51,8 +41,6 @@ Handige punt-commando's (vergelijkbaar met `\d` commando's in psql):
 | `.schema` | Toon tabelstructuur |
 | `.quit` | Afsluiten |
 
-**Maar**: In deze cursus gebruik je SQLite vooral vanuit **Python**, niet via de CLI. De focus ligt op het integreren van databases in Flask applicaties.
-
 !!! tip "Visueel werken met DB Browser for SQLite"
     Als je liever visueel werkt (vergelijkbaar met pgAdmin voor PostgreSQL), gebruik dan [DB Browser for SQLite](https://sqlitebrowser.org/).
 
@@ -64,8 +52,6 @@ Handige punt-commando's (vergelijkbaar met `\d` commando's in psql):
 
     **Download:** [sqlitebrowser.org](https://sqlitebrowser.org/)
 
-    Dit is optioneel - je kunt alles ook via Python of de CLI doen. DB Browser is vooral handig voor debugging tijdens development.
-
 ## SQLite in Python
 
 Python heeft `sqlite3` built-in. In het volgende deel leer je hoe je SQLite gebruikt vanuit Python met moderne patterns zoals:
@@ -73,6 +59,5 @@ Python heeft `sqlite3` built-in. In het volgende deel leer je hoe je SQLite gebr
 - Type annotations
 - Context managers (`with` statements)
 - Proper error handling
-- Voorbereiding op SQLAlchemy
 
 **Volgende stap:** In [Deel 2](sql-deel2.md) ga je direct aan de slag met SQLite in Python.

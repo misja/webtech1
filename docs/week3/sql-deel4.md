@@ -11,8 +11,6 @@ Een database class biedt verschillende voordelen:
 - **Consistency**: Altijd dezelfde patterns (context managers, placeholders, etc.)
 - **Onderhoudbaarheid**: Aanpassingen hoef je maar op één plek te maken
 
-Deze aanpak komt overeen met hoe je later met SQLAlchemy werkt.
-
 ## De complete MusicDatabase class
 
 Hier is een complete implementatie met alle patterns die je tot nu toe hebt geleerd:
@@ -412,25 +410,6 @@ def get_artist_by_id(self, artist_id: int) -> Optional[Row]:
         print(f"Database error: {e}")
         return None
 ```
-
-## Van sqlite3 naar SQLAlchemy
-
-Deze MusicDatabase class lijkt al veel op hoe je later met SQLAlchemy werkt:
-
-```python
-# Wat je nu schrijft (sqlite3):
-db = MusicDatabase()
-artists = db.get_all_artists()
-
-# Wordt later (SQLAlchemy):
-session = Session()
-artists = session.query(Artist).all()
-```
-
-Beide gebruiken een class-based approach met methods voor database operaties. Het grote verschil:
-
-- **sqlite3**: Je schrijft SQL, class is een wrapper
-- **SQLAlchemy**: Je schrijft Python, SQL wordt automatisch gegenereerd
 
 ## Samenvatting
 

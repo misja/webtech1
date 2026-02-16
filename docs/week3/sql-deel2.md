@@ -396,5 +396,3 @@ Je hebt geleerd:
 - Type annotations en moderne Python patterns
 
 **Volgende stap:** In [Deel 3](sql-deel3.md) werk je met een grotere database en leer je JOIN queries.
-
-**Waarom dit leren?** Deze patterns zijn de basis voor SQLAlchemy (Week 6), waar je niet meer zelf SQL schrijft maar via een ORM werkt. Begrijpen hoe sqlite3 werkt, helpt je begrijpen wat SQLAlchemy onder de motorkap doet.
