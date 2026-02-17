@@ -234,19 +234,6 @@ chmod +x run.sh
 ./run.sh
 ```
 
-## Vergelijking: uv vs pip/venv
-
-| Taak | pip/venv (oud) | uv (modern) |
-|------|----------------|-------------|
-| **Installatie** | Ingebouwd in Python | `pip install uv` |
-| **Virtual env maken** | `python -m venv .venv` | Automatisch bij `uv init` |
-| **Virtual env activeren** | `source .venv/bin/activate` | Niet nodig! `uv run` doet dit |
-| **Package installeren** | `pip install flask`<br>`pip freeze > requirements.txt` | `uv add flask` |
-| **Dependencies installeren** | `pip install -r requirements.txt` | `uv sync` |
-| **Python runnen** | `python app.py` (binnen venv) | `uv run app.py` |
-| **Dependencies updaten** | `pip install --upgrade flask` | `uv add flask@latest` |
-| **Lock file** | Handmatig (`pip freeze`) | Automatisch (`uv.lock`) |
-
 ## Veelvoorkomende workflows
 
 ### Development workflow
