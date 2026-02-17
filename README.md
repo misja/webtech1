@@ -29,10 +29,12 @@ git clone <repo-url>
 cd webtech1
 
 # Sync dependencies met uv (super snel!)
+# Dit installeert runtime dependencies (mkdocs etc.)
 uv sync
 
-# Of alleen de runtime dependencies
-uv pip install -e .
+# Voor docenten/ontwikkelaars: installeer ook dev dependencies
+# (inclusief Flask voor het testen van voorbeeldcode)
+uv sync --group dev
 ```
 
 ### Documentatie lokaal bekijken
@@ -51,6 +53,21 @@ mkdocs serve
 Open vervolgens [http://127.0.0.1:8000](http://127.0.0.1:8000) in je browser.
 
 De documentatie wordt automatisch herladen bij wijzigingen.
+
+### Voorbeeldcode testen
+
+Als je de dev dependencies hebt geïnstalleerd (`uv sync --group dev`), kun je de Flask voorbeeldcode draaien:
+
+```bash
+# Bijvoorbeeld: Week 7b webshop
+cd docs/week7b/bestanden/webshop
+python app.py
+
+# Of zonder venv activatie:
+uv run python app.py
+```
+
+**Let op**: Studenten installeren Flask zelf in hun eigen projecten als onderdeel van de lessen. De dev dependencies zijn alleen voor docenten/ontwikkelaars om voorbeeldcode te testen.
 
 ### Documentatie bouwen
 
@@ -110,6 +127,10 @@ Wijzigingen worden aangeboden als Pull Requests voor review door collega-docente
 ### Development
 - `ipython` - Interactive Python shell
 - `nbdime` - Jupyter notebook diff/merge
+- `flask` - Web framework (voor testen voorbeeldcode)
+- `flask-sqlalchemy` - ORM integration
+- `flask-login` - User session management
+- `flask-wtf` - Form handling met CSRF protection
 
 Zie `pyproject.toml` voor exacte versies.
 
