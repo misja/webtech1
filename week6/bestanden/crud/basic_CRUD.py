@@ -1,50 +1,69 @@
-# De tabel is nu aangemaakt door BasicModelApp en SetUpDatabase uit te voeren
-# Nu aandacht voor de nodige CRUD-opdrachten
-# Dit is slechts een overzicht, later wordt het script automatisch uitgevoerd
-# Het is de bedoeling een ieder vertrouwd te maken met CRUD-commando's
+"""CRUD operaties demonstratie met SQLAlchemy.
 
-from basic_model_app import db,Cursist
+Dit script demonstreert alle CRUD (Create, Read, Update, Delete) operaties:
+- CREATE: Nieuwe cursist toevoegen
+- READ: Cursisten opvragen (all, get, filter)
+- UPDATE: Leeftijd van cursist wijzigen
+- DELETE: Cursist verwijderen
+
+Voer eerst setup_database.py uit om de database aan te maken.
+"""
+from basic_model_app import db, Cursist
 
 ###########################
 ###### CREATE ############
-#########################
-elsje = Cursist('Elsje',19)
+###########################
+print("=== CREATE: Nieuwe cursist toevoegen ===")
+elsje = Cursist('Elsje', 19)
 db.session.add(elsje)
 db.session.commit()
+print("Elsje toegevoegd\n")
 
 ###########################
 ###### READ ##############
-#########################
-alle_cursisten = Cursist.query.all() # overzicht van alle studenten
+###########################
+print("=== READ: Alle cursisten ===")
+alle_cursisten = Cursist.query.all()
 print(*alle_cursisten, sep='\n')
-print('\n')
+print()
+
 # Zoeken op ID
+print("=== READ: Cursist met ID 2 ===")
 cursist_twee = Cursist.query.get(2)
 print(cursist_twee)
-print(cursist_twee.leeftijd)
-print('\n')
-# Filteren op naam cursist  WERKT MOMENTEEL NIET
-# cursist_elsje = Cursist.query.filter_by(naam='Elsje')
-# print(cursist_elsje)
-# print('\n')
+print(f"Leeftijd: {cursist_twee.leeftijd}")
+print()
+
+# Filteren op naam
+print("=== READ: Filter op naam 'Elsje' ===")
+cursist_elsje = Cursist.query.filter_by(naam='Elsje').first()
+print(cursist_elsje)
+print()
+
 ###########################
 ###### UPDATE ############
-#########################
-
-# Zoek het juiste record, wijzig het en leg de aanpassing vast.
+###########################
+print("=== UPDATE: Leeftijd wijzigen ===")
 cursist_joyce = Cursist.query.get(1)
+print(f"Oude leeftijd Joyce: {cursist_joyce.leeftijd}")
 cursist_joyce.leeftijd = 40
 db.session.add(cursist_joyce)
 db.session.commit()
+print(f"Nieuwe leeftijd Joyce: {cursist_joyce.leeftijd}")
+print()
 
 ###########################
 ###### DELETE ############
-#########################
+###########################
+print("=== DELETE: Cursist verwijderen ===")
 cursist_elsje = Cursist.query.get(3)
-print (cursist_elsje)
+print(f"Te verwijderen: {cursist_elsje}")
 db.session.delete(cursist_elsje)
 db.session.commit()
+print("Elsje verwijderd")
+print()
 
-# Overzicht na alle aanpassingen:
+# Overzicht na alle aanpassingen
+print("=== FINAL: Overzicht na CRUD operaties ===")
 alle_cursisten = Cursist.query.all()
 print(*alle_cursisten, sep='\n')
