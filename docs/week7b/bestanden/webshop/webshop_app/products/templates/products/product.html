@@ -6,9 +6,9 @@
 <!-- Breadcrumb -->
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('products.index') }}">Home</a></li>
         <li class="breadcrumb-item">
-            <a href="{{ url_for('category', category_id=product.category_id) }}">
+            <a href="{{ url_for('products.category', category_id=product.category_id) }}">
                 {{ product.category.name }}
             </a>
         </li>
@@ -19,7 +19,7 @@
 <!-- Admin Actions -->
 <div class="row mb-3">
     <div class="col-12">
-        <a href="{{ url_for('admin_edit_product', product_id=product.id) }}"
+        <a href="{{ url_for('admin.edit_product', product_id=product.id) }}"
            class="btn btn-sm btn-outline-secondary">
             ✏️ Bewerken (Admin)
         </a>
@@ -111,7 +111,7 @@
                 <tr>
                     <th scope="row">Categorie</th>
                     <td>
-                        <a href="{{ url_for('category', category_id=product.category_id) }}">
+                        <a href="{{ url_for('products.category', category_id=product.category_id) }}">
                             {{ product.category.name }}
                         </a>
                     </td>

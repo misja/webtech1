@@ -12,7 +12,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ url_for('contact') }}">
+                <form method="POST" action="{{ url_for('products.contact') }}">
                     {{ form.hidden_tag() }}
 
                     <!-- Naam -->
@@ -71,7 +71,7 @@
 
                     <!-- Submit Button -->
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                        <a href="{{ url_for('products.index') }}" class="btn btn-secondary">
                             Annuleren
                         </a>
                         {{ form.submit(class="btn btn-primary") }}

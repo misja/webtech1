@@ -7,7 +7,7 @@
     <div class="col-md-8 offset-md-2">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url_for('admin_products') }}">Admin - Producten</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('admin.products') }}">Admin - Producten</a></li>
                 <li class="breadcrumb-item active">{{ product.name }} bewerken</li>
             </ol>
         </nav>
@@ -16,7 +16,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ url_for('admin_edit_product', product_id=product.id) }}">
+                <form method="POST" action="{{ url_for('admin.edit_product', product_id=product.id) }}">
                     {{ form.hidden_tag() }}
 
                     <!-- Product Naam -->
@@ -89,7 +89,7 @@
 
                     <!-- Submit Buttons -->
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="{{ url_for('product', product_id=product.id) }}" class="btn btn-secondary">
+                        <a href="{{ url_for('products.product', product_id=product.id) }}" class="btn btn-secondary">
                             Annuleren
                         </a>
                         {{ form.submit(class="btn btn-primary") }}
@@ -105,7 +105,7 @@
                 <p class="card-text text-muted">
                     Let op: Deze actie kan niet ongedaan gemaakt worden!
                 </p>
-                <form method="POST" action="{{ url_for('admin_delete_product', product_id=product.id) }}"
+                <form method="POST" action="{{ url_for('admin.delete_product', product_id=product.id) }}"
                       onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?');">
                     <button type="submit" class="btn btn-danger">
                         Product Verwijderen

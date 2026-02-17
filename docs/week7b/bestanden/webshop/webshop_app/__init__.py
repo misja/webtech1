@@ -12,12 +12,9 @@ Voordelen:
 """
 import os
 from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
 
-# Initialize extensions (maar bind ze nog niet aan app!)
-db = SQLAlchemy()
-login_manager = LoginManager()
+# Import extensions from models (voorkomt duplicate instances!)
+from webshop_app.models import db, login_manager
 
 
 def create_app(config_name='default'):
@@ -50,14 +47,8 @@ def create_app(config_name='default'):
     login_manager.login_view = "auth.login"  # LET OP: blueprint.view syntax!
     login_manager.login_message = "Log in om deze pagina te bekijken."
 
-    # Importeer models hier (na db.init_app!)
-    # Dit voorkomt circular imports
-    from webshop_app.models import Customer
-
-    @login_manager.user_loader
-    def load_user(user_id):
-        """Laad user voor Flask-Login."""
-        return Customer.query.get(int(user_id))
+    # user_loader is al gedefinieerd in models.py!
+    # Geen duplicate user_loader hier
 
     # Registreer Blueprints
     from webshop_app.products.views import products_bp

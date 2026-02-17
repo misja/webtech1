@@ -57,25 +57,25 @@
             </div>
             <div class="card-body">
                 <div class="d-grid gap-2">
-                    <a href="{{ url_for('index') }}" class="btn btn-outline-primary">
+                    <a href="{{ url_for('products.index') }}" class="btn btn-outline-primary">
                         🛍️ Bekijk Categorieën
                     </a>
-                    <a href="{{ url_for('contact') }}" class="btn btn-outline-secondary">
+                    <a href="{{ url_for('products.contact') }}" class="btn btn-outline-secondary">
                         📧 Contact Opnemen
                     </a>
 
                     {% if current_user.is_admin %}
                     <hr>
-                    <a href="{{ url_for('admin_products') }}" class="btn btn-outline-danger">
+                    <a href="{{ url_for('admin.products') }}" class="btn btn-outline-danger">
                         🔒 Admin - Alle Producten
                     </a>
-                    <a href="{{ url_for('admin_add_product') }}" class="btn btn-outline-danger">
+                    <a href="{{ url_for('admin.add_product') }}" class="btn btn-outline-danger">
                         ➕ Admin - Product Toevoegen
                     </a>
                     {% endif %}
 
                     <hr>
-                    <a href="{{ url_for('logout') }}" class="btn btn-secondary">
+                    <a href="{{ url_for('auth.logout') }}" class="btn btn-secondary">
                         🚪 Uitloggen
                     </a>
                 </div>
@@ -117,7 +117,7 @@
                 </div>
                 {% else %}
                 <p class="text-muted mb-0">Je hebt nog geen bestellingen geplaatst.</p>
-                <a href="{{ url_for('index') }}" class="btn btn-primary mt-2">
+                <a href="{{ url_for('products.index') }}" class="btn btn-primary mt-2">
                     Start met Winkelen
                 </a>
                 {% endif %}

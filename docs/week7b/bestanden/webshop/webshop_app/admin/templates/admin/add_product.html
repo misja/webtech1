@@ -9,7 +9,7 @@
 
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ url_for('admin_add_product') }}">
+                <form method="POST" action="{{ url_for('admin.add_product') }}">
                     {{ form.hidden_tag() }}
 
                     <!-- Product Naam -->
@@ -85,7 +85,7 @@
 
                     <!-- Submit Buttons -->
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="{{ url_for('admin_products') }}" class="btn btn-secondary">
+                        <a href="{{ url_for('admin.products') }}" class="btn btn-secondary">
                             Annuleren
                         </a>
                         {{ form.submit(class="btn btn-primary") }}

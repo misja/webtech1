@@ -12,7 +12,7 @@
 
 <div class="row mb-3">
     <div class="col-12">
-        <a href="{{ url_for('admin_add_product') }}" class="btn btn-primary">
+        <a href="{{ url_for('admin.add_product') }}" class="btn btn-primary">
             <strong>+</strong> Nieuw Product Toevoegen
         </a>
     </div>
@@ -38,7 +38,7 @@
                     <tr>
                         <td>{{ product.id }}</td>
                         <td>
-                            <a href="{{ url_for('product', product_id=product.id) }}">
+                            <a href="{{ url_for('products.product', product_id=product.id) }}">
                                 {{ product.name }}
                             </a>
                         </td>
@@ -60,7 +60,7 @@
                                    title="Bekijken">
                                     👁️
                                 </a>
-                                <a href="{{ url_for('admin_edit_product', product_id=product.id) }}"
+                                <a href="{{ url_for('admin.edit_product', product_id=product.id) }}"
                                    class="btn btn-outline-secondary"
                                    title="Bewerken">
                                     ✏️
@@ -79,7 +79,7 @@
             <p>Er zijn momenteel geen producten in de database.</p>
             <hr>
             <p class="mb-0">
-                <a href="{{ url_for('admin_add_product') }}" class="alert-link">
+                <a href="{{ url_for('admin.add_product') }}" class="alert-link">
                     Voeg het eerste product toe
                 </a>
             </p>

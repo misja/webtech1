@@ -6,7 +6,7 @@
 <!-- Breadcrumb -->
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('products.index') }}">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
     </ol>
 </nav>
@@ -54,7 +54,7 @@
                         {% endif %}
                     </div>
 
-                    <a href="{{ url_for('product', product_id=product.id) }}"
+                    <a href="{{ url_for('products.product', product_id=product.id) }}"
                        class="btn btn-primary w-100">
                         Bekijk Details
                     </a>
@@ -71,7 +71,7 @@
     <p>Er zijn momenteel geen producten in deze categorie.</p>
     <hr>
     <p class="mb-0">
-        <a href="{{ url_for('index') }}" class="alert-link">Terug naar categorieën</a>
+        <a href="{{ url_for('products.index') }}" class="alert-link">Terug naar categorieën</a>
     </p>
 </div>
 {% endif %}
