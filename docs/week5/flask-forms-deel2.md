@@ -147,17 +147,38 @@ if __name__ == '__main__':
 
 ### Sessions
 
-Flask sessions bewaren data tussen requests. Perfect voor formulier data die je op meerdere pagina's wilt tonen:
+HTTP is **stateless** - elke request is los van de vorige. De server "vergeet" wat je eerder hebt gedaan. Dit is een probleem als je data tussen requests wilt bewaren (bijvoorbeeld formulier gegevens, inlog status, winkelmandje).
+
+**Flask sessions** lossen dit op. Sessions zijn onderdeel van Flask (geen extra package nodig) en werken met **encrypted cookies** aan de client-side:
+
+1. Je slaat data op in `session['key'] = value`
+2. Flask versleutelt de data met je `SECRET_KEY`
+3. Dit wordt als cookie naar de browser gestuurd
+4. Bij volgende requests stuurt de browser de cookie mee
+5. Flask ontsleutelt de data en maakt hem beschikbaar via `session['key']`
+
+**Voorbeeldcode:**
 
 ```python
+from flask import session
+
 # Opslaan in session
 session['naam'] = 'Joyce'
+session['email'] = 'joyce@example.com'
 
-# Ophalen uit session (in template of andere route)
+# Ophalen uit session (in deze of andere route)
 naam = session['naam']
+
+# Ook beschikbaar in templates
+# {{ session['naam'] }}
 ```
 
-Sessions zijn geëncrypteerd met je `SECRET_KEY`.
+**Belangrijke punten:**
+
+- Sessions zijn **versleuteld** met je `SECRET_KEY` - zonder geldige key kan niemand de data lezen of aanpassen
+- Sessions zijn **tijdelijk** - standaard tot de browser sluit (of na ingestelde timeout)
+- Sessions bewaren **kleine hoeveelheden data** - voor grote data gebruik je een database
+- Sessions zijn **client-side** - de data zit in de browser cookie, niet op de server
 
 ### Templates
 
