@@ -3768,11 +3768,18 @@
 <li>Message moet sluitbaar zijn met X knop</li>
 </ol>
 <h2 id="verwachte-output">Verwachte output<a class="headerlink" href="#verwachte-output" title="Link naar deze sectie">¶</a></h2>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/oefening1-leeg.png" data-desc-position="bottom"><img alt="Leeg formulier" src="../imgs/oefening1-leeg.png"></a></p>
-<p><em>Validation error bij leeg formulier</em></p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/oefening1-validation.png" data-desc-position="bottom"><img alt="Validation error" src="../imgs/oefening1-validation.png"></a></p>
-<p><em>Success message na invullen</em></p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../imgs/oefening1-success.png" data-desc-position="bottom"><img alt="Success message" src="../imgs/oefening1-success.png"></a></p>
+<p><strong>Leeg formulier:</strong>
+- Twee invoervelden (voornaam, achternaam)
+- Een verzend knop
+- Geen flash messages zichtbaar</p>
+<p><strong>Validation error bij leeg formulier:</strong>
+- Rode rand om lege verplichte velden
+- Formulier wordt niet verzonden
+- Blijft op dezelfde pagina</p>
+<p><strong>Success message na invullen:</strong>
+- Groene flash message bovenaan: "Welkom, [voornaam] [achternaam]!"
+- Message is sluitbaar met X knop
+- Formulier velden zijn leeg (na redirect)</p>
 <h2 id="bonus-opdrachten">Bonus opdrachten<a class="headerlink" href="#bonus-opdrachten" title="Link naar deze sectie">¶</a></h2>
 <h3 id="bonus-1-email-veld-toevoegen">Bonus 1: Email veld toevoegen<a class="headerlink" href="#bonus-1-email-veld-toevoegen" title="Link naar deze sectie">¶</a></h3>
 <p>Voeg een email veld toe met <code>Email()</code> validator:</p>
