@@ -1,20 +1,34 @@
 class Klant:
-    """Klasse voor klanten in de webshop met krediet en korting"""
+    """Klasse voor klanten in de webshop met krediet en korting."""
 
-    def __init__(self, naam, email):
-        self._naam = naam
-        self._email = email
+    def __init__(self, naam: str, email: str):
+        """Maak een nieuwe klant aan.
+
+        Args:
+            naam: Naam van de klant
+            email: Email adres van de klant
+        """
+        self.naam = naam
+        self.email = email
         self.__krediet = 1000.0  # Startkrediet voor nieuwe klanten
         self.__korting = 0.0  # Standaard geen korting
 
     @property
-    def krediet(self):
-        """Getter voor krediet"""
+    def krediet(self) -> float:
+        """Getter voor krediet.
+
+        Returns:
+            Huidig krediet in euro's
+        """
         return self.__krediet
 
     @krediet.setter
-    def krediet(self, waarde):
-        """Setter voor krediet"""
+    def krediet(self, waarde: float) -> None:
+        """Setter voor krediet met validatie.
+
+        Args:
+            waarde: Nieuw krediet (moet >= 0 zijn)
+        """
         if waarde >= 0:
             self.__krediet = waarde
         else:
@@ -22,25 +36,38 @@ class Klant:
             self.__krediet = 0
 
     @property
-    def korting(self):
-        """Getter voor korting"""
+    def korting(self) -> float:
+        """Getter voor korting.
+
+        Returns:
+            Korting als decimaal (0.15 = 15%)
+        """
         return self.__korting
 
     @korting.setter
-    def korting(self, waarde):
-        """Setter voor korting"""
+    def korting(self, waarde: float) -> None:
+        """Setter voor korting met validatie.
+
+        Args:
+            waarde: Korting tussen 0 en 1.0 (0.15 = 15%)
+        """
         if 0 <= waarde <= 1.0:
             self.__korting = waarde
         else:
             print("Korting moet tussen 0 en 1.0 liggen")
 
     @property
-    def volledige_naam(self):
-        """Read-only property die volledige naam returnt"""
-        return f"{self._naam} ({self._email})"
+    def volledige_naam(self) -> str:
+        """Read-only property die volledige naam returnt.
 
-    def __str__(self):
-        return f"Klant: {self._naam}, Email: {self._email}, Krediet: €{self.__krediet:.2f}"
+        Returns:
+            Naam met email tussen haakjes
+        """
+        return f"{self.naam} ({self.email})"
+
+    def __str__(self) -> str:
+        """String representatie van de klant."""
+        return f"Klant: {self.naam}, Email: {self.email}, Krediet: €{self.__krediet:.2f}"
 
 
 if __name__ == '__main__':
