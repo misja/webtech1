@@ -3646,14 +3646,35 @@
 <li><code>DataRequired()</code> validator - Naam is verplicht</li>
 </ul>
 <h3 id="sessions">Sessions<a class="headerlink" href="#sessions" title="Link naar deze sectie">¶</a></h3>
-<p>Flask sessions bewaren data tussen requests. Perfect voor formulier data die je op meerdere pagina's wilt tonen:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Opslaan in session</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">session</span><span class="p">[</span><span class="s1">'naam'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Joyce'</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Ophalen uit session (in template of andere route)</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">naam</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s1">'naam'</span><span class="p">]</span>
+<p>HTTP is <strong>stateless</strong> - elke request is los van de vorige. De server "vergeet" wat je eerder hebt gedaan. Dit is een probleem als je data tussen requests wilt bewaren (bijvoorbeeld formulier gegevens, inlog status, winkelmandje).</p>
+<p><strong>Flask sessions</strong> lossen dit op. Sessions zijn onderdeel van Flask (geen extra package nodig) en werken met <strong>encrypted cookies</strong> aan de client-side:</p>
+<ol>
+<li>Je slaat data op in <code>session['key'] = value</code></li>
+<li>Flask versleutelt de data met je <code>SECRET_KEY</code></li>
+<li>Dit wordt als cookie naar de browser gestuurd</li>
+<li>Bij volgende requests stuurt de browser de cookie mee</li>
+<li>Flask ontsleutelt de data en maakt hem beschikbaar via <code>session['key']</code></li>
+</ol>
+<p><strong>Voorbeeldcode:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">session</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># Opslaan in session</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">session</span><span class="p">[</span><span class="s1">'naam'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Joyce'</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">session</span><span class="p">[</span><span class="s1">'email'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'joyce@example.com'</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Ophalen uit session (in deze of andere route)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">naam</span> <span class="o">=</span> <span class="n">session</span><span class="p">[</span><span class="s1">'naam'</span><span class="p">]</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># Ook beschikbaar in templates</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># {{ session['naam'] }}</span>
 </span></code></pre></div>
-<p>Sessions zijn geëncrypteerd met je <code>SECRET_KEY</code>.</p>
+<p><strong>Belangrijke punten:</strong></p>
+<ul>
+<li>Sessions zijn <strong>versleuteld</strong> met je <code>SECRET_KEY</code> - zonder geldige key kan niemand de data lezen of aanpassen</li>
+<li>Sessions zijn <strong>tijdelijk</strong> - standaard tot de browser sluit (of na ingestelde timeout)</li>
+<li>Sessions bewaren <strong>kleine hoeveelheden data</strong> - voor grote data gebruik je een database</li>
+<li>Sessions zijn <strong>client-side</strong> - de data zit in de browser cookie, niet op de server</li>
+</ul>
 <h3 id="templates">Templates<a class="headerlink" href="#templates" title="Link naar deze sectie">¶</a></h3>
 <p><strong><code>templates/home.html</code>:</strong></p>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
