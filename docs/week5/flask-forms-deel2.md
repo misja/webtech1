@@ -1,170 +1,326 @@
-# Flask en Forms - Form Fields
+# Flask Forms - Validators en Field Types
+
+WTForms biedt veel verschillende veldtypen en validators. Validators controleren of de ingevoerde data correct is (bijvoorbeeld: verplicht veld, geldig email adres, minimum lengte).
 
 ## Validators
-Het mooie aan het werken met formulieren is hier dat voor elk mogelijk HTML-formulierveld  een bijbehorende `wtforms`-klasse bestaat die geïmporteerd kan worden. Deze klasse heeft ook validators die op gemakkelijke wijze ingevoegd kunnen worden. Validators kunnen ingezet worden om controles uitvoeren op de formuliergegevens, zoals bijvoorbeeld een controle of een verplicht veld inderdaad een waarde gekregen heeft.
 
-In deze paragraaf is er ook aandacht voor de wijze waarop een sessieobject van Flask ingeschakeld kan worden om de informatie in het formulier op te halen en door te geven aan een template.
-In een volgende deel wordt aandacht besteed hoe de gegevens in een database opgeslagen kunnen worden.
-
-## Voorbeeld
-We gaan weer verder met een voorbeeld.
-Voor het volgende uitgewerkte voorbeeld zijn drie bestanden nodig, een Python-file: [`form_fields.py`](bestanden/form_fields.py) en twee HTML-bestanden, [`home1.html`](bestanden/home1.html) en [`bedankt.html`](bestanden/home2.html).
-
-### Python gedeelte
-Uiteraard wordt begonnen met de Python-file. Het begin is weer meer van hetzelfde, nu alleen met wat uitbreidingen.
+Validators voeg je toe als parameter aan een veld:
 
 ```python
-from flask import Flask, render_template, session, redirect, url_for, session
+from wtforms import StringField
+from wtforms.validators import DataRequired, Email, Length
+
+class ContactForm(FlaskForm):
+    naam = StringField('Naam', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    bericht = StringField('Bericht', validators=[Length(min=10, max=500)])
+```
+
+**Veelgebruikte validators:**
+
+- `DataRequired()` - Veld mag niet leeg zijn
+- `Email()` - Moet geldig email adres zijn
+- `Length(min=x, max=y)` - Lengte tussen min en max
+- `NumberRange(min=x, max=y)` - Getal tussen min en max
+- `EqualTo('veldnaam')` - Moet gelijk zijn aan ander veld (wachtwoord bevestiging)
+- `URL()` - Moet geldige URL zijn
+- `Regexp(regex)` - Moet aan regex pattern voldoen
+
+## Field Types
+
+WTForms ondersteunt alle HTML formulier velden:
+
+- `StringField` - Tekst invoer
+- `TextAreaField` - Grote tekst invoer (meerdere regels)
+- `BooleanField` - Checkbox
+- `RadioField` - Radio buttons (kies één optie)
+- `SelectField` - Dropdown menu
+- `IntegerField` - Geheel getal
+- `FloatField` - Decimaal getal
+- `PasswordField` - Wachtwoord (verborgen tekst)
+- `SubmitField` - Submit button
+
+## Uitgebreid voorbeeld
+
+We maken een enquêteformulier voor de muziekschool. Project structuur:
+
+```text
+mijn-flask-app/
+├── app.py
+└── templates/
+    ├── home.html
+    └── bedankt.html
+```
+
+### Flask applicatie
+
+**`app.py`:**
+
+```python
+from flask import Flask, render_template, session, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import (StringField, BooleanField, DateTimeField,
-                     	          RadioField, SelectField, TextField,
-                     	          TextAreaField, SubmitField)
+from wtforms import (
+    StringField,
+    BooleanField,
+    RadioField,
+    SelectField,
+    TextAreaField,
+    SubmitField
+)
 from wtforms.validators import DataRequired
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mijngeheimesleutel'
-```
-
-Er worden een aantal extra elementen geïmporteerd van Flask, die zo nader uitgelegd worden. De velden die op het formulier voor gaan komen, worden als bekend verondersteld.
 
 
-Van de validators wordt de klasse `DataRequired` opgehaald. Er zijn er nog veel meer, bijvoorbeeld email: een klasse die controleert of een ingevuld e-mailadres aan de eisen voldoet, met punt, extensie en @.
+class EnqueteForm(FlaskForm):
+    """Enquêteformulier voor muziekschool Session."""
 
-
-Vervolgens wordt de applicatie en de geheime sleutel gecreëerd.
-
-
-#### InfoForm
-Volgende stap is weer het opzetten van het formulier:
-
-```python
-class InfoForm(FlaskForm):
-
-    naam = StringField('Wat is je naam?',validators=[DataRequired()])
-    vrouw  = BooleanField("Ben je een vrouw?")
-    instrument = RadioField('Welk instrument wil je leren bespelen?', 	choices=[('ins_een','Gitaar'),('ins_twee','Drums')])
-    plaats = SelectField(u'Welke locatie heeft de voorkeur?',
-             choices=[('as', 'Assen'), ('dr', 'Drachten'), ('gr', 'Groningen')])
-    feedback = TextAreaField()
+    naam = StringField(
+        'Wat is je naam?',
+        validators=[DataRequired()]
+    )
+    vrouw = BooleanField('Ben je een vrouw?')
+    instrument = RadioField(
+        'Welk instrument wil je leren bespelen?',
+        choices=[
+            ('gitaar', 'Gitaar'),
+            ('drums', 'Drums')
+        ]
+    )
+    plaats = SelectField(
+        'Welke locatie heeft de voorkeur?',
+        choices=[
+            ('assen', 'Assen'),
+            ('drachten', 'Drachten'),
+            ('groningen', 'Groningen')
+        ]
+    )
+    feedback = TextAreaField('Nog andere opmerkingen?')
     submit = SubmitField('Verzend')
-```
 
-Dit formulier bevat wat meer velden dan het vorige. De HTML-kennis moet voldoende zijn om deze code te kunnen begrijpen.
 
-De naam is een verplicht veld, en voor ieder instrument en plaats is een tuple aangemaakt. De eerste waarde wordt in de code gebruikt terwijl de tweede waarde steeds zichtbaar is op het formulier.
-
-#### View functies
-Daarna is het de beurt voor de viewfuncties. Als eerste het formulier.
-
-```python
 @app.route('/', methods=['GET', 'POST'])
-def index():
+def index() -> str:
+    """Homepage met enquête formulier.
 
-    form = InfoForm()
+    Returns:
+        Gerenderde template met formulier
+    """
+    form = EnqueteForm()
+
     if form.validate_on_submit():
-
+        # Sla data op in session
         session['naam'] = form.naam.data
         session['vrouw'] = form.vrouw.data
         session['instrument'] = form.instrument.data
         session['plaats'] = form.plaats.data
         session['feedback'] = form.feedback.data
 
-        return redirect(url_for("bedankt"))
+        # Redirect naar bedankt pagina
+        return redirect(url_for('bedankt'))
+
+    return render_template('home.html', form=form)
 
 
-    return render_template('home1.html', form=form)
-```
-
-Een paar opmerkingen:
-Het lijkt erg veel op de code van de vorige paragraaf. Als eerste extra item wordt session gehanteerd.
-
-Een session-tabel is een kortstondige tijdelijke tabel waarin waarden bewaard kunnen worden om aan een andere pagina door te geven. Een mooi voorbeeld hiervan is een overzicht van bestellingen van artikelen op een website. Als een artikel in een winkelmandje beland is, kan het voorkomen dat er nog een artikel aangeschaft gaat worden. Wanneer naar de pagina gesprongen wordt om het tweede artikel nog een keer uitvoerig te bekijken, wordt wanneer er geen sessievariabelen benut worden, het mandje weer geleegd. De gegevens zijn dan niet ergens opgeslagen.
-
-Een tweede opvallend iets is dat er twee return-statements zijn gebruikt. De laatste is nodig om de eerste keer een leeg formulier te tonen.
-
-Het andere return-statement sluist de waarden gelijk door naar de viewfunctie met de naam ‘bedankt’. De ingevoerde gegevens zullen daar getoond worden. Dit is de volgende stap.
-
-
-```python
 @app.route('/bedankt')
-def bedankt():
+def bedankt() -> str:
+    """Bedankpagina met enquête resultaten.
 
+    Returns:
+        Gerenderde template met ingevulde data
+    """
     return render_template('bedankt.html')
-```
 
-#### Afsluiting python code
-En aan het eind het vertrouwde:
 
-```python
 if __name__ == '__main__':
     app.run(debug=True)
 ```
 
-### HTML gedeelte
-Nu kunnen de HTML-formulieren ingevuld worden.
-Als eerste `home1.html`:
+**Code uitleg:**
 
-```html
-<h1>Welkom bij de enquete van muziekschool Session</h1>
-<form  method="POST">
-    {{ form.hidden_tag() }}
-    {{ form.naam.label }} {{form.naam}}
-    <br>
-    {{ form.vrouw.label}} {{form.vrouw}}
-    <br>
-    {{form.instrument.label}}{{form.instrument}}
-    <br>
-    {{form.plaats.label}}{{form.plaats}}
-    <br>
-    Nog andere opmerkingen?
-    <br>
-    {{form.feedback}}
-    <br>
-    {{ form.submit() }}
-</form>
-```
-Het lijkt weer veel op het de code van `home.html` uit de vorige pagina. Bovenaan een welkomsttekst, gevolgd door de openings-FORM-tag.
-Binnen het formulier is als eerste de geheime sleutel opgenomen waarna de diverse velden worden geïntroduceerd, zoals in de lijst die is vastgelegd in de Python-file
-`bedankt.html`.
+- `RadioField(choices=[...])` - Elke choice is een tuple: `(waarde, weergave_tekst)`
+- `SelectField(choices=[...])` - Dropdown met tuples
+- `session['key'] = value` - Data opslaan in Flask session (tijdelijke opslag)
+- `redirect(url_for('bedankt'))` - Navigeer naar andere route
+- `DataRequired()` validator - Naam is verplicht
 
-#### bedankt.html
-Als het formulier is ingevuld en er op de ‘Verzend’-knop is geklikt wordt de inhoud van de velden doorgestuurd naar `bedankt.html` en daar getoond:
+### Sessions
 
-```html
-<h1>Bedankt voor de moeite. <br>Dit zijn de ingevulde gegevens:</h1>
-<ul>
-    <li>Naam: {{ session['naam'] }}</li>
-    <li>Geslacht: {{ session['geslacht'] }}</li>
-    <li>Instrument: {{ session['instrument'] }}</li>
-    <li>Plaats: {{ session['plaats'] }}</li>
-    <li>Feedback: {{ session['feedback'] }}</li>
-</ul>
+Flask sessions bewaren data tussen requests. Perfect voor formulier data die je op meerdere pagina's wilt tonen:
+
+```python
+# Opslaan in session
+session['naam'] = 'Joyce'
+
+# Ophalen uit session (in template of andere route)
+naam = session['naam']
 ```
 
-### Runnen van de applicatie
-Tijd voor een test:
+Sessions zijn geëncrypteerd met je `SECRET_KEY`.
 
-![de enquete op home1.html](imgs/enquete-muziek.png)
-Ingevuld:
+### Templates
 
-![home1.html met ingevulde enquete](imgs/enquete-muziek-ingevuld.png)
+**`templates/home.html`:**
 
-Na een klik op de button:
-![bedankt.html met daarin de ingevulde waarden van de enquete](imgs/enquete-muziek-na-button.png)
+```html
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Enquête - Muziekschool Session</title>
+</head>
+<body>
+    <h1>Welkom bij de enquête van muziekschool Session</h1>
 
+    <form method="POST">
+        {{ form.hidden_tag() }}
 
-## Afsluiting
-Een paar opmerkingen tot slot van deze paragraaf:
+        <div>
+            {{ form.naam.label }}<br>
+            {{ form.naam }}
+        </div>
 
-### Lay-out
- De lay-out kan vele malen mooier door er CSS-stijlen aan toe te voegen.
-Misschien ziet de output er wat vreemd uit, maar alles is precies volgens de opzet verlopen. Het `RadioField` en het `SelectField` zijn beide gevuld met tuples. De eerste waarde van iedere tuple wordt na selectie doorgegeven.
+        <div>
+            {{ form.vrouw.label }}
+            {{ form.vrouw }}
+        </div>
 
-In de keuzelijst kan er bijvoorbeeld gekozen worden uit de zichtbare mogelijkheden, Assen, Drachten en Groningen. De corresponderende sleutelvelden zijn 'as', 'dr' en 'gr'. Deze waarden worden doorgeven naar `bedankt.html`. Dat is met opzet gebeurd om de werking te tonen. Om de gehele plaatsnaam te tonen zou twee keer dezelfde tekenrij in de tuple moeten worden ondergebracht.
+        <div>
+            {{ form.instrument.label }}<br>
+            {{ form.instrument }}
+        </div>
 
-### Validator test
-Om de test op alle items te toetsen wordt nog een poging gedaan de gegevens te tonen, echter zonder een naam in te vullen. Kijken of de validator dit kan onderkennen:
+        <div>
+            {{ form.plaats.label }}<br>
+            {{ form.plaats }}
+        </div>
 
-![als je geen naam invult werkt het niet](imgs/enquete-muziek-validator.png)
+        <div>
+            {{ form.feedback.label }}<br>
+            {{ form.feedback }}
+        </div>
 
-En inderdaad. Een rood kader om het veld om aan te geven dat dit veld voordat het formulier verwerkt kan worden een invulling moet krijgen.
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+</body>
+</html>
+```
+
+**` templates/bedankt.html`:**
+
+```html
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Bedankt</title>
+</head>
+<body>
+    <h1>Bedankt voor de moeite!</h1>
+    <h2>Dit zijn de ingevulde gegevens:</h2>
+
+    <ul>
+        <li>Naam: {{ session['naam'] }}</li>
+        <li>Vrouw: {{ session['vrouw'] }}</li>
+        <li>Instrument: {{ session['instrument'] }}</li>
+        <li>Plaats: {{ session['plaats'] }}</li>
+        <li>Feedback: {{ session['feedback'] }}</li>
+    </ul>
+
+    <a href="/">Nieuwe enquête</a>
+</body>
+</html>
+```
+
+### Testen
+
+Start de applicatie:
+
+```console
+uv run python app.py
+```
+
+Navigeer naar `http://127.0.0.1:5000/`:
+
+![Enquête formulier](imgs/enquete-muziek.png)
+
+Vul het formulier in:
+
+![Ingevuld enquête formulier](imgs/enquete-muziek-ingevuld.png)
+
+Klik Verzend - je wordt doorgestuurd naar `/bedankt`:
+
+![Bedankpagina met resultaten](imgs/enquete-muziek-na-button.png)
+
+## Validators in actie
+
+Probeer het formulier te verzenden **zonder naam** in te vullen:
+
+![Validator error](imgs/enquete-muziek-validator.png)
+
+Een rood kader verschijnt rond het naam veld - de `DataRequired()` validator blokkeert het verzenden.
+
+## RadioField en SelectField choices
+
+Let op de tuple structuur:
+
+```python
+choices=[
+    ('waarde_in_code', 'Tekst voor gebruiker'),
+    ('assen', 'Assen'),  # 'assen' wordt opgeslagen, 'Assen' wordt getoond
+    ('dr', 'Drachten'),  # 'dr' wordt opgeslagen, 'Drachten' wordt getoond
+]
+```
+
+Als je "Drachten" selecteert, wordt `'dr'` opgeslagen in `form.plaats.data`.
+
+Om de volledige naam op te slaan, gebruik dezelfde waarde twee keer:
+
+```python
+choices=[
+    ('Assen', 'Assen'),
+    ('Drachten', 'Drachten'),
+]
+```
+
+## Type hints voor validators
+
+```python
+from wtforms import StringField
+from wtforms.validators import DataRequired, Email, Length
+
+class ContactForm(FlaskForm):
+    """Contact formulier met validators."""
+
+    naam: StringField = StringField(
+        'Naam',
+        validators=[DataRequired()]
+    )
+    email: StringField = StringField(
+        'Email',
+        validators=[DataRequired(), Email()]
+    )
+```
+
+## Redirect pattern
+
+Het redirect-after-POST pattern voorkomt dubbele form submissions:
+
+```python
+if form.validate_on_submit():
+    # Verwerk data
+    session['data'] = form.data
+
+    # Redirect naar andere pagina (PRG pattern: Post-Redirect-Get)
+    return redirect(url_for('bedankt'))
+
+# GET request: toon formulier
+return render_template('form.html', form=form)
+```
+
+Als je na POST de template direct returnt, kan de gebruiker de pagina refreshen en het formulier opnieuw verzenden. Met redirect gaat de browser naar een GET request.
+
+**Volgende stap:** [Deel 3](flask-forms-deel3.md) - Flash messages.
