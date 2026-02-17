@@ -1,21 +1,21 @@
-# Oefening 2: JOINs met de Music Database
+# Oefening 2: JOINs met de Webshop Database
 
 Deze oefening past bij [SQL Deel 3](../sql-deel3.md).
 
-Download de [music.sqlite](../bestanden/music.sqlite) database en plaats deze in je project folder.
+Download de [webshop.sqlite](../bestanden/webshop.sqlite) database en plaats deze in je project folder. Als je deze nog moet maken, run dan eerst `create_webshop.py`.
 
 ## Voorbereiding
 
-Maak een Python bestand `music_queries.py` met een basis class:
+Maak een Python bestand `webshop_queries.py` met een basis class:
 
 ```python
 import sqlite3
 from sqlite3 import Row
 
-class MusicDatabase:
-    """Database voor music queries."""
+class WebshopDatabase:
+    """Database voor webshop queries."""
 
-    def __init__(self, db_path: str = "music.sqlite"):
+    def __init__(self, db_path: str = "webshop.sqlite"):
         self.db_path = db_path
 
     def _execute_query(self, query: str, params: tuple = ()) -> list[Row]:
@@ -26,186 +26,189 @@ class MusicDatabase:
             return cursor.fetchall()
 ```
 
-## Opgave 1: Songs van een Album
+## Opgave 1: Producten van een Categorie
 
-**Vraag:** Toon alle songs van het album 'Forbidden'.
+**Vraag:** Toon alle producten uit de categorie 'Electronics'.
 
 Implementeer deze method:
 
 ```python
-def get_songs_by_album(self, album_name: str) -> list[Row]:
-    """Haal alle songs op van een specifiek album."""
+def get_products_by_category(self, category_name: str) -> list[Row]:
+    """Haal alle producten op van een specifieke categorie."""
     # TODO: Implementeer deze query
-    # - JOIN songs met albums
-    # - WHERE album.name = ?
+    # - JOIN products met categories
+    # - WHERE categories.name = ?
     # - Gebruik _execute_query helper
+    # - SELECT p.name, p.price, p.stock
     pass
 ```
 
 Test:
 ```python
-db = MusicDatabase()
-songs = db.get_songs_by_album("Forbidden")
-for song in songs:
-    print(f"{song['title']}")
+db = WebshopDatabase()
+products = db.get_products_by_category("Electronics")
+for product in products:
+    print(f"{product['name']}: €{product['price']}")
 ```
 
-## Opgave 2: Songs Gesorteerd op Track
+## Opgave 2: Producten Gesorteerd op Prijs
 
-**Vraag:** Toon dezelfde songs, maar nu gesorteerd op tracknummer.
+**Vraag:** Toon dezelfde producten, maar nu gesorteerd op prijs (laag naar hoog).
 
 ```python
-def get_songs_by_album_sorted(self, album_name: str) -> list[Row]:
-    """Haal songs op gesorteerd op track nummer."""
-    # TODO: Voeg ORDER BY track toe
+def get_products_by_category_sorted(self, category_name: str) -> list[Row]:
+    """Haal producten op gesorteerd op prijs."""
+    # TODO: Voeg ORDER BY price ASC toe
     pass
 ```
 
 Test opnieuw en vergelijk de output.
 
-## Opgave 3: Songs van een Artiest
+## Opgave 3: Producten met Categorie Info
 
-**Vraag:** Toon alle songs van de band 'Deep Purple'.
-
-**Hint:** Dit vereist een **dubbele JOIN** (songs → albums → artists)
+**Vraag:** Toon alle producten met hun categorie naam EN beschrijving.
 
 ```python
-def get_songs_by_artist(self, artist_name: str) -> list[Row]:
-    """Haal alle songs op van een specifieke artiest."""
-    # TODO: Implementeer dubbele JOIN
-    # FROM songs s
-    # JOIN albums al ON s.album = al.id
-    # JOIN artists ar ON al.artist = ar.id
-    # WHERE ar.name = ?
+def get_all_products_with_category(self) -> list[Row]:
+    """Haal alle producten op met categorie informatie."""
+    # TODO: Implementeer JOIN
+    # SELECT p.name AS product, p.price, p.stock,
+    #        c.name AS category, c.description
+    # FROM products p
+    # JOIN categories c ON p.category_id = c.id
+    # ORDER BY c.name, p.name
     pass
 ```
 
-## Opgave 4: Artiest Naam Wijzigen
+## Opgave 4: Producten in Prijsrange
 
-**Vraag:** Wijzig de naam van de band 'Mehitabel' in 'One Kitten'.
-
-```python
-def update_artist_name(self, old_name: str, new_name: str) -> bool:
-    """Update artiest naam."""
-    # TODO: Implementeer UPDATE met WHERE
-    # Return True als gelukt, False anders
-    # Gebruik cursor.rowcount om te checken of er iets is gewijzigd
-    pass
-```
-
-Test:
-```python
-if db.update_artist_name("Mehitabel", "One Kitten"):
-    print("Artiest naam bijgewerkt")
-
-# Verifieer
-songs = db.get_songs_by_artist("One Kitten")
-print(f"One Kitten heeft {len(songs)} songs")
-```
-
-## Opgave 5: Unieke Song Titels
-
-**Vraag:** Toon alle unieke song titels van 'Aerosmith' in alfabetische volgorde.
-
-**Hint:** Gebruik `SELECT DISTINCT`
+**Vraag:** Vind alle producten tussen €20 en €50.
 
 ```python
-def get_unique_song_titles(self, artist_name: str) -> list[Row]:
-    """Haal unieke song titels op van een artiest."""
-    # TODO: Gebruik SELECT DISTINCT s.title
-    # ORDER BY s.title
+def get_products_in_price_range(self, min_price: float, max_price: float) -> list[Row]:
+    """Haal producten op binnen prijsrange."""
+    # TODO: Gebruik BETWEEN of >= AND <=
+    # Include categorie naam via JOIN
     pass
 ```
 
 Test:
 ```python
-titles = db.get_unique_song_titles("Aerosmith")
-print(f"Unieke Aerosmith songs: {len(titles)}")
-for song in titles:
-    print(f"  - {song['title']}")
+products = db.get_products_in_price_range(20.0, 50.0)
+print(f"Gevonden {len(products)} producten tussen €20 en €50")
+for product in products[:10]:
+    print(f"{product['category']}: {product['name']} - €{product['price']}")
 ```
 
-## Opgave 6: Aantal Unieke Songs
+## Opgave 5: Laagste Voorraad per Categorie
 
-**Vraag:** Tel het aantal unieke songs van 'Aerosmith'.
+**Vraag:** Vind het product met de laagste voorraad in elke categorie.
 
-**Hint:** Gebruik `SELECT COUNT(DISTINCT ...)`
+**Hint:** Gebruik `GROUP BY` en `MIN()`
 
 ```python
-def count_unique_songs(self, artist_name: str) -> int:
-    """Tel unieke songs van een artiest."""
-    # TODO: Gebruik COUNT(DISTINCT s.title)
-    # Return 0 als artiest niet bestaat
+def get_lowest_stock_per_category(self) -> list[Row]:
+    """Vind laagste voorraad per categorie."""
+    # TODO:
+    # SELECT c.name AS category, MIN(p.stock) AS lowest_stock
+    # FROM products p
+    # JOIN categories c ON p.category_id = c.id
+    # GROUP BY c.id, c.name
+    # ORDER BY lowest_stock ASC
     pass
 ```
 
-## Opgave 7: Aantal Albums
+## Opgave 6: Gemiddelde Prijs per Categorie
 
-**Vraag:** Tel het aantal unieke albums van 'Aerosmith'.
+**Vraag:** Bereken de gemiddelde prijs per categorie.
 
 ```python
-def count_albums(self, artist_name: str) -> int:
-    """Tel aantal albums van een artiest."""
-    # TODO: JOIN artists met albums
-    # COUNT(DISTINCT al.id) of COUNT(al.id) als elke albumid uniek is
+def get_average_price_per_category(self) -> list[Row]:
+    """Bereken gemiddelde prijs per categorie."""
+    # TODO: Gebruik AVG(p.price)
+    # GROUP BY categorie
+    # ORDER BY gemiddelde prijs DESC
     pass
 ```
 
-## Bonusopdracht 1: Top 5 Artiesten
+Test:
+```python
+stats = db.get_average_price_per_category()
+for cat in stats:
+    print(f"{cat['category']}: gemiddeld €{cat['avg_price']:.2f}")
+```
 
-Maak een method die de top 5 artiesten met de meeste songs laat zien:
+## Opgave 7: Producten Op Voorraad
+
+**Vraag:** Toon alleen producten die op voorraad zijn (stock > 0), gesorteerd op categorie.
 
 ```python
-def get_top_artists(self, limit: int = 5) -> list[Row]:
-    """Haal top artiesten op basis van aantal songs."""
-    # TODO: GROUP BY artist
-    # COUNT(*) as song_count
-    # ORDER BY song_count DESC
-    # LIMIT ?
+def get_in_stock_products(self) -> list[Row]:
+    """Haal producten op die op voorraad zijn."""
+    # TODO: WHERE p.stock > 0
+    # Include categorie naam
+    pass
+```
+
+## Bonusopdracht 1: Totale Voorraadwaarde
+
+Bereken de totale waarde van de voorraad (prijs × stock) per categorie:
+
+```python
+def get_inventory_value_per_category(self) -> list[Row]:
+    """Bereken totale voorraadwaarde per categorie."""
+    # TODO:
+    # SELECT c.name AS category,
+    #        COUNT(p.id) AS product_count,
+    #        SUM(p.price * p.stock) AS total_value
+    # FROM categories c
+    # LEFT JOIN products p ON c.id = p.category_id
+    # GROUP BY c.id, c.name
+    # ORDER BY total_value DESC
     pass
 ```
 
 Verwachte output format:
 ```
-Top 5 artiesten:
-1. Deep Purple (57 songs)
-2. Iron Maiden (45 songs)
+Voorraadwaarde per categorie:
+1. Electronics: €15,432.50 (15 producten)
+2. Books: €3,245.20 (20 producten)
 ...
 ```
 
-## Bonusopdracht 2: Langste Album
+## Bonusopdracht 2: Duurste Product per Categorie
 
-Vind het album met de meeste songs:
+Vind het duurste product in elke categorie:
 
 ```python
-def get_longest_album(self) -> Row | None:
-    """Vind album met meeste songs."""
-    # TODO: GROUP BY album
-    # COUNT(*) as song_count
-    # ORDER BY song_count DESC
-    # LIMIT 1
-    # Include artiest naam (JOIN met artists)
+def get_most_expensive_per_category(self) -> list[Row]:
+    """Vind duurste product per categorie."""
+    # TODO:
+    # Je kunt dit op twee manieren doen:
+    # Optie 1: Subquery
+    # Optie 2: Window functions (advanced)
+    # Begin met MAX(price) per categorie
     pass
 ```
 
-## Bonusopdracht 3: Complete Catalogus
+## Bonusopdracht 3: Complete Categorie Catalogus
 
-Maak een method die een complete artiest catalogus laat zien (artiest → albums → songs):
+Maak een method die een complete catalogus laat zien (categorie → alle producten):
 
 ```python
-def get_artist_catalog(self, artist_name: str) -> dict:
-    """Haal complete catalogus op van een artiest."""
+def get_category_catalog(self, category_name: str) -> dict:
+    """Haal complete catalogus op van een categorie."""
     # Return format:
     # {
-    #     'artist': 'Deep Purple',
-    #     'albums': [
+    #     'category': 'Electronics',
+    #     'description': 'Electronic devices and accessories',
+    #     'product_count': 15,
+    #     'total_value': 15432.50,
+    #     'products': [
     #         {
-    #             'name': 'Machine Head',
-    #             'songs': [
-    #                 {'track': 1, 'title': 'Highway Star'},
-    #                 {'track': 2, 'title': 'Maybe I'm a Leo'},
-    #                 ...
-    #             ]
+    #             'name': 'Laptop HP',
+    #             'price': 899.99,
+    #             'stock': 12
     #         },
     #         ...
     #     ]
@@ -219,13 +222,17 @@ Schrijf een main functie die alle queries demonstreert:
 
 ```python
 def main():
-    db = MusicDatabase()
+    db = WebshopDatabase()
 
-    print("=== Opgave 1: Songs van Forbidden ===")
-    # ...
+    print("=== Opgave 1: Electronics Producten ===")
+    products = db.get_products_by_category("Electronics")
+    for product in products:
+        print(f"{product['name']}: €{product['price']}")
 
-    print("\n=== Opgave 2: Gesorteerd op Track ===")
-    # ...
+    print("\n=== Opgave 2: Gesorteerd op Prijs ===")
+    products = db.get_products_by_category_sorted("Electronics")
+    for product in products[:5]:
+        print(f"{product['name']}: €{product['price']}")
 
     # etc.
 
@@ -236,29 +243,21 @@ if __name__ == "__main__":
 ## Verwachte Output Voorbeelden
 
 ```
-=== Opgave 1: Songs van Forbidden ===
-After Forever
-The Illusion of Power
-Get a Grip
-Can't Get Close Enough
-Shaking Off The Chains
-I Witness
-Cross of Thorns
-Psychophobia
-The Hand That Rocks The Cradle
-Cardinal Sin
-Forbidden
-Rusty Angels
+=== Opgave 1: Electronics Producten ===
+Bluetooth Headphones Sony: €149.99
+External SSD 1TB: €89.99
+Gaming Controller Xbox: €59.99
+HDMI Cable 2m: €12.99
+...
 
-=== Opgave 5: Unieke Aerosmith Songs ===
-Unieke Aerosmith songs: 79
-  - Adam's Apple
-  - Ain't Got You
-  - Amazing
-  ...
+=== Opgave 6: Gemiddelde Prijs per Categorie ===
+Electronics: gemiddeld €189.32
+Home & Garden: gemiddeld €42.99
+Beauty: gemiddeld €40.86
+...
 
-=== Opgave 7: Aantal Albums ===
-Aerosmith heeft 15 albums
+=== Opgave 7: Aantal Producten Op Voorraad ===
+Totaal: 118 producten op voorraad
 ```
 
 ## Checklist
@@ -268,7 +267,7 @@ Aerosmith heeft 15 albums
 ✅ Type hints op alle methods
 ✅ row_factory = Row gebruikt
 ✅ JOIN queries correct (INNER JOIN standaard)
-✅ DISTINCT voor unieke waarden
-✅ COUNT voor aggregaties
+✅ Aggregatiefuncties: COUNT, AVG, SUM, MIN, MAX
+✅ GROUP BY voor groeperen
 ✅ ORDER BY voor sortering
 ✅ Helper method `_execute_query` gebruikt

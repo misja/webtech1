@@ -1,6 +1,6 @@
-# Complete Database Class: MusicDatabase
+# Complete Database Class: WebshopDatabase
 
-In de vorige delen heb je afzonderlijke functies gezien voor database operaties. Nu gaan we alles combineren in een **database class** - een moderne, herbruikbare oplossing voor het werken met de music database.
+In de vorige delen heb je afzonderlijke functies gezien voor database operaties. Nu gaan we alles combineren in een **database class** - een moderne, herbruikbare oplossing voor het werken met de webshop database.
 
 ## Waarom een database class?
 
@@ -11,7 +11,7 @@ Een database class biedt verschillende voordelen:
 - **Consistency**: Altijd dezelfde patterns (context managers, placeholders, etc.)
 - **Onderhoudbaarheid**: Aanpassingen hoef je maar op één plek te maken
 
-## De complete MusicDatabase class
+## De complete WebshopDatabase class
 
 Hier is een complete implementatie met alle patterns die je tot nu toe hebt geleerd:
 
@@ -21,21 +21,21 @@ from sqlite3 import Row
 from typing import Optional
 
 
-class MusicDatabase:
-    """Database manager voor de music.sqlite database.
+class WebshopDatabase:
+    """Database manager voor de webshop.sqlite database.
 
-    Deze class biedt methoden voor het ophalen van artiesten, albums en songs
-    uit de music database, inclusief JOIN queries.
+    Deze class biedt methoden voor het ophalen van categorieën en producten
+    uit de webshop database, inclusief JOIN queries en statistieken.
 
     Attributes:
         db_path (str): Pad naar de SQLite database file.
     """
 
-    def __init__(self, db_path: str = "music.sqlite"):
+    def __init__(self, db_path: str = "webshop.sqlite"):
         """Initialiseer de database manager.
 
         Args:
-            db_path: Pad naar de database file (default: "music.sqlite")
+            db_path: Pad naar de database file (default: "webshop.sqlite")
         """
         self.db_path = db_path
 
@@ -49,161 +49,210 @@ class MusicDatabase:
         conn.row_factory = Row
         return conn
 
-    # ==================== ARTISTS ====================
+    # ==================== CATEGORIES ====================
 
-    def get_all_artists(self, order_by: str = "name") -> list[Row]:
-        """Haal alle artiesten op, gesorteerd.
+    def get_all_categories(self, order_by: str = "name") -> list[Row]:
+        """Haal alle categorieën op, gesorteerd.
 
         Args:
             order_by: Kolom om op te sorteren (default: "name")
 
         Returns:
-            Lijst met alle artiesten
+            Lijst met alle categorieën
         """
         with self._get_connection() as conn:
-            cursor = conn.execute(f"SELECT * FROM artists ORDER BY {order_by}")
+            cursor = conn.execute(f"SELECT * FROM categories ORDER BY {order_by}")
             return cursor.fetchall()
 
-    def get_artist_byid(self, artistid: int) -> Optional[Row]:
-        """Haal één artiest op op basis van ID.
+    def get_category_by_id(self, category_id: int) -> Optional[Row]:
+        """Haal één categorie op op basis van ID.
 
         Args:
-            artistid: ID van de artiest
+            category_id: ID van de categorie
 
         Returns:
-            Artiest record of None als niet gevonden
+            Categorie record of None als niet gevonden
         """
         with self._get_connection() as conn:
             cursor = conn.execute(
-                "SELECT * FROM artists WHERE id = ?",
-                (artistid,)
+                "SELECT * FROM categories WHERE id = ?",
+                (category_id,)
             )
             return cursor.fetchone()
 
-    def search_artists(self, search_term: str) -> list[Row]:
-        """Zoek artiesten op basis van naam.
+    def search_categories(self, search_term: str) -> list[Row]:
+        """Zoek categorieën op basis van naam.
 
         Args:
-            search_term: Zoekterm voor artiest naam
+            search_term: Zoekterm voor categorie naam
 
         Returns:
-            Lijst met matchende artiesten
+            Lijst met matchende categorieën
         """
         with self._get_connection() as conn:
             cursor = conn.execute(
-                "SELECT * FROM artists WHERE name LIKE ? ORDER BY name",
+                "SELECT * FROM categories WHERE name LIKE ? ORDER BY name",
                 (f"%{search_term}%",)
             )
             return cursor.fetchall()
 
-    # ==================== ALBUMS ====================
+    # ==================== PRODUCTS ====================
 
-    def get_all_albums(self) -> list[Row]:
-        """Haal alle albums op met artiest informatie."""
+    def get_all_products(self) -> list[Row]:
+        """Haal alle producten op met categorie informatie."""
         with self._get_connection() as conn:
             cursor = conn.execute("""
                 SELECT
-                    al.id,
-                    al.name AS album,
-                    ar.name AS artist
-                FROM albums al
-                JOIN artists ar ON al.artist = ar.id
-                ORDER BY ar.name, al.name
+                    p.id,
+                    p.name AS product,
+                    p.price,
+                    p.stock,
+                    c.name AS category
+                FROM products p
+                JOIN categories c ON p.category_id = c.id
+                ORDER BY c.name, p.name
             """)
             return cursor.fetchall()
 
-    def get_albums_by_artist(self, artistid: int) -> list[Row]:
-        """Haal alle albums op van een specifieke artiest.
+    def get_product_by_id(self, product_id: int) -> Optional[Row]:
+        """Haal één product op op basis van ID.
 
         Args:
-            artistid: ID van de artiest
+            product_id: ID van het product
 
         Returns:
-            Lijst met albums van deze artiest
+            Product record of None als niet gevonden
         """
         with self._get_connection() as conn:
             cursor = conn.execute(
-                "SELECT * FROM albums WHERE artist = ? ORDER BY name",
-                (artistid,)
+                "SELECT * FROM products WHERE id = ?",
+                (product_id,)
             )
-            return cursor.fetchall()
+            return cursor.fetchone()
 
-    # ==================== SONGS ====================
-
-    def get_songs_by_album(self, albumid: int) -> list[Row]:
-        """Haal alle songs op van een specifiek album.
+    def get_products_by_category(self, category_id: int) -> list[Row]:
+        """Haal alle producten op van een specifieke categorie.
 
         Args:
-            albumid: ID van het album
+            category_id: ID van de categorie
 
         Returns:
-            Lijst met songs van dit album, gesorteerd op track nummer
+            Lijst met producten van deze categorie
         """
         with self._get_connection() as conn:
             cursor = conn.execute(
-                "SELECT * FROM songs WHERE album = ? ORDER BY track",
-                (albumid,)
+                "SELECT * FROM products WHERE category_id = ? ORDER BY name",
+                (category_id,)
             )
             return cursor.fetchall()
 
-    def search_songs(self, search_term: str) -> list[Row]:
-        """Zoek songs inclusief artiest en album informatie.
+    def search_products(self, search_term: str) -> list[Row]:
+        """Zoek producten inclusief categorie informatie.
 
         Args:
-            search_term: Zoekterm voor song titel
+            search_term: Zoekterm voor product naam
 
         Returns:
-            Lijst met matchende songs met volledige informatie
+            Lijst met matchende producten met volledige informatie
         """
         with self._get_connection() as conn:
             cursor = conn.execute("""
                 SELECT
-                    ar.name AS artist,
-                    al.name AS album,
-                    s.track,
-                    s.title
-                FROM songs s
-                JOIN albums al ON s.album = al.id
-                JOIN artists ar ON al.artist = ar.id
-                WHERE s.title LIKE ?
-                ORDER BY ar.name, al.name, s.track
+                    c.name AS category,
+                    p.name AS product,
+                    p.price,
+                    p.stock,
+                    p.id
+                FROM products p
+                JOIN categories c ON p.category_id = c.id
+                WHERE p.name LIKE ?
+                ORDER BY c.name, p.name
             """, (f"%{search_term}%",))
+            return cursor.fetchall()
+
+    def get_products_in_price_range(
+        self,
+        min_price: float,
+        max_price: float
+    ) -> list[Row]:
+        """Haal producten op binnen een prijsrange.
+
+        Args:
+            min_price: Minimale prijs
+            max_price: Maximale prijs
+
+        Returns:
+            Lijst met producten in de prijsrange
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute("""
+                SELECT
+                    c.name AS category,
+                    p.name AS product,
+                    p.price,
+                    p.stock
+                FROM products p
+                JOIN categories c ON p.category_id = c.id
+                WHERE p.price BETWEEN ? AND ?
+                ORDER BY p.price ASC
+            """, (min_price, max_price))
+            return cursor.fetchall()
+
+    def get_products_in_stock(self, min_stock: int = 1) -> list[Row]:
+        """Haal producten op die op voorraad zijn.
+
+        Args:
+            min_stock: Minimale voorraad (default: 1)
+
+        Returns:
+            Lijst met producten die op voorraad zijn
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute("""
+                SELECT
+                    c.name AS category,
+                    p.name AS product,
+                    p.price,
+                    p.stock
+                FROM products p
+                JOIN categories c ON p.category_id = c.id
+                WHERE p.stock >= ?
+                ORDER BY c.name, p.name
+            """, (min_stock,))
             return cursor.fetchall()
 
     # ==================== CATALOG ====================
 
-    def get_artist_catalog(self, artistid: int) -> dict:
-        """Haal complete catalogus op voor een artiest.
+    def get_category_catalog(self, category_id: int) -> dict:
+        """Haal complete catalogus op voor een categorie.
 
         Args:
-            artistid: ID van de artiest
+            category_id: ID van de categorie
 
         Returns:
-            Dictionary met artiest info, albums en songs
+            Dictionary met categorie info en alle producten
         """
-        artist = self.get_artist_byid(artistid)
-        if not artist:
+        category = self.get_category_by_id(category_id)
+        if not category:
             return {}
 
-        albums = self.get_albums_by_artist(artistid)
+        products = self.get_products_by_category(category_id)
 
-        # Haal songs op per album
         catalog = {
-            "artist": artist["name"],
-            "artistid": artistid,
-            "albums": []
+            "category": category["name"],
+            "category_id": category_id,
+            "description": category["description"],
+            "products": [
+                {
+                    "product_id": product["id"],
+                    "name": product["name"],
+                    "price": product["price"],
+                    "stock": product["stock"],
+                    "description": product["description"]
+                }
+                for product in products
+            ]
         }
-
-        for album in albums:
-            songs = self.get_songs_by_album(album["id"])
-            catalog["albums"].append({
-                "album_name": album["name"],
-                "albumid": album["id"],
-                "songs": [
-                    {"track": song["track"], "title": song["title"]}
-                    for song in songs
-                ]
-            })
 
         return catalog
 
@@ -218,57 +267,97 @@ class MusicDatabase:
         with self._get_connection() as conn:
             stats = {}
 
-            # Tel artiesten
-            cursor = conn.execute("SELECT COUNT(*) as count FROM artists")
-            stats["total_artists"] = cursor.fetchone()["count"]
+            # Tel categorieën
+            cursor = conn.execute("SELECT COUNT(*) as count FROM categories")
+            stats["total_categories"] = cursor.fetchone()["count"]
 
-            # Tel albums
-            cursor = conn.execute("SELECT COUNT(*) as count FROM albums")
-            stats["total_albums"] = cursor.fetchone()["count"]
+            # Tel producten
+            cursor = conn.execute("SELECT COUNT(*) as count FROM products")
+            stats["total_products"] = cursor.fetchone()["count"]
 
-            # Tel songs
-            cursor = conn.execute("SELECT COUNT(*) as count FROM songs")
-            stats["total_songs"] = cursor.fetchone()["count"]
+            # Tel producten op voorraad
+            cursor = conn.execute("SELECT COUNT(*) as count FROM products WHERE stock > 0")
+            stats["products_in_stock"] = cursor.fetchone()["count"]
+
+            # Gemiddelde prijs
+            cursor = conn.execute("SELECT AVG(price) as avg_price FROM products")
+            stats["average_price"] = cursor.fetchone()["avg_price"]
+
+            # Totale voorraad waarde
+            cursor = conn.execute("SELECT SUM(price * stock) as total_value FROM products")
+            stats["total_inventory_value"] = cursor.fetchone()["total_value"]
 
             return stats
+
+    def get_category_statistics(self) -> list[Row]:
+        """Haal statistieken op per categorie.
+
+        Returns:
+            Lijst met statistieken per categorie
+        """
+        with self._get_connection() as conn:
+            cursor = conn.execute("""
+                SELECT
+                    c.name AS category,
+                    COUNT(p.id) AS product_count,
+                    AVG(p.price) AS avg_price,
+                    SUM(p.stock) AS total_stock,
+                    SUM(p.price * p.stock) AS inventory_value
+                FROM categories c
+                LEFT JOIN products p ON c.id = p.category_id
+                GROUP BY c.id, c.name
+                ORDER BY product_count DESC
+            """)
+            return cursor.fetchall()
 
 
 # ==================== GEBRUIK ====================
 
 if __name__ == "__main__":
-    db = MusicDatabase()
+    db = WebshopDatabase()
 
     # Toon statistieken
     stats = db.get_statistics()
-    print("=== Music Database Statistics ===")
-    print(f"Artiesten: {stats['total_artists']}")
-    print(f"Albums: {stats['total_albums']}")
-    print(f"Songs: {stats['total_songs']}\n")
+    print("=== Webshop Database Statistics ===")
+    print(f"Categorieën: {stats['total_categories']}")
+    print(f"Producten: {stats['total_products']}")
+    print(f"Op voorraad: {stats['products_in_stock']}")
+    print(f"Gemiddelde prijs: €{stats['average_price']:.2f}")
+    print(f"Totale voorraad waarde: €{stats['total_inventory_value']:.2f}\n")
 
-    # Zoek artiesten
-    print("=== Artiesten met 'black' in de naam ===")
-    artists = db.search_artists("black")
-    for artist in artists:
-        print(f"- {artist['name']}")
+    # Categorie statistieken
+    print("=== Statistieken per categorie ===")
+    cat_stats = db.get_category_statistics()
+    for cat in cat_stats[:5]:
+        print(f"{cat['category']}: {cat['product_count']} producten, "
+              f"gemiddeld €{cat['avg_price']:.2f}, "
+              f"voorraad: {cat['total_stock']}")
 
     print()
 
     # Haal complete catalogus op
-    print("=== Catalogus van AC/DC (artistid=3) ===")
-    catalog = db.get_artist_catalog(3)
+    print("=== Electronics Catalogus (category_id=1) ===")
+    catalog = db.get_category_catalog(1)
     if catalog:
-        print(f"Artiest: {catalog['artist']}\n")
-        for album in catalog["albums"]:
-            print(f"Album: {album['album_name']}")
-            for song in album["songs"]:
-                print(f"  {song['track']:2d}. {song['title']}")
-            print()
+        print(f"Categorie: {catalog['category']}")
+        print(f"Beschrijving: {catalog['description']}\n")
+        for product in catalog["products"][:5]:  # Toon eerste 5
+            print(f"  {product['name']}: €{product['price']} ({product['stock']} op voorraad)")
+        print()
 
-    # Zoek songs
-    print("=== Songs met 'love' in de titel ===")
-    songs = db.search_songs("love")
-    for song in songs[:5]:  # Toon eerste 5
-        print(f"{song['artist']}: {song['title']} (op {song['album']})")
+    # Zoek producten
+    print("=== Producten met 'book' in de naam ===")
+    products = db.search_products("book")
+    for product in products[:5]:  # Toon eerste 5
+        print(f"{product['category']}: {product['product']} - €{product['price']}")
+
+    print()
+
+    # Prijsrange
+    print("=== Producten tussen €10 en €30 ===")
+    products = db.get_products_in_price_range(10.0, 30.0)
+    for product in products[:5]:
+        print(f"{product['product']}: €{product['price']}")
 ```
 
 ## Gebruik van de class
@@ -277,37 +366,37 @@ if __name__ == "__main__":
 
 ```python
 # Maak een database instance
-db = MusicDatabase()
+db = WebshopDatabase()
 
-# Haal alle artiesten op
-artists = db.get_all_artists()
-for artist in artists:
-    print(f"{artist['id']}: {artist['name']}")
+# Haal alle categorieën op
+categories = db.get_all_categories()
+for category in categories:
+    print(f"{category['id']}: {category['name']}")
 
 # Zoek specifiek
-beatles_songs = db.search_songs("revolution")
-for song in beatles_songs:
-    print(f"{song['title']} door {song['artist']}")
+laptop_products = db.search_products("laptop")
+for product in laptop_products:
+    print(f"{product['product']}: €{product['price']}")
 ```
 
 ### Catalogus ophalen
 
 ```python
-# Haal alle albums en songs op voor een artiest
-catalog = db.get_artist_catalog(artistid=42)
+# Haal alle producten op voor een categorie
+catalog = db.get_category_catalog(category_id=2)  # Books
 
-print(f"Artiest: {catalog['artist']}")
-for album in catalog['albums']:
-    print(f"\nAlbum: {album['album_name']}")
-    for song in album['songs']:
-        print(f"  Track {song['track']}: {song['title']}")
+print(f"Categorie: {catalog['category']}")
+print(f"Beschrijving: {catalog['description']}\n")
+
+for product in catalog['products']:
+    print(f"  {product['name']}: €{product['price']} ({product['stock']} op voorraad)")
 ```
 
 ### Eigen database pad
 
 ```python
 # Gebruik een andere database file
-db = MusicDatabase("path/to/other/music.sqlite")
+db = WebshopDatabase("path/to/other/webshop.sqlite")
 ```
 
 ## Design patterns in de class
@@ -327,21 +416,21 @@ De underscore `_` geeft aan dat dit een interne method is.
 ### 2. Type hints overal
 
 ```python
-def get_artist_byid(self, artistid: int) -> Optional[Row]:
-    #                           ↑ input type    ↑ return type
+def get_product_by_id(self, product_id: int) -> Optional[Row]:
+    #                              ↑ input type    ↑ return type
 ```
 
 ### 3. Docstrings met Args en Returns
 
 ```python
-def search_artists(self, search_term: str) -> list[Row]:
-    """Zoek artiesten op basis van naam.
+def search_products(self, search_term: str) -> list[Row]:
+    """Zoek producten op basis van naam.
 
     Args:
-        search_term: Zoekterm voor artiest naam
+        search_term: Zoekterm voor product naam
 
     Returns:
-        Lijst met matchende artiesten
+        Lijst met matchende producten
     """
 ```
 
@@ -357,7 +446,7 @@ with self._get_connection() as conn:
 
 ```python
 cursor.execute(
-    "SELECT * FROM artists WHERE name LIKE ?",
+    "SELECT * FROM products WHERE name LIKE ?",
     (f"%{search_term}%",)  # Veilig!
 )
 ```
@@ -369,12 +458,20 @@ Je kunt de class uitbreiden met extra functionaliteit:
 ### Data toevoegen
 
 ```python
-def add_artist(self, name: str) -> int:
-    """Voeg een nieuwe artiest toe."""
+def add_product(
+    self,
+    name: str,
+    price: float,
+    stock: int,
+    category_id: int,
+    description: str | None = None
+) -> int:
+    """Voeg een nieuw product toe."""
     with self._get_connection() as conn:
         cursor = conn.execute(
-            "INSERT INTO artists (name) VALUES (?)",
-            (name,)
+            """INSERT INTO products (name, price, stock, category_id, description)
+               VALUES (?, ?, ?, ?, ?)""",
+            (name, price, stock, category_id, description)
         )
         conn.commit()
         return cursor.lastrowid
@@ -383,12 +480,12 @@ def add_artist(self, name: str) -> int:
 ### Data wijzigen
 
 ```python
-def update_song_title(self, songid: int, new_title: str) -> bool:
-    """Update de titel van een song."""
+def update_stock(self, product_id: int, new_stock: int) -> bool:
+    """Update de voorraad van een product."""
     with self._get_connection() as conn:
         cursor = conn.execute(
-            "UPDATE songs SET title = ? WHERE id = ?",
-            (new_title, songid)
+            "UPDATE products SET stock = ? WHERE id = ?",
+            (new_stock, product_id)
         )
         conn.commit()
         return cursor.rowcount > 0
@@ -397,13 +494,13 @@ def update_song_title(self, songid: int, new_title: str) -> bool:
 ### Error handling
 
 ```python
-def get_artist_byid(self, artistid: int) -> Optional[Row]:
-    """Haal artiest op met error handling."""
+def get_product_by_id(self, product_id: int) -> Optional[Row]:
+    """Haal product op met error handling."""
     try:
         with self._get_connection() as conn:
             cursor = conn.execute(
-                "SELECT * FROM artists WHERE id = ?",
-                (artistid,)
+                "SELECT * FROM products WHERE id = ?",
+                (product_id,)
             )
             return cursor.fetchone()
     except sqlite3.Error as e:
@@ -416,12 +513,13 @@ def get_artist_byid(self, artistid: int) -> Optional[Row]:
 Je hebt geleerd:
 
 - Een complete database class bouwen
-- Methods organiseren per entiteit (artists, albums, songs)
+- Methods organiseren per entiteit (categories, products)
 - Private helper methods gebruiken (`_get_connection`)
 - Complexe data structuren returnen (catalogus dictionary)
+- Statistieken berekenen met aggregatiefuncties
 - Type hints en docstrings consequent toepassen
 - Alle patterns combineren (context managers, placeholders, row_factory)
 
 **Volgende stap:** [Deel 5](sql-deel5.md) - SQL injection preventie.
 
-**Tip:** Gebruik deze MusicDatabase class als template voor je eigen database classes in Flask applicaties!
+**Tip:** Gebruik deze WebshopDatabase class als template voor je eigen database classes in Flask applicaties!

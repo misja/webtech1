@@ -32,20 +32,20 @@ import sqlite3
 ```python
 import sqlite3
 
-def add_user_unsafe(username: str, email: str) -> int:
+def add_product_unsafe(name: str, price: float, stock: int, category_id: int) -> int:
     """GEEN error handling - crasht bij fouten!"""
-    with sqlite3.connect("users.db") as conn:
+    with sqlite3.connect("webshop.sqlite") as conn:
         cursor = conn.execute(
-            "INSERT INTO users (username, email) VALUES (?, ?)",
-            (username, email)
+            "INSERT INTO products (name, price, stock, category_id) VALUES (?, ?, ?, ?)",
+            (name, price, stock, category_id)
         )
         conn.commit()
         return cursor.lastrowid
 
-# Dit crasht als username al bestaat (UNIQUE constraint)
-userid = add_user_unsafe("jan", "jan@email.nl")  # Werkt
-userid = add_user_unsafe("jan", "jan@email.nl")  # CRASH!
-# sqlite3.IntegrityError: UNIQUE constraint failed: users.username
+# Dit crasht als product naam al bestaat (UNIQUE constraint)
+productid = add_product_unsafe("Laptop HP", 899.99, 10, 1)  # Werkt
+productid = add_product_unsafe("Laptop HP", 899.99, 10, 1)  # CRASH!
+# sqlite3.IntegrityError: UNIQUE constraint failed: products.name
 ```
 
 ### Voorbeeld met error handling (goed)
@@ -54,20 +54,20 @@ userid = add_user_unsafe("jan", "jan@email.nl")  # CRASH!
 import sqlite3
 from sqlite3 import Row
 
-def add_user_safe(username: str, email: str) -> int | None:
+def add_product_safe(name: str, price: float, stock: int, category_id: int) -> int | None:
     """Met error handling - geeft None terug bij fout."""
     try:
-        with sqlite3.connect("users.db") as conn:
+        with sqlite3.connect("webshop.sqlite") as conn:
             cursor = conn.execute(
-                "INSERT INTO users (username, email) VALUES (?, ?)",
-                (username, email)
+                "INSERT INTO products (name, price, stock, category_id) VALUES (?, ?, ?, ?)",
+                (name, price, stock, category_id)
             )
             conn.commit()
             return cursor.lastrowid
 
     except sqlite3.IntegrityError as e:
         # UNIQUE constraint violation
-        print(f"Fout: gebruiker '{username}' bestaat al")
+        print(f"Fout: product '{name}' bestaat al of ongeldige categorie")
         return None
 
     except sqlite3.Error as e:
@@ -76,18 +76,18 @@ def add_user_safe(username: str, email: str) -> int | None:
         return None
 
 # Gebruik
-userid = add_user_safe("jan", "jan@email.nl")
-if userid:
-    print(f"User aangemaakt met ID {userid}")
+productid = add_product_safe("Laptop HP", 899.99, 10, 1)
+if productid:
+    print(f"Product aangemaakt met ID {productid}")
 else:
-    print("User niet aangemaakt")
+    print("Product niet aangemaakt")
 
 # Tweede keer - geen crash, netjes afgehandeld
-userid = add_user_safe("jan", "jan@email.nl")
-if userid:
-    print(f"User aangemaakt met ID {userid}")
+productid = add_product_safe("Laptop HP", 899.99, 10, 1)
+if productid:
+    print(f"Product aangemaakt met ID {productid}")
 else:
-    print("User niet aangemaakt")  # Dit wordt geprint
+    print("Product niet aangemaakt")  # Dit wordt geprint
 ```
 
 ## Specifieke exceptions afhandelen
@@ -95,13 +95,13 @@ else:
 ### IntegrityError (constraint violations)
 
 ```python
-def add_product(name: str, price: float, stock: int) -> int | None:
+def add_product(name: str, price: float, stock: int, category_id: int) -> int | None:
     """Voeg product toe met constraint validation."""
     try:
-        with sqlite3.connect("shop.db") as conn:
+        with sqlite3.connect("webshop.sqlite") as conn:
             cursor = conn.execute(
-                "INSERT INTO products (name, price, stock) VALUES (?, ?, ?)",
-                (name, price, stock)
+                "INSERT INTO products (name, price, stock, category_id) VALUES (?, ?, ?, ?)",
+                (name, price, stock, category_id)
             )
             conn.commit()
             return cursor.lastrowid
@@ -113,17 +113,20 @@ def add_product(name: str, price: float, stock: int) -> int | None:
             print(f"Product '{name}' bestaat al")
         elif "NOT NULL" in error_msg:
             print(f"Verplichte velden mogen niet leeg zijn")
+        elif "FOREIGN KEY" in error_msg:
+            print(f"Ongeldige categorie ID: {category_id}")
         elif "CHECK" in error_msg:
-            print(f"Ongeldige waarde (bijv. negatieve prijs)")
+            print(f"Ongeldige waarde (bijv. negatieve prijs of voorraad)")
         else:
             print(f"Database constraint error: {error_msg}")
 
         return None
 
 # Test
-add_product("Laptop", 799.99, 10)  # Werkt
-add_product("Laptop", 899.99, 5)   # Duplicate - netjes afgehandeld
-add_product("", 299.99, 2)         # NOT NULL - netjes afgehandeld
+add_product("Laptop HP", 899.99, 10, 1)  # Werkt
+add_product("Laptop HP", 799.99, 5, 1)   # Duplicate - netjes afgehandeld
+add_product("", 299.99, 2, 1)            # NOT NULL - netjes afgehandeld
+add_product("Mouse", 29.99, 10, 999)     # FOREIGN KEY - netjes afgehandeld
 ```
 
 ### OperationalError (database problemen)
@@ -132,7 +135,7 @@ add_product("", 299.99, 2)         # NOT NULL - netjes afgehandeld
 def get_all_products() -> list[Row]:
     """Haal producten op met error handling."""
     try:
-        with sqlite3.connect("shop.db") as conn:
+        with sqlite3.connect("webshop.sqlite") as conn:
             conn.row_factory = Row
             cursor = conn.execute("SELECT * FROM products")
             return cursor.fetchall()
@@ -141,7 +144,7 @@ def get_all_products() -> list[Row]:
         error_msg = str(e)
 
         if "no such table" in error_msg:
-            print("Database tabel bestaat niet - run eerst de setup!")
+            print("Database tabel bestaat niet - run eerst create_webshop.py!")
             return []
         elif "locked" in error_msg:
             print("Database is locked - probeer later opnieuw")
