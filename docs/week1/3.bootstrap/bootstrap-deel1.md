@@ -9,13 +9,13 @@ Voordelen van Bootstrap:
 - Eenvoudig in gebruik: iedereen met alleen basiskennis van HTML en CSS kan Bootstrap gaan gebruiken.
 - Responsieve functies: de responsieve CSS van Bootstrap past zich aan telefoons, tablets en desktops.
 - Mobiel-eerst benadering: in Bootstrap maken de mobile-first-stijlen deel uit van het kernraamwerk.
-- Compatibiliteit met browsers: Bootstrap 4 is compatibel met alle moderne browsers.
+- Compatibiliteit met browsers: Bootstrap 5 is compatibel met alle moderne browsers.
 
- 
-Er zijn twee manieren om Bootstrap 4 te gebruiken voor een eigen website. 
+
+Er zijn twee manieren om Bootstrap 5 te gebruiken voor een eigen website. 
 
 1.	Maak gebruik van een CDN.
-2.	Downloaden van Bootstrap 4.
+2.	Downloaden van Bootstrap 5.
 
 !!! info "Content Delivery Network"
     Een *Content Delivery Network* (CDN) is een netwerk dat verspreid is over verschillende geografische locaties. Via dit netwerk wordt verschillende inhoud (*content*) aangeboden. Die content kan van alles zijn: video, plaatjes, maar dus ook css of programmacode. 
