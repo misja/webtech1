@@ -30,22 +30,74 @@ We hebben nu twee objecten van de klasse Product.
 
 **Regel:** Gebruik consequent "je/jij", nooit "we/wij". De student doet het, niet "wij samen".
 
-### 2. Vermijd docentenperspectief
+### 2. Vermijd docentenperspectief en meta-uitleg
 
-**Goed:**
+**VERBODEN PATRONEN:**
+
+❌ **"In dit deel leer je..." introducties**
 ```markdown
-Later (bij databases en webapplicaties) zijn ze vereist.
-In Flask geef je data terug aan de browser.
+In dit deel leer je hoe je SQL injection voorkomt en errors afhandelt.
+In deze sectie gaan we kijken naar...
 ```
 
-**Fout:**
+✅ **Direct beginnen met inhoud**
 ```markdown
-In week 6 gebruiken we SQLAlchemy 2.0.
-In de cursus gaan we Flask leren.
-SQLAlchemy 2.0 vereist type annotaties (week 6).
+SQL injection is één van de meest voorkomende en gevaarlijkste beveiligingslekken.
 ```
 
-**Regel:** Geen weeknummers, geen "de cursus", geen verwijzingen naar administratieve structuur. Focus op wat de student moet leren, niet op de cursusindeling.
+❌ **"Voordelen voor deze cursus" lijsten**
+```markdown
+Voordelen van SQLite voor deze cursus:
+- Eenvoudig te gebruiken
+- Geen server nodig
+- Perfect voor development
+
+Waarom is Flask een goede keuze?
+- Lichtgewicht framework
+- Gemakkelijk te leren
+```
+
+✅ **Gewoon de feiten**
+```markdown
+SQLite is een lichtgewicht database die als een enkel bestand werkt en built-in bij Python zit. Geen server setup nodig.
+
+Flask is een webframework, het is een Python-module waarmee op eenvoudige wijze webapplicaties ontwikkeld kunnen worden.
+```
+
+❌ **Vergelijkingstabellen "oud vs nieuw"**
+```markdown
+| Taak | pip/venv (oud) | uv (modern) |
+|------|----------------|-------------|
+| Package installeren | pip install flask | uv add flask |
+```
+
+✅ **Direct de moderne aanpak tonen**
+```markdown
+Installeer Flask met uv:
+\```console
+uv add flask
+\```
+```
+
+❌ **"Later/Straks leer je..." forward references**
+```markdown
+Later leer je SQLAlchemy voor database operaties.
+Straks zie je hoe templates werken.
+In Week 6 gebruik je dit met SQLAlchemy.
+```
+
+✅ **Neutrale verwijzingen**
+```markdown
+Met SQLAlchemy wordt dit nog makkelijker - dat zie je in Week 6.
+Met templates scheid je HTML van Python.
+```
+
+**REGEL:**
+- Geen cursus-meta-uitleg ("dit vak leert je...", "voordelen voor de cursus...")
+- Geen weeknummers als motivatie
+- Geen vergelijkingstabellen tenzij technisch absoluut noodzakelijk
+- Geen "leer je" taal - de inhoud spreekt voor zich
+- Begin direct met de inhoud, niet met aankondigingen wat komt
 
 ### 3. Geen onbekende termen als motivatie
 
@@ -104,15 +156,18 @@ Het interessante van methoden is dat ze ook berekeningen kunnen doen:
 ### 6. Geen AI tells
 
 **Vermijd:**
-- Emoji (✅ ❌ 🎯 etc.)
-- "Oude stijl vs nieuwe stijl" vergelijkingen voor dingen die studenten niet kennen
+- Emoji (✅ ❌ 🎯 etc.) - alleen in AGENTS.md zelf toegestaan voor voorbeelden
+- **"Oude stijl vs nieuwe stijl" vergelijkingstabellen** - studenten kennen de "oude stijl" niet
+- **"Voordelen:" opsommingen** bij nieuwe tools/technieken - klinkt als marketing
 - Over-enthusiaste taal ("Super!", "Geweldig!", "Perfect!")
-- Kunstmatige structuren ("Stap 1, Stap 2, Stap 3...")
+- Kunstmatige structuren ("Stap 1, Stap 2, Stap 3...") - alleen als pedagogisch nodig
+- **"Waarom [technologie]?" secties** - de inhoud moet voor zich spreken
 
 **Gebruik:**
 - Natuurlijke, professionele docenttaal
 - Heldere uitleg zonder overdrijving
 - Praktische voorbeelden
+- Direct to the point - geen marketing-achtige taal
 
 ## Didactische Principes
 
@@ -486,6 +541,11 @@ Voordat je content indient:
 **Schrijfstijl:**
 - [ ] Geschreven naar student toe (je/jij, geen we/wij)
 - [ ] Geen docentenperspectief (weeknummers, cursusstructuur)
+- [ ] **GEEN "In dit deel leer je..." introducties**
+- [ ] **GEEN "Voordelen voor deze cursus" lijsten**
+- [ ] **GEEN vergelijkingstabellen "oud vs nieuw"**
+- [ ] **GEEN "Later/Straks leer je..." forward references**
+- [ ] **GEEN "Waarom is X een goede keuze?" secties**
 - [ ] Nederlandse termen waar mogelijk (klassen, methoden, objecten)
 - [ ] Geen emoji of AI tells
 - [ ] Admonitions alleen voor belangrijke concepten
