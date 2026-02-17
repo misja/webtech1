@@ -39,11 +39,10 @@ Nu is het de beurt om aan te geven uit welke attributen of eigenschappen deze cl
    ...:         self._naam = naam
    ...:         self._prijs = prijs
    ...:         self._voorraad = voorraad
-   ...:         self._beschikbaar = True
    In [2]:
 ```
 
-Het zijn er vier (4): `naam`, `prijs`, `voorraad` en `beschikbaar`. De eigenschap `beschikbaar` krijgt automatisch de waarde `True` bij het aanmaken van een product. De notatie `self` lijkt nu nog wat vreemd, maar dat went snel; zie eventueel [deze blogpost](https://www.bartbarnard.nl/programmeerblogs/python/self.html) voor meer informatie rondom `self`.
+Het zijn er vier (4): `naam`, `prijs`, `voorraad`. De notatie `self` lijkt nu nog wat vreemd, maar dat went snel; zie eventueel [deze blogpost](https://www.bartbarnard.nl/programmeerblogs/python/self.html) voor meer informatie rondom `self`.
 
 Nu de klasse is gedefinieerd kunnen we er objecten van maken – een ander woord voor hiervoor is *instantie*: we maken *instanties* van de klasse `Product`:
 
@@ -92,7 +91,7 @@ Attribuut | een variabele die is gebonden aan een object van een klasse.
 
 We breiden de definitie van `Product` uit met een tweede methode `verkoop()`. Het woord `self` moet je altijd aan een methode-definitie toevoegen, zelfs wanneer de methode zelf verder helemaal geen parameters heeft.
 
-Deze methode verkoopt een aantal producten en past de voorraad aan. De waarde van `_beschikbaar` wijzigt naar `False` wanneer de voorraad niet toereikend is.
+Deze methode verkoopt een aantal producten en past de voorraad aan.
 
 ```python
 def verkoop(self, aantal):
@@ -103,7 +102,6 @@ def verkoop(self, aantal):
         print(f"Verkocht: {aantal}x {self._naam}. Nog {self._voorraad} op voorraad")
     else:
         print(f"Onvoldoende voorraad. Nog maar {self._voorraad} beschikbaar")
-        self._beschikbaar = False
 ```
 
 De volledige klasse ziet er nu als volgt uit:
@@ -116,7 +114,6 @@ class Product:
         self._naam = naam
         self._prijs = prijs
         self._voorraad = voorraad
-        self._beschikbaar = True
 
     def verkoop(self, aantal):
         """Verkoop een aantal items van dit product"""
@@ -126,7 +123,6 @@ class Product:
             print(f"Verkocht: {aantal}x {self._naam}. Nog {self._voorraad} op voorraad")
         else:
             print(f"Onvoldoende voorraad. Nog maar {self._voorraad} beschikbaar")
-            self._beschikbaar = False
 ```
 
 Tijd voor de test! We maken een nieuw product en verkopen er een aantal:
