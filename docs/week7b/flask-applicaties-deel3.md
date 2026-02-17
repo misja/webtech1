@@ -19,29 +19,35 @@ De belangrijkste reden om blueprints te gebruiken is dat we hiermee onnze applic
 `views.py` (uit de folder `mijnproject/studenten/views.py`):
 
 ```python hl_lines="1 6-8"
-from flask import Blueprint,render_template,redirect,url_for
+from flask import Blueprint, Response, render_template, redirect, url_for
 from mijnproject import db
 from mijnproject.models import Student
 from mijnproject.studenten.forms import AddForm
 
 studenten_blueprint = Blueprint('studenten',
-                             __name__,
-                             template_folder='templates')
+                                __name__,
+                                template_folder='templates')
+
 
 @studenten_blueprint.route('/add', methods=['GET', 'POST'])
-def add():
+def add() -> str | Response:
+    """
+    Voeg een nieuwe student toe aan de database.
 
+    Returns:
+        Gerenderde template of redirect naar docenten lijst
+    """
     form = AddForm()
 
     if form.validate_on_submit():
         naam = form.naam.data
         doc_id = form.doc_id.data
-        new_student = Student(naam,doc_id)
+        new_student = Student(naam, doc_id)
         db.session.add(new_student)
         db.session.commit()
 
         return redirect(url_for('docenten.list'))
-    return render_template('studenten/add.html',form=form)
+    return render_template('studenten/add.html', form=form)
 ```
 
 Als eerste wordt hier weer het nodige geïmporteerd. Belangrijk hierbij is dat ook `Blueprint` wordt meegenomen uit het pakket `flask`. Verder zijn nodig de database (db) uit `mijnproject`, de tabel `Student` en het formulier waarmee een nieuwe student ingevoerd kan worden. 
@@ -57,17 +63,24 @@ Vervolgens wordt de view gecodeerd (gekopieerd). Daarbij wordt als eerste het fo
 `views.py` (uit de folder `mijnproject/docenten/views.py`)
 
 ```python
-from flask import Blueprint,render_template,redirect,url_for
+from flask import Blueprint, Response, render_template, redirect, url_for
 from mijnproject import db
-from mijnproject.docenten.forms import AddForm,DelForm
+from mijnproject.docenten.forms import AddForm, DelForm
 from mijnproject.models import Docent
 
 docenten_blueprint = Blueprint('docenten',
-                              __name__,
-                              template_folder='templates')
+                               __name__,
+                               template_folder='templates')
+
 
 @docenten_blueprint.route('/add', methods=['GET', 'POST'])
-def add():
+def add() -> str | Response:
+    """
+    Voeg een nieuwe docent toe aan de database.
+
+    Returns:
+        Gerenderde template of redirect naar docenten lijst
+    """
     form = AddForm()
 
     if form.validate_on_submit():
@@ -79,16 +92,29 @@ def add():
 
         return redirect(url_for('docenten.list'))
 
-    return render_template('docenten/add.html',form=form)
+    return render_template('docenten/add.html', form=form)
+
 
 @docenten_blueprint.route('/list')
-def list():
+def list() -> str:
+    """
+    Toon een lijst van alle docenten en hun studenten.
+
+    Returns:
+        Gerenderde template met docenten lijst
+    """
     docenten = Docent.query.all()
     return render_template('docenten/list.html', docenten=docenten)
 
-@docenten_blueprint.route('/delete', methods=['GET', 'POST'])
-def delete():
 
+@docenten_blueprint.route('/delete', methods=['GET', 'POST'])
+def delete() -> str | Response:
+    """
+    Verwijder een docent uit de database.
+
+    Returns:
+        Gerenderde template of redirect naar docenten lijst
+    """
     form = DelForm()
 
     if form.validate_on_submit():
@@ -98,7 +124,7 @@ def delete():
         db.session.commit()
 
         return redirect(url_for('docenten.list'))
-    return render_template('docenten/delete.html',form=form)
+    return render_template('docenten/delete.html', form=form)
 ```
 
 Meer van hetzelfde. Nu zijn er twee views die gemaakt moeten worden. De `blueprint` verwijst nu naar de folder waar de applicatie-onderdelen voor docenten gevonden kunnen worden.
@@ -120,18 +146,30 @@ app.register_blueprint(docenten_blueprint,url_prefix='/docenten')
 De laatste file die nog geen inhoud heeft is `app.py`. Daarin wordt de volgende code ondergebracht:
 
 ```python
-from mijnproject import app
-from flask import render_template
+from mijnproject import app, db
+from flask import Response, render_template
+
 
 @app.route('/')
-def index():
+def index() -> str:
+    """
+    Toon de homepagina van de applicatie.
+
+    Returns:
+        Gerenderde home template
+    """
     return render_template('home.html')
 
+
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
 ```
 
-Om te beginnen worden er weer een tweetal items ingeladen. Op het eerste gezicht ziet `import app` er wat raar uit, maar er wordt gevraagd om de volgende regel: `app = Flask(__name__)` op te halen uit `__init__.py`. Belangrijk is dat vervolgens de homepagina geladen kan worden als aan de `if`-voorwaarde voldaan wordt.
+Om te beginnen worden er items ingeladen. De `app` variabele komt uit `__init__.py` (waar `app = Flask(__name__)` staat), evenals de `db` variabele voor de database. Vervolgens wordt de homepagina geladen als aan de `if`-voorwaarde voldaan wordt.
+
+De database wordt aangemaakt binnen een *application context* met `with app.app_context()`. Dit is het moderne patroon voor het aanmaken van database tabellen bij het opstarten van de applicatie.
 
 ## Laatste loodjes
 

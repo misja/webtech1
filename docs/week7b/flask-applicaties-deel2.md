@@ -75,38 +75,81 @@ De code van de diverse pagina’s zal nog een keer getoond worden zonder al te v
 Als eerste `models.py`:
 
 ```python
-#from mijnproject import db
+# from mijnproject import db
+
 
 class Docent(db.Model):
+    """
+    Model voor docenten die als mentor fungeren.
+
+    Attributes:
+        id: Unieke identifier voor de docent
+        naam: Naam van de docent
+        student: Relatie naar de Student die deze docent begeleidt
+    """
 
     __tablename__ = 'docenten'
-    id = db.Column(db.Integer,primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     naam = db.Column(db.Text)
-    student = db.relationship('Student',backref='docent',uselist=False)
+    student = db.relationship('Student', backref='docent', uselist=False)
 
-    def __init__(self,naam):
+    def __init__(self, naam: str) -> None:
+        """
+        Initialiseer een nieuwe docent.
+
+        Args:
+            naam: De naam van de docent
+        """
         self.naam = naam
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """
+        Geef een tekstuele representatie van de docent.
+
+        Returns:
+            String met docent naam en eventuele student
+        """
         if self.student:
             return f"Docent {self.naam} is mentor van {self.student.naam}"
         else:
             return f"Docent {self.naam} heeft geen studenten als mentor te begeleiden."
 
+
 class Student(db.Model):
+    """
+    Model voor studenten die door een mentor worden begeleid.
+
+    Attributes:
+        id: Unieke identifier voor de student
+        naam: Naam van de student
+        docent_id: Foreign key naar de begeleidende docent
+    """
 
     __tablename__ = 'studenten'
 
-    id = db.Column(db.Integer,primary_key= True)
+    id = db.Column(db.Integer, primary_key=True)
     naam = db.Column(db.Text)
-    docent_id = db.Column(db.Integer,db.ForeignKey('docenten.id'))
+    docent_id = db.Column(db.Integer, db.ForeignKey('docenten.id'))
 
-    def __init__(self,naam,docent_id):
+    def __init__(self, naam: str, docent_id: int) -> None:
+        """
+        Initialiseer een nieuwe student.
+
+        Args:
+            naam: De naam van de student
+            docent_id: Het ID van de begeleidende docent
+        """
         self.naam = naam
         self.docent_id = docent_id
 
-    def __repr__(self):
-        return f"Deze student heet {self.name}"
+    def __repr__(self) -> str:
+        """
+        Geef een tekstuele representatie van de student.
+
+        Returns:
+            String met de naam van de student
+        """
+        return f"Deze student heet {self.naam}"
 ```
 
 Uit het bestand `mentor_site.py` zijn de klassen `Docent` en `Student` overgenomen. Punt van aandacht is nog wel dat er nog een koppeling gemaakt moet worden naar de plek waar db wordt aangemaakt. Dat zal gebeuren in het bestand `__init__.py`. Het is alvast opgenomen als commentaarregel.
@@ -197,10 +240,15 @@ from wtforms import StringField, IntegerField, SubmitField
 
 
 class AddForm(FlaskForm):
+    """Formulier voor het toevoegen van een nieuwe docent."""
+
     naam = StringField('Naam docent:')
     submit = SubmitField('Voeg toe')
 
+
 class DelForm(FlaskForm):
+    """Formulier voor het verwijderen van een docent."""
+
     id = IntegerField('Vul het ID in van de docent die verwijderd gaat worden:')
     submit = SubmitField('Verwijder')
 ```
@@ -211,7 +259,10 @@ class DelForm(FlaskForm):
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField
 
+
 class AddForm(FlaskForm):
+    """Formulier voor het toevoegen van een nieuwe student."""
+
     naam = StringField('Naam student:')
     doc_id = IntegerField("Id van de docent: ")
     submit = SubmitField('Voeg toe')
