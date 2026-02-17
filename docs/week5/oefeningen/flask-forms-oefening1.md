@@ -161,15 +161,20 @@ uv run python app.py
 
 ## Verwachte output
 
-![Leeg formulier](../imgs/oefening1-leeg.png)
+**Leeg formulier:**
+- Twee invoervelden (voornaam, achternaam)
+- Een verzend knop
+- Geen flash messages zichtbaar
 
-*Validation error bij leeg formulier*
+**Validation error bij leeg formulier:**
+- Rode rand om lege verplichte velden
+- Formulier wordt niet verzonden
+- Blijft op dezelfde pagina
 
-![Validation error](../imgs/oefening1-validation.png)
-
-*Success message na invullen*
-
-![Success message](../imgs/oefening1-success.png)
+**Success message na invullen:**
+- Groene flash message bovenaan: "Welkom, [voornaam] [achternaam]!"
+- Message is sluitbaar met X knop
+- Formulier velden zijn leeg (na redirect)
 
 ## Bonus opdrachten
 
