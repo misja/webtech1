@@ -24,7 +24,7 @@
     
     
       
-        <title>Flask en SQL - CRUD - Webtechnologie 1</title>
+        <title>Flask en SQLAlchemy - CRUD operaties - Webtechnologie 1</title>
       
     
     
@@ -91,7 +91,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#flask-en-sql-crud" class="md-skip">
+        <a href="#flask-en-sqlalchemy-crud-operaties" class="md-skip">
           Ga naar inhoud
         </a>
       
@@ -127,7 +127,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Flask en SQL - CRUD
+              Flask en SQLAlchemy - CRUD operaties
             
           </span>
         </div>
@@ -2579,7 +2579,7 @@
   <span class="md-ellipsis">
     
   
-    Flask en SQL - Theorie
+    Flask en SQLAlchemy - Theorie
   
 
     
@@ -2607,7 +2607,7 @@
   <span class="md-ellipsis">
     
   
-    Flask en SQL - het opzetten van een database
+    Flask en SQLAlchemy - Database Setup
   
 
     
@@ -2644,7 +2644,7 @@
   <span class="md-ellipsis">
     
   
-    Flask en SQL - CRUD
+    Flask en SQLAlchemy - CRUD operaties
   
 
     
@@ -2662,7 +2662,7 @@
   <span class="md-ellipsis">
     
   
-    Flask en SQL - CRUD
+    Flask en SQLAlchemy - CRUD operaties
   
 
     
@@ -2688,22 +2688,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#3-basic_crudpy" class="md-nav__link">
+  <a href="#3-crud-operaties-basic_crudpy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. basic_CRUD.py
+        3. CRUD operaties (basic_CRUD.py)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. basic_CRUD.py">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-records-toevoegen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CREATE - Records toevoegen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read-gegevens-opvragen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        READ - Gegevens opvragen
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="READ - Gegevens opvragen">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#stap-1-importeren" class="md-nav__link">
+  <a href="#alle-records-ophalen" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stap 1: Importeren
+        Alle records ophalen
       
     </span>
   </a>
@@ -2711,43 +2733,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#stap-2-create" class="md-nav__link">
+  <a href="#specifiek-record-ophalen-op-id" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stap 2: CREATE
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stap-3-read" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Stap 3: READ
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stap-4-update" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Stap 4: UPDATE
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stap-5-delete" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Stap 5: DELETE
+        Specifiek record ophalen op ID
       
     </span>
   </a>
@@ -2756,6 +2745,39 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-gegevens-wijzigen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UPDATE - Gegevens wijzigen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-records-verwijderen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DELETE - Records verwijderen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overzicht-crud-patterne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overzicht CRUD patterne
+      
+    </span>
+  </a>
   
 </li>
       
@@ -2782,7 +2804,7 @@
   <span class="md-ellipsis">
     
   
-    Flask en SQL - Relaties
+    Flask en SQLAlchemy - Relaties tussen tabellen
   
 
     
@@ -2810,7 +2832,7 @@
   <span class="md-ellipsis">
     
   
-    Flask en SQL - Website
+    Flask en SQLAlchemy - Complete Website
   
 
     
@@ -2889,7 +2911,7 @@
   <span class="md-ellipsis">
     
   
-    Flask en SQL - Oefening 1
+    Flask en SQLAlchemy - Oefening 1: Mentor Platform
   
 
     
@@ -3267,22 +3289,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#3-basic_crudpy" class="md-nav__link">
+  <a href="#3-crud-operaties-basic_crudpy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. basic_CRUD.py
+        3. CRUD operaties (basic_CRUD.py)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. basic_CRUD.py">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-records-toevoegen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CREATE - Records toevoegen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read-gegevens-opvragen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        READ - Gegevens opvragen
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="READ - Gegevens opvragen">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#stap-1-importeren" class="md-nav__link">
+  <a href="#alle-records-ophalen" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stap 1: Importeren
+        Alle records ophalen
       
     </span>
   </a>
@@ -3290,43 +3334,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#stap-2-create" class="md-nav__link">
+  <a href="#specifiek-record-ophalen-op-id" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stap 2: CREATE
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stap-3-read" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Stap 3: READ
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stap-4-update" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Stap 4: UPDATE
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stap-5-delete" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Stap 5: DELETE
+        Specifiek record ophalen op ID
       
     </span>
   </a>
@@ -3335,6 +3346,39 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-gegevens-wijzigen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UPDATE - Gegevens wijzigen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-records-verwijderen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DELETE - Records verwijderen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overzicht-crud-patterne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overzicht CRUD patterne
+      
+    </span>
+  </a>
   
 </li>
       
@@ -3403,66 +3447,139 @@
 
 
 
-<h1 id="flask-en-sql-crud">Flask en SQL - CRUD<a class="headerlink" href="#flask-en-sql-crud" title="Link naar deze sectie">¶</a></h1>
-<h2 id="3-basic_crudpy">3. <code>basic_CRUD.py</code><a class="headerlink" href="#3-basic_crudpy" title="Link naar deze sectie">¶</a></h2>
-<p>Nu bekend is hoe een database opgezet kan een beetje gestoeid worden door een aantal basishandelingen uit te voeren.</p>
-<p>Denk erom, vaak worden de scripts op een andere wijze uitgevoerd. Het doel is hier om te laten zien op welke wijze CRUD-commando’s uitgevoerd worden. De Python-file die daarvoor gebruikt wordt, is het bestand <a href="bestanden/crud/basic_CRUD.py"><code>basic_CRUD.py</code></a>. Iedere basishandeling komt even voorbij. De opbouw geschiedt in een vijftal stappen:</p>
-<h3 id="stap-1-importeren">Stap 1: Importeren<a class="headerlink" href="#stap-1-importeren" title="Link naar deze sectie">¶</a></h3>
+<h1 id="flask-en-sqlalchemy-crud-operaties">Flask en SQLAlchemy - CRUD operaties<a class="headerlink" href="#flask-en-sqlalchemy-crud-operaties" title="Link naar deze sectie">¶</a></h1>
+<h2 id="3-crud-operaties-basic_crudpy">3. CRUD operaties (<code>basic_CRUD.py</code>)<a class="headerlink" href="#3-crud-operaties-basic_crudpy" title="Link naar deze sectie">¶</a></h2>
+<p>Je hebt de database en model aangemaakt. Nu voer je de vier basis operaties uit: <strong>Create, Read, Update, Delete</strong>.</p>
+<p>Bestudeer het volledige bestand <a href="bestanden/crud/basic_CRUD.py"><code>basic_CRUD.py</code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Vereenvoudigd voorbeeld</p>
+<p>Dit script toont de basis CRUD operaties. In een echte Flask applicatie gebruik je routes en templates in plaats van losse scripts.</p>
+</div>
+<h2 id="create-records-toevoegen">CREATE - Records toevoegen<a class="headerlink" href="#create-records-toevoegen" title="Link naar deze sectie">¶</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">basic_model_app</span><span class="w"> </span><span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">Cursist</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Maak nieuw object aan</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">elsje</span> <span class="o">=</span> <span class="n">Cursist</span><span class="p">(</span><span class="s1">'Elsje'</span><span class="p">,</span> <span class="mi">19</span><span class="p">)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Voeg toe aan database sessie</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">elsje</span><span class="p">)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># Schrijf naar database</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 </span></code></pre></div>
-<h3 id="stap-2-create">Stap 2: CREATE<a class="headerlink" href="#stap-2-create" title="Link naar deze sectie">¶</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">elsje</span> <span class="o">=</span> <span class="n">Cursist</span><span class="p">(</span><span class="s1">'Elsje'</span><span class="p">,</span><span class="mi">19</span><span class="p">)</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">elsje</span><span class="p">)</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<p>Drie stappen: object maken, toevoegen aan sessie, committen.</p>
+<h2 id="read-gegevens-opvragen">READ - Gegevens opvragen<a class="headerlink" href="#read-gegevens-opvragen" title="Link naar deze sectie">¶</a></h2>
+<h3 id="alle-records-ophalen">Alle records ophalen<a class="headerlink" href="#alle-records-ophalen" title="Link naar deze sectie">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">alle_cursisten</span> <span class="o">=</span> <span class="n">Cursist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">alle_cursisten</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Op deze manier kun je data aanmaken, toevoegen en vastleggen.</p>
-<h3 id="stap-3-read">Stap 3: READ<a class="headerlink" href="#stap-3-read" title="Link naar deze sectie">¶</a></h3>
-<p>Deze stap staat bekend als het opvragen van gegevens uit de database.</p>
-<p>Als eerste een overzicht gemaakt van alle cursisten. Met de methode <code>all()</code> worden alle records in een python-lijst gestopt. De tekst wordt opgehaald uit <code>__repr__()</code>:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">alle_cursisten</span> <span class="o">=</span> <span class="n">Cursist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">alle_cursisten</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<p><code>Cursist.query.all()</code> geeft een lijst met alle cursisten terug. De tekst komt uit de <code>__repr__()</code> methode.</p>
+<p>Output:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">Cursist Joyce is 40 jaar oud</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">Cursist Bram is 24 jaar oud</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">Cursist Elsje is 19 jaar oud</span>
 </span></code></pre></div>
-<p>Dit levert het volgende resultaat op:</p>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">Cursist Joyce is 40 jaar oud</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">Cursist Bram is 24 jaar oud</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">Cursist Elsje is 19 jaar oud</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">Cursist Elsje is 19 jaar oud</span>
+<h3 id="specifiek-record-ophalen-op-id">Specifiek record ophalen op ID<a class="headerlink" href="#specifiek-record-ophalen-op-id" title="Link naar deze sectie">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">cursist_twee</span> <span class="o">=</span> <span class="n">Cursist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">cursist_twee</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">cursist_twee</span><span class="o">.</span><span class="n">leeftijd</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Nu worden de gegevens opgevraagd van de cursist die het id = 2 is toegekend. Eerst worden alle gegevens getoond en op de tweede regel alleen de leeftijd.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="hll"><span class="n">cursist_twee</span> <span class="o">=</span> <span class="n">Cursist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</span></span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">cursist_twee</span><span class="p">)</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">cursist_twee</span><span class="o">.</span><span class="n">leeftijd</span><span class="p">)</span>
+<p><code>Cursist.query.get(2)</code> haalt het record op met <code>id = 2</code>.</p>
+<p>Output:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">Cursist Bram is 24 jaar oud</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">24</span>
 </span></code></pre></div>
-<p>Gegevens van cursist 2:</p>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">Cursist Bram is 24 jaar oud</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">24</span>
+<p>Je kunt direct attributen ophalen zoals <code>cursist_twee.leeftijd</code> of <code>cursist_twee.naam</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Query API</p>
+<p>SQLAlchemy biedt veel query methoden:</p>
+<ul>
+<li><code>Model.query.all()</code> - Alle records</li>
+<li><code>Model.query.get(id)</code> - Record op ID</li>
+<li><code>Model.query.filter_by(naam='Joyce')</code> - Filteren op attribuut</li>
+<li><code>Model.query.first()</code> - Eerste record</li>
+</ul>
+</div>
+<h2 id="update-gegevens-wijzigen">UPDATE - Gegevens wijzigen<a class="headerlink" href="#update-gegevens-wijzigen" title="Link naar deze sectie">¶</a></h2>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Haal record op</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">cursist_joyce</span> <span class="o">=</span> <span class="n">Cursist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Wijzig attribuut</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">cursist_joyce</span><span class="o">.</span><span class="n">leeftijd</span> <span class="o">=</span> <span class="mi">40</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># Voeg toe aan sessie</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cursist_joyce</span><span class="p">)</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1"># Schrijf wijziging naar database</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 </span></code></pre></div>
-<h3 id="stap-4-update">Stap 4: UPDATE<a class="headerlink" href="#stap-4-update" title="Link naar deze sectie">¶</a></h3>
-<p>Joyce heeft een beetje gejokt over haar leeftijd. In plaats van de opgegeven 36 jaar is ze inmiddels al 40 geworden. Dat wordt in de database doorgevoerd:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">cursist_joyce</span> <span class="o">=</span> <span class="n">Cursist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="hll"><span class="n">cursist_joyce</span><span class="o">.</span><span class="n">leeftijd</span> <span class="o">=</span> <span class="mi">40</span>
-</span></span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cursist_joyce</span><span class="p">)</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-</span></code></pre></div>
-<p>Joyce heeft <code>id = 1</code> meegekregen. Er worden vier stappen na elkaar uitgevoerd:</p>
+<p>Vier stappen:</p>
 <ol>
-<li>Ophalen juiste record;</li>
-<li>Wijziging aanbrengen;</li>
-<li>Gegevens toevoegen aan database;</li>
-<li>Aanpassing definitief vastleggen.</li>
+<li>Record ophalen met <code>query.get()</code></li>
+<li>Attribuut wijzigen</li>
+<li>Toevoegen aan sessie</li>
+<li>Committen</li>
 </ol>
-<h3 id="stap-5-delete">Stap 5: DELETE<a class="headerlink" href="#stap-5-delete" title="Link naar deze sectie">¶</a></h3>
-<p>Bij nader inzien besluit Elsje toch maar af te zien van een lidmaatschap. Haar record gaat weer verdwijnen.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">cursist_elsje</span> <span class="o">=</span> <span class="n">Cursist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="hll"><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">cursist_elsje</span><span class="p">)</span>
-</span></span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<div class="admonition tip">
+<p class="admonition-title">Update zonder add</p>
+<p>Je kunt <code>db.session.add()</code> ook weglaten bij updates. SQLAlchemy houdt bij welke objecten gewijzigd zijn:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">cursist_joyce</span> <span class="o">=</span> <span class="n">Cursist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">cursist_joyce</span><span class="o">.</span><span class="n">leeftijd</span> <span class="o">=</span> <span class="mi">40</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>  <span class="c1"># Dit werkt ook</span>
 </span></code></pre></div>
-<p>Dit spreekt voor zich: record ophalen, verwijderen, en aanpassing vastleggen.</p>
-<p>Na het aanpassen en verwijderen zijn onderstaande gegevens overgebleven in de database:</p>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">Cursist Elsje is 19 jaar oud</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">Cursist Joyce is 40 jaar oud</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">Cursist Bram is 24 jaar oud</span>
+</div>
+<h2 id="delete-records-verwijderen">DELETE - Records verwijderen<a class="headerlink" href="#delete-records-verwijderen" title="Link naar deze sectie">¶</a></h2>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Haal record op</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">cursist_elsje</span> <span class="o">=</span> <span class="n">Cursist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Verwijder uit database</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">cursist_elsje</span><span class="p">)</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># Schrijf wijziging naar database</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 </span></code></pre></div>
+<p>Drie stappen:</p>
+<ol>
+<li>Record ophalen</li>
+<li><code>delete()</code> aanroepen</li>
+<li>Committen</li>
+</ol>
+<p>Na deze wijzigingen blijven deze records over:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">Cursist Joyce is 40 jaar oud</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">Cursist Bram is 24 jaar oud</span>
+</span></code></pre></div>
+<h2 id="overzicht-crud-patterne">Overzicht CRUD patterne<a class="headerlink" href="#overzicht-crud-patterne" title="Link naar deze sectie">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Operatie</th>
+<th>Code patroon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Create</strong></td>
+<td><code>obj = Model(...)</code><br><code>db.session.add(obj)</code><br><code>db.session.commit()</code></td>
+</tr>
+<tr>
+<td><strong>Read</strong></td>
+<td><code>Model.query.all()</code><br><code>Model.query.get(id)</code></td>
+</tr>
+<tr>
+<td><strong>Update</strong></td>
+<td><code>obj = Model.query.get(id)</code><br><code>obj.attribuut = nieuwe_waarde</code><br><code>db.session.commit()</code></td>
+</tr>
+<tr>
+<td><strong>Delete</strong></td>
+<td><code>obj = Model.query.get(id)</code><br><code>db.session.delete(obj)</code><br><code>db.session.commit()</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Altijd committen</p>
+<p>Vergeet <code>db.session.commit()</code> niet! Zonder commit worden wijzigingen niet opgeslagen in de database.</p>
+</div>
+<p><strong>Volgende stap:</strong> <a href="flask-views-deel4.html">Deel 4</a> - Relaties tussen tabellen.</p>
 
 
 

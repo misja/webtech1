@@ -24,7 +24,7 @@
     
     
       
-        <title>Flask en SQL - Website - Webtechnologie 1</title>
+        <title>Flask en SQLAlchemy - Complete Website - Webtechnologie 1</title>
       
     
     
@@ -91,7 +91,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#flask-en-sql-website" class="md-skip">
+        <a href="#flask-en-sqlalchemy-complete-website" class="md-skip">
           Ga naar inhoud
         </a>
       
@@ -127,7 +127,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Flask en SQL - Website
+              Flask en SQLAlchemy - Complete Website
             
           </span>
         </div>
@@ -2579,7 +2579,7 @@
   <span class="md-ellipsis">
     
   
-    Flask en SQL - Theorie
+    Flask en SQLAlchemy - Theorie
   
 
     
@@ -2607,7 +2607,7 @@
   <span class="md-ellipsis">
     
   
-    Flask en SQL - het opzetten van een database
+    Flask en SQLAlchemy - Database Setup
   
 
     
@@ -2635,7 +2635,7 @@
   <span class="md-ellipsis">
     
   
-    Flask en SQL - CRUD
+    Flask en SQLAlchemy - CRUD operaties
   
 
     
@@ -2663,7 +2663,7 @@
   <span class="md-ellipsis">
     
   
-    Flask en SQL - Relaties
+    Flask en SQLAlchemy - Relaties tussen tabellen
   
 
     
@@ -2700,7 +2700,7 @@
   <span class="md-ellipsis">
     
   
-    Flask en SQL - Website
+    Flask en SQLAlchemy - Complete Website
   
 
     
@@ -2718,7 +2718,7 @@
   <span class="md-ellipsis">
     
   
-    Flask en SQL - Website
+    Flask en SQLAlchemy - Complete Website
   
 
     
@@ -2744,10 +2744,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#stap-1-inventarisatie" class="md-nav__link">
+  <a href="#project-structuur" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stap 1: Inventarisatie
+        Project structuur
       
     </span>
   </a>
@@ -2755,33 +2755,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stap-2-begin-met-het-opzetten-van-de-file-waarin-de-structuur-wordt-bepaald" class="md-nav__link">
+  <a href="#stap-1-database-en-model-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stap 2: Begin met het opzetten van de file waarin de structuur wordt bepaald.
+        Stap 1: Database en model setup
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stap-3-aanmaken-van-de-views-functies-met-de-formulieren" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Stap 3: Aanmaken van de views-functies met de formulieren.
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Stap 3: Aanmaken van de views-functies met de formulieren.">
+    <nav class="md-nav" aria-label="Stap 1: Database en model setup">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#index" class="md-nav__link">
+  <a href="#imports-en-configuratie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        index
+        Imports en configuratie
       
     </span>
   </a>
@@ -2789,10 +2778,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add" class="md-nav__link">
+  <a href="#database-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        add
+        Database setup
       
     </span>
   </a>
@@ -2800,21 +2789,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#list" class="md-nav__link">
+  <a href="#cursist-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        list
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#delete" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        delete
+        Cursist model
       
     </span>
   </a>
@@ -2827,44 +2805,122 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stap-4-het-aanmaken-van-de-database-en-het-opstarten-van-de-applicatie" class="md-nav__link">
+  <a href="#stap-2-routes-en-views" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stap 4: het aanmaken van de database en het opstarten van de applicatie
+        Stap 2: Routes en views
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stap-5-het-ontwerpen-van-de-formulieren" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Stap 5: Het ontwerpen van de formulieren
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stap-6-het-vullen-van-de-html-bestanden" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Stap 6: Het vullen van de HTML-bestanden.
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Stap 6: Het vullen van de HTML-bestanden.">
+    <nav class="md-nav" aria-label="Stap 2: Routes en views">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#basehtml" class="md-nav__link">
+  <a href="#homepage-route" class="md-nav__link">
     <span class="md-ellipsis">
       
-        base.html
+        Homepage route
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cursist-toevoegen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cursist toevoegen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cursisten-tonen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cursisten tonen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cursist-verwijderen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cursist verwijderen
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stap-3-database-aanmaken-en-app-starten" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stap 3: Database aanmaken en app starten
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stap 3: Database aanmaken en app starten">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-initialisatie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database initialisatie
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stap-4-formulieren-definieren" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stap 4: Formulieren definiëren
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stap-5-templates-maken" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stap 5: Templates maken
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stap 5: Templates maken">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basehtml-basis-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        base.html - Basis template
       
     </span>
   </a>
@@ -2925,6 +2981,78 @@
     <span class="md-ellipsis">
       
         Stap 6: Testen
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stap 6: Testen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#homepage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Homepage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cursist-toevoegen_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cursist toevoegen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nog-een-cursist-toevoegen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nog een cursist toevoegen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cursist-verwijderen_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cursist verwijderen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-controleren" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database controleren
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
       
     </span>
   </a>
@@ -3005,7 +3133,7 @@
   <span class="md-ellipsis">
     
   
-    Flask en SQL - Oefening 1
+    Flask en SQLAlchemy - Oefening 1: Mentor Platform
   
 
     
@@ -3383,10 +3511,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#stap-1-inventarisatie" class="md-nav__link">
+  <a href="#project-structuur" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stap 1: Inventarisatie
+        Project structuur
       
     </span>
   </a>
@@ -3394,33 +3522,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stap-2-begin-met-het-opzetten-van-de-file-waarin-de-structuur-wordt-bepaald" class="md-nav__link">
+  <a href="#stap-1-database-en-model-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stap 2: Begin met het opzetten van de file waarin de structuur wordt bepaald.
+        Stap 1: Database en model setup
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stap-3-aanmaken-van-de-views-functies-met-de-formulieren" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Stap 3: Aanmaken van de views-functies met de formulieren.
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Stap 3: Aanmaken van de views-functies met de formulieren.">
+    <nav class="md-nav" aria-label="Stap 1: Database en model setup">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#index" class="md-nav__link">
+  <a href="#imports-en-configuratie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        index
+        Imports en configuratie
       
     </span>
   </a>
@@ -3428,10 +3545,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add" class="md-nav__link">
+  <a href="#database-setup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        add
+        Database setup
       
     </span>
   </a>
@@ -3439,21 +3556,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#list" class="md-nav__link">
+  <a href="#cursist-model" class="md-nav__link">
     <span class="md-ellipsis">
       
-        list
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#delete" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        delete
+        Cursist model
       
     </span>
   </a>
@@ -3466,44 +3572,122 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stap-4-het-aanmaken-van-de-database-en-het-opstarten-van-de-applicatie" class="md-nav__link">
+  <a href="#stap-2-routes-en-views" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stap 4: het aanmaken van de database en het opstarten van de applicatie
+        Stap 2: Routes en views
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stap-5-het-ontwerpen-van-de-formulieren" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Stap 5: Het ontwerpen van de formulieren
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stap-6-het-vullen-van-de-html-bestanden" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Stap 6: Het vullen van de HTML-bestanden.
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Stap 6: Het vullen van de HTML-bestanden.">
+    <nav class="md-nav" aria-label="Stap 2: Routes en views">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#basehtml" class="md-nav__link">
+  <a href="#homepage-route" class="md-nav__link">
     <span class="md-ellipsis">
       
-        base.html
+        Homepage route
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cursist-toevoegen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cursist toevoegen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cursisten-tonen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cursisten tonen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cursist-verwijderen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cursist verwijderen
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stap-3-database-aanmaken-en-app-starten" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stap 3: Database aanmaken en app starten
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stap 3: Database aanmaken en app starten">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#database-initialisatie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database initialisatie
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stap-4-formulieren-definieren" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stap 4: Formulieren definiëren
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stap-5-templates-maken" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stap 5: Templates maken
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stap 5: Templates maken">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basehtml-basis-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        base.html - Basis template
       
     </span>
   </a>
@@ -3564,6 +3748,78 @@
     <span class="md-ellipsis">
       
         Stap 6: Testen
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stap 6: Testen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#homepage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Homepage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cursist-toevoegen_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cursist toevoegen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nog-een-cursist-toevoegen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nog een cursist toevoegen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cursist-verwijderen_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cursist verwijderen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-controleren" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database controleren
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
       
     </span>
   </a>
@@ -3635,265 +3891,327 @@
 
 
 
-<h1 id="flask-en-sql-website">Flask en SQL - Website<a class="headerlink" href="#flask-en-sql-website" title="Link naar deze sectie">¶</a></h1>
-<p>Alle inspanningen in de vorige paragrafen zijn niet voor niets geweest. Er is op dit moment  voldoende kennis en informatie aangereikt om nu eindelijk een ‘echte’ website te bouwen! Alle opgedane kennis wordt in deze paragraaf met elkaar verbonden.</p>
-<p>De belangrijkste kenmerken die in deze paragraaf besproken zullen worden zijn:</p>
+<h1 id="flask-en-sqlalchemy-complete-website">Flask en SQLAlchemy - Complete Website<a class="headerlink" href="#flask-en-sqlalchemy-complete-website" title="Link naar deze sectie">¶</a></h1>
+<p>Je combineert nu alle kennis: templates, formulieren, en database. Je bouwt een beheersite voor cursisten van de muziekschool met:</p>
 <ul>
-<li>Het werken met templates;</li>
-<li>Gebruikersinformatie via formulieren ophalen;</li>
-<li>De aangeleverde informatie opslaan in de database;</li>
-<li>Overzichten maken van de opgeslagen informatie;</li>
+<li>Formulier om cursisten toe te voegen</li>
+<li>Overzicht van alle cursisten</li>
+<li>Formulier om cursisten te verwijderen</li>
 </ul>
-<p>Dit wordt allemaal toegepast op een beheersite voor de gegevens van de cursisten met onder meer:</p>
-<ul>
-<li>Een formulier waarmee nieuwe cursisten toegevoegd kunnen worden;</li>
-<li>Een formulier om cursisten uit de database te verwijderen;</li>
-<li>De mogelijkheid tot het maken van een overzicht van alle cursisten;</li>
-</ul>
-<p>Er wordt vanaf scratch begonnen om meer inzicht te krijgen in de wijze waarop een website opgebouwd wordt. Daarbij wordt een stappenplan aangehouden.</p>
-<h2 id="stap-1-inventarisatie">Stap 1: Inventarisatie<a class="headerlink" href="#stap-1-inventarisatie" title="Link naar deze sectie">¶</a></h2>
-<p>Er moeten verschillende componenten geconstrueerd worden om de eerste website werkend te krijgen: </p>
-<p>Twee Python-files:</p>
-<ul>
-<li><a href="bestanden/relaties/beheer_cursist.py"><code>beheer_cursist.py</code></a></li>
-<li><a href="bestanden/forms.py"><code>forms.py</code></a></li>
-</ul>
-<p>Een directory Templates met een vijftal HTML-bestanden:</p>
-<ul>
-<li><a href="bestanden/templates/base.html"><code>base.html</code></a></li>
-<li><a href="bestanden/templates/home.html"><code>home.html</code></a></li>
-<li><a href="bestanden/templates/voegtoe_cur.html"><code>voegtoe_cur.html</code></a></li>
-<li><a href="bestanden/templates/toon_cur.html"><code>toon_cur.html</code></a></li>
-<li><a href="bestanden/templates/verwijder_cur.html"><code>verwijder_cur.html</code></a></li>
-</ul>
-<p>Het einde van stap 1 bestaat eruit alle bestanden aan te maken. Dat levert het volgende plaatje op:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/5-bestanden.png" data-desc-position="bottom"><img alt="het overzicht van de bestanden" src="imgs/5-bestanden.png"></a></p>
-<h2 id="stap-2-begin-met-het-opzetten-van-de-file-waarin-de-structuur-wordt-bepaald">Stap 2: Begin met het opzetten van de file waarin de structuur wordt bepaald.<a class="headerlink" href="#stap-2-begin-met-het-opzetten-van-de-file-waarin-de-structuur-wordt-bepaald" title="Link naar deze sectie">¶</a></h2>
-<p>In dit geval is dat <a href="bestanden/relaties/beheer_cursist.py"><code>beheer_cursist.py</code></a>. De eerste regels van dit bestand zijn moeten nu bekend voorkomen.
-<code>VoegtoeForm</code> en <code>VerwijderForm</code> worden nog niet herkend, omdat ze pas later worden aangemaakt. </p>
-<p>Het werken met Forms vereist dat er een geheime sleutel moet worden ingegeven. De naam maakt niet uit, als er maar een sleutelwaarde wordt ingesteld. Het weglaten van deze regel levert een foutmelding op.</p>
-<p></p><div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">forms</span><span class="w"> </span><span class="kn">import</span>  <span class="n">VoegtoeForm</span><span class="p">,</span> <span class="n">VerwijderForm</span>
+<h2 id="project-structuur">Project structuur<a class="headerlink" href="#project-structuur" title="Link naar deze sectie">¶</a></h2>
+<p>Je maakt de volgende bestanden:</p>
+<p><strong>Python bestanden</strong>:
+- <code>beheer_cursist.py</code> - Hoofd applicatie met routes
+- <code>forms.py</code> - Formulier definities</p>
+<p><strong>Templates directory</strong>:
+- <code>base.html</code> - Basis template met navigatie
+- <code>home.html</code> - Homepage
+- <code>voegtoe_cur.html</code> - Cursist toevoegen
+- <code>toon_cur.html</code> - Cursisten tonen
+- <code>verwijder_cur.html</code> - Cursist verwijderen</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/5-bestanden.png" data-desc-position="bottom"><img alt="Het overzicht van de bestanden" src="imgs/5-bestanden.png"></a></p>
+<h2 id="stap-1-database-en-model-setup">Stap 1: Database en model setup<a class="headerlink" href="#stap-1-database-en-model-setup" title="Link naar deze sectie">¶</a></h2>
+<p><strong><code>beheer_cursist.py</code></strong> - Bestudeer het volledige bestand <a href="bestanden/relaties/beheer_cursist.py"><code>beheer_cursist.py</code></a>.</p>
+<h3 id="imports-en-configuratie">Imports en configuratie<a class="headerlink" href="#imports-en-configuratie" title="Link naar deze sectie">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">forms</span><span class="w"> </span><span class="kn">import</span> <span class="n">VoegtoeForm</span><span class="p">,</span> <span class="n">VerwijderForm</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">redirect</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask_sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">SQLAlchemy</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask_migrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">Migrate</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Omdat er formulieren gebruikt worden is een geheime sleutel nodig!</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">'SECRET_KEY'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'mijngeheimesleutel'</span>
 </span></code></pre></div>
-Het tweede gedeelte bestaat uit het opzetten van de koppeling tussen applicatie en database:<p></p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">#SQL database opzet</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">basedir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">'SQLALCHEMY_DATABASE_URI'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'sqlite:///'</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="s1">'data.sqlite'</span><span class="p">)</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">'SQLALCHEMY_TRACK_MODIFICATIONS'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">Migrate</span><span class="p">(</span><span class="n">app</span><span class="p">,</span><span class="n">db</span><span class="p">)</span>
+<p><code>SECRET_KEY</code> is vereist voor formulieren (CSRF-beveiliging).</p>
+<h3 id="database-setup">Database setup<a class="headerlink" href="#database-setup" title="Link naar deze sectie">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">basedir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">'SQLALCHEMY_DATABASE_URI'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'sqlite:///'</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">basedir</span><span class="p">,</span> <span class="s1">'data.sqlite'</span><span class="p">)</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">'SQLALCHEMY_TRACK_MODIFICATIONS'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">Migrate</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Tot dusver niets bijzonders. Het volgende gedeelte levert vast ook geen problemen op. De tabel (het model) voor de cursist wordt nu aangemaakt. Om het een klein project te laten blijven, en om de opbouw op een eenduidige wijze te kunnen beschrijven, blijft het bij een enkel model, dat ook nog eens geen relaties kent naar andere modellen:</p>
+<h3 id="cursist-model">Cursist model<a class="headerlink" href="#cursist-model" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Cursist</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">'cursisten'</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span><span class="n">primary_key</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">naam</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">naam</span><span class="p">):</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">naam</span> <span class="o">=</span> <span class="n">naam</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Naam van de cursist: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">naam</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="sd">"""Model voor cursisten van de muziekschool."""</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">'cursisten'</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">naam</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">naam</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span><span class="sd">"""Maak nieuwe cursist aan.</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="sd">        Args:</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="sd">            naam: Voor- en achternaam</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="sd">        """</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">naam</span> <span class="o">=</span> <span class="n">naam</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">        </span><span class="sd">"""String representatie."""</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Naam van de cursist: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">naam</span><span class="si">}</span><span class="s2">"</span>
 </span></code></pre></div>
-<h2 id="stap-3-aanmaken-van-de-views-functies-met-de-formulieren">Stap 3: Aanmaken van de views-functies met de formulieren.<a class="headerlink" href="#stap-3-aanmaken-van-de-views-functies-met-de-formulieren" title="Link naar deze sectie">¶</a></h2>
-<p>Voor het gemak zijn de Engelse termen aangehouden zoals <em>add</em>, <em>delete</em> en <em>list</em>.</p>
-<h3 id="index">index<a class="headerlink" href="#index" title="Link naar deze sectie">¶</a></h3>
+<p>Dit model is eenvoudig - geen relaties, alleen een naam. Perfect om de basis te begrijpen.</p>
+<h2 id="stap-2-routes-en-views">Stap 2: Routes en views<a class="headerlink" href="#stap-2-routes-en-views" title="Link naar deze sectie">¶</a></h2>
+<h3 id="homepage-route">Homepage route<a class="headerlink" href="#homepage-route" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">():</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">'home.html'</span><span class="p">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="sd">"""Homepage route.</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="sd">    Returns:</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="sd">        Gerenderde home template</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="sd">    """</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">'home.html'</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Wanneer de index wordt opgevraagd wordt er doorgeschakeld naar de pagina <a href="bestanden/templates/home.html"><code>home.html</code></a>.</p>
-<h3 id="add">add<a class="headerlink" href="#add" title="Link naar deze sectie">¶</a></h3>
+<h3 id="cursist-toevoegen">Cursist toevoegen<a class="headerlink" href="#cursist-toevoegen" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/add'</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">'GET'</span><span class="p">,</span> <span class="s1">'POST'</span><span class="p">])</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">add_cur</span><span class="p">():</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">form</span> <span class="o">=</span> <span class="n">VoegtoeForm</span><span class="p">()</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">add_cur</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="sd">"""Voeg nieuwe cursist toe.</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">naam</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">naam</span><span class="o">.</span><span class="n">data</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="c1"># Voeg een nieuwe cursist toe aan de database</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="n">new_cur</span> <span class="o">=</span> <span class="n">Cursist</span><span class="p">(</span><span class="n">naam</span><span class="p">)</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new_cur</span><span class="p">)</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">'toon_cur'</span><span class="p">))</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">'voegtoe_cur.html'</span><span class="p">,</span><span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="sd">    Returns:</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="sd">        Bij GET: formulier template</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="sd">        Bij POST: redirect naar cursisten lijst</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="sd">    """</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="n">form</span> <span class="o">=</span> <span class="n">VoegtoeForm</span><span class="p">()</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="n">naam</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">naam</span><span class="o">.</span><span class="n">data</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="c1"># Voeg nieuwe cursist toe</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>        <span class="n">new_cur</span> <span class="o">=</span> <span class="n">Cursist</span><span class="p">(</span><span class="n">naam</span><span class="p">)</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new_cur</span><span class="p">)</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">'list_cur'</span><span class="p">))</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">'voegtoe_cur.html'</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Op het moment dat deze view wordt aangeroepen wordt er doorgeschakeld naar <a href="bestanden/templates/voegtoe_cur.html"><code>voegtoe_cur.html</code></a>. Daar wordt een leeg formulier getoond met een passende tekst. Als de naam van een nieuwe cursist is ingevuld en bevestigd, wordt <a href="bestanden/templates/toon_cur.html"><code>toon_cur.html</code></a> geopend en verschijnt de lijst met alle aanwezige cursisten in beeld. In dit voorbeeld zal deze lijst zeer beperkt blijven.</p>
-<h3 id="list">list<a class="headerlink" href="#list" title="Link naar deze sectie">¶</a></h3>
+<p><strong>Workflow</strong>:
+1. GET request: Toon leeg formulier
+2. POST request: Naam opslaan in database, redirect naar lijst</p>
+<h3 id="cursisten-tonen">Cursisten tonen<a class="headerlink" href="#cursisten-tonen" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/list'</span><span class="p">)</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">list_cur</span><span class="p">():</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="c1"># Maak een lijst van alle aanwezige cursisten in de database.</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">cursisten</span> <span class="o">=</span> <span class="n">Cursist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">'toon_cur.html'</span><span class="p">,</span> <span class="n">cursisten</span><span class="o">=</span><span class="n">cursisten</span><span class="p">)</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">list_cur</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="sd">"""Toon alle cursisten.</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="sd">    Returns:</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="sd">        Template met lijst van cursisten</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="sd">    """</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="n">cursisten</span> <span class="o">=</span> <span class="n">Cursist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">'toon_cur.html'</span><span class="p">,</span> <span class="n">cursisten</span><span class="o">=</span><span class="n">cursisten</span><span class="p">)</span>
 </span></code></pre></div>
-<p>In deze view wordt een lijst aangemaakt van alle cursisten en die lijst wordt doorgegeven naar <a href="bestanden/templates/toon_cur.html"><code>toon_cur.html</code></a>, die de deelnemers laat zien.</p>
-<h3 id="delete">delete<a class="headerlink" href="#delete" title="Link naar deze sectie">¶</a></h3>
+<p>Haalt alle cursisten op en geeft ze door aan de template.</p>
+<h3 id="cursist-verwijderen">Cursist verwijderen<a class="headerlink" href="#cursist-verwijderen" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/delete'</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">'GET'</span><span class="p">,</span> <span class="s1">'POST'</span><span class="p">])</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">del_cur</span><span class="p">():</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">form</span> <span class="o">=</span> <span class="n">VerwijderForm</span><span class="p">()</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">del_cur</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="sd">"""Verwijder cursist op basis van ID.</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="nb">id</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">data</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="n">cur</span> <span class="o">=</span> <span class="n">Cursist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="sd">    Returns:</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="sd">        Bij GET: formulier template</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="sd">        Bij POST: redirect naar cursisten lijst</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="sd">    """</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="n">form</span> <span class="o">=</span> <span class="n">VerwijderForm</span><span class="p">()</span>
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">'toon_cur'</span><span class="p">))</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">'verwijder_cur.html'</span><span class="p">,</span><span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        <span class="nb">id</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">id</span><span class="o">.</span><span class="n">data</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="n">cur</span> <span class="o">=</span> <span class="n">Cursist</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">'list_cur'</span><span class="p">))</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">'verwijder_cur.html'</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Weer meer van hetzelfde. Als het de bedoeling is een cursist te verwijderen dan wordt deze view opgestart. Omdat er nog niet op een button geklikt is, wordt gelinkt naar <a href="bestanden/templates/verwijder_cur.html"><code>verwijder_cur.html</code></a> en zal er een leeg scherm te zien zijn met weer een passende tekst. Na invulling van het id van de cursist en een bevestiging daarvan door op de knop te drukken, zal het record verwijderd worden waarna <a href="bestanden/templates/toon_cur.html"><code>toon_cur.html</code></a> aangeroepen wordt waardoor de aangepast lijst zichtbaar is.</p>
-<h2 id="stap-4-het-aanmaken-van-de-database-en-het-opstarten-van-de-applicatie">Stap 4: het aanmaken van de database en het opstarten van de applicatie<a class="headerlink" href="#stap-4-het-aanmaken-van-de-database-en-het-opstarten-van-de-applicatie" title="Link naar deze sectie">¶</a></h2>
-<p>De volgende (voorlaatste) regel betreft het daadwerkelijk aanmaken van de database. We zien hier de regel <code>db.create_all()</code>; dit houdt in dat we de database (het SQLAlchemy-object dat we hebben aangemaakt op regel 19) de opdracht geven alle model-klassen langs te lopen en de corresponderende (<em>gemapte</em>) database-tabellen aan te maken (op basis van de informatie die is ingegeven in die modelklassen).</p>
+<p><strong>Workflow</strong>:
+1. GET request: Toon leeg formulier
+2. POST request: Verwijder cursist op ID, redirect naar lijst</p>
+<h2 id="stap-3-database-aanmaken-en-app-starten">Stap 3: Database aanmaken en app starten<a class="headerlink" href="#stap-3-database-aanmaken-en-app-starten" title="Link naar deze sectie">¶</a></h2>
+<h3 id="database-initialisatie">Database initialisatie<a class="headerlink" href="#database-initialisatie" title="Link naar deze sectie">¶</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></code></pre></div>
 <div class="admonition info">
-<p class="admonition-title">Verschillende versies van SQLAlchemy</p>
-<p>In nieuwere versies van SQLAlchemy is het creëren van de database zelf behoorlijk aangepast. In <a href="https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/api/#flask_sqlalchemy.SQLAlchemy.create_all">de documentatie staat</a> <em>This requires that a Flask application context is active</em>. Dit betekent dat je het statement binnen een <em>flask-context</em> moet uitvoeren:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
+<p class="admonition-title">Flask application context</p>
+<p>In moderne SQLAlchemy (3.0+) moet <code>db.create_all()</code> binnen een application context draaien:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
 </span></code></pre></div>
+<p>Dit zorgt ervoor dat SQLAlchemy toegang heeft tot de Flask configuratie.</p>
 </div>
-<p>Tenslotte starten we de applicatie op, op de manier die we al gewend zijn.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span></code></pre></div>
-<h2 id="stap-5-het-ontwerpen-van-de-formulieren">Stap 5: Het ontwerpen van de formulieren<a class="headerlink" href="#stap-5-het-ontwerpen-van-de-formulieren" title="Link naar deze sectie">¶</a></h2>
-<p>Hier worden de formulieren in <a href="bestanden/forms.py"><code>forms.py</code></a> ontworpen.
-Er is al uitvoerig aandacht besteed aan het opzetten van formulieren met <code>Flask</code>. Ook deze twee formulieren <code>VoegtoeForm</code> en <code>VerwijderForm</code> zullen vast geen vragen meer oproepen:</p>
+<h2 id="stap-4-formulieren-definieren">Stap 4: Formulieren definiëren<a class="headerlink" href="#stap-4-formulieren-definieren" title="Link naar deze sectie">¶</a></h2>
+<p><strong><code>forms.py</code></strong> - Bestudeer het volledige bestand <a href="bestanden/forms.py"><code>forms.py</code></a>.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask_wtf</span><span class="w"> </span><span class="kn">import</span> <span class="n">FlaskForm</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">wtforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringField</span><span class="p">,</span> <span class="n">IntegerField</span><span class="p">,</span> <span class="n">SubmitField</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">VoegtoeForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">naam</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">'Vul de naam van de nieuwe cursist in:'</span><span class="p">)</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">'Voeg toe'</span><span class="p">)</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="k">class</span><span class="w"> </span><span class="nc">VerwijderForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="sd">"""Formulier voor nieuwe cursist."""</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">naam</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">'Vul de naam van de nieuwe cursist in:'</span><span class="p">)</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">'Voeg toe'</span><span class="p">)</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
 </span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
-</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="nb">id</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">(</span><span class="s1">'Vul het ID van de cursist die verwijderd gaat worden in:'</span><span class="p">)</span>
-</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">'Verwijder'</span><span class="p">)</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="k">class</span><span class="w"> </span><span class="nc">VerwijderForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="sd">"""Formulier voor cursist verwijderen."""</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    <span class="nb">id</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">(</span><span class="s1">'Vul het ID van de cursist die verwijderd gaat worden in:'</span><span class="p">)</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">'Verwijder'</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Het formulier om een cursist toe te voegen kent een veld waarin een naam kan worden ingegeven en een knop om te bevestigen. Voor het verwijderen van een cursist is een veld nodig om het <code>id</code> in te geven en weer een knop om te bevestigen.</p>
-<h2 id="stap-6-het-vullen-van-de-html-bestanden">Stap 6: Het vullen van de HTML-bestanden.<a class="headerlink" href="#stap-6-het-vullen-van-de-html-bestanden" title="Link naar deze sectie">¶</a></h2>
-<h3 id="basehtml"><code>base.html</code><a class="headerlink" href="#basehtml" title="Link naar deze sectie">¶</a></h3>
-<p>In dit bestand wordt de structuur van de website grotendeels vastgelegd. In ieder geval wordt de connectie naar Bootstrap hier vastgelegd en wordt er ook een navigatiebalk opgemaakt. Het is de bedoeling dat alle overige webpagina’s van dit sjabloon gebruik gaan maken. Die pagina’s kunnen hun eigen specifieke inhoud opnemen in het block-vak.</p>
+<p>Twee eenvoudige formulieren:
+- <strong>VoegtoeForm</strong>: Naam (text veld) + submit
+- <strong>VerwijderForm</strong>: ID (nummer veld) + submit</p>
+<h2 id="stap-5-templates-maken">Stap 5: Templates maken<a class="headerlink" href="#stap-5-templates-maken" title="Link naar deze sectie">¶</a></h2>
+<h3 id="basehtml-basis-template"><code>base.html</code> - Basis template<a class="headerlink" href="#basehtml-basis-template" title="Link naar deze sectie">¶</a></h3>
+<p>Bestudeer het volledige bestand <a href="bestanden/templates/base.html"><code>base.html</code></a>.</p>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"en"</span> <span class="na">dir</span><span class="o">=</span><span class="s">"ltr"</span><span class="p">&gt;</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"nl"</span><span class="p">&gt;</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">"utf-8"</span><span class="p">&gt;</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span> <span class="na">href</span><span class="o">=</span><span class="s">"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"</span>     <span class="na">integrity</span><span class="o">=</span><span class="s">"sha384-  Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"</span>   <span class="na">crossorigin</span><span class="o">=</span><span class="s">"anonymous"</span><span class="p">&gt;</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"https://code.jquery.com/jquery-3.2.1.slim.min.js"</span> <span class="na">integrity</span><span class="o">=</span><span class="s">"sha384-   KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"</span>   <span class="na">crossorigin</span><span class="o">=</span><span class="s">"anonymous"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"</span>     <span class="na">integrity</span><span class="o">=</span><span class="s">"sha384-  ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"</span>   <span class="na">crossorigin</span><span class="o">=</span><span class="s">"anonymous"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"</span>   <span class="na">integrity</span><span class="o">=</span><span class="s">"sha384-  JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"</span>   <span class="na">crossorigin</span><span class="o">=</span><span class="s">"anonymous"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Beheer cursisten<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>
-</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">"navbar navbar-expand-lg navbar-light bg-light"</span><span class="p">&gt;</span>
-</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"navbar-nav"</span><span class="p">&gt;</span>
-</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-item nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ url_for('index') }}"</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-item nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ url_for('add_cur') }}"</span><span class="p">&gt;</span>Voeg cursist toe<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-item nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ url_for('list_cur') }}"</span><span class="p">&gt;</span>Toon cursisten<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-item nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ url_for('del_cur') }}"</span><span class="p">&gt;</span>Verwijder cursist<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
-</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>
-</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>{% block content %}
-</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>
-</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>{% endblock %}
-</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">"viewport"</span> <span class="na">content</span><span class="o">=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="p">&gt;</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"</span> <span class="na">rel</span><span class="o">=</span><span class="s">"stylesheet"</span><span class="p">&gt;</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Beheer cursisten<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    <span class="p">&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">"navbar navbar-expand-lg navbar-light bg-light"</span><span class="p">&gt;</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"container-fluid"</span><span class="p">&gt;</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"navbar-nav"</span><span class="p">&gt;</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>                <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ url_for('index') }}"</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>                <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ url_for('add_cur') }}"</span><span class="p">&gt;</span>Voeg cursist toe<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>                <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ url_for('list_cur') }}"</span><span class="p">&gt;</span>Toon cursisten<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>                <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"{{ url_for('del_cur') }}"</span><span class="p">&gt;</span>Verwijder cursist<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>    <span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"container mt-4"</span><span class="p">&gt;</span>
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>        {% block content %}
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>        {% endblock %}
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
-<p>Als eerste dus de gekopieerde linken, vervolgens de navigatiebalk en tenslotte de plek waar ruimte is voor de andere pagina’s om hun inhoud te tonen.</p>
+<p><strong>Bootstrap 5</strong> CDN links en navigatie balk. Alle andere templates extenden deze basis.</p>
 <h3 id="homehtml"><code>home.html</code><a class="headerlink" href="#homehtml" title="Link naar deze sectie">¶</a></h3>
-<p>Een heel eenvoudige pagina om mee te starten:</p>
+<p>Bestudeer het volledige bestand <a href="bestanden/templates/home.html"><code>home.html</code></a>.</p>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>{% extends "base.html" %}
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>{% block content %}
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"jumbotron"</span><span class="p">&gt;</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Welkom bij de beheersite van onze cursisten<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Om te beginnen, selecteer een item uit de navigatiebalk.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>{% endblock %}
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"p-5 mb-4 bg-light rounded-3"</span><span class="p">&gt;</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"container-fluid py-5"</span><span class="p">&gt;</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>        <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">"display-5 fw-bold"</span><span class="p">&gt;</span>Welkom bij de beheersite van onze cursisten<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>        <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"col-md-8 fs-4"</span><span class="p">&gt;</span>Om te beginnen, selecteer een item uit de navigatiebalk.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>{% endblock %}
 </span></code></pre></div>
-<p>De code van <code>base.html</code> wordt als eerste ingeladen. In het block worden de inleidende teksten vermeld en er is als accent gekozen om het ‘<code>jumbotron</code>’-effect te selecteren.</p>
+<div class="admonition note">
+<p class="admonition-title">Bootstrap 5 wijziging</p>
+<p><code>jumbotron</code> bestaat niet meer in Bootstrap 5. Gebruik <code>p-5 mb-4 bg-light rounded-3</code> voor hetzelfde effect.</p>
+</div>
 <h3 id="voegtoe_curhtml"><code>voegtoe_cur.html</code><a class="headerlink" href="#voegtoe_curhtml" title="Link naar deze sectie">¶</a></h3>
+<p>Bestudeer het volledige bestand <a href="bestanden/templates/voegtoe_cur.html"><code>voegtoe_cur.html</code></a>.</p>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>{% extends "base.html" %}
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>{% block content %}
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"jumbotron"</span><span class="p">&gt;</span>
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Heeft zich een nieuwe cursist aangemeld?<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Vul de naam in en klik op Voeg toe:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">"POST"</span><span class="p">&gt;</span>
-</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>        {{ form.hidden_tag() }}
-</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>        {{ form.naam.label }} {{ form.naam() }}
-</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>        {{ form.submit() }}
-</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>{% endblock %}
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"p-5 mb-4 bg-light rounded-3"</span><span class="p">&gt;</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"container-fluid py-5"</span><span class="p">&gt;</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>        <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">"display-5 fw-bold"</span><span class="p">&gt;</span>Heeft zich een nieuwe cursist aangemeld?<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Vul de naam in en klik op Voeg toe:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>        <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">"POST"</span><span class="p">&gt;</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>            {{ form.hidden_tag() }}
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"mb-3"</span><span class="p">&gt;</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>                {{ form.naam.label(class="form-label") }}
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>                {{ form.naam(class="form-control") }}
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>            {{ form.submit(class="btn btn-primary") }}
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>{% endblock %}
 </span></code></pre></div>
-<p>Niets nieuws onder de zon. Alleen hier nog even aandacht voor de geheime tag die moet worden opgenomen wanneer er met een formulier wordt gewerkt.</p>
+<p><code>{{ form.hidden_tag() }}</code> voegt CSRF token toe (verplicht).</p>
 <h3 id="toon_curhtml"><code>toon_cur.html</code><a class="headerlink" href="#toon_curhtml" title="Link naar deze sectie">¶</a></h3>
+<p>Bestudeer het volledige bestand <a href="bestanden/templates/toon_cur.html"><code>toon_cur.html</code></a>.</p>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>{% extends "base.html" %}
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>{% block content %}
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"jumbotron"</span><span class="p">&gt;</span>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Dit zijn de momenteel ingeschreven cursisten.<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>        {% for cur in cursisten  %}
-</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>{{cur}}<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>        {% endfor %}
-</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
-</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>{% endblock %}
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"p-5 mb-4 bg-light rounded-3"</span><span class="p">&gt;</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"container-fluid py-5"</span><span class="p">&gt;</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>        <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">"display-5 fw-bold"</span><span class="p">&gt;</span>Dit zijn de momenteel ingeschreven cursisten<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>        <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">"list-group list-group-flush"</span><span class="p">&gt;</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>            {% for cur in cursisten %}
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>            <span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">"list-group-item"</span><span class="p">&gt;</span>{{ cur }}<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>            {% endfor %}
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>{% endblock %}
 </span></code></pre></div>
-<p>Een koptekst plus een lijst met cursisten. De <code>FOR</code>-loop haalt de cursisten één voor éen op uit de tabel cursisten.</p>
+<p>Jinja2 <code>for</code> loop toont alle cursisten. De tekst komt uit de <code>__repr__()</code> methode.</p>
 <h3 id="verwijder_curhtml"><code>verwijder_cur.html</code><a class="headerlink" href="#verwijder_curhtml" title="Link naar deze sectie">¶</a></h3>
+<p>Bestudeer het volledige bestand <a href="bestanden/templates/verwijder_cur.html"><code>verwijder_cur.html</code></a>.</p>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>{% extends "base.html" %}
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>{% block content %}
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"jumbotron"</span><span class="p">&gt;</span>
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Afmelding binnen gekomen?<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Vul het ID van de cursist in en klik op Verwijder.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">"POST"</span><span class="p">&gt;</span>
-</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>        {{ form.hidden_tag() }}
-</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>        {{ form.id.label }} {{ form.id() }}
-</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>        {{ form.submit() }}
-</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>{% endblock %}
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"p-5 mb-4 bg-light rounded-3"</span><span class="p">&gt;</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"container-fluid py-5"</span><span class="p">&gt;</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>        <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">"display-5 fw-bold"</span><span class="p">&gt;</span>Afmelding binnen gekomen?<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Vul het ID van de cursist in en klik op Verwijder.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>        <span class="p">&lt;</span><span class="nt">form</span> <span class="na">method</span><span class="o">=</span><span class="s">"POST"</span><span class="p">&gt;</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>            {{ form.hidden_tag() }}
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"mb-3"</span><span class="p">&gt;</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>                {{ form.id.label(class="form-label") }}
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>                {{ form.id(class="form-control") }}
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>            {{ form.submit(class="btn btn-danger") }}
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>{% endblock %}
 </span></code></pre></div>
-<p>Ook hier weer de geheime controletag omdat het een formulier betreft.</p>
 <h2 id="stap-6-testen">Stap 6: Testen<a class="headerlink" href="#stap-6-testen" title="Link naar deze sectie">¶</a></h2>
-<p>Eerste test is het runnen van <code>beheer_cursist.py</code>:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/beheer_cursist.py.png" data-desc-position="bottom"><img alt="het resultaat van het runnen van beheer_cursist.py" src="imgs/beheer_cursist.py.png"></a></p>
-<p>Tabel <code>Cursist</code> bestaat nu ook:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/tabel_cursist.png" data-desc-position="bottom"><img alt="De Tabel Cursist" src="imgs/tabel_cursist.png"></a></p>
-<p>Nu ‘Voeg cursist toe’:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/voeg-cursist-toe.png" data-desc-position="bottom"><img alt="voeg een nieuwe cursist toe" src="imgs/voeg-cursist-toe.png"></a>
-Joyce is de eerste:</p>
+<p>Start de applicatie:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">uv run python beheer_cursist.py</span>
+</span></code></pre></div>
+<h3 id="homepage">Homepage<a class="headerlink" href="#homepage" title="Link naar deze sectie">¶</a></h3>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/home.png" data-desc-position="bottom"><img alt="Home pagina" src="imgs/home.png"></a></p>
+<h3 id="cursist-toevoegen_1">Cursist toevoegen<a class="headerlink" href="#cursist-toevoegen_1" title="Link naar deze sectie">¶</a></h3>
+<p>Klik "Voeg cursist toe":</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/voeg-cursist-toe.png" data-desc-position="bottom"><img alt="Voeg een nieuwe cursist toe" src="imgs/voeg-cursist-toe.png"></a></p>
+<p>Vul "Joyce" in en klik "Voeg toe":</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/joyce-als-eerste.png" data-desc-position="bottom"><img alt="Joyce wordt toegevoegd als nieuwe cursist" src="imgs/joyce-als-eerste.png"></a></p>
-<p>Na een klik op ‘Voeg toe’:</p>
+<p>Na submit zie je de lijst:</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/joyce-toegevoegd.png" data-desc-position="bottom"><img alt="Momenteel ingeschreven cursisten: alleen Joyce" src="imgs/joyce-toegevoegd.png"></a></p>
-<p>Vervolgens is Bram aan de beurt:</p>
+<h3 id="nog-een-cursist-toevoegen">Nog een cursist toevoegen<a class="headerlink" href="#nog-een-cursist-toevoegen" title="Link naar deze sectie">¶</a></h3>
+<p>Voeg "Bram" toe:</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/bram-toevoegen.png" data-desc-position="bottom"><img alt="Bram wordt toegevoegd als cursist" src="imgs/bram-toevoegen.png"></a></p>
-<p>Na een klik op ‘voeg toe’:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/ingeschreven-cursisten.png" data-desc-position="bottom"><img alt="overzicht van de momenteel ingeschreven cursisten: Joyce en Bram" src="imgs/ingeschreven-cursisten.png"></a></p>
-<p>Bram mag weer uit de Tabel verwijderd worden, zijn ID = 2, kan opgezocht worden:</p>
+<p>Lijst met twee cursisten:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/ingeschreven-cursisten.png" data-desc-position="bottom"><img alt="Overzicht van de momenteel ingeschreven cursisten: Joyce en Bram" src="imgs/ingeschreven-cursisten.png"></a></p>
+<h3 id="cursist-verwijderen_1">Cursist verwijderen<a class="headerlink" href="#cursist-verwijderen_1" title="Link naar deze sectie">¶</a></h3>
+<p>Klik "Verwijder cursist". Bram heeft <code>id=2</code> (zie in database of lijst):</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/browse-data.png" data-desc-position="bottom"><img alt="De data die in de tabel staat" src="imgs/browse-data.png"></a></p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/afmelden.png" data-desc-position="bottom"><img alt="het afmelden van een cursist met id 2" src="imgs/afmelden.png"></a></p>
-<p>Na een klik op ‘Verwijder’:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/verwijderen.png" data-desc-position="bottom"><img alt="overzicht van de momenteel ingeschreven cursisten: alleen Joyce" src="imgs/verwijderen.png"></a></p>
-<p>Terug naar Home:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/home.png" data-desc-position="bottom"><img alt="home pagina" src="imgs/home.png"></a></p>
-<p>Als laatste nog een blik op de database:</p>
+<p>Vul ID 2 in:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/afmelden.png" data-desc-position="bottom"><img alt="Het afmelden van een cursist met id 2" src="imgs/afmelden.png"></a></p>
+<p>Na submit is Bram verwijderd:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/verwijderen.png" data-desc-position="bottom"><img alt="Overzicht van de momenteel ingeschreven cursisten: alleen Joyce" src="imgs/verwijderen.png"></a></p>
+<h3 id="database-controleren">Database controleren<a class="headerlink" href="#database-controleren" title="Link naar deze sectie">¶</a></h3>
+<p>Met DB Browser for SQLite:</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/database-huidig.png" data-desc-position="bottom"><img alt="De data die in de Tabel staat" src="imgs/database-huidig.png"></a></p>
-<p>Inderdaad nog maar één cursist aanwezig.</p>
+<p>Eén cursist over - Joyce met ID 1.</p>
+<h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
+<p>Je hebt een complete CRUD webapp gemaakt:</p>
+<p><strong>Backend (Flask + SQLAlchemy)</strong>:
+- Database setup met <code>db.Model</code>
+- Routes voor Create, Read, Delete
+- Formulieren met Flask-WTF</p>
+<p><strong>Frontend (Jinja2 + Bootstrap)</strong>:
+- Basis template met navigatie
+- Formulier templates
+- Lijst template met data uit database</p>
+<p><strong>Database (SQLite)</strong>:
+- Eén tabel (<code>cursisten</code>)
+- CRUD operaties via SQLAlchemy</p>
+<p><strong>Volgende stap:</strong> <a href="oefeningen/flask-views-oefening1.html">Oefening 1</a> - Bouw je eigen beheersite.</p>
 
 
 
