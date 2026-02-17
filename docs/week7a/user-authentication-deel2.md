@@ -89,10 +89,15 @@ De klasse `User()` erft eigenschappen van `dbModel` en `UserMixin`:
 
 ```python
 class User(db.Model, UserMixin):
+    """User model voor authenticatie.
 
-     __tablename__ = 'users'
+    Erft van db.Model voor database functionaliteit en UserMixin voor
+    ingebouwde Flask-Login methoden zoals is_authenticated(), is_active(),
+    is_anonymous(), en get_id().
+    """
+    __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
     username = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
@@ -104,7 +109,14 @@ Achter de variabelen `email`, `username` en `password_hash` staat een getal geno
 Nu is het weer de beurt aan `__init__()`. De volgorde waarin de coderegels worden opgenomen in de diverse bestanden heeft steeds eenzelfde stramien.
 
 ```python
-def __init__(self, email, username, password):
+def __init__(self, email: str, username: str, password: str) -> None:
+    """Initialiseer een nieuwe gebruiker.
+
+    Args:
+        email: Het e-mailadres van de gebruiker
+        username: De unieke gebruikersnaam
+        password: Het wachtwoord in plain text (wordt automatisch gehashed)
+    """
     self.email = email
     self.username = username
     self.password_hash = generate_password_hash(password)
@@ -115,7 +127,15 @@ Voor iedere nieuwe gebruiker wordt gevraagd om een gebruikersnaam, een e-mailadr
 Verder is er nog een methode nodig die gaat controleren of het ingevoerde wachtwoord het juiste is. In de vorige paragraaf is deze methode uitgebreid besproken:
 
 ```python
-def check_password(self, password):
+def check_password(self, password: str) -> bool:
+    """Controleer of het opgegeven wachtwoord correct is.
+
+    Args:
+        password: Het te verifiëren wachtwoord in plain text
+
+    Returns:
+        True als het wachtwoord overeenkomt, anders False
+    """
     return check_password_hash(self.password_hash, password)
 ```
 
@@ -126,7 +146,18 @@ Als laatste nog een nieuwe vereiste methode. Deze nieuwe functie `load_user()` w
 
 ```python
 @login_manager.user_loader
-def load_user(user_id):
+def load_user(user_id: int) -> User | None:
+    """Laad een gebruiker op basis van het user ID.
+
+    Deze functie wordt gebruikt door Flask-Login om de huidige gebruiker
+    te laden uit de sessie.
+
+    Args:
+        user_id: Het ID van de gebruiker om te laden
+
+    Returns:
+        De User instantie als gevonden, anders None
+    """
     return User.query.get(user_id)
 ```
 
@@ -150,9 +181,14 @@ Nu kunnen de formulieren opgebouwd worden, te beginnen met het registratieformul
 
 ```python
 class RegistrationForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(),Email()])
+    """Formulier voor het registreren van nieuwe gebruikers."""
+
+    email = StringField('Email', validators=[DataRequired(), Email()])
     username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired(), EqualTo('pass_confirm', 	message='Passwords Must Match!')])
+    password = PasswordField(
+        'Password',
+        validators=[DataRequired(), EqualTo('pass_confirm', message='Passwords Must Match!')]
+    )
     pass_confirm = PasswordField('Confirm password', validators=[DataRequired()])
     submit = SubmitField('Leg vast!')
 ```
@@ -168,7 +204,15 @@ Nu weer terug naar het veld waar voor de eerste keer het wachtwoord wordt ingevu
 Aan dit formulier worden nog een tweetal methoden verbonden:
 
 ```python
-def validate_email(self, field):
+def validate_email(self, field) -> None:
+    """Valideer dat het e-mailadres nog niet in gebruik is.
+
+    Args:
+        field: Het email veld uit het formulier
+
+    Raises:
+        ValidationError: Als het e-mailadres al geregistreerd is
+    """
     if User.query.filter_by(email=field.data).first():
         raise ValidationError('Dit e-mailadres staat al geregistreerd!')
 ```
@@ -177,7 +221,15 @@ De melding is al duidelijk genoeg, maar toch nog wat extra uitleg. Er wordt geco
 De tweede methode is nagenoeg gelijk aan de eerste. Alleen moet er nu nagegaan worden of de gebruikersnaam al in de database voorkomt.
 
 ```python
-def validate_username(self, field):
+def validate_username(self, field) -> None:
+    """Valideer dat de gebruikersnaam nog niet in gebruik is.
+
+    Args:
+        field: Het username veld uit het formulier
+
+    Raises:
+        ValidationError: Als de gebruikersnaam al bestaat
+    """
     if User.query.filter_by(username=field.data).first():
         raise ValidationError('Deze gebruikersnaam is al vergeven, probeer een ander naam!')
 ```
@@ -188,6 +240,8 @@ Nu het registratieformulier ontwikkeld is, is de volgende logische stap het aanm
 
 ```python
 class LoginForm(FlaskForm):
+    """Formulier voor het inloggen van bestaande gebruikers."""
+
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Inloggen')
