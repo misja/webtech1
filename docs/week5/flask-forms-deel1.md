@@ -3,7 +3,7 @@
 HTML formulieren zijn essentieel voor webapplicaties - ze laten gebruikers data invoeren. Flask gebruikt [Flask-WTF](https://flask-wtf.readthedocs.io/) en [WTForms](https://wtforms.readthedocs.io/) om formulieren te maken met automatische validatie en CSRF-beveiliging.
 
 !!! warning "Projectwerk"
-    Vanaf deze week werk je als duo aan [één van de vier voorgestelde projecten](../projecten/). Tijdens de practica kun je hierover vragen stellen aan je practicumdocent. Bekijk [de omschrijving en beoordeling](../index.md#toetsing) voor details.
+    Vanaf deze week werk je als duo aan [één van de vier voorgestelde projecten](../projecten/index.md). Tijdens de practica kun je hierover vragen stellen aan je practicumdocent. Bekijk [de omschrijving en beoordeling](../index.md#toetsing) voor details.
 
 ## Installatie
 
