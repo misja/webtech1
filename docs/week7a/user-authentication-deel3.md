@@ -18,7 +18,7 @@ from mijnproject.forms import LoginForm, RegistrationForm
 
 De eerste regel laat de app en de database ophalen. Daarna worden van flask een aantal oude bekenden geïmporteerd.
 
-Vanaf de derde coderegel wordt het interessant. Deze regel zorgt ervoor dat de afwikkeling van het inloggen en uitloggen verzorgd worden zonder dat deze handelingen door de programmeur zelf geprogrammeerd hoeven te worden. 
+Vanaf de derde coderegel wordt het interessant. Deze regel zorgt ervoor dat de afwikkeling van het inloggen en uitloggen verzorgd worden zonder dat deze handelingen door de programmeur zelf geprogrammeerd hoeven te worden.
 
 Het tweede item wat wordt ingeladen is `login_required`. Hiermee kan de status van een gebruiker (*user*) achterhaald worden en op basis van die status de gepaste bijbehorende inhoud getoond worden. Is een gebruiker nog niet ingelogd dan zal hem de mogelijkheid geboden worden dit te doen. Is een gebruiker ingelogd en is het zijn wens de sessie te beëindigen moet deze mogelijkheid hem worden aangeboden. Hoe dat geregeld wordt, komt zo aan bod.
 
@@ -54,7 +54,7 @@ def welkom() -> str:
     return render_template('welkom.html')
 ```
 
-Wat gelijk opvalt is dat er een tweetal decorators aan het begin van dit codeblok zijn opgenomen. De eerste geeft aan met welke route met het bestand `welkom.html` correspondeert. De tweede decorator controleert of de gebruiker van deze pagina daadwerkelijk is ingelogd. Is dat zo, wordt het welkomstbericht vrijgegeven. In het andere geval wordt er doorgeschakeld naar het loginformulier. 
+Wat gelijk opvalt is dat er een tweetal decorators aan het begin van dit codeblok zijn opgenomen. De eerste geeft aan met welke route met het bestand `welkom.html` correspondeert. De tweede decorator controleert of de gebruiker van deze pagina daadwerkelijk is ingelogd. Is dat zo, wordt het welkomstbericht vrijgegeven. In het andere geval wordt er doorgeschakeld naar het loginformulier.
 
 Door deze acties te importeren van `Flask_login` wordt het de ontwikkelaar weer een stuk eenvoudiger gemaakt.
 
@@ -81,7 +81,7 @@ def logout() -> Response:
     return redirect(url_for('home'))
 ```
 
-De `logout` view bevindt zich op de route `/logout`. Deze mogelijkheid wordt alleen geboden indien de gebruiker daadwerkelijk is ingelogd. Daar zorgt de decorator `login_required` voor. Het zou raar zijn uit te kunnen loggen zonder ingelogd te zijn. 
+De `logout` view bevindt zich op de route `/logout`. Deze mogelijkheid wordt alleen geboden indien de gebruiker daadwerkelijk is ingelogd. Daar zorgt de decorator `login_required` voor. Het zou raar zijn uit te kunnen loggen zonder ingelogd te zijn.
 
 Binnen de functie `logout()` zorgt de functie `logout_user()` voor de afwikkeling van het uitloggen. Ook deze functie is geïmporteerd om het leven zo aangenaam mogelijk te maken. Als er succesvol uitgelogd is verschijnt er een flitsbericht en wordt de gebruiker doorgestuurd naar de homepagina.
 
@@ -132,7 +132,7 @@ Nu nog wat bijzonders:
     return redirect(next)
 ```
 
-Stel een gebruiker probeert een pagina te bezoeken waarvoor inloggen vereist is (zoals `welkom.html`). Dan slaat `Flask` die URL op in de variabele `next`. Vervolgens wordt de gebruiker doorgelinkt naar het inlogformulier. 
+Stel een gebruiker probeert een pagina te bezoeken waarvoor inloggen vereist is (zoals `welkom.html`). Dan slaat `Flask` die URL op in de variabele `next`. Vervolgens wordt de gebruiker doorgelinkt naar het inlogformulier.
 
 Indien er succesvol is ingelogd wordt er nagegaan of de variabele `next` een waarde heeft. Is dat niet het geval wordt het welkomstbericht getoond, anders verschijnt de pagina waar nu wel toestemming voor gegeven is.
 
@@ -166,7 +166,7 @@ def register() -> str | Response:
     form = RegistrationForm()
 ```
 
-Bij het aanroepen van de view wordt een object van de klasse `RegistrationForm` aangemaakt. 
+Bij het aanroepen van de view wordt een object van de klasse `RegistrationForm` aangemaakt.
 
 ```python
     if form.validate_on_submit():

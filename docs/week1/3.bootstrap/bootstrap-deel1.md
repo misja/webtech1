@@ -12,15 +12,15 @@ Voordelen van Bootstrap:
 - Compatibiliteit met browsers: Bootstrap 5 is compatibel met alle moderne browsers.
 
 
-Er zijn twee manieren om Bootstrap 5 te gebruiken voor een eigen website. 
+Er zijn twee manieren om Bootstrap 5 te gebruiken voor een eigen website.
 
 1.	Maak gebruik van een CDN.
 2.	Downloaden van Bootstrap 5.
 
 !!! info "Content Delivery Network"
-    Een *Content Delivery Network* (CDN) is een netwerk dat verspreid is over verschillende geografische locaties. Via dit netwerk wordt verschillende inhoud (*content*) aangeboden. Die content kan van alles zijn: video, plaatjes, maar dus ook css of programmacode. 
-    
-    Het voordeel hiervan is dat de *uptime* van zo'n netwerk vele malen hoger ligt dan een enkele computer. 
+    Een *Content Delivery Network* (CDN) is een netwerk dat verspreid is over verschillende geografische locaties. Via dit netwerk wordt verschillende inhoud (*content*) aangeboden. Die content kan van alles zijn: video, plaatjes, maar dus ook css of programmacode.
+
+    Het voordeel hiervan is dat de *uptime* van zo'n netwerk vele malen hoger ligt dan een enkele computer.
 
 Open de pagina [GetBootstrap.com](https://getbootstrap.com/). Een klik op de button met de tekst ‘Download’ zorgt ervoor dat de complete software gedownload wordt. Wanneer er een stukje naar beneden gescrold wordt, zie je wat je moet doen om gebruik te maken van een CDN.
 
@@ -34,7 +34,7 @@ Als je gebruik wilt maken van een CDN, moet je de beide regels aan de rechterkan
 
 Als voorbeeld een overzicht van de component ‘Buttons’. Een keurige beschrijving, voorbeelden plus de bijbehorende code, klaar voor gebruik. Dat is voor elk van de items in het linker-menu prachtig uitgewerkt.
 
-![Buttongs](imgs/buttons.png) 
+![Buttongs](imgs/buttons.png)
 
 ### Examples
 
@@ -42,7 +42,7 @@ Onder de knop *Buttons* zitten tal van schermontwerpen verborgen, variërend van
 
 ![Examples](imgs/examples.png)
 
-Hieronder nog eeen voorbeeld van een schermontwerp gemaakt met Bootstrap dat bedoeld is om gebruikers te laten kiezen uit een drietal opties. 
+Hieronder nog eeen voorbeeld van een schermontwerp gemaakt met Bootstrap dat bedoeld is om gebruikers te laten kiezen uit een drietal opties.
 
 ![Pricing](imgs/pricing.png)
 

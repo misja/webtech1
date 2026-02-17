@@ -50,9 +50,9 @@ def add() -> str | Response:
     return render_template('studenten/add.html', form=form)
 ```
 
-Als eerste wordt hier weer het nodige geïmporteerd. Belangrijk hierbij is dat ook `Blueprint` wordt meegenomen uit het pakket `flask`. Verder zijn nodig de database (db) uit `mijnproject`, de tabel `Student` en het formulier waarmee een nieuwe student ingevoerd kan worden. 
+Als eerste wordt hier weer het nodige geïmporteerd. Belangrijk hierbij is dat ook `Blueprint` wordt meegenomen uit het pakket `flask`. Verder zijn nodig de database (db) uit `mijnproject`, de tabel `Student` en het formulier waarmee een nieuwe student ingevoerd kan worden.
 
-Vervolgens wordt er een variabele aangemaakt `studenten_blueprint`. Deze variabele is een instantie van de klasse `Blueprint`. Er moeten een drietal kenmerken worden vastgelegd: een naam (hier `studenten`), de naam van de applicatie, en de folder die verantwoordelijk is voor alle logica voor de studenten. 
+Vervolgens wordt er een variabele aangemaakt `studenten_blueprint`. Deze variabele is een instantie van de klasse `Blueprint`. Er moeten een drietal kenmerken worden vastgelegd: een naam (hier `studenten`), de naam van de applicatie, en de folder die verantwoordelijk is voor alle logica voor de studenten.
 
 Daarna kan de decorator aangemaakt worden. Dit moet weer bekend voorkomen. Aangezien alle gegevens van studenten zijn samengebracht in de map `studenten` valt af te lezen dat het pad om de gegevens terug te kunnen vinden binnen `templates/` heel logisch wordt. Dat pad wordt ook vastgelegd in `studenten_blueprint`. Voor het pad binnen render-templates voegen we dan nog de directory toe waar het te gebruiken template staat `studenten/add.html`.
 
@@ -202,11 +202,11 @@ Voordat er getest kan worden dient de database aangemaakt te worden. Daarvoor zi
 1. Stel de omgevingsvariabele FLASK_APP in
     - Voor een MacOS / Linux-machine is dat `export FLASK_APP = app.py`
     - Voor een Windows-machine `set FLASK_APP = app.py`
-2. `flask db init ` 
+2. `flask db init `
 
 ## Resultaat
 
-Als alles naar behoren is gegaan kan er nu weer getest worden. 
+Als alles naar behoren is gegaan kan er nu weer getest worden.
 
 Homepagina:
 
