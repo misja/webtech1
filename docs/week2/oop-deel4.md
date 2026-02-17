@@ -12,7 +12,7 @@ Compositie betekent dat een object andere objecten bevat. Dit is een **"heeft ee
 from dataclasses import dataclass
 
 @dataclass
-class Klant:
+class Customer:
     naam: str
     email: str
 
@@ -22,23 +22,23 @@ class Product:
     prijs: float
 
 @dataclass
-class Bestelling:
-    klant: Klant  # Bestelling HEEFT EEN klant
-    product: Product  # Bestelling HEEFT EEN product
+class Order:
+    klant: Customer  # Order HEEFT EEN klant
+    product: Product  # Order HEEFT EEN product
 
 # Gebruik
-jan = Klant("Jan Jansen", "jan@email.nl")
+jan = Customer("Jan Jansen", "jan@email.nl")
 laptop = Product("Laptop", 799.99)
-bestelling = Bestelling(jan, laptop)
+order = Order(jan, laptop)
 
-print(f"{bestelling.klant.naam} bestelde {bestelling.product.naam}")
+print(f"{order.klant.naam} bestelde {order.product.naam}")
 # Jan Jansen bestelde Laptop
 ```
 
 !!! note "Compositie vs Inheritance"
     **Inheritance (is-een):** Een laptop **is een** product
 
-    **Compositie (heeft-een):** Een bestelling **heeft een** klant
+    **Compositie (heeft-een):** Een order **heeft een** klant
 
     In databases: compositie = foreign keys!
 
@@ -46,8 +46,8 @@ print(f"{bestelling.klant.naam} bestelde {bestelling.product.naam}")
 
 In webapplicaties heb je vaak objecten die aan elkaar gerelateerd zijn:
 
-- Een **bestelling** heeft een **klant**
-- Een **bestelling** heeft **producten**
+- Een **order** heeft een **klant**
+- Een **order** heeft **producten**
 - Een **blogpost** heeft een **auteur**
 - Een **comment** heeft een **user** en een **post**
 
@@ -66,12 +66,12 @@ class Product:
     prijs: float
 
 @dataclass
-class Winkelwagen:
+class Cart:
     klant_naam: str
     items: list[Product] = field(default_factory=list)
 
     def voeg_toe(self, product: Product) -> None:
-        """Voeg product toe aan winkelwagen."""
+        """Voeg product toe aan winkelcart."""
         self.items.append(product)
 
     def bereken_totaal(self) -> float:
@@ -79,11 +79,11 @@ class Winkelwagen:
         return sum(product.prijs for product in self.items)
 
 # Gebruik
-wagen = Winkelwagen("Jan Jansen")
-wagen.voeg_toe(Product("Laptop", 799.99))
-wagen.voeg_toe(Product("Muis", 25.50))
+cart = Cart("Jan Jansen")
+cart.voeg_toe(Product("Laptop", 799.99))
+cart.voeg_toe(Product("Muis", 25.50))
 
-print(f"Totaal: €{wagen.bereken_totaal():.2f}")
+print(f"Totaal: €{cart.bereken_totaal():.2f}")
 # Totaal: €825.49
 ```
 
@@ -99,7 +99,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 @dataclass
-class Klant:
+class Customer:
     naam: str
     email: str
     korting_percentage: float = 0.0
@@ -109,8 +109,8 @@ class Klant:
         return bedrag * (self.korting_percentage / 100)
 
 @dataclass
-class Bestelling:
-    klant: Klant
+class Order:
+    klant: Customer
     subtotaal: float
     verzendkosten: float = 5.95
 
@@ -138,10 +138,10 @@ class Bestelling:
         }
 
 # Gebruik
-jan = Klant("Jan Jansen", "jan@email.nl", korting_percentage=10.0)
-bestelling = Bestelling(jan, subtotaal=125.50)
+jan = Customer("Jan Jansen", "jan@email.nl", korting_percentage=10.0)
+order = Order(jan, subtotaal=125.50)
 
-totaal_info = bestelling.bereken_totaal()
+totaal_info = order.bereken_totaal()
 print(f"Subtotaal: €{totaal_info['subtotaal']:.2f}")
 print(f"Korting: -€{totaal_info['korting']:.2f}")
 print(f"Verzendkosten: €{totaal_info['verzendkosten']:.2f}")
@@ -152,23 +152,23 @@ print(f"Totaal: €{totaal_info['totaal']:.2f}")
     Dicts zijn handig voor templates. In Flask kun je ze doorgeven aan Jinja2 templates:
 
     ```python
-    @app.route('/bestelling/<int:id>')
-    def toon_bestelling(id):
-        bestelling = Bestelling.query.get(id)
-        totaal_info = bestelling.bereken_totaal()
-        return render_template('bestelling.html',
-                             bestelling=bestelling,
+    @app.route('/order/<int:id>')
+    def toon_order(id):
+        order = Order.query.get(id)
+        totaal_info = order.bereken_totaal()
+        return render_template('order.html',
+                             order=order,
                              totaal=totaal_info)
     ```
 
-    In het template (`bestelling.html`) kun je dan de dict gebruiken:
+    In het template (`order.html`) kun je dan de dict gebruiken:
     ```html
     <p>Subtotaal: €{{ totaal.subtotaal }}</p>
     <p>Korting: -€{{ totaal.korting }}</p>
     <p>Totaal: €{{ totaal.totaal }}</p>
     ```
 
-## Complexe compositie: Complete bestelling
+## Complexe compositie: Complete order
 
 Hier een realistisch voorbeeld met meerdere gecomponeerde objecten:
 
@@ -177,7 +177,7 @@ from dataclasses import dataclass, field
 from typing import Optional
 
 @dataclass
-class Klant:
+class Customer:
     naam: str
     email: str
     korting_percentage: float = 0.0
@@ -192,7 +192,7 @@ class Product:
     voorraad: int = 0
 
 @dataclass
-class Betaalmethode:
+class PaymentMethod:
     type: str  # "iDEAL", "Creditcard", "PayPal"
     transactiekosten: float = 0.0
 
@@ -200,13 +200,13 @@ class Betaalmethode:
         return bedrag + self.transactiekosten
 
 @dataclass
-class Verzendmethode:
+class ShippingMethod:
     type: str  # "Standaard", "Express", "Afhalen"
     kosten: float
     levertijd: str
 
 @dataclass
-class Kortingscode:
+class DiscountCode:
     code: str
     percentage: float
 
@@ -214,13 +214,13 @@ class Kortingscode:
         return bedrag * (self.percentage / 100)
 
 @dataclass
-class Bestelling:
-    """Complete bestelling met alle relaties."""
-    klant: Klant
+class Order:
+    """Complete order met alle relaties."""
+    klant: Customer
     producten: list[Product] = field(default_factory=list)
-    betaalmethode: Optional[Betaalmethode] = None
-    verzendmethode: Optional[Verzendmethode] = None
-    kortingscode: Optional[Kortingscode] = None
+    betaalmethode: Optional[PaymentMethod] = None
+    verzendmethode: Optional[ShippingMethod] = None
+    kortingscode: Optional[DiscountCode] = None
 
     def bereken_subtotaal(self) -> float:
         """Som van alle productprijzen."""
@@ -235,7 +235,7 @@ class Bestelling:
         """
         subtotaal = self.bereken_subtotaal()
 
-        # Kortingscode
+        # DiscountCode
         korting = 0.0
         if self.kortingscode:
             korting = self.kortingscode.bereken_korting(subtotaal)
@@ -267,20 +267,20 @@ class Bestelling:
 laptop = Product("Gaming Laptop", 799.99, 5)
 muis = Product("Gaming Muis", 89.99, 20)
 
-jan = Klant("Jan Jansen", "jan@email.nl", korting_percentage=5.0)
+jan = Customer("Jan Jansen", "jan@email.nl", korting_percentage=5.0)
 
-bestelling = Bestelling(
+order = Order(
     klant=jan,
     producten=[laptop, muis],
-    betaalmethode=Betaalmethode("iDEAL", transactiekosten=0.0),
-    verzendmethode=Verzendmethode("Standaard", 5.95, "2-3 werkdagen"),
-    kortingscode=Kortingscode("WELKOM10", 10.0)
+    betaalmethode=PaymentMethod("iDEAL", transactiekosten=0.0),
+    verzendmethode=ShippingMethod("Standaard", 5.95, "2-3 werkdagen"),
+    kortingscode=DiscountCode("WELKOM10", 10.0)
 )
 
-totaal_info = bestelling.bereken_totaal()
+totaal_info = order.bereken_totaal()
 
-print(f"Klant: {bestelling.klant.naam}")
-print(f"Producten: {len(bestelling.producten)}x")
+print(f"Customer: {order.klant.naam}")
+print(f"Producten: {len(order.producten)}x")
 print(f"\nSubtotaal: €{totaal_info['subtotaal']:.2f}")
 print(f"Korting: -€{totaal_info['korting']:.2f}")
 print(f"Verzendkosten: €{totaal_info['verzendkosten']:.2f}")
@@ -329,7 +329,7 @@ print(f"{post.title} door {post.author.username}")
 
 !!! info "OOP → Database mapping"
     - **Compositie in Python** → **Foreign key in database**
-    - `bestelling.klant` → `bestellingen.klant_id` (foreign key naar `klanten.id`)
+    - `order.klant` → `orderen.klant_id` (foreign key naar `klanten.id`)
     - Objecten bevatten objecten → Tabellen verwijzen naar tabellen
 
 ## Gestructureerde data voor templates
@@ -340,7 +340,7 @@ Voor webapplicaties wil je vaak je data in een gestructureerde vorm aan template
 from dataclasses import dataclass
 
 @dataclass
-class Klant:
+class Customer:
     naam: str
     email: str
 
@@ -350,8 +350,8 @@ class Product:
     prijs: float
 
 @dataclass
-class Bestelling:
-    klant: Klant
+class Order:
+    klant: Customer
     producten: list[Product]
 
     def bereken_overzicht(self) -> dict:
@@ -366,8 +366,8 @@ class Bestelling:
         }
 
 # Test
-jan = Klant("Jan Jansen", "jan@email.nl")
-bestelling = Bestelling(
+jan = Customer("Jan Jansen", "jan@email.nl")
+order = Order(
     klant=jan,
     producten=[
         Product("Laptop", 799.99),
@@ -375,7 +375,7 @@ bestelling = Bestelling(
     ]
 )
 
-overzicht = bestelling.bereken_overzicht()
+overzicht = order.bereken_overzicht()
 print(overzicht)
 ```
 
@@ -463,9 +463,9 @@ Goede code scheidt verantwoordelijkheden:
 **Business logic (modellen):**
 ```python
 @dataclass
-class Bestelling:
+class Order:
     """Bevat business logic en data."""
-    klant: Klant
+    klant: Customer
     producten: list[Product]
 
     def bereken_totaal(self) -> dict:
@@ -475,15 +475,15 @@ class Bestelling:
 
 **Presentation layer (routes):**
 ```python
-@app.route('/bestelling/<int:id>')
-def toon_bestelling(id):
+@app.route('/order/<int:id>')
+def toon_order(id):
     """Haalt data op en presenteert het."""
-    bestelling = get_bestelling(id)  # Haal op
-    totaal_info = bestelling.bereken_totaal()  # Bereken
+    order = get_order(id)  # Haal op
+    totaal_info = order.bereken_totaal()  # Bereken
 
     # Presenteer in template
-    return render_template('bestelling.html',
-                         bestelling=bestelling,
+    return render_template('order.html',
+                         order=order,
                          totaal=totaal_info)
 ```
 
@@ -508,7 +508,7 @@ Controleer of je het volgende beheerst:
 In dit deel heb je geleerd:
 
 - **Compositie**: Objecten die andere objecten bevatten (heeft-een relatie)
-- **Type hints**: `list[Product]`, `Optional[Klant]`
+- **Type hints**: `list[Product]`, `Optional[Customer]`
 - **Return dicts**: Gestructureerde data voor templates
 - **Database preview**: Compositie = foreign keys
 - **Separation of concerns**: Business logic apart van presentation
@@ -522,4 +522,4 @@ In dit deel heb je geleerd:
 
 **Volgende stap:** Later ga je dit toepassen met SQLAlchemy. Je modellen krijgen foreign keys en relationships om tabellen aan elkaar te koppelen.
 
-**Oefening:** Maak [Oefening 4](oefeningen/oop-oefening4.md) om compositie te oefenen met een compleet bestellingssysteem.
+**Oefening:** Maak [Oefening 4](oefeningen/oop-oefening4.md) om compositie te oefenen met een compleet orderssysteem.
