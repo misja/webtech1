@@ -190,6 +190,36 @@ Een klik op Home:
 
 Tot zover het testen. Er kunnen nog veel meer opties bekeken worden op hun gedrag, maar voor nu is dit even voldoende.
 
+## Samenvatting
 
+Je hebt nu een complete user authentication systeem gebouwd met Flask-Login. De belangrijkste onderdelen die je hebt geleerd zijn:
 
+### Beveiliging
+- **Password hashing** met Werkzeug - wachtwoorden worden nooit in plain text opgeslagen
+- **CSRF protection** via Flask-WTF - automatische beveiliging tegen cross-site request forgery
+- **Session management** - Flask-Login beheert automatisch de ingelogde status
 
+### Functionaliteit
+- **Registratie** - nieuwe gebruikers kunnen zich aanmelden
+- **Login** - gebruikers kunnen inloggen met email en wachtwoord
+- **Logout** - veilig uitloggen met sessie cleanup
+- **Protected routes** - pagina's die alleen toegankelijk zijn voor ingelogde gebruikers
+
+### Flask-Login Features
+- `UserMixin` - standaard implementatie van user methoden
+- `@login_required` decorator - beveilig routes automatisch
+- `current_user` - altijd beschikbaar in templates en views
+- `user_loader` - automatisch laden van users uit database
+
+Dit authentication systeem vormt de basis voor grotere applicaties waar gebruikers persoonlijke data hebben of verschillende toegangsniveaus nodig zijn (bijvoorbeeld admin vs reguliere gebruiker).
+
+!!! tip "Volgende stappen"
+    Met deze kennis kun je verder met:
+
+    - **Role-based access control** - Admin vs normale gebruikers
+    - **Password reset** - Gebruikers kunnen wachtwoord vergeten link gebruiken
+    - **Email verificatie** - Bevestig email adressen bij registratie
+    - **Two-factor authentication** - Extra beveiligingslaag toevoegen
+    - **OAuth integration** - Login met Google, GitHub, etc.
+
+Veel succes met het bouwen van je eigen beveiligde webapplicaties!

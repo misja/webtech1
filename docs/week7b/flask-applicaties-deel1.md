@@ -13,7 +13,7 @@ In dit deel hebben we aandacht voor de wijze waarop de ontwikkelde applicatie va
 ![mentor_site.py opgesplitst tot twee componenten](imgs/structuur-flask-app.png)
 
 !!! Tip "Gebruik een bibliotheek"
-    De [`blueprints`]()-bibliotheek kan gebruikt worden om deze afzonderlijke modulaire componenten te verbinden met het hoofdbestand `app.py`. Hier komen we zo op terug.
+    De [`blueprints`](https://flask.palletsprojects.com/en/3.0.x/blueprints/)-bibliotheek kan gebruikt worden om deze afzonderlijke modulaire componenten te verbinden met het hoofdbestand `app.py`. Hier komen we zo op terug.
 
 Houd er rekening mee dat de `app.py` nog steeds een rol speelt, alleen verwijst het nu alleen nog naar de subcomponenten in plaats van zelf alle code te bevatten.
 

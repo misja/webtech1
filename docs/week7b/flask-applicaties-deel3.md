@@ -1,12 +1,12 @@
 # Flask-applicaties - Blueprints
 
-Tot dusver hebben is de inhoud van de bestanden niet gewijzigd. We hebben ze uit elkaar gehaald en opgenomen in afzonderlijke folders, maar verder niet aangepast. Voor de `views.py`-bestanden moeten deze bestanden als blueprints toegevoegd worden om daarna geregistreerd te kunnen worden in het bestand  `__init__.py`.
+Tot dusver hebben is de inhoud van de bestanden niet gewijzigd. We hebben ze uit elkaar gehaald en opgenomen in afzonderlijke folders, maar verder niet aangepast. Voor de `views.py`-bestanden moeten deze bestanden als `blueprints` toegevoegd worden om daarna geregistreerd te kunnen worden in het bestand  `__init__.py`.
 
 Er zijn nog een aantal aandachtspunten van de vorige paragraaf blijven hangen waar ook nog een passende oplossing voor gecreëerd dient te worden:
 
 - Het toevoegen van code aan de `views.py`-bestanden.
-- Het toevoegen van de blueprints.
-- Het registreren van de blueprints.
+- Het toevoegen van de `blueprints`.
+- Het registreren van de `blueprints`.
 - Het coderen van de file `app.py`.
 - Aanpassen van de `url_for ()`-links in de navigatiebalk.
 - Het aanmaken van de database.
@@ -14,7 +14,7 @@ Er zijn nog een aantal aandachtspunten van de vorige paragraaf blijven hangen wa
 
 ## De studenten-view
 
-De belangrijkste reden om blueprints te gebruiken is dat we hiermee onnze applicatie kunnen organiseren door logica in submappen te groeperen.
+De belangrijkste reden om `blueprints` te gebruiken is dat we hiermee onnze applicatie kunnen organiseren door logica in submappen te groeperen.
 
 `views.py` (uit de folder `mijnproject/studenten/views.py`):
 
@@ -131,9 +131,9 @@ Meer van hetzelfde. Nu zijn er twee views die gemaakt moeten worden. De `bluepri
 
 ## Registratie van de blueprints
 
-De blueprints moeten nu nog geregistreerd worden in de file `__init__.py`. De blueprints moeten worden opgenomen in de code *nadat* de db gedefinieerd is.
+De `blueprints` moeten nu nog geregistreerd worden in de file `__init__.py`. De `blueprints` moeten worden opgenomen in de code *nadat* de db gedefinieerd is.
 
-Dat vastleggen gaat in een tweetal stappen. Als eerste moeten de blueprints opgehaald worden uit de folders waar ze zijn aangemaakt. Eenmaal geïmporteerd kunnen ze geregistreerd worden:
+Dat vastleggen gaat in een tweetal stappen. Als eerste moeten de `blueprints` opgehaald worden uit de folders waar ze zijn aangemaakt. Eenmaal geïmporteerd kunnen ze geregistreerd worden:
 
 ```python
 from mijnproject.docenten.views import docenten_blueprint
@@ -221,4 +221,23 @@ Docent Bart wordt mentor van Roos:
 ![Docent Bart (met Id 1) wordt toegevoegd als mentor van student Roos](imgs/student-roos.png)
 
 ![In het overzicht staat nu ook dat Docent Bart de mentor is van Roos](imgs/bart-mentor-roos.png)
+
+## Samenvatting
+
+Je hebt nu geleerd hoe je een Flask applicatie kunt structureren met `blueprints`. De belangrijkste voordelen zijn:
+
+- **Modulariteit**: Elke functionaliteit (docenten, studenten) heeft zijn eigen folder met views, forms en templates
+- **Onderhoudbaarheid**: Code is logisch georganiseerd en makkelijker te vinden
+- **Schaalbaarheid**: Nieuwe features kunnen eenvoudig worden toegevoegd als nieuwe `blueprints`
+- **Samenwerking**: Teams kunnen parallel aan verschillende `blueprints` werken
+
+Deze structuur is professioneel en wordt gebruikt in productie-applicaties. In de volgende weken kun je deze kennis gebruiken om grotere webapplicaties te bouwen.
+
+!!! tip "Volgende stappen"
+    Nu je `blueprints` beheerst, kun je experimenteren met:
+
+    - Het toevoegen van meer `blueprints` voor andere onderdelen
+    - Het gebruik van blueprint-specifieke static files
+    - Het implementeren van API endpoints in aparte `blueprints`
+    - Het toevoegen van authentication met de `Flask-Login` bibliotheek
 

@@ -54,7 +54,7 @@ def welkom() -> str:
     return render_template('welkom.html')
 ```
 
-Wat gelijk opvalt is dat er een tweetal decorators aan het begin van dit codeblok zijn opgenomen. De eerste geeft aan met welke route met het bestand `welkom.html` correspondeert. De tweede decorator controleert of de gebruiker van deze pagina daadwerkelijk is ingelogd. Is dat zo, wordt het welkomstbericht vrijgegeven. In het andere geval wordt er doorgeschakeld naar het loginformulier.
+Wat gelijk opvalt is dat er een tweetal decorators aan het begin van dit codeblok zijn opgenomen. De eerste decorator koppelt de route `/welkom` aan het template bestand `welkom.html`. De tweede decorator controleert of de gebruiker van deze pagina daadwerkelijk is ingelogd. Is dat zo, wordt het welkomstbericht vrijgegeven. In het andere geval wordt er doorgeschakeld naar het loginformulier.
 
 Door deze acties te importeren van `Flask_login` wordt het de ontwikkelaar weer een stuk eenvoudiger gemaakt.
 
