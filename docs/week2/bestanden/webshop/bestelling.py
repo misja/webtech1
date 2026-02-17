@@ -1,10 +1,10 @@
-"""Bestelling klasse voor de webshop - demonstratie van compositie"""
+"""Bestelling klasse voor de webshop - demonstratie van compositie."""
 
 import datetime
 
 
 class Bestelling:
-    """Klasse voor bestellingen in de webshop
+    """Klasse voor bestellingen in de webshop.
 
     Een bestelling is samengesteld uit:
     - Een klant
@@ -13,7 +13,21 @@ class Bestelling:
     - Verzendkosten
     """
 
-    def __init__(self, klant, winkelwagen, betaalmethode, verzendkosten=5.95):
+    def __init__(
+        self,
+        klant: 'Klant',
+        winkelwagen: 'Winkelwagen',
+        betaalmethode: 'Betaalmethode',
+        verzendkosten: float = 5.95
+    ):
+        """Maak een nieuwe bestelling aan.
+
+        Args:
+            klant: Klant object
+            winkelwagen: Winkelwagen object met producten
+            betaalmethode: Betaalmethode object
+            verzendkosten: Verzendkosten in euro's (default: 5.95)
+        """
         self.klant = klant
         self.winkelwagen = winkelwagen
         self.betaalmethode = betaalmethode
@@ -21,26 +35,32 @@ class Bestelling:
         self.besteldatum = datetime.datetime.now()
         self.status = "In behandeling"
 
-    def bereken_totaal(self):
-        """Berekent totaalbedrag inclusief verzendkosten"""
+    def bereken_totaal(self) -> float:
+        """Bereken totaalbedrag inclusief verzendkosten.
+
+        Returns:
+            Totaalbedrag in euro's (gratis verzending boven €50)
+        """
         subtotaal = self.winkelwagen.bereken_totaal()
 
         # Gratis verzending boven €50
         if subtotaal >= 50:
-            verzending = 0.0
+            return subtotaal
         else:
-            verzending = self.verzendkosten
+            return subtotaal + self.verzendkosten
 
-        return subtotaal + verzending
+    def plaats_bestelling(self) -> bool:
+        """Plaats de bestelling en verwerk de betaling.
 
-    def plaats_bestelling(self):
-        """Plaatst de bestelling en verwerkt de betaling"""
+        Returns:
+            True als bestelling succesvol geplaatst, False bij lege winkelwagen
+        """
         if not self.winkelwagen.items:
             print("Kan geen lege bestelling plaatsen!")
             return False
 
         print(f"\n{'='*50}")
-        print(f"BESTELLING VOOR {self.klant._naam}")
+        print(f"BESTELLING VOOR {self.klant.naam}")
         print(f"{'='*50}")
 
         # Toon producten
@@ -69,16 +89,16 @@ class Bestelling:
         # Bevestiging
         self.status = "Bevestigd"
         print(f"\nBestelling bevestigd!")
-        print(f"Bevestiging verzonden naar {self.klant._email}")
+        print(f"Bevestiging verzonden naar {self.klant.email}")
         print(f"Verwachte levering: 2-3 werkdagen")
         print(f"{'='*50}\n")
 
         return True
 
-    def toon_status(self):
-        """Toont de status van de bestelling"""
+    def toon_status(self) -> None:
+        """Toon de status van de bestelling."""
         print(f"\nBestellingsnummer: #{id(self)}")
-        print(f"Klant: {self.klant._naam}")
+        print(f"Klant: {self.klant.naam}")
         print(f"Datum: {self.besteldatum.strftime('%d-%m-%Y %H:%M')}")
         print(f"Status: {self.status}")
         print(f"Aantal producten: {len(self.winkelwagen.items)}")
