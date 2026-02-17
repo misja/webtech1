@@ -12,9 +12,9 @@ regel 1| | | |
 regel 2| | | |
 regel 3| | | |
 
-Voorbeeld met cursisten van de muziekschool. De eerste kolom is het sleutelveld (_id) - deze waarde is uniek per rij:
+Voorbeeld met cursisten van de muziekschool. De eerste kolom is het sleutelveld (id) - deze waarde is uniek per rij:
 
-| _id	|Voornaam|	Achternaam|	Plaats
+| id	|Voornaam|	Achternaam|	Plaats
 |---|--------|------------|--------|
 1|	Joyce	|Rooth	|Groningen
 2	|Timo |Bijl	|Drachten

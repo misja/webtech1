@@ -75,7 +75,7 @@ def get_all(self) -> list[Row]:
 Voeg ook een method toe om één werknemer op ID op te halen:
 
 ```python
-def get_by_id(self, werknemer_id: int) -> Row | None:
+def get_byid(self, werknemerid: int) -> Row | None:
     """Haal één werknemer op."""
     # TODO: Implementeer deze method
     pass
@@ -86,14 +86,14 @@ def get_by_id(self, werknemer_id: int) -> Row | None:
 Voeg methods toe voor UPDATE operaties:
 
 ```python
-def update_salaris(self, werknemer_id: int, nieuw_salaris: float) -> bool:
+def update_salaris(self, werknemerid: int, nieuw_salaris: float) -> bool:
     """Update salaris van een werknemer."""
     # TODO: Implementeer deze method
     # - Return True bij succes
     # - Return False bij fout of niet gevonden
     pass
 
-def update_naam(self, werknemer_id: int, nieuwe_naam: str) -> bool:
+def update_naam(self, werknemerid: int, nieuwe_naam: str) -> bool:
     """Update naam van een werknemer."""
     # TODO: Implementeer deze method
     pass
@@ -109,7 +109,7 @@ Test je code:
 Voeg een method toe om een werknemer te verwijderen:
 
 ```python
-def delete(self, werknemer_id: int) -> bool:
+def delete(self, werknemerid: int) -> bool:
     """Verwijder een werknemer."""
     # TODO: Implementeer deze method
     pass
@@ -135,8 +135,8 @@ def main():
     ]
 
     for naam, plaats, salaris in werknemers:
-        werknemer_id = db.add_werknemer(naam, plaats, salaris)
-        print(f"{naam} toegevoegd met ID {werknemer_id}")
+        werknemerid = db.add_werknemer(naam, plaats, salaris)
+        print(f"{naam} toegevoegd met ID {werknemerid}")
 
     # TODO: Implementeer de rest
     # - Toon alle werknemers
@@ -204,7 +204,7 @@ Gemiddeld salaris: €73333.33
 ## Checklist
 
 ✅ Class met `__init__` en `_create_table`
-✅ CRUD methods: add, get_all, get_by_id, update, delete
+✅ CRUD methods: add, get_all, get_byid, update, delete
 ✅ Placeholders (`?`) gebruikt
 ✅ Context managers (`with`) gebruikt
 ✅ Type hints op alle methods

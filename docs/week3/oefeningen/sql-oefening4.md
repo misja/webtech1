@@ -61,8 +61,8 @@ Test met verschillende scenario's:
 db = ProductDatabase()
 
 # Test 1: Normale toevoeging (werkt)
-product_id = db.add_product_unsafe("Laptop", 799.99, 10, "Electronics")
-print(f"Product toegevoegd met ID {product_id}")
+productid = db.add_product_unsafe("Laptop", 799.99, 10, "Electronics")
+print(f"Product toegevoegd met ID {productid}")
 
 # Test 2: Duplicate naam (crasht!)
 try:
@@ -109,23 +109,23 @@ Test dezelfde scenario's:
 print("\n=== Met Error Handling ===")
 
 # Test 1: Succesvol
-product_id = db.add_product("Laptop", 799.99, 10, "Electronics")
-if product_id:
-    print(f"✅ Product toegevoegd met ID {product_id}")
+productid = db.add_product("Laptop", 799.99, 10, "Electronics")
+if productid:
+    print(f"✅ Product toegevoegd met ID {productid}")
 
 # Test 2: Duplicate - netjes afgevangen
-product_id = db.add_product("Laptop", 899.99, 5, "Electronics")
-if not product_id:
+productid = db.add_product("Laptop", 899.99, 5, "Electronics")
+if not productid:
     print("❌ Product niet toegevoegd (bestaat al)")
 
 # Test 3: Negatieve prijs - netjes afgevangen
-product_id = db.add_product("Monitor", -50.00, 3, "Electronics")
-if not product_id:
+productid = db.add_product("Monitor", -50.00, 3, "Electronics")
+if not productid:
     print("❌ Product niet toegevoegd (ongeldige prijs)")
 
 # Test 4: Lege naam - netjes afgevangen
-product_id = db.add_product("", 299.99, 2, "Electronics")
-if not product_id:
+productid = db.add_product("", 299.99, 2, "Electronics")
+if not productid:
     print("❌ Product niet toegevoegd (naam is verplicht)")
 ```
 
@@ -160,7 +160,7 @@ print(f"\n{len(products)} producten gevonden")
 Implementeer een method om voorraad te updaten met validatie en error handling:
 
 ```python
-def update_stock(self, product_id: int, new_stock: int) -> bool:
+def update_stock(self, productid: int, new_stock: int) -> bool:
     """Update voorraad met validatie en error handling."""
     # TODO: Implementeer met error handling
     # - Valideer dat new_stock >= 0 (return False als niet)
@@ -196,7 +196,7 @@ if not db.update_stock(999, 10):
 Implementeer een delete method:
 
 ```python
-def delete_product(self, product_id: int) -> bool:
+def delete_product(self, productid: int) -> bool:
     """Verwijder product met error handling."""
     # TODO: Implementeer met error handling
     # - Gebruik try/except voor sqlite3.Error

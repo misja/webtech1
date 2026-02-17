@@ -74,8 +74,8 @@ def get_songs_by_artist(self, artist_name: str) -> list[Row]:
     """Haal alle songs op van een specifieke artiest."""
     # TODO: Implementeer dubbele JOIN
     # FROM songs s
-    # JOIN albums al ON s.album = al._id
-    # JOIN artists ar ON al.artist = ar._id
+    # JOIN albums al ON s.album = al.id
+    # JOIN artists ar ON al.artist = ar.id
     # WHERE ar.name = ?
     pass
 ```
@@ -147,7 +147,7 @@ def count_unique_songs(self, artist_name: str) -> int:
 def count_albums(self, artist_name: str) -> int:
     """Tel aantal albums van een artiest."""
     # TODO: JOIN artists met albums
-    # COUNT(DISTINCT al._id) of COUNT(al._id) als elke album_id uniek is
+    # COUNT(DISTINCT al.id) of COUNT(al.id) als elke albumid uniek is
     pass
 ```
 

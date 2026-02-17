@@ -58,11 +58,11 @@ Aantal records: 5350
 ```
 
 !!! info "PRIMARY KEY AUTOINCREMENT"
-    SQLite vult automatisch de primary key kolom `_id` in wanneer je een nieuwe record toevoegt:
+    SQLite vult automatisch de primary key kolom `id` in wanneer je een nieuwe record toevoegt:
 
     ```python
     cursor = conn.execute("INSERT INTO artists (name) VALUES (?)", ("Travis",))
-    new_id = cursor.lastrowid  # 202
+    newid = cursor.lastrowid  # 202
     ```
 
     Dit werkt hetzelfde als PostgreSQL's `SERIAL` type.
@@ -72,20 +72,20 @@ Aantal records: 5350
 Laten we beginnen met een paar eenvoudige queries om weer in te komen:
 
 ```python
-def get_album_by_id(album_id: int, db_path: str = "music.sqlite") -> Row | None:
+def get_album_byid(albumid: int, db_path: str = "music.sqlite") -> Row | None:
     """Haal één album op op basis van ID."""
     with sqlite3.connect(db_path) as conn:
         conn.row_factory = Row
         cursor = conn.execute(
-            "SELECT * FROM albums WHERE _id = ?",
-            (album_id,)
+            "SELECT * FROM albums WHERE id = ?",
+            (albumid,)
         )
         return cursor.fetchone()
 
 # Gebruik
-album = get_album_by_id(167)
+album = get_album_byid(167)
 if album:
-    print(f"Album {album['_id']}: {album['name']}")
+    print(f"Album {album['id']}: {album['name']}")
 ```
 
 Output:
@@ -111,7 +111,7 @@ def get_artists_sorted(db_path: str = "music.sqlite", desc: bool = False) -> lis
 # Gebruik
 artists = get_artists_sorted(desc=True)
 for artist in artists[:5]:  # Toon eerste 5
-    print(f"{artist['_id']}: {artist['name']}")
+    print(f"{artist['id']}: {artist['name']}")
 ```
 
 Output:
@@ -150,7 +150,7 @@ def get_songs_with_albums(db_path: str = "music.sqlite") -> list[Row]:
         cursor = conn.execute("""
             SELECT s.track, s.title, a.name AS album_name
             FROM songs s
-            JOIN albums a ON s.album = a._id
+            JOIN albums a ON s.album = a.id
             ORDER BY s.title
         """)
 
@@ -197,7 +197,7 @@ def get_artists_with_albums(db_path: str = "music.sqlite") -> list[Row]:
         cursor = conn.execute("""
             SELECT ar.name AS artist, al.name AS album
             FROM artists ar
-            JOIN albums al ON ar._id = al.artist
+            JOIN albums al ON ar.id = al.artist
             ORDER BY ar.name, al.name
         """)
 
@@ -238,8 +238,8 @@ def get_complete_music_catalog(db_path: str = "music.sqlite") -> list[Row]:
                 s.track,
                 s.title
             FROM songs s
-            JOIN albums al ON s.album = al._id
-            JOIN artists ar ON al.artist = ar._id
+            JOIN albums al ON s.album = al.id
+            JOIN artists ar ON al.artist = ar.id
             ORDER BY ar.name, al.name, s.track
         """)
 
@@ -263,8 +263,8 @@ Output:
 !!! tip "Meerdere JOINs"
     Bij meerdere JOINs werk je **van binnen naar buiten**:
 
-    1. `songs` JOIN `albums` (via `s.album = al._id`)
-    2. `albums` JOIN `artists` (via `al.artist = ar._id`)
+    1. `songs` JOIN `albums` (via `s.album = al.id`)
+    2. `albums` JOIN `artists` (via `al.artist = ar.id`)
 
     Dit is hetzelfde als bij PostgreSQL. De volgorde maakt uit!
 
@@ -288,8 +288,8 @@ def search_songs_by_title(
                 s.track,
                 s.title
             FROM songs s
-            JOIN albums al ON s.album = al._id
-            JOIN artists ar ON al.artist = ar._id
+            JOIN albums al ON s.album = al.id
+            JOIN artists ar ON al.artist = ar.id
             WHERE s.title LIKE ?
             ORDER BY ar.name, al.name, s.title
         """, (f"%{search_term}%",))
@@ -354,8 +354,8 @@ def create_doctor_songs_view(db_path: str = "music.sqlite") -> None:
                 s.track,
                 s.title
             FROM songs s
-            JOIN albums al ON s.album = al._id
-            JOIN artists ar ON al.artist = ar._id
+            JOIN albums al ON s.album = al.id
+            JOIN artists ar ON al.artist = ar.id
             WHERE s.title LIKE '%doctor%'
             ORDER BY ar.name, al.name, s.title
         """)

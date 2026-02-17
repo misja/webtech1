@@ -60,7 +60,7 @@ query = f"SELECT * FROM users WHERE username = '{user_input}'"
 **Data vernietiging:**
 ```python
 # User input: '; DROP TABLE users; --
-query = f"DELETE FROM messages WHERE id = {message_id}"
+query = f"DELETE FROM messages WHERE id = {messageid}"
 # Zou kunnen worden: DELETE FROM messages WHERE id = 1; DROP TABLE users; --
 # (Dit werkt gelukkig niet altijd, maar het risico bestaat)
 ```
@@ -250,22 +250,22 @@ class UserDatabase:
             )
             return cursor.fetchall()
 
-    def update_email(self, user_id: int, new_email: str) -> bool:
+    def update_email(self, userid: int, new_email: str) -> bool:
         """Update email (veilig met placeholders)."""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.execute(
                 "UPDATE users SET email = ? WHERE id = ?",
-                (new_email, user_id)
+                (new_email, userid)
             )
             conn.commit()
             return cursor.rowcount > 0
 
-    def delete_user(self, user_id: int) -> bool:
+    def delete_user(self, userid: int) -> bool:
         """Verwijder user (veilig met placeholder)."""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.execute(
                 "DELETE FROM users WHERE id = ?",
-                (user_id,)
+                (userid,)
             )
             conn.commit()
             return cursor.rowcount > 0

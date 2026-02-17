@@ -64,19 +64,19 @@ class MusicDatabase:
             cursor = conn.execute(f"SELECT * FROM artists ORDER BY {order_by}")
             return cursor.fetchall()
 
-    def get_artist_by_id(self, artist_id: int) -> Optional[Row]:
+    def get_artist_byid(self, artistid: int) -> Optional[Row]:
         """Haal één artiest op op basis van ID.
 
         Args:
-            artist_id: ID van de artiest
+            artistid: ID van de artiest
 
         Returns:
             Artiest record of None als niet gevonden
         """
         with self._get_connection() as conn:
             cursor = conn.execute(
-                "SELECT * FROM artists WHERE _id = ?",
-                (artist_id,)
+                "SELECT * FROM artists WHERE id = ?",
+                (artistid,)
             )
             return cursor.fetchone()
 
@@ -103,20 +103,20 @@ class MusicDatabase:
         with self._get_connection() as conn:
             cursor = conn.execute("""
                 SELECT
-                    al._id,
+                    al.id,
                     al.name AS album,
                     ar.name AS artist
                 FROM albums al
-                JOIN artists ar ON al.artist = ar._id
+                JOIN artists ar ON al.artist = ar.id
                 ORDER BY ar.name, al.name
             """)
             return cursor.fetchall()
 
-    def get_albums_by_artist(self, artist_id: int) -> list[Row]:
+    def get_albums_by_artist(self, artistid: int) -> list[Row]:
         """Haal alle albums op van een specifieke artiest.
 
         Args:
-            artist_id: ID van de artiest
+            artistid: ID van de artiest
 
         Returns:
             Lijst met albums van deze artiest
@@ -124,17 +124,17 @@ class MusicDatabase:
         with self._get_connection() as conn:
             cursor = conn.execute(
                 "SELECT * FROM albums WHERE artist = ? ORDER BY name",
-                (artist_id,)
+                (artistid,)
             )
             return cursor.fetchall()
 
     # ==================== SONGS ====================
 
-    def get_songs_by_album(self, album_id: int) -> list[Row]:
+    def get_songs_by_album(self, albumid: int) -> list[Row]:
         """Haal alle songs op van een specifiek album.
 
         Args:
-            album_id: ID van het album
+            albumid: ID van het album
 
         Returns:
             Lijst met songs van dit album, gesorteerd op track nummer
@@ -142,7 +142,7 @@ class MusicDatabase:
         with self._get_connection() as conn:
             cursor = conn.execute(
                 "SELECT * FROM songs WHERE album = ? ORDER BY track",
-                (album_id,)
+                (albumid,)
             )
             return cursor.fetchall()
 
@@ -163,8 +163,8 @@ class MusicDatabase:
                     s.track,
                     s.title
                 FROM songs s
-                JOIN albums al ON s.album = al._id
-                JOIN artists ar ON al.artist = ar._id
+                JOIN albums al ON s.album = al.id
+                JOIN artists ar ON al.artist = ar.id
                 WHERE s.title LIKE ?
                 ORDER BY ar.name, al.name, s.track
             """, (f"%{search_term}%",))
@@ -172,33 +172,33 @@ class MusicDatabase:
 
     # ==================== CATALOG ====================
 
-    def get_artist_catalog(self, artist_id: int) -> dict:
+    def get_artist_catalog(self, artistid: int) -> dict:
         """Haal complete catalogus op voor een artiest.
 
         Args:
-            artist_id: ID van de artiest
+            artistid: ID van de artiest
 
         Returns:
             Dictionary met artiest info, albums en songs
         """
-        artist = self.get_artist_by_id(artist_id)
+        artist = self.get_artist_byid(artistid)
         if not artist:
             return {}
 
-        albums = self.get_albums_by_artist(artist_id)
+        albums = self.get_albums_by_artist(artistid)
 
         # Haal songs op per album
         catalog = {
             "artist": artist["name"],
-            "artist_id": artist_id,
+            "artistid": artistid,
             "albums": []
         }
 
         for album in albums:
-            songs = self.get_songs_by_album(album["_id"])
+            songs = self.get_songs_by_album(album["id"])
             catalog["albums"].append({
                 "album_name": album["name"],
-                "album_id": album["_id"],
+                "albumid": album["id"],
                 "songs": [
                     {"track": song["track"], "title": song["title"]}
                     for song in songs
@@ -254,7 +254,7 @@ if __name__ == "__main__":
     print()
 
     # Haal complete catalogus op
-    print("=== Catalogus van AC/DC (artist_id=3) ===")
+    print("=== Catalogus van AC/DC (artistid=3) ===")
     catalog = db.get_artist_catalog(3)
     if catalog:
         print(f"Artiest: {catalog['artist']}\n")
@@ -282,7 +282,7 @@ db = MusicDatabase()
 # Haal alle artiesten op
 artists = db.get_all_artists()
 for artist in artists:
-    print(f"{artist['_id']}: {artist['name']}")
+    print(f"{artist['id']}: {artist['name']}")
 
 # Zoek specifiek
 beatles_songs = db.search_songs("revolution")
@@ -294,7 +294,7 @@ for song in beatles_songs:
 
 ```python
 # Haal alle albums en songs op voor een artiest
-catalog = db.get_artist_catalog(artist_id=42)
+catalog = db.get_artist_catalog(artistid=42)
 
 print(f"Artiest: {catalog['artist']}")
 for album in catalog['albums']:
@@ -327,7 +327,7 @@ De underscore `_` geeft aan dat dit een interne method is.
 ### 2. Type hints overal
 
 ```python
-def get_artist_by_id(self, artist_id: int) -> Optional[Row]:
+def get_artist_byid(self, artistid: int) -> Optional[Row]:
     #                           ↑ input type    ↑ return type
 ```
 
@@ -383,12 +383,12 @@ def add_artist(self, name: str) -> int:
 ### Data wijzigen
 
 ```python
-def update_song_title(self, song_id: int, new_title: str) -> bool:
+def update_song_title(self, songid: int, new_title: str) -> bool:
     """Update de titel van een song."""
     with self._get_connection() as conn:
         cursor = conn.execute(
-            "UPDATE songs SET title = ? WHERE _id = ?",
-            (new_title, song_id)
+            "UPDATE songs SET title = ? WHERE id = ?",
+            (new_title, songid)
         )
         conn.commit()
         return cursor.rowcount > 0
@@ -397,13 +397,13 @@ def update_song_title(self, song_id: int, new_title: str) -> bool:
 ### Error handling
 
 ```python
-def get_artist_by_id(self, artist_id: int) -> Optional[Row]:
+def get_artist_byid(self, artistid: int) -> Optional[Row]:
     """Haal artiest op met error handling."""
     try:
         with self._get_connection() as conn:
             cursor = conn.execute(
-                "SELECT * FROM artists WHERE _id = ?",
-                (artist_id,)
+                "SELECT * FROM artists WHERE id = ?",
+                (artistid,)
             )
             return cursor.fetchone()
     except sqlite3.Error as e:

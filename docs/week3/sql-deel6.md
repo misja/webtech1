@@ -43,8 +43,8 @@ def add_user_unsafe(username: str, email: str) -> int:
         return cursor.lastrowid
 
 # Dit crasht als username al bestaat (UNIQUE constraint)
-user_id = add_user_unsafe("jan", "jan@email.nl")  # Werkt
-user_id = add_user_unsafe("jan", "jan@email.nl")  # CRASH!
+userid = add_user_unsafe("jan", "jan@email.nl")  # Werkt
+userid = add_user_unsafe("jan", "jan@email.nl")  # CRASH!
 # sqlite3.IntegrityError: UNIQUE constraint failed: users.username
 ```
 
@@ -76,16 +76,16 @@ def add_user_safe(username: str, email: str) -> int | None:
         return None
 
 # Gebruik
-user_id = add_user_safe("jan", "jan@email.nl")
-if user_id:
-    print(f"User aangemaakt met ID {user_id}")
+userid = add_user_safe("jan", "jan@email.nl")
+if userid:
+    print(f"User aangemaakt met ID {userid}")
 else:
     print("User niet aangemaakt")
 
 # Tweede keer - geen crash, netjes afgehandeld
-user_id = add_user_safe("jan", "jan@email.nl")
-if user_id:
-    print(f"User aangemaakt met ID {user_id}")
+userid = add_user_safe("jan", "jan@email.nl")
+if userid:
+    print(f"User aangemaakt met ID {userid}")
 else:
     print("User niet aangemaakt")  # Dit wordt geprint
 ```
@@ -213,9 +213,9 @@ class ProductDatabase:
                     (name, price, stock)
                 )
                 conn.commit()
-                product_id = cursor.lastrowid
-                logger.info(f"Product '{name}' toegevoegd met ID {product_id}")
-                return product_id
+                productid = cursor.lastrowid
+                logger.info(f"Product '{name}' toegevoegd met ID {productid}")
+                return productid
 
         except sqlite3.IntegrityError as e:
             if "UNIQUE" in str(e):
@@ -242,22 +242,22 @@ class ProductDatabase:
             logger.error(f"Fout bij ophalen producten: {e}")
             return []
 
-    def get_by_id(self, product_id: int) -> Optional[Row]:
+    def get_byid(self, productid: int) -> Optional[Row]:
         """Haal één product op."""
         try:
             with sqlite3.connect(self.db_path) as conn:
                 conn.row_factory = Row
                 cursor = conn.execute(
                     "SELECT * FROM products WHERE id = ?",
-                    (product_id,)
+                    (productid,)
                 )
                 return cursor.fetchone()
 
         except sqlite3.Error as e:
-            logger.error(f"Fout bij ophalen product {product_id}: {e}")
+            logger.error(f"Fout bij ophalen product {productid}: {e}")
             return None
 
-    def update_stock(self, product_id: int, new_stock: int) -> bool:
+    def update_stock(self, productid: int, new_stock: int) -> bool:
         """Update voorraad met validatie."""
         if new_stock < 0:
             logger.warning(f"Negatieve voorraad niet toegestaan: {new_stock}")
@@ -267,40 +267,40 @@ class ProductDatabase:
             with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.execute(
                     "UPDATE products SET stock = ? WHERE id = ?",
-                    (new_stock, product_id)
+                    (new_stock, productid)
                 )
                 conn.commit()
 
                 if cursor.rowcount > 0:
-                    logger.info(f"Stock update voor product {product_id}: {new_stock}")
+                    logger.info(f"Stock update voor product {productid}: {new_stock}")
                     return True
                 else:
-                    logger.warning(f"Product {product_id} niet gevonden")
+                    logger.warning(f"Product {productid} niet gevonden")
                     return False
 
         except sqlite3.Error as e:
-            logger.error(f"Fout bij update stock voor product {product_id}: {e}")
+            logger.error(f"Fout bij update stock voor product {productid}: {e}")
             return False
 
-    def delete(self, product_id: int) -> bool:
+    def delete(self, productid: int) -> bool:
         """Verwijder product."""
         try:
             with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.execute(
                     "DELETE FROM products WHERE id = ?",
-                    (product_id,)
+                    (productid,)
                 )
                 conn.commit()
 
                 if cursor.rowcount > 0:
-                    logger.info(f"Product {product_id} verwijderd")
+                    logger.info(f"Product {productid} verwijderd")
                     return True
                 else:
-                    logger.warning(f"Product {product_id} niet gevonden")
+                    logger.warning(f"Product {productid} niet gevonden")
                     return False
 
         except sqlite3.Error as e:
-            logger.error(f"Fout bij verwijderen product {product_id}: {e}")
+            logger.error(f"Fout bij verwijderen product {productid}: {e}")
             return False
 
 
@@ -308,18 +308,18 @@ class ProductDatabase:
 db = ProductDatabase()
 
 # Succesvol toevoegen
-product_id = db.add("Laptop", 799.99, 10)
-if product_id:
-    print(f"Product toegevoegd met ID {product_id}")
+productid = db.add("Laptop", 799.99, 10)
+if productid:
+    print(f"Product toegevoegd met ID {productid}")
 
 # Duplicate - wordt netjes afgevangen
-duplicate_id = db.add("Laptop", 899.99, 5)
-if not duplicate_id:
+duplicateid = db.add("Laptop", 899.99, 5)
+if not duplicateid:
     print("Product niet toegevoegd (bestaat al)")
 
 # Ongeldige waarde - wordt netjes afgevangen
-invalid_id = db.add("Monitor", -50.00, 3)  # Negatieve prijs
-if not invalid_id:
+invalidid = db.add("Monitor", -50.00, 3)  # Negatieve prijs
+if not invalidid:
     print("Product niet toegevoegd (ongeldige prijs)")
 
 # Stock update
@@ -356,12 +356,12 @@ def add_product():
         stock = int(data['stock'])
 
         db = ProductDatabase()
-        product_id = db.add(name, price, stock)
+        productid = db.add(name, price, stock)
 
-        if product_id:
+        if productid:
             return jsonify({
                 'success': True,
-                'id': product_id,
+                'id': productid,
                 'message': f'Product {name} toegevoegd'
             }), 201
         else:
@@ -390,12 +390,12 @@ def add_product():
         }), 500
 
 
-@app.route('/products/<int:product_id>')
-def get_product(product_id):
+@app.route('/products/<int:productid>')
+def get_product(productid):
     """Haal product op via API."""
     try:
         db = ProductDatabase()
-        product = db.get_by_id(product_id)
+        product = db.get_byid(productid)
 
         if product:
             return jsonify({
@@ -409,7 +409,7 @@ def get_product(product_id):
             }), 404
 
     except Exception as e:
-        logger.error(f"Fout bij ophalen product {product_id}: {e}")
+        logger.error(f"Fout bij ophalen product {productid}: {e}")
         return jsonify({
             'success': False,
             'message': 'Server error'
