@@ -2341,17 +2341,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#vergelijking-uv-vs-pipvenv" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vergelijking: uv vs pip/venv
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#veelvoorkomende-workflows" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3683,17 +3672,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#vergelijking-uv-vs-pipvenv" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Vergelijking: uv vs pip/venv
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#veelvoorkomende-workflows" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4024,58 +4002,6 @@
 </p><div class="language-console highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">chmod +x run.sh</span>
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="go">./run.sh</span>
 </span></code></pre></div><p></p>
-<h2 id="vergelijking-uv-vs-pipvenv">Vergelijking: uv vs pip/venv<a class="headerlink" href="#vergelijking-uv-vs-pipvenv" title="Link naar deze sectie">¶</a></h2>
-<table>
-<thead>
-<tr>
-<th>Taak</th>
-<th>pip/venv (oud)</th>
-<th>uv (modern)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Installatie</strong></td>
-<td>Ingebouwd in Python</td>
-<td><code>pip install uv</code></td>
-</tr>
-<tr>
-<td><strong>Virtual env maken</strong></td>
-<td><code>python -m venv .venv</code></td>
-<td>Automatisch bij <code>uv init</code></td>
-</tr>
-<tr>
-<td><strong>Virtual env activeren</strong></td>
-<td><code>source .venv/bin/activate</code></td>
-<td>Niet nodig! <code>uv run</code> doet dit</td>
-</tr>
-<tr>
-<td><strong>Package installeren</strong></td>
-<td><code>pip install flask</code><br><code>pip freeze &gt; requirements.txt</code></td>
-<td><code>uv add flask</code></td>
-</tr>
-<tr>
-<td><strong>Dependencies installeren</strong></td>
-<td><code>pip install -r requirements.txt</code></td>
-<td><code>uv sync</code></td>
-</tr>
-<tr>
-<td><strong>Python runnen</strong></td>
-<td><code>python app.py</code> (binnen venv)</td>
-<td><code>uv run app.py</code></td>
-</tr>
-<tr>
-<td><strong>Dependencies updaten</strong></td>
-<td><code>pip install --upgrade flask</code></td>
-<td><code>uv add flask@latest</code></td>
-</tr>
-<tr>
-<td><strong>Lock file</strong></td>
-<td>Handmatig (<code>pip freeze</code>)</td>
-<td>Automatisch (<code>uv.lock</code>)</td>
-</tr>
-</tbody>
-</table>
 <h2 id="veelvoorkomende-workflows">Veelvoorkomende workflows<a class="headerlink" href="#veelvoorkomende-workflows" title="Link naar deze sectie">¶</a></h2>
 <h3 id="development-workflow">Development workflow<a class="headerlink" href="#development-workflow" title="Link naar deze sectie">¶</a></h3>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="gp"># </span><span class="m">1</span>.<span class="w"> </span>Project<span class="w"> </span>maken
