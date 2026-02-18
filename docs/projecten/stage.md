@@ -12,7 +12,7 @@ De tabel instelling kent ook drie karakteristieken, id, naam van de instelling, 
 
 Ook de tabel begeleider heeft een drietal eigenschappen nodig, id, voor- en achternaam van de begeleider.
 
-De vierde en laatste tabel is tevens de meest omvattende, maar liefst 6 features, id, id van de student, id van de instelling, id van de begeleider, cijfer en periode, bijv. semester 1 2021.
+De vierde en laatste tabel is tevens de meest omvattende, maar liefst 6 eigenschappen, id, id van de student, id van de instelling, id van de begeleider, cijfer en periode, bijv. semester 1 2021.
 
 Er zijn twee typen geregistreerde bezoekers van deze site. Allereerst studenten, die de gegevens van hun stages kunnen inzien. Ten tweede de administratief medewerkers, die gegevens van stages kunnen toevoegen, aanpassen, of verwijderen. Bezoekers die niet zijn ingelogd kunnen alleen het stage-aanbod bekijken en hun interesse voor een stage kenbaar maken.
 
@@ -22,6 +22,6 @@ Maak een sterk vereenvoudige webapplicatie waarbij deze gegevens kunnen worden g
 
 ## Tips
 
-- Gebruik KISS (hier Keep it Small en Simple), uitbreiden kan altijd nog.
+- Hou het eenvoudig, uitbreiden kan altijd nog.
 - Kijk goed naar de al beschikbare code, het wiel hoeft niet opnieuw uitgevonden te worden.
 - Zorg voor een goede planning en samenwerking!

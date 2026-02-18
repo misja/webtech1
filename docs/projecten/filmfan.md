@@ -18,6 +18,6 @@ Het is mogelijk om bij deze site een account aan te maken. Ingelogde bezoekers k
 
 ## Tips
 
-- Gebruik KISS (hier Keep it Small en Simple), uitbreiden kan altijd nog.
+- Hou het eenvoudig, uitbreiden kan altijd nog.
 - Kijk goed naar de al beschikbare code, het wiel hoeft niet opnieuw uitgevonden te worden.
 - Zorg voor een goede planning en samenwerking!

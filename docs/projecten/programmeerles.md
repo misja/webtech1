@@ -20,6 +20,6 @@ Maak een sterk vereenvoudige webapplicatie waarbij deze gegevens kunnen worden g
 
 ## Tips
 
-- Gebruik KISS (hier Keep it Small en Simple), uitbreiden kan altijd nog.
+- Hou het eenvoudig, uitbreiden kan altijd nog.
 - Kijk goed naar de al beschikbare code, het wiel hoeft niet opnieuw uitgevonden te worden.
 - Zorg voor een goede planning en samenwerking!

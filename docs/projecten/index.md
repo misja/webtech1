@@ -3,7 +3,7 @@
 Liefst zo snel mogelijk, in ieder geval vanaf week vijf, werken studenten in duo's aan hun eigen project, waarbij de volgende onderdelen van belang zijn:
 
 - Website heeft vormgeving en een koppeling met een database
-- Op de site ingevulde data komt door sqlalchemy terecht in een sqlite-database
+- Op de site ingevulde data komt via SQLAlchemy terecht in een SQLite-database
 - Website maakt gebruik van verschillende views
 - Geregistreerde bezoekers kunnen op de site inloggen
 
@@ -20,7 +20,7 @@ Kies één van deze casussen en laat aan je practicumdocent weten welke casus je
 
 ### week 1-3
 
-Regel de IDE en de ontwikkelomgeving. Inventariseer welke bestanden nodig zijn (py en html) en bedenk het ontwerp en de vormgeving van de site.
+Regel je IDE (ontwikkelomgeving). Inventariseer welke bestanden nodig zijn (py en html) en bedenk het ontwerp en de vormgeving van de site.
 
 ### week 4
 
