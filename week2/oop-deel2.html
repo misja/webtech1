@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
     
     
       
@@ -4227,7 +4227,7 @@
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">prijs</span> <span class="o">=</span> <span class="n">prijs</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">voorraad</span> <span class="o">=</span> <span class="n">voorraad</span>
 </span></code></pre></div>
-<p>Dit werkt prima, maar er is veel <strong>boilerplate</strong>: je typt elke attribuutnaam drie keer. Voor klassen met veel attributen wordt dit vervelend.</p>
+<p>Dit werkt prima, maar er is veel <strong>boilerplate</strong> (herhalende, weinig toevoegende code): je typt elke attribuutnaam drie keer. Voor klassen met veel attributen wordt dit vervelend.</p>
 <h2 id="dataclasses-minder-code-zelfde-resultaat">Dataclasses: minder code, zelfde resultaat<a class="headerlink" href="#dataclasses-minder-code-zelfde-resultaat" title="Link naar deze sectie">¶</a></h2>
 <p>Python biedt een elegantere manier voor data-klassen: <strong>dataclasses</strong>.</p>
 <p>Je herkent een dataclass aan de <code>@dataclass</code> <strong>decorator</strong> (het <code>@</code>-symbool) boven de klasse:</p>
@@ -4334,7 +4334,7 @@
 <div class="admonition note">
 <p class="admonition-title">field(default_factory=list)</p>
 <p>Voor <strong>mutable</strong> default waarden (lists, dicts) moet je <code>field(default_factory=list)</code> gebruiken in plaats van <code>= []</code>.</p>
-<p><strong>Waarom?</strong> Een gewoon <code>= []</code> zou gedeeld worden tussen alle instanties (Python quirk). Met <code>default_factory</code> krijgt elke instantie zijn eigen lege lijst.</p>
+<p><strong>Waarom?</strong> Een gewoon <code>= []</code> zou gedeeld worden tussen alle instanties: Python maakt die lijst eenmalig aan bij het laden van de klasse, niet bij elke aanmaak van een object. Met <code>default_factory</code> krijgt elke instantie zijn eigen lege lijst.</p>
 </div>
 <h2 id="preview-database-modellen">Preview: Database modellen<a class="headerlink" href="#preview-database-modellen" title="Link naar deze sectie">¶</a></h2>
 <p>Database modellen (die je later gaat maken) lijken erg op dataclasses:</p>
@@ -4404,8 +4404,8 @@
 </span><span id="__span-7-47"><a id="__codelineno-7-47" name="__codelineno-7-47" href="#__codelineno-7-47"></a>
 </span><span id="__span-7-48"><a id="__codelineno-7-48" name="__codelineno-7-48" href="#__codelineno-7-48"></a>
 </span><span id="__span-7-49"><a id="__codelineno-7-49" name="__codelineno-7-49" href="#__codelineno-7-49"></a><span class="c1"># Gebruik</span>
-</span><span id="__span-7-50"><a id="__codelineno-7-50" name="__codelineno-7-50" href="#__codelineno-7-50"></a><span class="n">jan</span> <span class="o">=</span> <span class="n">Klant</span><span class="p">(</span><span class="s2">"Jan Jansen"</span><span class="p">,</span> <span class="s2">"jan@email.nl"</span><span class="p">,</span> <span class="n">korting_percentage</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
-</span><span id="__span-7-51"><a id="__codelineno-7-51" name="__codelineno-7-51" href="#__codelineno-7-51"></a><span class="n">bestelling</span> <span class="o">=</span> <span class="n">Bestelling</span><span class="p">(</span><span class="n">klant</span><span class="o">=</span><span class="n">jan</span><span class="p">)</span>
+</span><span id="__span-7-50"><a id="__codelineno-7-50" name="__codelineno-7-50" href="#__codelineno-7-50"></a><span class="n">jan</span> <span class="o">=</span> <span class="n">Klant</span><span class="p">(</span><span class="s2">"Jan Jansen"</span><span class="p">,</span> <span class="s2">"jan@email.nl"</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+</span><span id="__span-7-51"><a id="__codelineno-7-51" name="__codelineno-7-51" href="#__codelineno-7-51"></a><span class="n">bestelling</span> <span class="o">=</span> <span class="n">Bestelling</span><span class="p">(</span><span class="n">jan</span><span class="p">)</span>
 </span><span id="__span-7-52"><a id="__codelineno-7-52" name="__codelineno-7-52" href="#__codelineno-7-52"></a>
 </span><span id="__span-7-53"><a id="__codelineno-7-53" name="__codelineno-7-53" href="#__codelineno-7-53"></a><span class="n">laptop</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="s2">"Laptop"</span><span class="p">,</span> <span class="mf">799.99</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 </span><span id="__span-7-54"><a id="__codelineno-7-54" name="__codelineno-7-54" href="#__codelineno-7-54"></a><span class="n">muis</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="s2">"Muis"</span><span class="p">,</span> <span class="mf">25.50</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
@@ -4427,12 +4427,12 @@
 <ul>
 <li>Voor klassen die vooral data bevatten</li>
 <li>Veel attributen, weinig logica</li>
-<li>Je wilt clean, leesbare code</li>
+<li>Je wilt leesbare, overzichtelijke code</li>
 </ul>
 <p><strong>Gebruik reguliere klassen:</strong></p>
 <ul>
 <li>Complexe initialization logic nodig</li>
-<li>Veel custom dunder methods (<code>__len__</code>, <code>__iter__</code>, etc.)</li>
+<li>Veel custom dunder methoden (speciale methoden met dubbele underscores, zoals <code>__len__</code>, <code>__iter__</code>)</li>
 <li>Geen data container maar echt gedrag</li>
 </ul>
 <div class="admonition tip">
@@ -4442,7 +4442,7 @@
 <h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
 <p>Je hebt nu gezien:</p>
 <ul>
-<li><strong>Dataclasses</strong>: Minder boilerplate voor data containers met <code>@dataclass</code></li>
+<li><strong>Dataclasses</strong>: Minder herhalende code (boilerplate) voor data containers met <code>@dataclass</code></li>
 <li><strong>Type hints</strong>: <code>Optional[str]</code>, <code>list[Product]</code> voor complexere types</li>
 <li><strong>field()</strong>: Voor mutable defaults met <code>default_factory</code></li>
 <li><strong>Preview</strong>: Database modellen volgen hetzelfde patroon</li>
