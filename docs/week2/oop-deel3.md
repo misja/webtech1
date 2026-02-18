@@ -1,7 +1,5 @@
 # OOP Python – Inheritance
 
-**Leestijd: ~20 minuten**
-
 In dit deel leer je hoe **inheritance** (overerving) werkt in Python. Dit is een essentiële basis voor het werken met SQLAlchemy, waar je straks modellen maakt die erven van `db.Model`.
 
 ## Wat is inheritance?

@@ -1,7 +1,5 @@
 # OOP Python – Objecten & Relaties
 
-**Leestijd: ~20 minuten**
-
 In dit deel leer je hoe objecten andere objecten kunnen bevatten (**compositie**). Dit is essentieel voor het werken met databases, waar tabellen aan elkaar gereleerd zijn via foreign keys.
 
 ## Wat is compositie?
