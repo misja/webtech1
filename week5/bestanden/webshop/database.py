@@ -7,7 +7,6 @@ toe te voegen en te wijzigen.
 """
 import sqlite3
 from sqlite3 import Row
-from typing import Optional
 
 
 class WebshopDatabase:
@@ -47,7 +46,7 @@ class WebshopDatabase:
             """)
             return cursor.fetchall()
 
-    def get_category_by_id(self, category_id: int) -> Optional[Row]:
+    def get_category_by_id(self, category_id: int) -> Row | None:
         """Haal één categorie op op basis van ID.
 
         Args:
@@ -100,7 +99,7 @@ class WebshopDatabase:
             """, (limit,))
             return cursor.fetchall()
 
-    def get_product_by_id(self, product_id: int) -> Optional[Row]:
+    def get_product_by_id(self, product_id: int) -> Row | None:
         """Haal één product op met categorie info.
 
         Args:
@@ -180,7 +179,7 @@ class WebshopDatabase:
         price: float,
         stock: int,
         category_id: int,
-        description: Optional[str] = None
+        description: str | None = None
     ) -> int:
         """Voeg een nieuw product toe aan de database.
 
@@ -212,7 +211,7 @@ class WebshopDatabase:
         price: float,
         stock: int,
         category_id: int,
-        description: Optional[str] = None
+        description: str | None = None
     ) -> bool:
         """Update een bestaand product.
 
