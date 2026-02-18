@@ -57,7 +57,7 @@ Maak `templates/basic.html`:
 **Let op:** `{{ url_for('static', filename='drums.jpg') }}`
 
 - Jinja2 syntax voor dynamische URL generatie
-- Beter dan hardcoded `../static/drums.jpg`
+- Beter dan een vast ingesteld pad zoals `../static/drums.jpg`
 - Werkt ook als je app in een subdirectory draait
 
 ### Stap 2: Render de template in Flask

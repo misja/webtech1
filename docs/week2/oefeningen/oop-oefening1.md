@@ -41,7 +41,7 @@ Test je klasse met deze code:
 
 ```python
 # Maak klanten aan
-jan = Klant("Jan Jansen", "jan@email.nl", korting_percentage=10.0)
+jan = Klant("Jan Jansen", "jan@email.nl", 10.0)
 marie = Klant("Marie Peters", "marie@email.nl")  # Geen korting
 
 # Bereken prijzen

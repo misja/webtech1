@@ -280,7 +280,7 @@ webshop/
    Product.query.filter_by(name=user_input).first()
    ```
 
-4. **Database Agnostic**
+4. **Databaseonafhankelijk**
    - Wissel makkelijk van SQLite → PostgreSQL → MySQL
    - Zelfde Python code blijft werken
 
@@ -293,10 +293,10 @@ webshop/
 
 ### Nadelen
 
-1. **Leercruve** - Je moet ORM concepten leren
+1. **Leercurve** - Je moet ORM concepten leren
 2. **Performance** - Complexe queries zijn soms langzamer
-3. **N+1 Problem** - Let op met lazy loading
-4. **Hidden Complexity** - ORM doet veel achter de schermen
+3. **N+1 probleem** - Let op met lazy loading
+4. **Verborgen complexiteit** - ORM doet veel achter de schermen
 
 ## Vergelijking Database Operaties
 
@@ -447,7 +447,7 @@ In Week 7 bouwen we verder op deze ORM foundation:
    products = db.relationship('Product', ...)
    ```
 
-3. **N+1 queries**
+3. **N+1 probleem**
 
    ```python
    # ❌ Slecht - 1 query voor categories + N queries voor products

@@ -261,11 +261,11 @@ except sqlite3.IntegrityError:
 ```
 
 !!! tip "Altijd with gebruiken"
-    De `with` statement zorgt dat de connectie altijd wordt gesloten, ook bij errors. Dit is de **preferred way** om met databases te werken.
+    De `with` statement zorgt dat de connectie altijd wordt gesloten, ook bij errors. Dit is de **aangeraden manier** om met databases te werken.
 
 ## Complete voorbeeld
 
-Hier een volledig voorbeeld dat alle CRUD operaties combineert:
+Hier een volledig voorbeeld dat alle CRUD operaties (Create, Read, Update, Delete) combineert:
 
 ```python
 import sqlite3

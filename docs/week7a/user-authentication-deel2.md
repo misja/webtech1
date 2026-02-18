@@ -172,7 +172,7 @@ from wtforms import ValidationError
 from mijnproject.models import User
 ```
 
-Er moet gecontroleerd worden of velden op een formulier voldoen aan de verplichting een waarde te krijgen. Verder vindt er toezicht plaats of het opgegeven e-mailadres aan de eisen voldoet – is er bijvoorbeeld een apenstaartje (`@`) meegestuurd en dergelijke. De validator `EqualTo` is uitgerust om twee waardes met elkaar te vergelijken. Mocht er iets niet in orde dan kan er met behulp van de `ValidationError` een passende melding getoond wordt.
+Er moet gecontroleerd worden of velden op een formulier voldoen aan de verplichting een waarde te krijgen. Verder vindt er toezicht plaats of het opgegeven e-mailadres aan de eisen voldoet: is er bijvoorbeeld een apenstaartje (`@`) meegestuurd en dergelijke. De validator `EqualTo` is uitgerust om twee waardes met elkaar te vergelijken. Mocht er iets niet in orde dan kan er met behulp van de `ValidationError` een passende melding getoond wordt.
 
 Nu kunnen de formulieren opgebouwd worden, te beginnen met het registratieformulier. Omdat er als veel vaker Engelse termen in de code zijn opgetekend, worden hier ook Engelse benamingen gehanteerd.
 
@@ -214,7 +214,7 @@ def validate_email(self, field) -> None:
         raise ValidationError('Dit e-mailadres staat al geregistreerd!')
 ```
 
-De melding is al duidelijk genoeg, maar toch nog wat extra uitleg. Er wordt gecontroleerd of het opgegeven e-mailadres gevonden kan worden door de waarde ervan op te geven in de `query.filter.by(waarde).first()`. Geeft dit resultaat `True`, dan is er al een e-mailadres met een gelijke inhoud in de database te vinden – en dat mag niet. Er moet dan een melding getoond worden, hetgeen hier dus via de `ValidationError` geregeld is.
+De melding is al duidelijk genoeg, maar toch nog wat extra uitleg. Er wordt gecontroleerd of het opgegeven e-mailadres gevonden kan worden door de waarde ervan op te geven in de `query.filter.by(waarde).first()`. Geeft dit resultaat `True`, dan is er al een e-mailadres met een gelijke inhoud in de database te vinden, en dat mag niet. Er moet dan een melding getoond worden, hetgeen hier dus via de `ValidationError` geregeld is.
 
 De tweede methode is nagenoeg gelijk aan de eerste. Alleen moet er nu nagegaan worden of de gebruikersnaam al in de database voorkomt.
 

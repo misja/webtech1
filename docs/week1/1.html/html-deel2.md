@@ -11,7 +11,7 @@ HTML is in het begin van de jaren negentig van de vorige eeuw ontwikkeld door [T
 !!! info "HTML was niet nieuw"
     Hoewel Tim Berners-Lee (of TBL) HTML bedacht en ontwikkeld heeft, wat dat in die tijd niet nieuw. Het idee van het in de tekst zélf aangeven wat de verschillende onderdelen van die tekst betekenen (en eventueel hoe die moeten worden vormgegeven) stamt al uit de jaren zestig. Technieken als de [Generalized Markup Language (GML)](https://en.wikipedia.org/wiki/Standard_Generalized_Markup_Language#History) en [COCOA](https://en.wikipedia.org/wiki/COCOA_(digital_humanities)) gingen aan HTML vooraf.
 
-    Het echt *nieuwe* van TBL was dat HTML een stuk eenvoudiger was om mee te werken, en dat de *browser* een stuk 'vergevingsgezinder' was dan de systemen die op die oudere technieken gebaseerd waren – een ontwerpbeslissing waar we ook heden ten dage nog last van hebben...
+    Het echt *nieuwe* van TBL was dat HTML een stuk eenvoudiger was om mee te werken, en dat de *browser* een stuk 'vergevingsgezinder' was dan de systemen die op die oudere technieken gebaseerd waren, een ontwerpbeslissing waar we ook heden ten dage nog last van hebben...
 
 ## Tags
 

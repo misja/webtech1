@@ -138,7 +138,7 @@ class Order:
         }
 
 # Gebruik
-jan = Customer("Jan Jansen", "jan@email.nl", korting_percentage=10.0)
+jan = Customer("Jan Jansen", "jan@email.nl", 10.0)
 order = Order(jan, subtotaal=125.50)
 
 totaal_info = order.bereken_totaal()
@@ -267,7 +267,7 @@ class Order:
 laptop = Product("Gaming Laptop", 799.99, 5)
 muis = Product("Gaming Muis", 89.99, 20)
 
-jan = Customer("Jan Jansen", "jan@email.nl", korting_percentage=5.0)
+jan = Customer("Jan Jansen", "jan@email.nl", 5.0)
 
 order = Order(
     klant=jan,
@@ -457,16 +457,16 @@ In je template (`producten.html`) kun je dan de objecten gebruiken:
 !!! note "Return values → Templates"
     Zie je waarom we altijd **return values** gebruiken en niet **print**? In een Flask route moet je data doorgeven aan je template, niet naar de console printen.
 
-## Separation of concerns
+## Scheiding van verantwoordelijkheden (separation of concerns)
 
 Goede code scheidt verantwoordelijkheden:
 
-**Business logic (modellen):**
+**Bedrijfslogica (modellen):**
 
 ```python
 @dataclass
 class Order:
-    """Bevat business logic en data."""
+    """Bevat bedrijfslogica en data."""
     klant: Customer
     producten: list[Product]
 
@@ -475,7 +475,7 @@ class Order:
         return {"totaal": sum(p.prijs for p in self.producten)}
 ```
 
-**Presentation layer (routes):**
+**Presentatielaag (routes):**
 
 ```python
 @app.route('/order/<int:id>')
@@ -491,7 +491,7 @@ def toon_order(id):
 ```
 
 !!! info "Waarom scheiden?"
-    - Business logic is herbruikbaar (webapplicatie, CLI, tests)
+    - De bedrijfslogica is herbruikbaar (webapplicatie, CLI, tests)
     - Makkelijker te testen (geen Flask nodig voor tests)
     - Duidelijke verantwoordelijkheden
 
@@ -504,7 +504,7 @@ Controleer of je het volgende beheerst:
 - [ ] `Optional[]` voor attributen die None kunnen zijn
 - [ ] Methoden die dicts teruggeven voor templates
 - [ ] Begrijpen: compositie in code = foreign keys in database
-- [ ] Separation of concerns: business logic vs presentation
+- [ ] Scheiding van verantwoordelijkheden: bedrijfslogica vs presentatie
 
 ## Samenvatting
 
@@ -514,7 +514,7 @@ In dit deel heb je geleerd:
 - **Type hints**: `list[Product]`, `Optional[Customer]`
 - **Return dicts**: Gestructureerde data voor templates
 - **Database preview**: Compositie = foreign keys
-- **Separation of concerns**: Business logic apart van presentation
+- **Scheiding van verantwoordelijkheden**: Bedrijfslogica apart van presentatie
 
 **Je kunt nu:**
 

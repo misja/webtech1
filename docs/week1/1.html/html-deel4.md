@@ -19,7 +19,7 @@ HTML-formulieren worden op een webpagina geplaatst met behulp van de tag `<form>
 
 ## Input-tag
 
-Het HTML-element `<input>` wordt gebruikt om interactieve besturingselementen te maken voor webgebaseerde formulieren. Dit element wordt gebruikt om gegevens van de gebruiker te accepteren en is één van de krachtigst, meest complexe en gevaarlijkste elementen in heel HTML vanwege het enorme aantal combinaties van invoertypen en attributen – én omdat je hiermee de bezoeker de mogelijkheid biedt om contact met de server te maken.
+Het HTML-element `<input>` wordt gebruikt om interactieve besturingselementen te maken voor webgebaseerde formulieren. Dit element wordt gebruikt om gegevens van de gebruiker te accepteren en is één van de krachtigst, meest complexe en gevaarlijkste elementen in heel HTML vanwege het enorme aantal combinaties van invoertypen en attributen, én omdat je hiermee de bezoeker de mogelijkheid biedt om contact met de server te maken.
 
 Alle `<input>`-tags kennen het attribuut `type`. Standaard is de waarde hiervan `text`, wat betekent dat er een tekstinput wordt weergegeven.
 
@@ -56,7 +56,7 @@ Een eenvoudig inlogformulier zou door de volgende HTML-regels gebouwd kunnen wor
 
 ```html
 <body>
-    <form method="get" action="pagina1.html"> 
+    <form method="get" action="pagina1.html">
         <h1>Inloggen</h1>
         <h2>Vul e-mail en wachtwoord in</h2>
         <input type="text" size="30">

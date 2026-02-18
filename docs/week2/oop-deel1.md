@@ -132,11 +132,11 @@ class Product:
         return redirect('/producten')
     ```
 
-    Dit heet **separation of concerns**: elke laag in je applicatie heeft zijn eigen verantwoordelijkheid.
+    Dit heet **scheiding van verantwoordelijkheden** (separation of concerns): elke laag in je applicatie heeft zijn eigen verantwoordelijkheid.
 
 ## De `__str__` methode
 
-Python heeft **speciale methoden** die beginnen en eindigen met dubbele underscores (`__`), ook wel "dunder methods" genoemd.
+Python heeft **speciale methoden** die beginnen en eindigen met dubbele underscores (`__`), ook wel "dunder methods" genoemd (van "double underscore").
 
 De `__str__` methode bepaalt hoe een object als string wordt weergegeven:
 

@@ -132,7 +132,7 @@ Nieuw totaal: €889.98
 
 Controleer voordat je klaar bent:
 
-- [ ] `Product` gebruikt `@dataclass` decorator
+- [ ] `Product` gebruikt `@dataclass` decorator (de `@`-aanduiding boven de klasse)
 - [ ] `Optional[str]` gebruikt voor beschrijving
 - [ ] `Winkelwagen` gebruikt `list[Product]` type hint
 - [ ] `field(default_factory=list)` gebruikt voor items
@@ -141,7 +141,7 @@ Controleer voordat je klaar bent:
 
 ## Wat je geleerd hebt
 
-- `@dataclass` vermindert boilerplate code
+- `@dataclass` vermindert herhalende code (boilerplate)
 - `Optional[]` voor waarden die None kunnen zijn
 - `list[Type]` voor typed lists
 - `field(default_factory=list)` voor mutable defaults

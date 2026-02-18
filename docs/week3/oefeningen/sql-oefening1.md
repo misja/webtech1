@@ -1,5 +1,7 @@
 # Oefening 1: CRUD Operaties met Python
 
+CRUD staat voor **Create, Read, Update, Delete**: de vier basisbewerkingen op een database.
+
 Deze oefening past bij [SQL Deel 2](../sql-deel2.md) en [Deel 3](../sql-deel3.md).
 
 ## Opgave 1: Database en Tabel Aanmaken

@@ -187,7 +187,7 @@ laptop = Product("Laptop", 799.99, 5)
 muis = Product("Muis", 25.50, 20)
 
 # Maak klant
-jan = Klant("Jan Jansen", "jan@email.nl", korting_percentage=5.0)
+jan = Klant("Jan Jansen", "jan@email.nl", 5.0)
 
 # Maak bestelling
 bestelling = Bestelling(

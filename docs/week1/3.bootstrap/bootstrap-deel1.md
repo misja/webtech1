@@ -37,7 +37,7 @@ Als voorbeeld een overzicht van de component ‘Buttons’. Een keurige beschrij
 
 ### Examples
 
-Onder de knop *Buttons* zitten tal van schermontwerpen verborgen, variërend van een scherm dat de inhoud van een check-out formulier levert, inclusief controle op de juistheid van het invullen van de data tot een carrousel – een item dat verschillende afbeeldingen na elkaar kan tonen. Van elk voorbeeld kan de code bekeken worden.
+Onder de knop *Buttons* zitten tal van schermontwerpen verborgen, variërend van een scherm dat de inhoud van een check-out formulier levert, inclusief controle op de juistheid van het invullen van de data tot een carrousel, een item dat verschillende afbeeldingen na elkaar kan tonen. Van elk voorbeeld kan de code bekeken worden.
 
 ![Examples](imgs/examples.png)
 

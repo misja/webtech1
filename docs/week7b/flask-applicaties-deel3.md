@@ -238,5 +238,5 @@ Deze structuur is professioneel en wordt gebruikt in productie-applicaties. In d
 
     - Het toevoegen van meer `blueprints` voor andere onderdelen
     - Het gebruik van blueprint-specifieke static files
-    - Het implementeren van API endpoints in aparte `blueprints`
+    - Het implementeren van API endpoints (URLs die data teruggeven in plaats van HTML) in aparte `blueprints`
     - Het toevoegen van authentication met de `Flask-Login` bibliotheek

@@ -14,7 +14,7 @@ class Product:
         self.voorraad = voorraad
 ```
 
-Dit werkt prima, maar er is veel **boilerplate**: je typt elke attribuutnaam drie keer. Voor klassen met veel attributen wordt dit vervelend.
+Dit werkt prima, maar er is veel **boilerplate** (herhalende, weinig toevoegende code): je typt elke attribuutnaam drie keer. Voor klassen met veel attributen wordt dit vervelend.
 
 ## Dataclasses: minder code, zelfde resultaat
 
@@ -143,7 +143,7 @@ print(f"Totaal: €{wagen.bereken_totaal():.2f}")
 !!! note "field(default_factory=list)"
     Voor **mutable** default waarden (lists, dicts) moet je `field(default_factory=list)` gebruiken in plaats van `= []`.
 
-    **Waarom?** Een gewoon `= []` zou gedeeld worden tussen alle instanties (Python quirk). Met `default_factory` krijgt elke instantie zijn eigen lege lijst.
+    **Waarom?** Een gewoon `= []` zou gedeeld worden tussen alle instanties: Python maakt die lijst eenmalig aan bij het laden van de klasse, niet bij elke aanmaak van een object. Met `default_factory` krijgt elke instantie zijn eigen lege lijst.
 
 ## Preview: Database modellen
 
@@ -221,8 +221,8 @@ class Bestelling:
 
 
 # Gebruik
-jan = Klant("Jan Jansen", "jan@email.nl", korting_percentage=10.0)
-bestelling = Bestelling(klant=jan)
+jan = Klant("Jan Jansen", "jan@email.nl", 10.0)
+bestelling = Bestelling(jan)
 
 laptop = Product("Laptop", 799.99, 5)
 muis = Product("Muis", 25.50, 20)
@@ -246,12 +246,12 @@ print(f"Totaal: €{bestelling.bereken_totaal():.2f}")
 
 - Voor klassen die vooral data bevatten
 - Veel attributen, weinig logica
-- Je wilt clean, leesbare code
+- Je wilt leesbare, overzichtelijke code
 
 **Gebruik reguliere klassen:**
 
 - Complexe initialization logic nodig
-- Veel custom dunder methods (`__len__`, `__iter__`, etc.)
+- Veel custom dunder methoden (speciale methoden met dubbele underscores, zoals `__len__`, `__iter__`)
 - Geen data container maar echt gedrag
 
 !!! tip "Database modellen zijn dataclass-achtig"
@@ -261,7 +261,7 @@ print(f"Totaal: €{bestelling.bereken_totaal():.2f}")
 
 Je hebt nu gezien:
 
-- **Dataclasses**: Minder boilerplate voor data containers met `@dataclass`
+- **Dataclasses**: Minder herhalende code (boilerplate) voor data containers met `@dataclass`
 - **Type hints**: `Optional[str]`, `list[Product]` voor complexere types
 - **field()**: Voor mutable defaults met `default_factory`
 - **Preview**: Database modellen volgen hetzelfde patroon
