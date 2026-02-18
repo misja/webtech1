@@ -1,5 +1,8 @@
+"""Customer klasse voor de webshop."""
+
+
 class Customer:
-    """Klasse voor klanten in de webshop met krediet en korting."""
+    """Klasse voor klanten in de webshop."""
 
     def __init__(self, naam: str, email: str):
         """Maak een nieuwe klant aan.
@@ -10,64 +13,23 @@ class Customer:
         """
         self.naam = naam
         self.email = email
-        self.__krediet = 1000.0  # Startkrediet voor nieuwe klanten
-        self.__korting = 0.0  # Standaard geen korting
+        self.krediet: float = 1000.0
+        self.korting: float = 0.0  # Decimaal: 0.15 = 15%
 
-    @property
-    def krediet(self) -> float:
-        """Getter voor krediet.
-
-        Returns:
-            Huidig krediet in euro's
-        """
-        return self.__krediet
-
-    @krediet.setter
-    def krediet(self, waarde: float) -> None:
-        """Setter voor krediet met validatie.
+    def bereken_korting(self, bedrag: float) -> float:
+        """Bereken kortingsbedrag op een bedrag.
 
         Args:
-            waarde: Nieuw krediet (moet >= 0 zijn)
-        """
-        if waarde >= 0:
-            self.__krediet = waarde
-        else:
-            print("Krediet kan geen negatieve waarde krijgen")
-            self.__krediet = 0
-
-    @property
-    def korting(self) -> float:
-        """Getter voor korting.
+            bedrag: Bedrag waarop korting berekend wordt
 
         Returns:
-            Korting als decimaal (0.15 = 15%)
+            Kortingsbedrag in euro's
         """
-        return self.__korting
-
-    @korting.setter
-    def korting(self, waarde: float) -> None:
-        """Setter voor korting met validatie.
-
-        Args:
-            waarde: Korting tussen 0 en 1.0 (0.15 = 15%)
-        """
-        if 0 <= waarde <= 1.0:
-            self.__korting = waarde
-        else:
-            print("Korting moet tussen 0 en 1.0 liggen")
-
-    @property
-    def volledige_naam(self) -> str:
-        """Read-only property die volledige naam returnt.
-
-        Returns:
-            Naam met email tussen haakjes
-        """
-        return f"{self.naam} ({self.email})"
+        return bedrag * self.korting
 
     def __str__(self) -> str:
         """String representatie van de klant."""
-        return f"Klant: {self.naam}, Email: {self.email}, Krediet: €{self.__krediet:.2f}"
+        return f"Klant: {self.naam} ({self.email}), krediet: €{self.krediet:.2f}"
 
 
 if __name__ == '__main__':
@@ -75,17 +37,11 @@ if __name__ == '__main__':
     jan = Customer("Jan Jansen", "jan@email.nl")
     print(jan)
 
-    # Test properties
-    print(f"\nKrediet: €{jan.krediet:.2f}")
-
+    # Korting instellen
     jan.korting = 0.15
-    print(f"Korting: {jan.korting * 100}%")
+    print(f"Korting: {jan.korting * 100:.0f}%")
+    print(f"Korting op €100: €{jan.bereken_korting(100):.2f}")
 
-    # Test validatie
-    jan.korting = 2.0  # Dit wordt afgewezen
-
-    jan.krediet = jan.krediet - 300.0
-    print(f"Nieuw krediet: €{jan.krediet:.2f}")
-
-    # Test read-only property
-    print(f"\nVolledige naam: {jan.volledige_naam}")
+    # Krediet aanpassen
+    jan.krediet -= 300.0
+    print(f"Resterend krediet: €{jan.krediet:.2f}")
