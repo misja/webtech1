@@ -93,8 +93,6 @@ plugins:
       separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])'
       lang: nl
   - glightbox                   # Image zoom/lightbox (vervangt custom modal JS/CSS)
-  - mknotebooks:
-      execute: false
 
 # Copyright en extra links
 copyright: |
