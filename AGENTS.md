@@ -163,6 +163,7 @@ Het interessante van methoden is dat ze ook berekeningen kunnen doen:
 - Kunstmatige structuren ("Stap 1, Stap 2, Stap 3...") - alleen als pedagogisch nodig
 - **"Waarom [technologie]?" secties** - de inhoud moet voor zich spreken
 - **Em dash (—)** als leesteken in lopende tekst: is ongebruikelijk in Nederlands en een veelzeggend AI-kenmerk. Gebruik in plaats daarvan een komma, dubbele punt of herschrijf de zin.
+- **Leestijd** ("Leestijd: ~20 minuten" e.d.) bovenaan pagina's: niet toevoegen.
 
 **Gebruik:**
 - Natuurlijke, professionele docenttaal
