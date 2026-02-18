@@ -4340,20 +4340,26 @@
 <h1 id="oop-python-oefening-3">OOP Python – Oefening 3<a class="headerlink" href="#oop-python-oefening-3" title="Link naar deze sectie">¶</a></h1>
 <p>In deze oefening pas je <strong>inheritance</strong> (overerving) toe. Je maakt subklassen van <code>Product</code> voor verschillende producttypen, wat je voorbereidt op het werken met database modellen die erven van <code>db.Model</code>.</p>
 <h2 id="achtergrond">Achtergrond<a class="headerlink" href="#achtergrond" title="Link naar deze sectie">¶</a></h2>
-<p>In een webshop heb je verschillende soorten producten:
-- <strong>Fysieke producten</strong>: hebben gewicht en verzendkosten
-- <strong>Digitale producten</strong>: hebben bestandsgrootte en geen verzending</p>
+<p>In een webshop heb je verschillende soorten producten:</p>
+<ul>
+<li><strong>Fysieke producten</strong>: hebben gewicht en verzendkosten</li>
+<li><strong>Digitale producten</strong>: hebben bestandsgrootte en geen verzending</li>
+</ul>
 <p>Dit is een perfect geval voor inheritance: beide zijn producten, maar met specifieke eigenschappen.</p>
 <h2 id="deel-a-fysiekproduct">Deel a: FysiekProduct<a class="headerlink" href="#deel-a-fysiekproduct" title="Link naar deze sectie">¶</a></h2>
 <p>Maak een <code>FysiekProduct</code> klasse die erft van <code>Product</code>.</p>
 <h3 id="opdracht">Opdracht<a class="headerlink" href="#opdracht" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Extra attributen:</strong>
-- <code>gewicht</code> (float): Gewicht in kg</p>
-<p><strong>Extra methoden:</strong>
-- <code>bereken_verzendkosten() -&gt; float</code>: Bereken verzendkosten op basis van gewicht
-  - Tot 1 kg: €3.95
-  - Tot 5 kg: €6.95
-  - Meer dan 5 kg: €9.95</p>
+<p><strong>Extra attributen:</strong></p>
+<ul>
+<li><code>gewicht</code> (float): Gewicht in kg</li>
+</ul>
+<p><strong>Extra methoden:</strong></p>
+<ul>
+<li><code>bereken_verzendkosten() -&gt; float</code>: Bereken verzendkosten op basis van gewicht</li>
+<li>Tot 1 kg: €3.95</li>
+<li>Tot 5 kg: €6.95</li>
+<li>Meer dan 5 kg: €9.95</li>
+</ul>
 <h3 id="startcode">Startcode<a class="headerlink" href="#startcode" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">product</span><span class="w"> </span><span class="kn">import</span> <span class="n">Product</span>
@@ -4384,23 +4390,29 @@
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">laptop</span> <span class="o">=</span> <span class="n">FysiekProduct</span><span class="p">(</span><span class="s2">"Gaming Laptop"</span><span class="p">,</span> <span class="mf">1299.99</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">gewicht</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Verzendkosten laptop: €</span><span class="si">{</span><span class="n">laptop</span><span class="o">.</span><span class="n">bereken_verzendkosten</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>Verwachte output:</strong>
-</p><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>FysiekProduct(naam='Python Crash Course', prijs=34.95, voorraad=8, beschrijving=None, gewicht=0.6)
+<p><strong>Verwachte output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>FysiekProduct(naam='Python Crash Course', prijs=34.95, voorraad=8, beschrijving=None, gewicht=0.6)
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Verzendkosten: €3.95
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Verzendkosten laptop: €6.95
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="deel-b-digitaalproduct">Deel b: DigitaalProduct<a class="headerlink" href="#deel-b-digitaalproduct" title="Link naar deze sectie">¶</a></h2>
 <p>Maak een <code>DigitaalProduct</code> klasse die erft van <code>Product</code>.</p>
 <h3 id="opdracht_1">Opdracht<a class="headerlink" href="#opdracht_1" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Extra attributen:</strong>
-- <code>bestandsgrootte</code> (float): Grootte in MB
-- <code>download_link</code> (str): URL voor download</p>
-<p><strong>Defaults:</strong>
-- <code>voorraad</code>: 999 (digitale producten zijn bijna onbeperkt beschikbaar)</p>
-<p><strong>Extra methoden:</strong>
-- <code>download() -&gt; dict</code>: Simuleer een download
-  - Verminder voorraad met 1
-  - Geef een dict terug met info: <code>{"product": naam, "link": download_link, "grootte_mb": bestandsgrootte}</code></p>
+<p><strong>Extra attributen:</strong></p>
+<ul>
+<li><code>bestandsgrootte</code> (float): Grootte in MB</li>
+<li><code>download_link</code> (str): URL voor download</li>
+</ul>
+<p><strong>Defaults:</strong></p>
+<ul>
+<li><code>voorraad</code>: 999 (digitale producten zijn bijna onbeperkt beschikbaar)</li>
+</ul>
+<p><strong>Extra methoden:</strong></p>
+<ul>
+<li><code>download() -&gt; dict</code>: Simuleer een download</li>
+<li>Verminder voorraad met 1</li>
+<li>Geef een dict terug met info: <code>{"product": naam, "link": download_link, "grootte_mb": bestandsgrootte}</code></li>
+</ul>
 <h3 id="startcode_1">Startcode<a class="headerlink" href="#startcode_1" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@dataclass</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">DigitaalProduct</span><span class="p">(</span><span class="n">Product</span><span class="p">):</span>
@@ -4428,11 +4440,15 @@
 <h2 id="deel-c-subklasse-van-subklasse">Deel c: Subklasse van subklasse<a class="headerlink" href="#deel-c-subklasse-van-subklasse" title="Link naar deze sectie">¶</a></h2>
 <p>Maak een <code>Boek</code> klasse die erft van <code>FysiekProduct</code>.</p>
 <h3 id="opdracht_2">Opdracht<a class="headerlink" href="#opdracht_2" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Extra attributen:</strong>
-- <code>auteur</code> (str): Naam van de auteur
-- <code>isbn</code> (str): ISBN nummer</p>
-<p><strong>Defaults:</strong>
-- <code>gewicht</code>: 0.5 kg (boeken zijn meestal licht)</p>
+<p><strong>Extra attributen:</strong></p>
+<ul>
+<li><code>auteur</code> (str): Naam van de auteur</li>
+<li><code>isbn</code> (str): ISBN nummer</li>
+</ul>
+<p><strong>Defaults:</strong></p>
+<ul>
+<li><code>gewicht</code>: 0.5 kg (boeken zijn meestal licht)</li>
+</ul>
 <p><strong>Override <code>__str__()</code>:</strong>
 Maak een custom string representatie die ook auteur en ISBN toont.</p>
 <h3 id="startcode_2">Startcode<a class="headerlink" href="#startcode_2" title="Link naar deze sectie">¶</a></h3>
@@ -4463,9 +4479,11 @@ Maak een custom string representatie die ook auteur en ISBN toont.</p>
 </span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Voorraad na verkoop: </span><span class="si">{</span><span class="n">python_boek</span><span class="o">.</span><span class="n">voorraad</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="extra-uitdaging-software-klasse-optioneel">Extra uitdaging: Software klasse (optioneel)<a class="headerlink" href="#extra-uitdaging-software-klasse-optioneel" title="Link naar deze sectie">¶</a></h2>
-<p>Maak een <code>Software</code> klasse die erft van <code>DigitaalProduct</code> met extra attributen:
-- <code>versie</code> (str): Versienummer
-- <code>besturingssysteem</code> (str): "Windows", "Mac", "Linux", etc.</p>
+<p>Maak een <code>Software</code> klasse die erft van <code>DigitaalProduct</code> met extra attributen:</p>
+<ul>
+<li><code>versie</code> (str): Versienummer</li>
+<li><code>besturingssysteem</code> (str): "Windows", "Mac", "Linux", etc.</li>
+</ul>
 <p>Test door een instantie te maken en downloads te simuleren.</p>
 <h2 id="checklist">Checklist<a class="headerlink" href="#checklist" title="Link naar deze sectie">¶</a></h2>
 <p>Controleer voordat je klaar bent:</p>

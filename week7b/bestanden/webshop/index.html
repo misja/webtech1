@@ -4268,17 +4268,21 @@
 </tbody>
 </table>
 <h2 id="wat-zijn-blueprints">Wat zijn Blueprints?<a class="headerlink" href="#wat-zijn-blueprints" title="Link naar deze sectie">¶</a></h2>
-<p>Blueprints zijn Flask's manier om een applicatie op te delen in <strong>herbruikbare componenten</strong>. Elk blueprint is een verzameling van:
-- Routes (<code>@blueprint.route()</code>)
-- Templates (in eigen <code>templates/</code> folder)
-- Forms (in eigen <code>forms.py</code>)
-- Static files (optioneel)</p>
-<p><strong>Voordelen:</strong>
-- <strong>Modulariteit</strong>: Elke feature heeft eigen folder
-- <strong>Schaalbaarheid</strong>: Teams kunnen aan verschillende blueprints werken
-- <strong>Herbruikbaarheid</strong>: Blueprints kunnen in meerdere apps gebruikt worden
-- <strong>Testbaarheid</strong>: Blueprints kunnen apart getest worden
-- <strong>Duidelijkheid</strong>: Logische scheiding tussen functionaliteiten</p>
+<p>Blueprints zijn Flask's manier om een applicatie op te delen in <strong>herbruikbare componenten</strong>. Elk blueprint is een verzameling van:</p>
+<ul>
+<li>Routes (<code>@blueprint.route()</code>)</li>
+<li>Templates (in eigen <code>templates/</code> folder)</li>
+<li>Forms (in eigen <code>forms.py</code>)</li>
+<li>Static files (optioneel)</li>
+</ul>
+<p><strong>Voordelen:</strong></p>
+<ul>
+<li><strong>Modulariteit</strong>: Elke feature heeft eigen folder</li>
+<li><strong>Schaalbaarheid</strong>: Teams kunnen aan verschillende blueprints werken</li>
+<li><strong>Herbruikbaarheid</strong>: Blueprints kunnen in meerdere apps gebruikt worden</li>
+<li><strong>Testbaarheid</strong>: Blueprints kunnen apart getest worden</li>
+<li><strong>Duidelijkheid</strong>: Logische scheiding tussen functionaliteiten</li>
+</ul>
 <h2 id="nieuwe-structuur">Nieuwe Structuur<a class="headerlink" href="#nieuwe-structuur" title="Link naar deze sectie">¶</a></h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>webshop/
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── app.py                      # Entry point
@@ -4328,8 +4332,8 @@
 </span></code></pre></div>
 <h2 id="belangrijkste-wijzigingen">Belangrijkste Wijzigingen<a class="headerlink" href="#belangrijkste-wijzigingen" title="Link naar deze sectie">¶</a></h2>
 <h3 id="1-application-factory-pattern">1. Application Factory Pattern<a class="headerlink" href="#1-application-factory-pattern" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Week 7a (Monolithisch):</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># app.py</span>
+<p><strong>Week 7a (Monolithisch):</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># app.py</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">'SECRET_KEY'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'...'</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">db</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
@@ -4337,9 +4341,9 @@
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">():</span>
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="k">pass</span>
-</span></code></pre></div><p></p>
-<p><strong>Week 7b (Factory):</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># webshop_app/__init__.py</span>
+</span></code></pre></div>
+<p><strong>Week 7b (Factory):</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># webshop_app/__init__.py</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_app</span><span class="p">(</span><span class="n">config_name</span><span class="o">=</span><span class="s1">'default'</span><span class="p">):</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">'SECRET_KEY'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'...'</span>
@@ -4356,14 +4360,16 @@
 </span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c1"># app.py</span>
 </span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="kn">from</span><span class="w"> </span><span class="nn">webshop_app</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
 </span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">()</span>
-</span></code></pre></div><p></p>
-<p><strong>Voordelen:</strong>
-- Kan meerdere app instances maken (voor tests met verschillende config)
-- Extensions worden pas gebonden bij create_app() call
-- Config kan per environment verschillen</p>
+</span></code></pre></div>
+<p><strong>Voordelen:</strong></p>
+<ul>
+<li>Kan meerdere app instances maken (voor tests met verschillende config)</li>
+<li>Extensions worden pas gebonden bij create_app() call</li>
+<li>Config kan per environment verschillen</li>
+</ul>
 <h3 id="2-blueprint-routes">2. Blueprint Routes<a class="headerlink" href="#2-blueprint-routes" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Route definitie in blueprint:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># webshop_app/products/views.py</span>
+<p><strong>Route definitie in blueprint:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># webshop_app/products/views.py</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Blueprint</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">products_bp</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span>
@@ -4381,35 +4387,64 @@
 </span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="k">def</span><span class="w"> </span><span class="nf">product</span><span class="p">(</span><span class="n">product_id</span><span class="p">):</span>
 </span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    <span class="c1"># Deze route is beschikbaar als '/product/&lt;id&gt;'</span>
 </span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="k">pass</span>
-</span></code></pre></div><p></p>
-<p><strong>Blueprint registratie met prefix:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># webshop_app/__init__.py</span>
+</span></code></pre></div>
+<p><strong>Blueprint registratie met prefix:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># webshop_app/__init__.py</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">products_bp</span><span class="p">)</span>  <span class="c1"># Geen prefix, routes beginnen bij /</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">auth_bp</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s1">'/auth'</span><span class="p">)</span>  <span class="c1"># Routes beginnen bij /auth</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">admin_bp</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s1">'/admin'</span><span class="p">)</span>  <span class="c1"># Routes beginnen bij /admin</span>
-</span></code></pre></div><p></p>
-<p><strong>Resultaat:</strong>
-| Blueprint | Route | URL |
-|-----------|-------|-----|
-| products  | <code>@products_bp.route("/")</code> | <code>/</code> |
-| products  | <code>@products_bp.route("/product/&lt;id&gt;")</code> | <code>/product/123</code> |
-| auth      | <code>@auth_bp.route("/login")</code> | <code>/auth/login</code> |
-| auth      | <code>@auth_bp.route("/logout")</code> | <code>/auth/logout</code> |
-| admin     | <code>@admin_bp.route("/products")</code> | <code>/admin/products</code> |</p>
+</span></code></pre></div>
+<p><strong>Resultaat:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Blueprint</th>
+<th>Route</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>products</td>
+<td><code>@products_bp.route("/")</code></td>
+<td><code>/</code></td>
+</tr>
+<tr>
+<td>products</td>
+<td><code>@products_bp.route("/product/&lt;id&gt;")</code></td>
+<td><code>/product/123</code></td>
+</tr>
+<tr>
+<td>auth</td>
+<td><code>@auth_bp.route("/login")</code></td>
+<td><code>/auth/login</code></td>
+</tr>
+<tr>
+<td>auth</td>
+<td><code>@auth_bp.route("/logout")</code></td>
+<td><code>/auth/logout</code></td>
+</tr>
+<tr>
+<td>admin</td>
+<td><code>@admin_bp.route("/products")</code></td>
+<td><code>/admin/products</code></td>
+</tr>
+</tbody>
+</table>
 <h3 id="3-url-generation-met-blueprints">3. URL Generation met Blueprints<a class="headerlink" href="#3-url-generation-met-blueprints" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Week 7a:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">url_for</span><span class="p">(</span><span class="s1">'index'</span><span class="p">)</span>           <span class="c1"># Naar index() functie</span>
+<p><strong>Week 7a:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">url_for</span><span class="p">(</span><span class="s1">'index'</span><span class="p">)</span>           <span class="c1"># Naar index() functie</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">url_for</span><span class="p">(</span><span class="s1">'login'</span><span class="p">)</span>           <span class="c1"># Naar login() functie</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">url_for</span><span class="p">(</span><span class="s1">'admin_products'</span><span class="p">)</span>  <span class="c1"># Naar admin_products() functie</span>
-</span></code></pre></div><p></p>
-<p><strong>Week 7b:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">url_for</span><span class="p">(</span><span class="s1">'products.index'</span><span class="p">)</span>        <span class="c1"># Blueprint.view syntax!</span>
+</span></code></pre></div>
+<p><strong>Week 7b:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">url_for</span><span class="p">(</span><span class="s1">'products.index'</span><span class="p">)</span>        <span class="c1"># Blueprint.view syntax!</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">url_for</span><span class="p">(</span><span class="s1">'auth.login'</span><span class="p">)</span>            <span class="c1"># auth blueprint, login view</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">url_for</span><span class="p">(</span><span class="s1">'admin.products'</span><span class="p">)</span>        <span class="c1"># admin blueprint, products view</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">url_for</span><span class="p">(</span><span class="s1">'products.category'</span><span class="p">,</span> <span class="n">category_id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Met parameters</span>
-</span></code></pre></div><p></p>
-<p><strong>In templates:</strong>
-</p><div class="language-jinja highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="x">&lt;!-- base.html --&gt;</span>
+</span></code></pre></div>
+<p><strong>In templates:</strong></p>
+<div class="language-jinja highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="x">&lt;!-- base.html --&gt;</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="x">&lt;a href="</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">'products.index'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">"&gt;Home&lt;/a&gt;</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="x">&lt;a href="</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">'auth.login'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">"&gt;Inloggen&lt;/a&gt;</span>
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="x">&lt;a href="</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">'admin.products'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">"&gt;Admin Panel&lt;/a&gt;</span>
@@ -4418,7 +4453,7 @@
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="x">&lt;a href="</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">'products.product'</span><span class="o">,</span> <span class="nv">product_id</span><span class="o">=</span><span class="nv">product.id</span><span class="o">)</span> <span class="cp">}}</span><span class="x">"&gt;</span>
 </span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="x">    Bekijk Product</span>
 </span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="x">&lt;/a&gt;</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h3 id="4-template-folders">4. Template Folders<a class="headerlink" href="#4-template-folders" title="Link naar deze sectie">¶</a></h3>
 <p>Elke blueprint heeft eigen template folder:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># products/views.py</span>
@@ -4427,32 +4462,34 @@
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># De templates staan in products/templates/products/</span>
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1"># Dit voorkomt naming conflicts tussen blueprints</span>
 </span></code></pre></div>
-<p><strong>Flask zoekt templates in deze volgorde:</strong>
-1. <code>webshop_app/templates/</code> (main app templates)
-2. <code>webshop_app/products/templates/</code> (products blueprint)
-3. <code>webshop_app/auth/templates/</code> (auth blueprint)
-4. <code>webshop_app/admin/templates/</code> (admin blueprint)</p>
-<p><strong>Best practice:</strong> Gebruik subfolders met blueprint naam:
-</p><div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>products/templates/products/index.html  # Goed!
+<p><strong>Flask zoekt templates in deze volgorde:</strong></p>
+<ol>
+<li><code>webshop_app/templates/</code> (main app templates)</li>
+<li><code>webshop_app/products/templates/</code> (products blueprint)</li>
+<li><code>webshop_app/auth/templates/</code> (auth blueprint)</li>
+<li><code>webshop_app/admin/templates/</code> (admin blueprint)</li>
+</ol>
+<p><strong>Best practice:</strong> Gebruik subfolders met blueprint naam:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>products/templates/products/index.html  # Goed!
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>products/templates/index.html           # Vermijd (kan conflicts geven)
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h3 id="5-circular-import-prevention">5. Circular Import Prevention<a class="headerlink" href="#5-circular-import-prevention" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Probleem:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># models.py</span>
+<p><strong>Probleem:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># models.py</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">webshop_app</span><span class="w"> </span><span class="kn">import</span> <span class="n">db</span>  <span class="c1"># ❌ Circular import!</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># __init__.py</span>
 </span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">webshop_app.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Customer</span>  <span class="c1"># ❌ Circular import!</span>
-</span></code></pre></div><p></p>
-<p><strong>Oplossing:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># models.py</span>
+</span></code></pre></div>
+<p><strong>Oplossing:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># models.py</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask_sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">SQLAlchemy</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">()</span>  <span class="c1"># ✅ Maak db hier aan</span>
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
 </span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># __init__.py</span>
 </span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">webshop_app.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">db</span>  <span class="c1"># ✅ Import db</span>
 </span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">db</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>  <span class="c1"># ✅ Bind aan app in factory</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="url-prefix-voorbeelden">URL Prefix Voorbeelden<a class="headerlink" href="#url-prefix-voorbeelden" title="Link naar deze sectie">¶</a></h2>
 <h3 id="zonder-prefix-products">Zonder Prefix (Products)<a class="headerlink" href="#zonder-prefix-products" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">products_bp</span><span class="p">)</span>  <span class="c1"># Geen url_prefix</span>
@@ -4543,31 +4580,29 @@
 </table>
 <h2 id="installatie">Installatie<a class="headerlink" href="#installatie" title="Link naar deze sectie">¶</a></h2>
 <ol>
-<li>
-<p><strong>Installeer dependencies:</strong>
-   </p><div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Migreer data (optioneel):</strong>
-   </p><div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>python<span class="w"> </span>migrate_database.py
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Start de applicatie:</strong>
-   </p><div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>python<span class="w"> </span>app.py
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Open in browser:</strong>
-   </p><div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>http://127.0.0.1:5000
-</span></code></pre></div><p></p>
-</li>
+<li><strong>Installeer dependencies:</strong></li>
 </ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span></code></pre></div>
+<ol>
+<li><strong>Migreer data (optioneel):</strong></li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>python<span class="w"> </span>migrate_database.py
+</span></code></pre></div>
+<ol>
+<li><strong>Start de applicatie:</strong></li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>python<span class="w"> </span>app.py
+</span></code></pre></div>
+<ol>
+<li><strong>Open in browser:</strong></li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>http://127.0.0.1:5000
+</span></code></pre></div>
 <h2 id="code-vergelijking">Code Vergelijking<a class="headerlink" href="#code-vergelijking" title="Link naar deze sectie">¶</a></h2>
 <h3 id="route-definitie">Route Definitie<a class="headerlink" href="#route-definitie" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Week 7a:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># app.py (alles in één bestand)</span>
+<p><strong>Week 7a:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># app.py (alles in één bestand)</span>
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
 </span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">():</span>
 </span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>    <span class="n">categories</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
@@ -4584,9 +4619,9 @@
 </span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="k">def</span><span class="w"> </span><span class="nf">admin_products</span><span class="p">():</span>
 </span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>    <span class="n">products</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </span><span id="__span-19-17"><a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">"admin_products.html"</span><span class="p">,</span> <span class="n">products</span><span class="o">=</span><span class="n">products</span><span class="p">)</span>
-</span></code></pre></div><p></p>
-<p><strong>Week 7b:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># products/views.py</span>
+</span></code></pre></div>
+<p><strong>Week 7b:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># products/views.py</span>
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nd">@products_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
 </span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">():</span>
 </span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>    <span class="n">categories</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
@@ -4605,17 +4640,17 @@
 </span><span id="__span-20-17"><a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a><span class="k">def</span><span class="w"> </span><span class="nf">products</span><span class="p">():</span>
 </span><span id="__span-20-18"><a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a>    <span class="n">all_products</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </span><span id="__span-20-19"><a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">"admin/products.html"</span><span class="p">,</span> <span class="n">products</span><span class="o">=</span><span class="n">all_products</span><span class="p">)</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h3 id="imports">Imports<a class="headerlink" href="#imports" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Week 7a:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># app.py</span>
+<p><strong>Week 7a:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># app.py</span>
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
 </span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">models</span><span class="w"> </span><span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">Category</span><span class="p">,</span> <span class="n">Product</span><span class="p">,</span> <span class="n">Customer</span>
 </span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">forms</span><span class="w"> </span><span class="kn">import</span> <span class="n">LoginForm</span><span class="p">,</span> <span class="n">AddProductForm</span>
 </span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="c1"># Alles in één bestand</span>
-</span></code></pre></div><p></p>
-<p><strong>Week 7b:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># products/views.py</span>
+</span></code></pre></div>
+<p><strong>Week 7b:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># products/views.py</span>
 </span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Blueprint</span><span class="p">,</span> <span class="n">render_template</span>
 </span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">webshop_app.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Category</span><span class="p">,</span> <span class="n">Product</span>
 </span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">webshop_app.products.forms</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContactForm</span>
@@ -4629,7 +4664,7 @@
 </span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Blueprint</span>
 </span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="kn">from</span><span class="w"> </span><span class="nn">webshop_app.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Product</span>
 </span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="kn">from</span><span class="w"> </span><span class="nn">webshop_app.admin.forms</span><span class="w"> </span><span class="kn">import</span> <span class="n">AddProductForm</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="testing-met-blueprints">Testing met Blueprints<a class="headerlink" href="#testing-met-blueprints" title="Link naar deze sectie">¶</a></h2>
 <p>Blueprints kunnen apart getest worden:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># tests/test_products.py</span>

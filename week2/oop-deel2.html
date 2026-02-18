@@ -4423,14 +4423,18 @@
 </span><span id="__span-7-66"><a id="__codelineno-7-66" name="__codelineno-7-66" href="#__codelineno-7-66"></a><span class="c1"># Totaal: €742.94</span>
 </span></code></pre></div>
 <h2 id="wanneer-dataclasses-gebruiken">Wanneer dataclasses gebruiken?<a class="headerlink" href="#wanneer-dataclasses-gebruiken" title="Link naar deze sectie">¶</a></h2>
-<p><strong>Gebruik dataclasses:</strong>
-- Voor klassen die vooral data bevatten
-- Veel attributen, weinig logica
-- Je wilt clean, leesbare code</p>
-<p><strong>Gebruik reguliere klassen:</strong>
-- Complexe initialization logic nodig
-- Veel custom dunder methods (<code>__len__</code>, <code>__iter__</code>, etc.)
-- Geen data container maar echt gedrag</p>
+<p><strong>Gebruik dataclasses:</strong></p>
+<ul>
+<li>Voor klassen die vooral data bevatten</li>
+<li>Veel attributen, weinig logica</li>
+<li>Je wilt clean, leesbare code</li>
+</ul>
+<p><strong>Gebruik reguliere klassen:</strong></p>
+<ul>
+<li>Complexe initialization logic nodig</li>
+<li>Veel custom dunder methods (<code>__len__</code>, <code>__iter__</code>, etc.)</li>
+<li>Geen data container maar echt gedrag</li>
+</ul>
 <div class="admonition tip">
 <p class="admonition-title">Database modellen zijn dataclass-achtig</p>
 <p>SQLAlchemy modellen die je later maakt, gebruiken hetzelfde patroon: type annotaties met class attributen. Als je dataclasses begrijpt, begrijp je ook de moderne SQLAlchemy syntax.</p>

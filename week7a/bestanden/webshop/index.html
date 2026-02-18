@@ -4405,21 +4405,27 @@
 </table>
 <h2 id="belangrijkste-concepten">Belangrijkste Concepten<a class="headerlink" href="#belangrijkste-concepten" title="Link naar deze sectie">¶</a></h2>
 <h3 id="1-flask-login">1. Flask-Login<a class="headerlink" href="#1-flask-login" title="Link naar deze sectie">¶</a></h3>
-<p>Flask-Login biedt gebruikerssessie beheer:
-- ID van actieve gebruiker wordt opgeslagen in sessie
-- Makkelijk inloggen/uitloggen
-- Views beperken tot ingelogde gebruikers
-- "Remember me" functionaliteit
-- Bescherming tegen cookie diefstal</p>
-<p><strong>Wat Flask-Login NIET doet:</strong>
-- Geen password hashing (dat doen we met Werkzeug)
-- Geen registration forms (dat doen we met Flask-WTF)
-- Geen database models (dat doen we met SQLAlchemy)</p>
+<p>Flask-Login biedt gebruikerssessie beheer:</p>
+<ul>
+<li>ID van actieve gebruiker wordt opgeslagen in sessie</li>
+<li>Makkelijk inloggen/uitloggen</li>
+<li>Views beperken tot ingelogde gebruikers</li>
+<li>"Remember me" functionaliteit</li>
+<li>Bescherming tegen cookie diefstal</li>
+</ul>
+<p><strong>Wat Flask-Login NIET doet:</strong></p>
+<ul>
+<li>Geen password hashing (dat doen we met Werkzeug)</li>
+<li>Geen registration forms (dat doen we met Flask-WTF)</li>
+<li>Geen database models (dat doen we met SQLAlchemy)</li>
+</ul>
 <h3 id="2-password-hashing-met-werkzeug">2. Password Hashing met Werkzeug<a class="headerlink" href="#2-password-hashing-met-werkzeug" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Waarom password hashing?</strong>
-- Wachtwoorden NOOIT in plain text opslaan in database
-- Als database wordt gehackt, zijn wachtwoorden veilig
-- Zelfs database admins kunnen wachtwoorden niet zien</p>
+<p><strong>Waarom password hashing?</strong></p>
+<ul>
+<li>Wachtwoorden NOOIT in plain text opslaan in database</li>
+<li>Als database wordt gehackt, zijn wachtwoorden veilig</li>
+<li>Zelfs database admins kunnen wachtwoorden niet zien</li>
+</ul>
 <p><strong>Hoe werkt het?</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">werkzeug.security</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_password_hash</span><span class="p">,</span> <span class="n">check_password_hash</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -4431,10 +4437,12 @@
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">check_password_hash</span><span class="p">(</span><span class="n">hashed</span><span class="p">,</span> <span class="s1">'mijnwachtwoord'</span><span class="p">)</span>  <span class="c1"># True</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">check_password_hash</span><span class="p">(</span><span class="n">hashed</span><span class="p">,</span> <span class="s1">'fout'</span><span class="p">)</span>  <span class="c1"># False</span>
 </span></code></pre></div>
-<p><strong>Belangrijke eigenschappen:</strong>
-- Zelfde wachtwoord geeft elke keer andere hash (door salt)
-- Hash kan niet worden teruggerekend naar origineel wachtwoord
-- Check is snel, maar brute force is traag (door PBKDF2)</p>
+<p><strong>Belangrijke eigenschappen:</strong></p>
+<ul>
+<li>Zelfde wachtwoord geeft elke keer andere hash (door salt)</li>
+<li>Hash kan niet worden teruggerekend naar origineel wachtwoord</li>
+<li>Check is snel, maar brute force is traag (door PBKDF2)</li>
+</ul>
 <h3 id="3-usermixin">3. UserMixin<a class="headerlink" href="#3-usermixin" title="Link naar deze sectie">¶</a></h3>
 <p>UserMixin voegt automatisch methodes toe aan Customer model:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Customer</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span> <span class="n">UserMixin</span><span class="p">):</span>
@@ -4452,12 +4460,12 @@
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">login_manager</span><span class="o">.</span><span class="n">init_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">login_manager</span><span class="o">.</span><span class="n">login_view</span> <span class="o">=</span> <span class="s2">"login"</span>  <span class="c1"># Waar heen bij @login_required</span>
 </span></code></pre></div>
-<p><strong>user_loader decorator:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@login_manager</span><span class="o">.</span><span class="n">user_loader</span>
+<p><strong>user_loader decorator:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@login_manager</span><span class="o">.</span><span class="n">user_loader</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">load_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="sd">"""Flask-Login gebruikt deze functie om user te laden uit sessie."""</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">return</span> <span class="n">Customer</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">user_id</span><span class="p">))</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h3 id="5-admin-vs-customer-roles">5. Admin vs Customer Roles<a class="headerlink" href="#5-admin-vs-customer-roles" title="Link naar deze sectie">¶</a></h3>
 <p>We gebruiken een <code>is_admin</code> boolean field om te onderscheiden:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Customer</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span> <span class="n">UserMixin</span><span class="p">):</span>
@@ -4469,18 +4477,18 @@
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">customer</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Jan'</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">'jan@email.nl'</span><span class="p">,</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>                    <span class="n">password</span><span class="o">=</span><span class="s1">'wachtwoord'</span><span class="p">,</span> <span class="n">is_admin</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>Admin checks in templates:</strong>
-</p><div class="language-jinja highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">{%</span> <span class="k">if</span> <span class="nv">current_user.is_admin</span> <span class="cp">%}</span>
+<p><strong>Admin checks in templates:</strong></p>
+<div class="language-jinja highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">{%</span> <span class="k">if</span> <span class="nv">current_user.is_admin</span> <span class="cp">%}</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="x">    &lt;a href="</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">'admin_products'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">"&gt;Admin Panel&lt;/a&gt;</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
-</span></code></pre></div><p></p>
-<p><strong>Admin checks in routes:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/admin/products'</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Admin checks in routes:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/admin/products'</span><span class="p">)</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nd">@admin_required</span>  <span class="c1"># Custom decorator!</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">admin_products</span><span class="p">():</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="c1"># Alleen admins kunnen hier komen</span>
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="k">pass</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="bestanden-structuur">Bestanden Structuur<a class="headerlink" href="#bestanden-structuur" title="Link naar deze sectie">¶</a></h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>webshop/
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>├── app.py                  # Flask app met authentication routes
@@ -4504,30 +4512,28 @@
 </span></code></pre></div>
 <h2 id="installatie">Installatie<a class="headerlink" href="#installatie" title="Link naar deze sectie">¶</a></h2>
 <ol>
-<li>
-<p><strong>Installeer dependencies:</strong>
-   </p><div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>pip<span class="w"> </span>install<span class="w"> </span>flask<span class="w"> </span>flask-sqlalchemy<span class="w"> </span>flask-wtf<span class="w"> </span>flask-login
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Migreer data van Week 6 (optioneel):</strong>
-   </p><div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>python<span class="w"> </span>migrate_database.py
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Start de applicatie:</strong>
-   </p><div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>python<span class="w"> </span>app.py
-</span></code></pre></div><p></p>
-</li>
+<li><strong>Installeer dependencies:</strong></li>
 </ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>pip<span class="w"> </span>install<span class="w"> </span>flask<span class="w"> </span>flask-sqlalchemy<span class="w"> </span>flask-wtf<span class="w"> </span>flask-login
+</span></code></pre></div>
+<ol>
+<li><strong>Migreer data van Week 6 (optioneel):</strong></li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>python<span class="w"> </span>migrate_database.py
+</span></code></pre></div>
+<ol>
+<li><strong>Start de applicatie:</strong></li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>python<span class="w"> </span>app.py
+</span></code></pre></div>
 <p>Bij eerste start wordt automatisch een demo admin aangemaakt:
    - <strong>Email:</strong> <a href="mailto:admin@webshop.nl">admin@webshop.nl</a>
    - <strong>Wachtwoord:</strong> admin123</p>
 <ol>
-<li><strong>Open in browser:</strong>
-   <div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>http://127.0.0.1:5000
-</span></code></pre></div></li>
+<li><strong>Open in browser:</strong></li>
 </ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>http://127.0.0.1:5000
+</span></code></pre></div>
 <h2 id="nieuwe-routes">Nieuwe Routes<a class="headerlink" href="#nieuwe-routes" title="Link naar deze sectie">¶</a></h2>
 <h3 id="authentication-routes">Authentication Routes<a class="headerlink" href="#authentication-routes" title="Link naar deze sectie">¶</a></h3>
 <table>
@@ -4658,12 +4664,12 @@
 </span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>
 </span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">'login.html'</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>Hoe werkt de 'next' parameter?</strong>
-</p><div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>1. User probeert /admin/products te bezoeken (niet ingelogd)
+<p><strong>Hoe werkt de 'next' parameter?</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>1. User probeert /admin/products te bezoeken (niet ingelogd)
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>2. @admin_required redirect naar /login?next=/admin/products
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>3. User logt in
 </span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>4. Wordt doorgestuurd naar /admin/products
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h3 id="2-registration-flow">2. Registration Flow<a class="headerlink" href="#2-registration-flow" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/register"</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">'GET'</span><span class="p">,</span> <span class="s1">'POST'</span><span class="p">])</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">register</span><span class="p">():</span>
@@ -4728,10 +4734,12 @@
 </span><span id="__span-16-25"><a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a>    <span class="n">products</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </span><span id="__span-16-26"><a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">'admin_products.html'</span><span class="p">,</span> <span class="n">products</span><span class="o">=</span><span class="n">products</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>Waarom <code>@wraps(f)</code>?</strong>
-- Behoudt originele functienaam en docstring
-- Zonder <code>@wraps</code> zou <code>admin_products.__name__</code> = "decorated_function" zijn
-- Dit breekt <code>url_for()</code> en Flask's routing</p>
+<p><strong>Waarom <code>@wraps(f)</code>?</strong></p>
+<ul>
+<li>Behoudt originele functienaam en docstring</li>
+<li>Zonder <code>@wraps</code> zou <code>admin_products.__name__</code> = "decorated_function" zijn</li>
+<li>Dit breekt <code>url_for()</code> en Flask's routing</li>
+</ul>
 <h3 id="5-template-context-current_user">5. Template Context (current_user)<a class="headerlink" href="#5-template-context-current_user" title="Link naar deze sectie">¶</a></h3>
 <p>Flask-Login maakt <code>current_user</code> automatisch beschikbaar in templates:</p>
 <div class="language-jinja highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="x">&lt;!-- base.html --&gt;</span>
@@ -4791,10 +4799,12 @@
 </span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>    <span class="p">]</span>
 </span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>Voor productie:</strong>
-- Minimaal 8 karakters
-- Verplicht cijfers/speciale tekens
-- Gebruik <code>zxcvbn</code> library voor strength check</p>
+<p><strong>Voor productie:</strong></p>
+<ul>
+<li>Minimaal 8 karakters</li>
+<li>Verplicht cijfers/speciale tekens</li>
+<li>Gebruik <code>zxcvbn</code> library voor strength check</li>
+</ul>
 <h3 id="2-csrf-protection">2. CSRF Protection<a class="headerlink" href="#2-csrf-protection" title="Link naar deze sectie">¶</a></h3>
 <p>Flask-WTF beveiligt automatisch tegen CSRF:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># In form</span>
@@ -4803,11 +4813,11 @@
 </span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1"># In app.py</span>
 </span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">'SECRET_KEY'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'webshop-secret-key-2025'</span>  <span class="c1"># Verplicht!</span>
 </span></code></pre></div>
-<p><strong>Voor productie:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">secrets</span>
+<p><strong>Voor productie:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">secrets</span>
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">'SECRET_KEY'</span><span class="p">]</span> <span class="o">=</span> <span class="n">secrets</span><span class="o">.</span><span class="n">token_hex</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>  <span class="c1"># Random key!</span>
 </span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="c1"># Bewaar in environment variable, NIET in code!</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h3 id="3-sql-injection-prevention">3. SQL Injection Prevention<a class="headerlink" href="#3-sql-injection-prevention" title="Link naar deze sectie">¶</a></h3>
 <p>SQLAlchemy ORM voorkomt SQL injection automatisch:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># ✅ Veilig - ORM escaped automatisch</span>
@@ -4891,32 +4901,30 @@
 </ul>
 <h2 id="tips">Tips<a class="headerlink" href="#tips" title="Link naar deze sectie">¶</a></h2>
 <ol>
-<li>
-<p><strong>Test altijd met fresh database</strong>
-   </p><div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>rm<span class="w"> </span>webshop.db
+<li><strong>Test altijd met fresh database</strong></li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>rm<span class="w"> </span>webshop.db
 </span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>python<span class="w"> </span>app.py<span class="w">  </span><span class="c1"># Maakt nieuwe DB aan met admin</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Check wachtwoord hash in database</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">app</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">Customer</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Check wachtwoord hash in database</strong></li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">app</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">Customer</span>
 </span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
 </span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>    <span class="n">admin</span> <span class="o">=</span> <span class="n">Customer</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="s1">'admin@webshop.nl'</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 </span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">password_hash</span><span class="p">)</span>
 </span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>    <span class="c1"># pbkdf2:sha256:150000$...</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Debug login issues</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">user</span> <span class="o">=</span> <span class="n">Customer</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Debug login issues</strong></li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">user</span> <span class="o">=</span> <span class="n">Customer</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 </span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="k">if</span> <span class="n">user</span><span class="p">:</span>
 </span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"User found: </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Password check: </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">check_password</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">password</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="k">else</span><span class="p">:</span>
 </span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"User not found!"</span><span class="p">)</span>
-</span></code></pre></div><p></p>
-</li>
-</ol>
+</span></code></pre></div>
 <h2 id="resources">Resources<a class="headerlink" href="#resources" title="Link naar deze sectie">¶</a></h2>
 <ul>
 <li><a href="https://flask-login.readthedocs.io/">Flask-Login Documentation</a></li>

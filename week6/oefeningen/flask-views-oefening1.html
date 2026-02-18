@@ -4293,13 +4293,17 @@
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Link naar deze sectie">¶</a></h2>
 <h3 id="database-structuur">Database structuur<a class="headerlink" href="#database-structuur" title="Link naar deze sectie">¶</a></h3>
 <p>Twee modellen met een relatie:</p>
-<p><strong>Docent</strong>:
-- <code>id</code> (primary key)
-- <code>naam</code></p>
-<p><strong>Student</strong>:
-- <code>id</code> (primary key)
-- <code>naam</code>
-- <code>mentor_id</code> (foreign key naar Docent)</p>
+<p><strong>Docent</strong>:</p>
+<ul>
+<li><code>id</code> (primary key)</li>
+<li><code>naam</code></li>
+</ul>
+<p><strong>Student</strong>:</p>
+<ul>
+<li><code>id</code> (primary key)</li>
+<li><code>naam</code></li>
+<li><code>mentor_id</code> (foreign key naar Docent)</li>
+</ul>
 <p><strong>Relatie</strong>: Eén docent kan mentor zijn van meerdere studenten (één-op-veel).</p>
 <h3 id="functionaliteit">Functionaliteit<a class="headerlink" href="#functionaliteit" title="Link naar deze sectie">¶</a></h3>
 <p>De website moet deze acties ondersteunen:</p>
@@ -4325,16 +4329,20 @@
 </ul>
 <h2 id="bestandsstructuur">Bestandsstructuur<a class="headerlink" href="#bestandsstructuur" title="Link naar deze sectie">¶</a></h2>
 <p>Maak deze bestanden:</p>
-<p><strong>Python</strong>:
-- <code>mentor_site.py</code> - Hoofd applicatie
-- <code>forms.py</code> - Drie formulieren</p>
-<p><strong>Templates</strong>:
-- <code>base.html</code> - Basis template met navigatie
-- <code>home.html</code> - Homepage
-- <code>voeg_docent_toe.html</code>
-- <code>voeg_student_toe.html</code>
-- <code>overzicht.html</code> - Studenten met mentor
-- <code>verwijder.html</code> (of twee aparte templates)</p>
+<p><strong>Python</strong>:</p>
+<ul>
+<li><code>mentor_site.py</code> - Hoofd applicatie</li>
+<li><code>forms.py</code> - Drie formulieren</li>
+</ul>
+<p><strong>Templates</strong>:</p>
+<ul>
+<li><code>base.html</code> - Basis template met navigatie</li>
+<li><code>home.html</code> - Homepage</li>
+<li><code>voeg_docent_toe.html</code></li>
+<li><code>voeg_student_toe.html</code></li>
+<li><code>overzicht.html</code> - Studenten met mentor</li>
+<li><code>verwijder.html</code> (of twee aparte templates)</li>
+</ul>
 <h2 id="hints">Hints<a class="headerlink" href="#hints" title="Link naar deze sectie">¶</a></h2>
 <h3 id="models">Models<a class="headerlink" href="#models" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Docent</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>

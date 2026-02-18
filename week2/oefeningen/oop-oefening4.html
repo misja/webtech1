@@ -4374,21 +4374,27 @@
 <h1 id="oop-python-oefening-4">OOP Python – Oefening 4<a class="headerlink" href="#oop-python-oefening-4" title="Link naar deze sectie">¶</a></h1>
 <p>In deze oefening werk je met <strong>compositie</strong> - objecten die andere objecten bevatten. Je bouwt een compleet bestellingssysteem dat je voorbereidt op het werken met database relaties (foreign keys).</p>
 <h2 id="achtergrond">Achtergrond<a class="headerlink" href="#achtergrond" title="Link naar deze sectie">¶</a></h2>
-<p>Een bestelling in een webshop is samengesteld uit meerdere objecten:
-- Een <strong>Klant</strong> (wie bestelt?)
-- Een lijst met <strong>Producten</strong> (wat wordt besteld?)
-- Een <strong>Betaalmethode</strong> (hoe betalen?)
--Een <strong>Verzendmethode</strong> (hoe verzenden?)
-- Optioneel: een <strong>Kortingscode</strong></p>
+<p>Een bestelling in een webshop is samengesteld uit meerdere objecten:</p>
+<ul>
+<li>Een <strong>Klant</strong> (wie bestelt?)</li>
+<li>Een lijst met <strong>Producten</strong> (wat wordt besteld?)</li>
+<li>Een <strong>Betaalmethode</strong> (hoe betalen?)
+-Een <strong>Verzendmethode</strong> (hoe verzenden?)</li>
+<li>Optioneel: een <strong>Kortingscode</strong></li>
+</ul>
 <p>Dit is <strong>compositie</strong>: de <code>Bestelling</code> <em>heeft</em> een klant, <em>heeft</em> producten, etc.</p>
 <h2 id="deel-a-betaalmethode">Deel a: Betaalmethode<a class="headerlink" href="#deel-a-betaalmethode" title="Link naar deze sectie">¶</a></h2>
 <p>Maak een <code>Betaalmethode</code> dataclass.</p>
 <h3 id="opdracht">Opdracht<a class="headerlink" href="#opdracht" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Attributen:</strong>
-- <code>type</code> (str): Type betaling ("iDEAL", "Creditcard", "PayPal")
-- <code>transactiekosten</code> (float): Kosten voor deze betaalmethode (default: 0.0)</p>
-<p><strong>Methoden:</strong>
-- <code>bereken_totaal_met_kosten(bedrag: float) -&gt; float</code>: Geef bedrag + transactiekosten terug</p>
+<p><strong>Attributen:</strong></p>
+<ul>
+<li><code>type</code> (str): Type betaling ("iDEAL", "Creditcard", "PayPal")</li>
+<li><code>transactiekosten</code> (float): Kosten voor deze betaalmethode (default: 0.0)</li>
+</ul>
+<p><strong>Methoden:</strong></p>
+<ul>
+<li><code>bereken_totaal_met_kosten(bedrag: float) -&gt; float</code>: Geef bedrag + transactiekosten terug</li>
+</ul>
 <h3 id="code">Code<a class="headerlink" href="#code" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -4404,10 +4410,12 @@
 <h2 id="deel-b-verzendmethode">Deel b: Verzendmethode<a class="headerlink" href="#deel-b-verzendmethode" title="Link naar deze sectie">¶</a></h2>
 <p>Maak een <code>Verzendmethode</code> dataclass.</p>
 <h3 id="opdracht_1">Opdracht<a class="headerlink" href="#opdracht_1" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Attributen:</strong>
-- <code>type</code> (str): Type verzending ("Standaard", "Express", "Afhalen")
-- <code>kosten</code> (float): Verzendkosten
-- <code>levertijd</code> (str): Verwachte levertijd (bijv. "2-3 werkdagen")</p>
+<p><strong>Attributen:</strong></p>
+<ul>
+<li><code>type</code> (str): Type verzending ("Standaard", "Express", "Afhalen")</li>
+<li><code>kosten</code> (float): Verzendkosten</li>
+<li><code>levertijd</code> (str): Verwachte levertijd (bijv. "2-3 werkdagen")</li>
+</ul>
 <h3 id="code_1">Code<a class="headerlink" href="#code_1" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@dataclass</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">Verzendmethode</span><span class="p">:</span>
@@ -4418,11 +4426,15 @@
 <h2 id="deel-c-kortingscode-optioneel-maar-aanbevolen">Deel c: Kortingscode (optioneel maar aanbevolen)<a class="headerlink" href="#deel-c-kortingscode-optioneel-maar-aanbevolen" title="Link naar deze sectie">¶</a></h2>
 <p>Maak een <code>Kortingscode</code> dataclass.</p>
 <h3 id="opdracht_2">Opdracht<a class="headerlink" href="#opdracht_2" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Attributen:</strong>
-- <code>code</code> (str): De kortingscode (bijv. "ZOMER2024")
-- <code>percentage</code> (float): Kortingspercentage (bijv. 15.0 voor 15%)</p>
-<p><strong>Methoden:</strong>
-- <code>bereken_korting(bedrag: float) -&gt; float</code>: Bereken kortingsbedrag</p>
+<p><strong>Attributen:</strong></p>
+<ul>
+<li><code>code</code> (str): De kortingscode (bijv. "ZOMER2024")</li>
+<li><code>percentage</code> (float): Kortingspercentage (bijv. 15.0 voor 15%)</li>
+</ul>
+<p><strong>Methoden:</strong></p>
+<ul>
+<li><code>bereken_korting(bedrag: float) -&gt; float</code>: Bereken kortingsbedrag</li>
+</ul>
 <h3 id="code_2">Code<a class="headerlink" href="#code_2" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@dataclass</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">Kortingscode</span><span class="p">:</span>
@@ -4436,12 +4448,14 @@
 <h2 id="deel-d-bestelling-compositie">Deel d: Bestelling (compositie!)<a class="headerlink" href="#deel-d-bestelling-compositie" title="Link naar deze sectie">¶</a></h2>
 <p>Nu komt het allemaal samen. Maak een <code>Bestelling</code> dataclass die alle andere objecten gebruikt.</p>
 <h3 id="opdracht_3">Opdracht<a class="headerlink" href="#opdracht_3" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Attributen:</strong>
-- <code>klant</code> (Klant): Klant object
-- <code>producten</code> (list[Product]): Lijst met producten
-- <code>betaalmethode</code> (Betaalmethode): Betaalmethode object
-- <code>verzendmethode</code> (Verzendmethode): Verzendmethode object
-- <code>kortingscode</code> (Optional[Kortingscode]): Optionele kortingscode (default: None)</p>
+<p><strong>Attributen:</strong></p>
+<ul>
+<li><code>klant</code> (Klant): Klant object</li>
+<li><code>producten</code> (list[Product]): Lijst met producten</li>
+<li><code>betaalmethode</code> (Betaalmethode): Betaalmethode object</li>
+<li><code>verzendmethode</code> (Verzendmethode): Verzendmethode object</li>
+<li><code>kortingscode</code> (Optional[Kortingscode]): Optionele kortingscode (default: None)</li>
+</ul>
 <p><strong>Methoden:</strong></p>
 <ol>
 <li><strong><code>bereken_subtotaal() -&gt; float</code></strong></li>
@@ -4543,8 +4557,8 @@
 </span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Transactiekosten: €</span><span class="si">{</span><span class="n">totaal_info</span><span class="p">[</span><span class="s1">'transactiekosten'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Totaal: €</span><span class="si">{</span><span class="n">totaal_info</span><span class="p">[</span><span class="s1">'totaal'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>Verwachte output:</strong>
-</p><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Klant: Jan Jansen
+<p><strong>Verwachte output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Klant: Jan Jansen
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Aantal producten: 2
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>Subtotaal: €825.49
@@ -4552,7 +4566,7 @@
 </span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>Verzendkosten: €0.00
 </span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>Transactiekosten: €0.00
 </span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>Totaal: €742.94
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Gratis verzending boven €50</p>
 <p>Let op: de verzendkosten zijn €0.00 omdat het subtotaal na korting boven de €50 is!</p>
@@ -4579,10 +4593,10 @@
 </span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>
 </span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>    <span class="k">return</span> <span class="n">data</span>
 </span></code></pre></div>
-<p>Test:
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">overzicht</span> <span class="o">=</span> <span class="n">bestelling</span><span class="o">.</span><span class="n">maak_overzicht</span><span class="p">()</span>
+<p>Test:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">overzicht</span> <span class="o">=</span> <span class="n">bestelling</span><span class="o">.</span><span class="n">maak_overzicht</span><span class="p">()</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">overzicht</span><span class="p">)</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="checklist">Checklist<a class="headerlink" href="#checklist" title="Link naar deze sectie">¶</a></h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Alle dataclasses gebruiken <code>@dataclass</code></li>

@@ -4215,19 +4215,25 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>└── static/                   # CSS, images, JavaScript (optioneel)
 </span></code></pre></div>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Link naar deze sectie">¶</a></h2>
-<p>✅ <strong>Routes:</strong>
-- <code>/</code> - Homepage met alle categorieën
-- <code>/category/&lt;id&gt;</code> - Producten per categorie
-- <code>/product/&lt;id&gt;</code> - Product detail pagina</p>
-<p>✅ <strong>Database Integratie:</strong>
-- Gebruikt <code>webshop.sqlite</code> uit Week 3
-- Hergebruikt SQL queries uit Week 3
-- Type hints en modern Python patterns</p>
-<p>✅ <strong>Templates:</strong>
-- Bootstrap 5.3.0 voor styling
-- Template inheritance (<code>{% extends %}</code>)
-- Jinja2 loops en conditionals
-- Responsive design</p>
+<p>✅ <strong>Routes:</strong></p>
+<ul>
+<li><code>/</code> - Homepage met alle categorieën</li>
+<li><code>/category/&lt;id&gt;</code> - Producten per categorie</li>
+<li><code>/product/&lt;id&gt;</code> - Product detail pagina</li>
+</ul>
+<p>✅ <strong>Database Integratie:</strong></p>
+<ul>
+<li>Gebruikt <code>webshop.sqlite</code> uit Week 3</li>
+<li>Hergebruikt SQL queries uit Week 3</li>
+<li>Type hints en modern Python patterns</li>
+</ul>
+<p>✅ <strong>Templates:</strong></p>
+<ul>
+<li>Bootstrap 5.3.0 voor styling</li>
+<li>Template inheritance (<code>{% extends %}</code>)</li>
+<li>Jinja2 loops en conditionals</li>
+<li>Responsive design</li>
+</ul>
 <h2 id="setup">Setup<a class="headerlink" href="#setup" title="Link naar deze sectie">¶</a></h2>
 <h3 id="1-installeer-flask">1. Installeer Flask<a class="headerlink" href="#1-installeer-flask" title="Link naar deze sectie">¶</a></h3>
 <p>Vanuit deze directory:</p>
@@ -4235,9 +4241,9 @@
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go">uv add flask</span>
 </span></code></pre></div>
 <h3 id="2-controleer-database-pad">2. Controleer database pad<a class="headerlink" href="#2-controleer-database-pad" title="Link naar deze sectie">¶</a></h3>
-<p>De <code>database.py</code> zoekt de database in:
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">db_path</span> <span class="o">=</span> <span class="s2">"../../../week3/bestanden/webshop.sqlite"</span>
-</span></code></pre></div><p></p>
+<p>De <code>database.py</code> zoekt de database in:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">db_path</span> <span class="o">=</span> <span class="s2">"../../../week3/bestanden/webshop.sqlite"</span>
+</span></code></pre></div>
 <p>Als je de database elders hebt, pas het pad aan.</p>
 <h3 id="3-run-de-applicatie">3. Run de applicatie<a class="headerlink" href="#3-run-de-applicatie" title="Link naar deze sectie">¶</a></h3>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">uv run python app.py</span>
@@ -4310,11 +4316,13 @@
 </span></code></pre></div>
 <p>Dit is een uitbreiding van de queries uit Week 3!</p>
 <h2 id="template-inheritance">Template Inheritance<a class="headerlink" href="#template-inheritance" title="Link naar deze sectie">¶</a></h2>
-<p><strong>base.html</strong> bevat:
-- Navigation bar
-- Bootstrap 5.3.0 CDN links
-- Footer
-- <code>{% block content %}</code> placeholder</p>
+<p><strong>base.html</strong> bevat:</p>
+<ul>
+<li>Navigation bar</li>
+<li>Bootstrap 5.3.0 CDN links</li>
+<li>Footer</li>
+<li><code>{% block content %}</code> placeholder</li>
+</ul>
 <p><strong>Andere templates</strong> extenden base.html:</p>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>{% extends "base.html" %}
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>

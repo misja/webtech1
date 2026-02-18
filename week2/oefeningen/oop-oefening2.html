@@ -4177,14 +4177,18 @@
 <p>Je hebt in oefening 1 waarschijnlijk een reguliere <code>Product</code> klasse gemaakt. Nu ga je deze omzetten naar een dataclass.</p>
 <h3 id="opdracht">Opdracht<a class="headerlink" href="#opdracht" title="Link naar deze sectie">¶</a></h3>
 <p>Maak een bestand <code>product.py</code> met een <code>Product</code> dataclass:</p>
-<p><strong>Attributen:</strong>
-- <code>naam</code> (str): Productnaam
-- <code>prijs</code> (float): Prijs in euro's
-- <code>voorraad</code> (int): Aantal op voorraad (default: 0)
-- <code>beschrijving</code> (Optional[str]): Een optionele beschrijving (default: None)</p>
-<p><strong>Methoden:</strong>
-- <code>verkoop(aantal: int) -&gt; bool</code>: Verkoop items, geeft True bij succes
-- <code>voorraad_waarde() -&gt; float</code>: Bereken totale waarde van voorraad</p>
+<p><strong>Attributen:</strong></p>
+<ul>
+<li><code>naam</code> (str): Productnaam</li>
+<li><code>prijs</code> (float): Prijs in euro's</li>
+<li><code>voorraad</code> (int): Aantal op voorraad (default: 0)</li>
+<li><code>beschrijving</code> (Optional[str]): Een optionele beschrijving (default: None)</li>
+</ul>
+<p><strong>Methoden:</strong></p>
+<ul>
+<li><code>verkoop(aantal: int) -&gt; bool</code>: Verkoop items, geeft True bij succes</li>
+<li><code>voorraad_waarde() -&gt; float</code>: Bereken totale waarde van voorraad</li>
+</ul>
 <h3 id="startcode">Startcode<a class="headerlink" href="#startcode" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
@@ -4208,22 +4212,26 @@
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">laptop</span><span class="o">.</span><span class="n">verkoop</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">laptop</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>Verwachte output:</strong>
-</p><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Product(naam='Laptop', prijs=799.99, voorraad=5, beschrijving='Gaming laptop met RGB')
+<p><strong>Verwachte output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Product(naam='Laptop', prijs=799.99, voorraad=5, beschrijving='Gaming laptop met RGB')
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Voorraadwaarde: €3999.95
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Product(naam='Laptop', prijs=799.99, voorraad=3, beschrijving='Gaming laptop met RGB')
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="deel-b-winkelwagen-met-list-type-hint">Deel b: Winkelwagen met list type hint<a class="headerlink" href="#deel-b-winkelwagen-met-list-type-hint" title="Link naar deze sectie">¶</a></h2>
 <p>Maak een bestand <code>winkelwagen.py</code> met een <code>Winkelwagen</code> dataclass.</p>
 <h3 id="opdracht_1">Opdracht<a class="headerlink" href="#opdracht_1" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Attributen:</strong>
-- <code>klant_naam</code> (str): Naam van de klant
-- <code>items</code> (list[Product]): Lijst met producten</p>
-<p><strong>Methoden:</strong>
-- <code>voeg_toe(product: Product) -&gt; None</code>: Voeg product toe
-- <code>verwijder(product: Product) -&gt; bool</code>: Verwijder product, geeft True als gelukt
-- <code>bereken_totaal() -&gt; float</code>: Bereken totaalprijs
-- <code>aantal_items() -&gt; int</code>: Geef aantal items terug</p>
+<p><strong>Attributen:</strong></p>
+<ul>
+<li><code>klant_naam</code> (str): Naam van de klant</li>
+<li><code>items</code> (list[Product]): Lijst met producten</li>
+</ul>
+<p><strong>Methoden:</strong></p>
+<ul>
+<li><code>voeg_toe(product: Product) -&gt; None</code>: Voeg product toe</li>
+<li><code>verwijder(product: Product) -&gt; bool</code>: Verwijder product, geeft True als gelukt</li>
+<li><code>bereken_totaal() -&gt; float</code>: Bereken totaalprijs</li>
+<li><code>aantal_items() -&gt; int</code>: Geef aantal items terug</li>
+</ul>
 <div class="admonition warning">
 <p class="admonition-title">Mutable defaults: gebruik field()</p>
 <p>Voor lists als default waarde <strong>moet</strong> je <code>field(default_factory=list)</code> gebruiken!</p>
@@ -4262,13 +4270,13 @@
 </span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>
 </span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Nieuw totaal: €</span><span class="si">{</span><span class="n">wagen</span><span class="o">.</span><span class="n">bereken_totaal</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>Verwachte output:</strong>
-</p><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Aantal items: 0
+<p><strong>Verwachte output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Aantal items: 0
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Aantal items: 3
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Totaal: €915.48
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>Muis verwijderd
 </span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>Nieuw totaal: €889.98
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="checklist">Checklist<a class="headerlink" href="#checklist" title="Link naar deze sectie">¶</a></h2>
 <p>Controleer voordat je klaar bent:</p>
 <ul class="task-list">

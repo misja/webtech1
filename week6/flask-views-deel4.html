@@ -4233,15 +4233,21 @@
 <h2 id="sleutels">Sleutels<a class="headerlink" href="#sleutels" title="Link naar deze sectie">¶</a></h2>
 <h3 id="primary-key-primaire-sleutel">Primary Key (Primaire sleutel)<a class="headerlink" href="#primary-key-primaire-sleutel" title="Link naar deze sectie">¶</a></h3>
 <p>Elk model heeft een <code>id</code> kolom die de <strong>primary key</strong> is. Deze waarde is uniek per record en identificeert één specifieke rij.</p>
-<p><code>Cursist</code>:
-- id (primary key, integer)
-- naam (text)</p>
-<p><code>Instrument</code>:
-- id (primary key, integer)
-- naam (text)</p>
-<p><code>Docent</code>:
-- id (primary key, integer)
-- naam (text)</p>
+<p><code>Cursist</code>:</p>
+<ul>
+<li>id (primary key, integer)</li>
+<li>naam (text)</li>
+</ul>
+<p><code>Instrument</code>:</p>
+<ul>
+<li>id (primary key, integer)</li>
+<li>naam (text)</li>
+</ul>
+<p><code>Docent</code>:</p>
+<ul>
+<li>id (primary key, integer)</li>
+<li>naam (text)</li>
+</ul>
 <h3 id="foreign-key-refererende-sleutel">Foreign Key (Refererende sleutel)<a class="headerlink" href="#foreign-key-refererende-sleutel" title="Link naar deze sectie">¶</a></h3>
 <p>Om een <strong>relatie</strong> te leggen tussen tabellen gebruik je een <strong>foreign key</strong>. Dit is een kolom die verwijst naar de <code>id</code> van een ander model.</p>
 <p>Voorbeeld: <code>Instrument</code> moet weten welke cursist het instrument bespeelt. Daarom krijgt <code>Instrument</code> een <code>cursist_id</code> kolom die verwijst naar <code>Cursist.id</code>.</p>
@@ -4308,21 +4314,23 @@
 </span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">instr</span><span class="o">.</span><span class="n">naam</span> <span class="k">for</span> <span class="n">instr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">instrumenten</span><span class="p">]</span>
 </span></code></pre></div>
 <p><strong>Relaties uitleg</strong>:</p>
-<p><strong>Één-op-veel (Cursist ↔ Instrumenten)</strong>:
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">instrumenten</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">'Instrument'</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">'cursist'</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="s1">'dynamic'</span><span class="p">)</span>
-</span></code></pre></div><p></p>
+<p><strong>Één-op-veel (Cursist ↔ Instrumenten)</strong>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">instrumenten</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">'Instrument'</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">'cursist'</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="s1">'dynamic'</span><span class="p">)</span>
+</span></code></pre></div>
 <ul>
 <li><code>'Instrument'</code> - Verwijst naar <code>Instrument</code> model</li>
 <li><code>backref='cursist'</code> - Maakt automatisch <code>instrument.cursist</code> attribuut</li>
 <li><code>lazy='dynamic'</code> - Laadt instrumenten pas wanneer je ze nodig hebt (efficiënt)</li>
 </ul>
-<p>Andere <code>lazy</code> opties:
-- <code>'select'</code> (of <code>True</code>) - Laadt direct bij query
-- <code>'joined'</code> (of <code>False</code>) - Gebruikt SQL JOIN
-- <code>'subquery'</code> - Gebruikt subquery</p>
-<p><strong>Één-op-één (Cursist ↔ Docent)</strong>:
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">docent</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">'Docent'</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">'cursist'</span><span class="p">,</span> <span class="n">uselist</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span></code></pre></div><p></p>
+<p>Andere <code>lazy</code> opties:</p>
+<ul>
+<li><code>'select'</code> (of <code>True</code>) - Laadt direct bij query</li>
+<li><code>'joined'</code> (of <code>False</code>) - Gebruikt SQL JOIN</li>
+<li><code>'subquery'</code> - Gebruikt subquery</li>
+</ul>
+<p><strong>Één-op-één (Cursist ↔ Docent)</strong>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">docent</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">'Docent'</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">'cursist'</span><span class="p">,</span> <span class="n">uselist</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></code></pre></div>
 <ul>
 <li><code>uselist=False</code> - Eén object, geen lijst</li>
 </ul>
@@ -4394,17 +4402,17 @@
 </div>
 </div>
 </div>
-<p><strong>2. Initialiseer migraties</strong>:
-</p><div class="language-console highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">flask db init</span>
-</span></code></pre></div><p></p>
+<p><strong>2. Initialiseer migraties</strong>:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">flask db init</span>
+</span></code></pre></div>
 <p>Dit maakt een <code>migrations/</code> directory aan.</p>
-<p><strong>3. Maak eerste migratie</strong>:
-</p><div class="language-console highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">flask db migrate -m "Initial migration"</span>
-</span></code></pre></div><p></p>
+<p><strong>3. Maak eerste migratie</strong>:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">flask db migrate -m "Initial migration"</span>
+</span></code></pre></div>
 <p>Flask-Migrate detecteert je models en maakt migratie scripts.</p>
-<p><strong>4. Voer migratie uit</strong>:
-</p><div class="language-console highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">flask db upgrade</span>
-</span></code></pre></div><p></p>
+<p><strong>4. Voer migratie uit</strong>:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">flask db upgrade</span>
+</span></code></pre></div>
 <p>Nu worden de tabellen aangemaakt in <code>data.sqlite</code>.</p>
 <h2 id="data-toevoegen-met-relaties">Data toevoegen met relaties<a class="headerlink" href="#data-toevoegen-met-relaties" title="Link naar deze sectie">¶</a></h2>
 <p>Bestudeer het volledige bestand <a href="bestanden/relaties/populate_database.py"><code>populate_database.py</code></a>.</p>

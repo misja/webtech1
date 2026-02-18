@@ -4175,11 +4175,13 @@
 
 <h1 id="flask-forms-flash-messages">Flask Forms - Flash Messages<a class="headerlink" href="#flask-forms-flash-messages" title="Link naar deze sectie">¶</a></h1>
 <p>Flask kan tijdelijke berichten tonen aan gebruikers - bijvoorbeeld een bevestiging na het verzenden van een formulier. Deze berichten heten <strong>flash messages</strong>.</p>
-<p>Flash messages zijn perfect voor:
-- Bevestigingen ("Formulier verzonden!")
-- Waarschuwingen ("Let op: dit veld is verplicht")
-- Errors ("Er ging iets mis")
-- Informatie ("Je sessie verloopt over 5 minuten")</p>
+<p>Flash messages zijn perfect voor:</p>
+<ul>
+<li>Bevestigingen ("Formulier verzonden!")</li>
+<li>Waarschuwingen ("Let op: dit veld is verplicht")</li>
+<li>Errors ("Er ging iets mis")</li>
+<li>Informatie ("Je sessie verloopt over 5 minuten")</li>
+</ul>
 <p>Aan het eind van deze tekst maken we <a href="oefeningen/flask-forms-oefening1.html">oefening 1</a>.</p>
 <h2 id="basis-voorbeeld">Basis voorbeeld<a class="headerlink" href="#basis-voorbeeld" title="Link naar deze sectie">¶</a></h2>
 <p>We maken een formulier met een knop die een flash message toont. Project structuur:</p>
@@ -4302,11 +4304,13 @@
 </span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>{% endfor %}
 </span></code></pre></div>
-<p>Dit genereert automatisch de juiste Bootstrap classes:
-- <code>alert-success</code> (groen)
-- <code>alert-warning</code> (geel)
-- <code>alert-danger</code> (rood)
-- <code>alert-info</code> (blauw)</p>
+<p>Dit genereert automatisch de juiste Bootstrap classes:</p>
+<ul>
+<li><code>alert-success</code> (groen)</li>
+<li><code>alert-warning</code> (geel)</li>
+<li><code>alert-danger</code> (rood)</li>
+<li><code>alert-info</code> (blauw)</li>
+</ul>
 <h3 id="voorbeeld-met-categorieen">Voorbeeld met categorieën<a class="headerlink" href="#voorbeeld-met-categorieen" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/contact'</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">'GET'</span><span class="p">,</span> <span class="s1">'POST'</span><span class="p">])</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">contact</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>

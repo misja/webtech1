@@ -4366,18 +4366,24 @@
 </ul>
 <h2 id="nieuwe-features-in-week-5">Nieuwe Features in Week 5<a class="headerlink" href="#nieuwe-features-in-week-5" title="Link naar deze sectie">¶</a></h2>
 <h3 id="forms-met-flask-wtf">Forms met Flask-WTF<a class="headerlink" href="#forms-met-flask-wtf" title="Link naar deze sectie">¶</a></h3>
-<p>✅ <strong>AddProductForm</strong> - Formulier om producten toe te voegen
-- Validators voor naam, prijs, voorraad
-- Dropdown voor categorie selectie
-- CSRF-beveiliging</p>
-<p>✅ <strong>EditProductForm</strong> - Formulier om producten te bewerken
-- Pre-filled met huidige product data
-- Alle velden editable
-- Delete functionaliteit</p>
-<p>✅ <strong>ContactForm</strong> - Contact formulier voor klanten
-- Naam, email, onderwerp, bericht
-- Email validatie
-- Flash messages na verzenden</p>
+<p>✅ <strong>AddProductForm</strong> - Formulier om producten toe te voegen</p>
+<ul>
+<li>Validators voor naam, prijs, voorraad</li>
+<li>Dropdown voor categorie selectie</li>
+<li>CSRF-beveiliging</li>
+</ul>
+<p>✅ <strong>EditProductForm</strong> - Formulier om producten te bewerken</p>
+<ul>
+<li>Pre-filled met huidige product data</li>
+<li>Alle velden editable</li>
+<li>Delete functionaliteit</li>
+</ul>
+<p>✅ <strong>ContactForm</strong> - Contact formulier voor klanten</p>
+<ul>
+<li>Naam, email, onderwerp, bericht</li>
+<li>Email validatie</li>
+<li>Flash messages na verzenden</li>
+</ul>
 <h3 id="admin-routes">Admin Routes<a class="headerlink" href="#admin-routes" title="Link naar deze sectie">¶</a></h3>
 <ul>
 <li><code>/admin/products</code> - Overzicht van alle producten</li>
@@ -4386,11 +4392,13 @@
 <li><code>/admin/product/delete/&lt;id&gt;</code> - Product verwijderen (POST only)</li>
 </ul>
 <h3 id="database-updates">Database Updates<a class="headerlink" href="#database-updates" title="Link naar deze sectie">¶</a></h3>
-<p>De <code>database.py</code> is uitgebreid met CRUD operaties:
-- <code>add_product()</code> - INSERT query
-- <code>update_product()</code> - UPDATE query
-- <code>delete_product()</code> - DELETE query
-- <code>get_category_choices()</code> - Helper voor SelectField</p>
+<p>De <code>database.py</code> is uitgebreid met CRUD operaties:</p>
+<ul>
+<li><code>add_product()</code> - INSERT query</li>
+<li><code>update_product()</code> - UPDATE query</li>
+<li><code>delete_product()</code> - DELETE query</li>
+<li><code>get_category_choices()</code> - Helper voor SelectField</li>
+</ul>
 <h2 id="structuur">Structuur<a class="headerlink" href="#structuur" title="Link naar deze sectie">¶</a></h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>webshop/
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── app.py                    # Flask app met formulier routes
@@ -4414,9 +4422,9 @@
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go">uv add flask flask-wtf</span>
 </span></code></pre></div>
 <h3 id="2-controleer-database-pad">2. Controleer database pad<a class="headerlink" href="#2-controleer-database-pad" title="Link naar deze sectie">¶</a></h3>
-<p>De <code>database.py</code> zoekt de database in:
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">db_path</span> <span class="o">=</span> <span class="s2">"../../../week3/bestanden/webshop.sqlite"</span>
-</span></code></pre></div><p></p>
+<p>De <code>database.py</code> zoekt de database in:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">db_path</span> <span class="o">=</span> <span class="s2">"../../../week3/bestanden/webshop.sqlite"</span>
+</span></code></pre></div>
 <p>Pas aan indien nodig.</p>
 <h3 id="3-run-de-applicatie">3. Run de applicatie<a class="headerlink" href="#3-run-de-applicatie" title="Link naar deze sectie">¶</a></h3>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">uv run python app.py</span>
@@ -4429,11 +4437,13 @@
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">flash</span><span class="p">(</span><span class="s1">'Product succesvol toegevoegd!'</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">)</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">flash</span><span class="p">(</span><span class="s1">'Er ging iets mis.'</span><span class="p">,</span> <span class="s1">'danger'</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Bootstrap alert categories:
-- <code>success</code> - Groen (succes)
-- <code>danger</code> - Rood (error)
-- <code>warning</code> - Oranje (waarschuwing)
-- <code>info</code> - Blauw (informatie)</p>
+<p>Bootstrap alert categories:</p>
+<ul>
+<li><code>success</code> - Groen (succes)</li>
+<li><code>danger</code> - Rood (error)</li>
+<li><code>warning</code> - Oranje (waarschuwing)</li>
+<li><code>info</code> - Blauw (informatie)</li>
+</ul>
 <h2 id="wtforms-validators">WTForms Validators<a class="headerlink" href="#wtforms-validators" title="Link naar deze sectie">¶</a></h2>
 <h3 id="addproductform-editproductform">AddProductForm &amp; EditProductForm<a class="headerlink" href="#addproductform-editproductform" title="Link naar deze sectie">¶</a></h3>
 <table>
@@ -4596,9 +4606,9 @@
 <p>Flask-WTF biedt automatische CSRF-beveiliging:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">'SECRET_KEY'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'webshop-secret-key-2025'</span>
 </span></code></pre></div>
-<p>Elke form heeft een hidden CSRF token:
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">hidden_tag</span><span class="p">()</span> <span class="p">}}</span>
-</span></code></pre></div><p></p>
+<p>Elke form heeft een hidden CSRF token:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{{</span> <span class="n">form</span><span class="o">.</span><span class="n">hidden_tag</span><span class="p">()</span> <span class="p">}}</span>
+</span></code></pre></div>
 <h3 id="post-only-delete">POST-only Delete<a class="headerlink" href="#post-only-delete" title="Link naar deze sectie">¶</a></h3>
 <p>Delete operaties zijn alleen via POST toegestaan:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/admin/product/delete/&lt;int:id&gt;"</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">'POST'</span><span class="p">])</span>
@@ -4628,34 +4638,32 @@
 <h2 id="tips">Tips<a class="headerlink" href="#tips" title="Link naar deze sectie">¶</a></h2>
 <h3 id="form-flow">Form Flow<a class="headerlink" href="#form-flow" title="Link naar deze sectie">¶</a></h3>
 <ol>
-<li>
-<p><strong>Create form instance</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">form</span> <span class="o">=</span> <span class="n">AddProductForm</span><span class="p">()</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Populate choices</strong> (voor SelectField)
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">form</span><span class="o">.</span><span class="n">category_id</span><span class="o">.</span><span class="n">choices</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_category_choices</span><span class="p">()</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Check validation</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    <span class="c1"># Process form data</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Access form data</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">form</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">data</span>  <span class="c1"># User input</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Flash message &amp; redirect</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">flash</span><span class="p">(</span><span class="s1">'Success!'</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">)</span>
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">'index'</span><span class="p">))</span>
-</span></code></pre></div><p></p>
-</li>
+<li><strong>Create form instance</strong></li>
 </ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">form</span> <span class="o">=</span> <span class="n">AddProductForm</span><span class="p">()</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Populate choices</strong> (voor SelectField)</li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">form</span><span class="o">.</span><span class="n">category_id</span><span class="o">.</span><span class="n">choices</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_category_choices</span><span class="p">()</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Check validation</strong></li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    <span class="c1"># Process form data</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Access form data</strong></li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">form</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">data</span>  <span class="c1"># User input</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Flash message &amp; redirect</strong></li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">flash</span><span class="p">(</span><span class="s1">'Success!'</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">)</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">'index'</span><span class="p">))</span>
+</span></code></pre></div>
 <h3 id="edit-form-pattern">Edit Form Pattern<a class="headerlink" href="#edit-form-pattern" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>    <span class="c1"># Update database</span>
@@ -4666,28 +4674,36 @@
 </span></code></pre></div>
 <h2 id="testing">Testing<a class="headerlink" href="#testing" title="Link naar deze sectie">¶</a></h2>
 <p>Test alle formulieren:</p>
-<p><strong>Add Product:</strong>
-1. Ga naar <code>/admin/product/add</code>
-2. Vul alle velden in
-3. Submit
-4. Check flash message &amp; redirect</p>
-<p><strong>Edit Product:</strong>
-1. Ga naar een product detail pagina
-2. Klik "Bewerken (Admin)"
-3. Wijzig velden
-4. Submit
-5. Check updates</p>
-<p><strong>Delete Product:</strong>
-1. Ga naar edit pagina
-2. Klik "Product Verwijderen"
-3. Bevestig dialog
-4. Check flash message &amp; redirect</p>
-<p><strong>Contact Form:</strong>
-1. Ga naar <code>/contact</code>
-2. Vul formulier in
-3. Test validators (lege velden, te korte tekst)
-4. Submit
-5. Check flash message</p>
+<p><strong>Add Product:</strong></p>
+<ol>
+<li>Ga naar <code>/admin/product/add</code></li>
+<li>Vul alle velden in</li>
+<li>Submit</li>
+<li>Check flash message &amp; redirect</li>
+</ol>
+<p><strong>Edit Product:</strong></p>
+<ol>
+<li>Ga naar een product detail pagina</li>
+<li>Klik "Bewerken (Admin)"</li>
+<li>Wijzig velden</li>
+<li>Submit</li>
+<li>Check updates</li>
+</ol>
+<p><strong>Delete Product:</strong></p>
+<ol>
+<li>Ga naar edit pagina</li>
+<li>Klik "Product Verwijderen"</li>
+<li>Bevestig dialog</li>
+<li>Check flash message &amp; redirect</li>
+</ol>
+<p><strong>Contact Form:</strong></p>
+<ol>
+<li>Ga naar <code>/contact</code></li>
+<li>Vul formulier in</li>
+<li>Test validators (lege velden, te korte tekst)</li>
+<li>Submit</li>
+<li>Check flash message</li>
+</ol>
 <h2 id="debugging">Debugging<a class="headerlink" href="#debugging" title="Link naar deze sectie">¶</a></h2>
 <h3 id="form-errors">Form Errors<a class="headerlink" href="#form-errors" title="Link naar deze sectie">¶</a></h3>
 <p>Print form errors in development:</p>
@@ -4695,16 +4711,20 @@
 </span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">errors</span><span class="p">)</span>
 </span></code></pre></div>
 <h3 id="csrf-errors">CSRF Errors<a class="headerlink" href="#csrf-errors" title="Link naar deze sectie">¶</a></h3>
-<p>Als je CSRF errors krijgt:
-1. Check of SECRET_KEY is geconfigureerd
-2. Check of <code>{{ form.hidden_tag() }}</code> in template staat
-3. Check of je POST gebruikt voor formulier</p>
+<p>Als je CSRF errors krijgt:</p>
+<ol>
+<li>Check of SECRET_KEY is geconfigureerd</li>
+<li>Check of <code>{{ form.hidden_tag() }}</code> in template staat</li>
+<li>Check of je POST gebruikt voor formulier</li>
+</ol>
 <h2 id="volgende-stappen">Volgende Stappen<a class="headerlink" href="#volgende-stappen" title="Link naar deze sectie">¶</a></h2>
-<p>In Week 6 gaan we:
-- SQLAlchemy ORM gebruiken in plaats van raw SQL
-- Models maken voor Product, Category, Customer, Order
-- Relationships definiëren tussen models
-- Formulieren koppelen aan ORM models</p>
+<p>In Week 6 gaan we:</p>
+<ul>
+<li>SQLAlchemy ORM gebruiken in plaats van raw SQL</li>
+<li>Models maken voor Product, Category, Customer, Order</li>
+<li>Relationships definiëren tussen models</li>
+<li>Formulieren koppelen aan ORM models</li>
+</ul>
 <h2 id="referenties">Referenties<a class="headerlink" href="#referenties" title="Link naar deze sectie">¶</a></h2>
 <ul>
 <li><a href="https://flask-wtf.readthedocs.io/">Flask-WTF Documentation</a></li>

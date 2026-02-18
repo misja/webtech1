@@ -4064,13 +4064,13 @@
 </span></code></pre></div>
 <p>Wordt het runnen herhaald, verschijnt er een andere hash.</p>
 <p>Uiteraard nu weer een test naar de werking.</p>
-<p></p><div class="language-ipython highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">bcrypt</span><span class="o">.</span><span class="n">check_password_hash</span><span class="p">(</span><span class="n">hashed_pass</span><span class="p">,</span> <span class="s1">'verkeerdwachtwoord'</span><span class="p">)</span>
+<div class="language-ipython highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">bcrypt</span><span class="o">.</span><span class="n">check_password_hash</span><span class="p">(</span><span class="n">hashed_pass</span><span class="p">,</span> <span class="s1">'verkeerdwachtwoord'</span><span class="p">)</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="kc">False</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">bcrypt</span><span class="o">.</span><span class="n">check_password_hash</span><span class="p">(</span><span class="n">hashed_pass</span><span class="p">,</span> <span class="s1">'supergeheimwachtwoord'</span><span class="p">)</span>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">Out</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="kc">True</span>
 </span></code></pre></div>
-Precies in de lijn der verwachting.<p></p>
+<p>Precies in de lijn der verwachting.</p>
 <h3 id="werkzeug">Werkzeug<a class="headerlink" href="#werkzeug" title="Link naar deze sectie">¶</a></h3>
 <p>Je kunt hetzelfde bereiken met Werkzeug, waarbij de syntax en de check zelfs nog iets simpeler is:</p>
 <div class="language-ipython highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span><span class="w"> </span><span class="nn">werkzeug.security</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_password_hash</span><span class="p">,</span><span class="n">check_password_hash</span>

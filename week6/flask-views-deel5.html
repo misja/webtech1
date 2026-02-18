@@ -4570,15 +4570,19 @@
 </ul>
 <h2 id="project-structuur">Project structuur<a class="headerlink" href="#project-structuur" title="Link naar deze sectie">¶</a></h2>
 <p>Je maakt de volgende bestanden:</p>
-<p><strong>Python bestanden</strong>:
-- <code>beheer_cursist.py</code> - Hoofd applicatie met routes
-- <code>forms.py</code> - Formulier definities</p>
-<p><strong>Templates directory</strong>:
-- <code>base.html</code> - Basis template met navigatie
-- <code>home.html</code> - Homepage
-- <code>voegtoe_cur.html</code> - Cursist toevoegen
-- <code>toon_cur.html</code> - Cursisten tonen
-- <code>verwijder_cur.html</code> - Cursist verwijderen</p>
+<p><strong>Python bestanden</strong>:</p>
+<ul>
+<li><code>beheer_cursist.py</code> - Hoofd applicatie met routes</li>
+<li><code>forms.py</code> - Formulier definities</li>
+</ul>
+<p><strong>Templates directory</strong>:</p>
+<ul>
+<li><code>base.html</code> - Basis template met navigatie</li>
+<li><code>home.html</code> - Homepage</li>
+<li><code>voegtoe_cur.html</code> - Cursist toevoegen</li>
+<li><code>toon_cur.html</code> - Cursisten tonen</li>
+<li><code>verwijder_cur.html</code> - Cursist verwijderen</li>
+</ul>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/5-bestanden.png" data-desc-position="bottom"><img alt="Het overzicht van de bestanden" src="imgs/5-bestanden.png"></a></p>
 <h2 id="stap-1-database-en-model-setup">Stap 1: Database en model setup<a class="headerlink" href="#stap-1-database-en-model-setup" title="Link naar deze sectie">¶</a></h2>
 <p><strong><code>beheer_cursist.py</code></strong> - Bestudeer het volledige bestand <a href="bestanden/relaties/beheer_cursist.py"><code>beheer_cursist.py</code></a>.</p>
@@ -4657,9 +4661,11 @@
 </span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>
 </span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">'voegtoe_cur.html'</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>Workflow</strong>:
-1. GET request: Toon leeg formulier
-2. POST request: Naam opslaan in database, redirect naar lijst</p>
+<p><strong>Workflow</strong>:</p>
+<ol>
+<li>GET request: Toon leeg formulier</li>
+<li>POST request: Naam opslaan in database, redirect naar lijst</li>
+</ol>
 <h3 id="cursisten-tonen">Cursisten tonen<a class="headerlink" href="#cursisten-tonen" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/list'</span><span class="p">)</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">list_cur</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -4693,9 +4699,11 @@
 </span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>
 </span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">'verwijder_cur.html'</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>Workflow</strong>:
-1. GET request: Toon leeg formulier
-2. POST request: Verwijder cursist op ID, redirect naar lijst</p>
+<p><strong>Workflow</strong>:</p>
+<ol>
+<li>GET request: Toon leeg formulier</li>
+<li>POST request: Verwijder cursist op ID, redirect naar lijst</li>
+</ol>
 <h2 id="stap-3-database-aanmaken-en-app-starten">Stap 3: Database aanmaken en app starten<a class="headerlink" href="#stap-3-database-aanmaken-en-app-starten" title="Link naar deze sectie">¶</a></h2>
 <h3 id="database-initialisatie">Database initialisatie<a class="headerlink" href="#database-initialisatie" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
@@ -4729,9 +4737,11 @@
 </span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    <span class="nb">id</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">(</span><span class="s1">'Vul het ID van de cursist die verwijderd gaat worden in:'</span><span class="p">)</span>
 </span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">'Verwijder'</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Twee eenvoudige formulieren:
-- <strong>VoegtoeForm</strong>: Naam (text veld) + submit
-- <strong>VerwijderForm</strong>: ID (nummer veld) + submit</p>
+<p>Twee eenvoudige formulieren:</p>
+<ul>
+<li><strong>VoegtoeForm</strong>: Naam (text veld) + submit</li>
+<li><strong>VerwijderForm</strong>: ID (nummer veld) + submit</li>
+</ul>
 <h2 id="stap-5-templates-maken">Stap 5: Templates maken<a class="headerlink" href="#stap-5-templates-maken" title="Link naar deze sectie">¶</a></h2>
 <h3 id="basehtml-basis-template"><code>base.html</code> - Basis template<a class="headerlink" href="#basehtml-basis-template" title="Link naar deze sectie">¶</a></h3>
 <p>Bestudeer het volledige bestand <a href="bestanden/templates/base.html"><code>base.html</code></a>.</p>
@@ -4870,17 +4880,23 @@
 <p>Eén cursist over - Joyce met ID 1.</p>
 <h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
 <p>Je hebt een complete CRUD webapp gemaakt:</p>
-<p><strong>Backend (Flask + SQLAlchemy)</strong>:
-- Database setup met <code>db.Model</code>
-- Routes voor Create, Read, Delete
-- Formulieren met Flask-WTF</p>
-<p><strong>Frontend (Jinja2 + Bootstrap)</strong>:
-- Basis template met navigatie
-- Formulier templates
-- Lijst template met data uit database</p>
-<p><strong>Database (SQLite)</strong>:
-- Eén tabel (<code>cursisten</code>)
-- CRUD operaties via SQLAlchemy</p>
+<p><strong>Backend (Flask + SQLAlchemy)</strong>:</p>
+<ul>
+<li>Database setup met <code>db.Model</code></li>
+<li>Routes voor Create, Read, Delete</li>
+<li>Formulieren met Flask-WTF</li>
+</ul>
+<p><strong>Frontend (Jinja2 + Bootstrap)</strong>:</p>
+<ul>
+<li>Basis template met navigatie</li>
+<li>Formulier templates</li>
+<li>Lijst template met data uit database</li>
+</ul>
+<p><strong>Database (SQLite)</strong>:</p>
+<ul>
+<li>Eén tabel (<code>cursisten</code>)</li>
+<li>CRUD operaties via SQLAlchemy</li>
+</ul>
 <p><strong>Volgende stap:</strong> <a href="oefeningen/flask-views-oefening1.html">Oefening 1</a> - Bouw je eigen beheersite.</p>
 
 

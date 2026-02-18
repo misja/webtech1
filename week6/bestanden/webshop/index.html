@@ -4235,25 +4235,27 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="c1"># Foreign Key relatie</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">category_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">'categories.id'</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>Voordelen:</strong>
-- Type hints en autocompletion in je IDE
-- Automatische validatie
-- Relaties worden objecten (geen JOIN queries nodig)</p>
+<p><strong>Voordelen:</strong></p>
+<ul>
+<li>Type hints en autocompletion in je IDE</li>
+<li>Automatische validatie</li>
+<li>Relaties worden objecten (geen JOIN queries nodig)</li>
+</ul>
 <h3 id="2-database-relaties">2. Database Relaties<a class="headerlink" href="#2-database-relaties" title="Link naar deze sectie">¶</a></h3>
 <h4 id="one-to-many-category-products">One-to-Many: Category → Products<a class="headerlink" href="#one-to-many-category-products" title="Link naar deze sectie">¶</a></h4>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Category</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="c1"># ...</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">products</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">'Product'</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">'category'</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Nu kun je eenvoudig:
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">category</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<p>Nu kun je eenvoudig:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">category</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="n">category</span><span class="o">.</span><span class="n">products</span><span class="p">:</span>  <span class="c1"># Automatisch alle producten!</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">product</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-</span></code></pre></div><p></p>
-<p>Of andersom:
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Of andersom:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">product</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>  <span class="c1"># Via backref!</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h4 id="many-to-many-order-products-via-orderitem">Many-to-Many: Order ↔ Products (via OrderItem)<a class="headerlink" href="#many-to-many-order-products-via-orderitem" title="Link naar deze sectie">¶</a></h4>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Order</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">order_items</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">'OrderItem'</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">'order'</span><span class="p">,</span> <span class="n">cascade</span><span class="o">=</span><span class="s1">'all, delete-orphan'</span><span class="p">)</span>
@@ -4265,23 +4267,23 @@
 </span></code></pre></div>
 <h3 id="3-query-examples">3. Query Examples<a class="headerlink" href="#3-query-examples" title="Link naar deze sectie">¶</a></h3>
 <h4 id="week-3-5-raw-sql-vs-week-6-orm">Week 3-5 (Raw SQL) vs Week 6 (ORM)<a class="headerlink" href="#week-3-5-raw-sql-vs-week-6-orm" title="Link naar deze sectie">¶</a></h4>
-<p><strong>Alle producten ophalen:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Raw SQL (Week 3-5)</span>
+<p><strong>Alle producten ophalen:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Raw SQL (Week 3-5)</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM products"</span><span class="p">)</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">products</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
 </span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># ORM (Week 6)</span>
 </span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">products</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-</span></code></pre></div><p></p>
-<p><strong>Product filteren op categorie:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Raw SQL</span>
+</span></code></pre></div>
+<p><strong>Product filteren op categorie:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Raw SQL</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM products WHERE category_id = ?"</span><span class="p">,</span> <span class="p">(</span><span class="n">category_id</span><span class="p">,))</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># ORM</span>
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">products</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">category_id</span><span class="o">=</span><span class="n">category_id</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-</span></code></pre></div><p></p>
-<p><strong>Product met JOIN:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Raw SQL</span>
+</span></code></pre></div>
+<p><strong>Product met JOIN:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Raw SQL</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="s2">    SELECT p.*, c.name as category_name</span>
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="s2">    FROM products p</span>
@@ -4292,9 +4294,9 @@
 </span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="c1"># ORM - JOIN gebeurt automatisch via relationship!</span>
 </span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>
 </span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">product</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>  <span class="c1"># Automatisch!</span>
-</span></code></pre></div><p></p>
-<p><strong>Product toevoegen:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Raw SQL</span>
+</span></code></pre></div>
+<p><strong>Product toevoegen:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Raw SQL</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="s2">"INSERT INTO products (name, price, stock, category_id) VALUES (?, ?, ?, ?)"</span><span class="p">,</span>
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">stock</span><span class="p">,</span> <span class="n">category_id</span><span class="p">)</span>
@@ -4305,9 +4307,9 @@
 </span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="n">new_product</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="n">price</span><span class="p">,</span> <span class="n">stock</span><span class="o">=</span><span class="n">stock</span><span class="p">,</span> <span class="n">category_id</span><span class="o">=</span><span class="n">category_id</span><span class="p">)</span>
 </span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new_product</span><span class="p">)</span>
 </span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-</span></code></pre></div><p></p>
-<p><strong>Product updaten:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Raw SQL</span>
+</span></code></pre></div>
+<p><strong>Product updaten:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Raw SQL</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="s2">"UPDATE products SET name = ?, price = ? WHERE id = ?"</span><span class="p">,</span>
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="p">(</span><span class="n">new_name</span><span class="p">,</span> <span class="n">new_price</span><span class="p">,</span> <span class="n">product_id</span><span class="p">)</span>
@@ -4318,16 +4320,16 @@
 </span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="n">product</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">new_name</span>
 </span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">product</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">new_price</span>
 </span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>  <span class="c1"># Automatisch UPDATE!</span>
-</span></code></pre></div><p></p>
-<p><strong>Product verwijderen:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Raw SQL</span>
+</span></code></pre></div>
+<p><strong>Product verwijderen:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Raw SQL</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"DELETE FROM products WHERE id = ?"</span><span class="p">,</span> <span class="p">(</span><span class="n">product_id</span><span class="p">,))</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># ORM</span>
 </span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>
 </span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
 </span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h3 id="4-model-properties">4. Model Properties<a class="headerlink" href="#4-model-properties" title="Link naar deze sectie">¶</a></h3>
 <p>Je kunt custom properties toevoegen aan models:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Product</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
@@ -4343,11 +4345,11 @@
 </span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">        </span><span class="sd">"""Formatteer prijs als euro bedrag."""</span>
 </span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">"€</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">price</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span>
 </span></code></pre></div>
-<p>Gebruik in templates:
-</p><div class="language-jinja highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="cp">{%</span> <span class="k">if</span> <span class="nv">product.in_stock</span> <span class="cp">%}</span>
+<p>Gebruik in templates:</p>
+<div class="language-jinja highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="cp">{%</span> <span class="k">if</span> <span class="nv">product.in_stock</span> <span class="cp">%}</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="x">    &lt;span class="badge bg-success"&gt;Op voorraad&lt;/span&gt;</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h3 id="5-cascade-delete">5. Cascade Delete<a class="headerlink" href="#5-cascade-delete" title="Link naar deze sectie">¶</a></h3>
 <p>Als je een Order verwijdert, verwijder je automatisch alle OrderItems:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Order</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
@@ -4377,71 +4379,65 @@
 </span></code></pre></div>
 <h2 id="installatie">Installatie<a class="headerlink" href="#installatie" title="Link naar deze sectie">¶</a></h2>
 <ol>
-<li>
-<p><strong>Installeer dependencies:</strong>
-   </p><div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>pip<span class="w"> </span>install<span class="w"> </span>flask<span class="w"> </span>flask-sqlalchemy<span class="w"> </span>flask-wtf
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Migreer data van Week 3 database:</strong>
-   </p><div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>python<span class="w"> </span>migrate_database.py
-</span></code></pre></div><p></p>
-</li>
+<li><strong>Installeer dependencies:</strong></li>
 </ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>pip<span class="w"> </span>install<span class="w"> </span>flask<span class="w"> </span>flask-sqlalchemy<span class="w"> </span>flask-wtf
+</span></code></pre></div>
+<ol>
+<li><strong>Migreer data van Week 3 database:</strong></li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>python<span class="w"> </span>migrate_database.py
+</span></code></pre></div>
 <p>Dit script:
    - Maakt nieuwe <code>webshop.db</code> aan met ORM schema
    - Kopieert alle categorieën en producten van Week 3
    - Behoudt originele IDs</p>
 <ol>
-<li>
-<p><strong>Start de applicatie:</strong>
-   </p><div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>python<span class="w"> </span>app.py
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Open in browser:</strong>
-   </p><div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>http://127.0.0.1:5000
-</span></code></pre></div><p></p>
-</li>
+<li><strong>Start de applicatie:</strong></li>
 </ol>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>python<span class="w"> </span>app.py
+</span></code></pre></div>
+<ol>
+<li><strong>Open in browser:</strong></li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>http://127.0.0.1:5000
+</span></code></pre></div>
 <h2 id="waarom-orm">Waarom ORM?<a class="headerlink" href="#waarom-orm" title="Link naar deze sectie">¶</a></h2>
 <h3 id="voordelen">Voordelen<a class="headerlink" href="#voordelen" title="Link naar deze sectie">¶</a></h3>
 <ol>
-<li>
-<p><strong>Pythonic Code</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># ORM is veel leesbaarder</span>
+<li><strong>Pythonic Code</strong></li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># ORM is veel leesbaarder</span>
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">expensive_products</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Product</span><span class="o">.</span><span class="n">price</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
 </span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1"># vs Raw SQL strings</span>
 </span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM products WHERE price &gt; 100"</span><span class="p">)</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Type Safety</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Type Safety</strong></li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="n">product</span><span class="o">.</span><span class="n">name</span>  <span class="c1"># IDE weet dat dit een string is!</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Geen SQL Injection risico</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># ORM escaped automatisch</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Geen SQL Injection risico</strong></li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># ORM escaped automatisch</span>
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">user_input</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Database Agnostic</strong></p>
-</li>
+</span></code></pre></div>
+<ol>
+<li><strong>Database Agnostic</strong></li>
 <li>Wissel makkelijk van SQLite → PostgreSQL → MySQL</li>
 <li>
 <p>Zelfde Python code blijft werken</p>
 </li>
 <li>
-<p><strong>Automatische Relaties</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Geen JOIN queries schrijven</span>
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">product</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">name</span>  <span class="c1"># Werkt automatisch!</span>
-</span></code></pre></div><p></p>
+<p><strong>Automatische Relaties</strong></p>
 </li>
 </ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># Geen JOIN queries schrijven</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">product</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">name</span>  <span class="c1"># Werkt automatisch!</span>
+</span></code></pre></div>
 <h3 id="nadelen">Nadelen<a class="headerlink" href="#nadelen" title="Link naar deze sectie">¶</a></h3>
 <ol>
 <li><strong>Leercruve</strong> - Je moet ORM concepten leren</li>
@@ -4561,26 +4557,26 @@
 </ul>
 <h2 id="tips-best-practices">Tips &amp; Best Practices<a class="headerlink" href="#tips-best-practices" title="Link naar deze sectie">¶</a></h2>
 <ol>
-<li>
-<p><strong>Gebruik altijd <code>with app.app_context()</code></strong> bij database operaties buiten routes
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+<li><strong>Gebruik altijd <code>with app.app_context()</code></strong> bij database operaties buiten routes</li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
 </span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>    <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Commit na wijzigingen</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">product</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"Nieuwe naam"</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Commit na wijzigingen</strong></li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">product</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"Nieuwe naam"</span>
 </span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>  <span class="c1"># Vergeet dit niet!</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Gebruik <code>get_or_404()</code> in routes</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>  <span class="c1"># Automatic 404!</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Lazy loading vs Eager loading</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># Lazy (standaard) - query per product.category</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Gebruik <code>get_or_404()</code> in routes</strong></li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get_or_404</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>  <span class="c1"># Automatic 404!</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Lazy loading vs Eager loading</strong></li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># Lazy (standaard) - query per product.category</span>
 </span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">products</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">products</span><span class="p">:</span>
 </span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>  <span class="c1"># ❌ N+1 queries!</span>
@@ -4589,44 +4585,40 @@
 </span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="n">products</span> <span class="o">=</span> <span class="n">Product</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">joinedload</span><span class="p">(</span><span class="n">Product</span><span class="o">.</span><span class="n">category</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">products</span><span class="p">:</span>
 </span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">category</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>  <span class="c1"># ✅ Efficient!</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Gebruik <code>__repr__</code> voor debugging</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;Product </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&gt;"</span>
-</span></code></pre></div><p></p>
-</li>
+</span></code></pre></div>
+<ol>
+<li><strong>Gebruik <code>__repr__</code> voor debugging</strong></li>
 </ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;Product </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&gt;"</span>
+</span></code></pre></div>
 <h2 id="veelvoorkomende-fouten">Veelvoorkomende Fouten<a class="headerlink" href="#veelvoorkomende-fouten" title="Link naar deze sectie">¶</a></h2>
 <ol>
-<li>
-<p><strong>Vergeten te committen</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"Test"</span><span class="p">)</span>
+<li><strong>Vergeten te committen</strong></li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">product</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"Test"</span><span class="p">)</span>
 </span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
 </span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="c1"># ❌ Vergeet db.session.commit() niet!</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>Fout relationship definiëren</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1"># ❌ Fout: string moet exact matchen met class naam</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Fout relationship definiëren</strong></li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1"># ❌ Fout: string moet exact matchen met class naam</span>
 </span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="n">products</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">'Producten'</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
 </span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>
 </span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="c1"># ✅ Correct</span>
 </span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="n">products</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">'Product'</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
-</span></code></pre></div><p></p>
-</li>
-<li>
-<p><strong>N+1 queries</strong>
-   </p><div class="language-python highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1"># ❌ Slecht - 1 query voor categories + N queries voor products</span>
+</span></code></pre></div>
+<ol>
+<li><strong>N+1 queries</strong></li>
+</ol>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1"># ❌ Slecht - 1 query voor categories + N queries voor products</span>
 </span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">Category</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
 </span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">category</span><span class="o">.</span><span class="n">products</span><span class="p">))</span>
 </span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>
 </span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="c1"># ✅ Beter - gebruik eager loading of custom query</span>
 </span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="n">categories</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Category</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">joinedload</span><span class="p">(</span><span class="n">Category</span><span class="o">.</span><span class="n">products</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-</span></code></pre></div><p></p>
-</li>
-</ol>
+</span></code></pre></div>
 <h2 id="opdrachten">Opdrachten<a class="headerlink" href="#opdrachten" title="Link naar deze sectie">¶</a></h2>
 <ol>
 <li><strong>Analyse de models.py</strong> - Begrijp alle relaties en properties</li>

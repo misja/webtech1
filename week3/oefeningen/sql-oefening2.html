@@ -4290,12 +4290,12 @@
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="c1"># - SELECT p.name, p.price, p.stock</span>
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="k">pass</span>
 </span></code></pre></div>
-<p>Test:
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">db</span> <span class="o">=</span> <span class="n">WebshopDatabase</span><span class="p">()</span>
+<p>Test:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">db</span> <span class="o">=</span> <span class="n">WebshopDatabase</span><span class="p">()</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">products</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_products_by_category</span><span class="p">(</span><span class="s2">"Electronics"</span><span class="p">)</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="n">products</span><span class="p">:</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="si">}</span><span class="s2">: €</span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'price'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="opgave-2-producten-gesorteerd-op-prijs">Opgave 2: Producten Gesorteerd op Prijs<a class="headerlink" href="#opgave-2-producten-gesorteerd-op-prijs" title="Link naar deze sectie">¶</a></h2>
 <p><strong>Vraag:</strong> Toon dezelfde producten, maar nu gesorteerd op prijs (laag naar hoog).</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_products_by_category_sorted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Row</span><span class="p">]:</span>
@@ -4324,12 +4324,12 @@
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="c1"># Include categorie naam via JOIN</span>
 </span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="k">pass</span>
 </span></code></pre></div>
-<p>Test:
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">products</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_products_in_price_range</span><span class="p">(</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">)</span>
+<p>Test:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">products</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_products_in_price_range</span><span class="p">(</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">)</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Gevonden </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">products</span><span class="p">)</span><span class="si">}</span><span class="s2"> producten tussen €20 en €50"</span><span class="p">)</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="n">products</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'category'</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="si">}</span><span class="s2"> - €</span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'price'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="opgave-5-laagste-voorraad-per-categorie">Opgave 5: Laagste Voorraad per Categorie<a class="headerlink" href="#opgave-5-laagste-voorraad-per-categorie" title="Link naar deze sectie">¶</a></h2>
 <p><strong>Vraag:</strong> Vind het product met de laagste voorraad in elke categorie.</p>
 <p><strong>Hint:</strong> Gebruik <code>GROUP BY</code> en <code>MIN()</code></p>
@@ -4352,11 +4352,11 @@
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="c1"># ORDER BY gemiddelde prijs DESC</span>
 </span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="k">pass</span>
 </span></code></pre></div>
-<p>Test:
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">stats</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_average_price_per_category</span><span class="p">()</span>
+<p>Test:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">stats</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_average_price_per_category</span><span class="p">()</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">:</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">cat</span><span class="p">[</span><span class="s1">'category'</span><span class="p">]</span><span class="si">}</span><span class="s2">: gemiddeld €</span><span class="si">{</span><span class="n">cat</span><span class="p">[</span><span class="s1">'avg_price'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="opgave-7-producten-op-voorraad">Opgave 7: Producten Op Voorraad<a class="headerlink" href="#opgave-7-producten-op-voorraad" title="Link naar deze sectie">¶</a></h2>
 <p><strong>Vraag:</strong> Toon alleen producten die op voorraad zijn (stock &gt; 0), gesorteerd op categorie.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_in_stock_products</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Row</span><span class="p">]:</span>
@@ -4379,12 +4379,12 @@
 </span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="c1"># ORDER BY total_value DESC</span>
 </span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    <span class="k">pass</span>
 </span></code></pre></div>
-<p>Verwachte output format:
-</p><div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Voorraadwaarde per categorie:
+<p>Verwachte output format:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Voorraadwaarde per categorie:
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>1. Electronics: €15,432.50 (15 producten)
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>2. Books: €3,245.20 (20 producten)
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>...
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="bonusopdracht-2-duurste-product-per-categorie">Bonusopdracht 2: Duurste Product per Categorie<a class="headerlink" href="#bonusopdracht-2-duurste-product-per-categorie" title="Link naar deze sectie">¶</a></h2>
 <p>Vind het duurste product in elke categorie:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_most_expensive_per_category</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Row</span><span class="p">]:</span>

@@ -4414,11 +4414,13 @@
 <li><strong>Eindigt de naam op iets anders?</strong> → Voeg <code>TEZY</code> toe</li>
 <li><strong>Converteer naar hoofdletters</strong> (de artiestennaam)</li>
 </ol>
-<p><strong>Voorbeelden:</strong>
-- <code>Truus</code> → <code>TRUUSSY</code>
-- <code>Rob</code> → <code>ROBTEZY</code>
-- <code>Joyce</code> → <code>JOYCETEZY</code>
-- <code>Thomas</code> → <code>THOMASSY</code></p>
+<p><strong>Voorbeelden:</strong></p>
+<ul>
+<li><code>Truus</code> → <code>TRUUSSY</code></li>
+<li><code>Rob</code> → <code>ROBTEZY</code></li>
+<li><code>Joyce</code> → <code>JOYCETEZY</code></li>
+<li><code>Thomas</code> → <code>THOMASSY</code></li>
+</ul>
 <h2 id="opdracht">Opdracht<a class="headerlink" href="#opdracht" title="Link naar deze sectie">¶</a></h2>
 <p>Maak een Flask applicatie met een dynamische route die een artiestennaam genereert.</p>
 <h3 id="vereisten">Vereisten<a class="headerlink" href="#vereisten" title="Link naar deze sectie">¶</a></h3>
@@ -4520,38 +4522,40 @@
 </span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></code></pre></div>
 <h3 id="stap-4-implementatie-tips">Stap 4: Implementatie tips<a class="headerlink" href="#stap-4-implementatie-tips" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Hint 1 - Check laatste letter:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">if</span> <span class="n">naam</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'s'</span><span class="p">):</span>
+<p><strong>Hint 1 - Check laatste letter:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">if</span> <span class="n">naam</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'s'</span><span class="p">):</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="c1"># Eindigt op 's'</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">else</span><span class="p">:</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="c1"># Eindigt op iets anders</span>
-</span></code></pre></div><p></p>
-<p><strong>Hint 2 - String concatenatie:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">artiestennaam</span> <span class="o">=</span> <span class="n">naam</span> <span class="o">+</span> <span class="n">suffix</span>
-</span></code></pre></div><p></p>
-<p><strong>Hint 3 - Uppercase:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">artiestennaam</span> <span class="o">=</span> <span class="n">artiestennaam</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-</span></code></pre></div><p></p>
-<p><strong>Hint 4 - Template renderen:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">return</span> <span class="n">render_template</span><span class="p">(</span>
+</span></code></pre></div>
+<p><strong>Hint 2 - String concatenatie:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">artiestennaam</span> <span class="o">=</span> <span class="n">naam</span> <span class="o">+</span> <span class="n">suffix</span>
+</span></code></pre></div>
+<p><strong>Hint 3 - Uppercase:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">artiestennaam</span> <span class="o">=</span> <span class="n">artiestennaam</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</span></code></pre></div>
+<p><strong>Hint 4 - Template renderen:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">return</span> <span class="n">render_template</span><span class="p">(</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="s2">"artiestennaam.html"</span><span class="p">,</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="n">echte_naam</span><span class="o">=</span><span class="n">naam</span><span class="p">,</span>
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="n">artiest_naam</span><span class="o">=</span><span class="n">artiestennaam</span>
 </span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">)</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h3 id="stap-5-testen">Stap 5: Testen<a class="headerlink" href="#stap-5-testen" title="Link naar deze sectie">¶</a></h3>
 <p>Run je app:</p>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">uv run python app.py</span>
 </span></code></pre></div>
-<p>Test met verschillende namen:
-- <code>http://localhost:5000/artiestennaam/Truus</code> → TRUUSSY
-- <code>http://localhost:5000/artiestennaam/Rob</code> → ROBTEZY
-- <code>http://localhost:5000/artiestennaam/Joyce</code> → JOYCETEZY
-- <code>http://localhost:5000/artiestennaam/Thomas</code> → THOMASSY</p>
+<p>Test met verschillende namen:</p>
+<ul>
+<li><code>http://localhost:5000/artiestennaam/Truus</code> → TRUUSSY</li>
+<li><code>http://localhost:5000/artiestennaam/Rob</code> → ROBTEZY</li>
+<li><code>http://localhost:5000/artiestennaam/Joyce</code> → JOYCETEZY</li>
+<li><code>http://localhost:5000/artiestennaam/Thomas</code> → THOMASSY</li>
+</ul>
 <h2 id="bonusopdracht-1-homepage-met-voorbeelden">Bonusopdracht 1: Homepage met voorbeelden<a class="headerlink" href="#bonusopdracht-1-homepage-met-voorbeelden" title="Link naar deze sectie">¶</a></h2>
 <p>Maak de <code>/</code> route dynamischer met een template die voorbeelden toont:</p>
-<p><strong><code>templates/index.html</code>:</strong>
-</p><div class="language-html highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<p><strong><code>templates/index.html</code>:</strong></p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"nl"</span><span class="p">&gt;</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">"UTF-8"</span><span class="p">&gt;</span>
@@ -4574,18 +4578,18 @@
 </span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Ga naar: <span class="p">&lt;</span><span class="nt">code</span><span class="p">&gt;</span>/artiestennaam/<span class="ni">&amp;lt;</span>jouw-naam<span class="ni">&amp;gt;</span><span class="p">&lt;/</span><span class="nt">code</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 </span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-</span></code></pre></div><p></p>
-<p><strong>Update <code>app.py</code>:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Update <code>app.py</code>:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="sd">"""Homepage met voorbeelden."""</span>
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">voorbeelden</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Truus"</span><span class="p">,</span> <span class="s2">"Rob"</span><span class="p">,</span> <span class="s2">"Joyce"</span><span class="p">,</span> <span class="s2">"Thomas"</span><span class="p">,</span> <span class="s2">"Rens"</span><span class="p">]</span>
 </span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">"index.html"</span><span class="p">,</span> <span class="n">voorbeelden</span><span class="o">=</span><span class="n">voorbeelden</span><span class="p">)</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="bonusopdracht-2-template-inheritance">Bonusopdracht 2: Template inheritance<a class="headerlink" href="#bonusopdracht-2-template-inheritance" title="Link naar deze sectie">¶</a></h2>
 <p>Maak een <code>base.html</code> template en gebruik deze in beide pagina's:</p>
-<p><strong><code>templates/base.html</code>:</strong>
-</p><div class="language-html highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<p><strong><code>templates/base.html</code>:</strong></p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"nl"</span><span class="p">&gt;</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">"UTF-8"</span><span class="p">&gt;</span>
@@ -4606,7 +4610,7 @@
 </span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>        <span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
 </span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <p>Update <code>artiestennaam.html</code> en <code>index.html</code> om <code>base.html</code> te extenden:</p>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>{% extends "base.html" %}
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
@@ -4620,8 +4624,8 @@
 <p>Maak <code>static/style.css</code>:</p>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">mkdir static</span>
 </span></code></pre></div>
-<p><strong><code>static/style.css</code>:</strong>
-</p><div class="language-css highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
+<p><strong><code>static/style.css</code>:</strong></p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="k">font-family</span><span class="p">:</span><span class="w"> </span><span class="s1">'Arial'</span><span class="p">,</span><span class="w"> </span><span class="kc">sans-serif</span><span class="p">;</span>
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="k">max-width</span><span class="p">:</span><span class="w"> </span><span class="mi">800</span><span class="kt">px</span><span class="p">;</span>
 </span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span>
@@ -4651,18 +4655,18 @@
 </span><span id="__span-14-28"><a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a><span class="nt">a</span><span class="p">:</span><span class="nd">hover</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-14-29"><a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a><span class="w">    </span><span class="k">text-decoration</span><span class="p">:</span><span class="w"> </span><span class="kc">underline</span><span class="p">;</span>
 </span><span id="__span-14-30"><a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a><span class="p">}</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="bonusopdracht-4-formulier-toevoegen">Bonusopdracht 4: Formulier toevoegen<a class="headerlink" href="#bonusopdracht-4-formulier-toevoegen" title="Link naar deze sectie">¶</a></h2>
 <p>Voeg een formulier toe zodat gebruikers hun naam kunnen invoeren zonder URL aan te passen:</p>
-<p><strong>Update <code>index.html</code>:</strong>
-</p><div class="language-html highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">"/genereer"</span> <span class="na">method</span><span class="o">=</span><span class="s">"POST"</span><span class="p">&gt;</span>
+<p><strong>Update <code>index.html</code>:</strong></p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">"/genereer"</span> <span class="na">method</span><span class="o">=</span><span class="s">"POST"</span><span class="p">&gt;</span>
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"naam"</span><span class="p">&gt;</span>Jouw naam:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">id</span><span class="o">=</span><span class="s">"naam"</span> <span class="na">name</span><span class="o">=</span><span class="s">"naam"</span> <span class="na">required</span><span class="p">&gt;</span>
 </span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"submit"</span><span class="p">&gt;</span>Genereer!<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
 </span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
-</span></code></pre></div><p></p>
-<p><strong>Update <code>app.py</code>:</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
+</span></code></pre></div>
+<p><strong>Update <code>app.py</code>:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/genereer"</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">"POST"</span><span class="p">])</span>
 </span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">genereer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -4675,49 +4679,51 @@
 </span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>    <span class="k">if</span> <span class="n">naam</span><span class="p">:</span>
 </span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">"artiestennaam"</span><span class="p">,</span> <span class="n">naam</span><span class="o">=</span><span class="n">naam</span><span class="p">))</span>
 </span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">"index"</span><span class="p">))</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="verwachte-output">Verwachte Output<a class="headerlink" href="#verwachte-output" title="Link naar deze sectie">¶</a></h2>
 <h3 id="basis-opdracht">Basis opdracht<a class="headerlink" href="#basis-opdracht" title="Link naar deze sectie">¶</a></h3>
 <p><strong>URL:</strong> <code>http://localhost:5000/artiestennaam/Truus</code></p>
-<p><strong>Output:</strong>
-</p><div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>🎤 Artiestennaam Generator 🎸
+<p><strong>Output:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>🎤 Artiestennaam Generator 🎸
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>Echte naam: Truus
 </span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>TRUUSSY
 </span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>
 </span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>← Genereer een nieuwe naam
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="checklist">Checklist<a class="headerlink" href="#checklist" title="Link naar deze sectie">¶</a></h2>
 <p>✅ Project aangemaakt met <code>uv init</code> en <code>uv add flask</code>
 ✅ <code>templates/</code> directory met <code>artiestennaam.html</code>
 ✅ Flask route op <code>/artiestennaam/&lt;naam&gt;</code>
 ✅ Type hints gebruikt (<code>naam: str</code>, <code>-&gt; str</code>)
-✅ Logica correct:
-- Naam eindigt op <code>s</code> → voeg <code>SY</code> toe
-- Anders → voeg <code>TEZY</code> toe
-- Converteer naar uppercase
+✅ Logica correct:</p>
+<ul>
+<li>Naam eindigt op <code>s</code> → voeg <code>SY</code> toe</li>
+<li>Anders → voeg <code>TEZY</code> toe</li>
+<li>Converteer naar uppercase
 ✅ Template gebruikt (geen HTML in string!)
 ✅ Docstring bij route functie
-✅ Werkt met verschillende namen</p>
+✅ Werkt met verschillende namen</li>
+</ul>
 <h2 id="veelvoorkomende-fouten">Veelvoorkomende fouten<a class="headerlink" href="#veelvoorkomende-fouten" title="Link naar deze sectie">¶</a></h2>
-<p>❌ <strong>HTML in string returnen</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;h1&gt;</span><span class="si">{</span><span class="n">artiestennaam</span><span class="si">}</span><span class="s2">&lt;/h1&gt;"</span>  <span class="c1"># FOUT!</span>
+<p>❌ <strong>HTML in string returnen</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;h1&gt;</span><span class="si">{</span><span class="n">artiestennaam</span><span class="si">}</span><span class="s2">&lt;/h1&gt;"</span>  <span class="c1"># FOUT!</span>
 </span></code></pre></div>
-✅ <strong>Template gebruiken</strong>
+<p>✅ <strong>Template gebruiken</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">"artiestennaam.html"</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>  <span class="c1"># GOED!</span>
-</span></code></pre></div><p></p>
-<p>❌ <strong>Geen type hints</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">artiestennaam</span><span class="p">(</span><span class="n">naam</span><span class="p">):</span>  <span class="c1"># FOUT!</span>
 </span></code></pre></div>
-✅ <strong>Type hints toevoegen</strong>
+<p>❌ <strong>Geen type hints</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">artiestennaam</span><span class="p">(</span><span class="n">naam</span><span class="p">):</span>  <span class="c1"># FOUT!</span>
+</span></code></pre></div>
+<p>✅ <strong>Type hints toevoegen</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">artiestennaam</span><span class="p">(</span><span class="n">naam</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># GOED!</span>
-</span></code></pre></div><p></p>
-<p>❌ <strong>Case-sensitive check</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">if</span> <span class="n">naam</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'s'</span><span class="p">):</span>  <span class="c1"># FOUT! "Truus" != "truuS"</span>
 </span></code></pre></div>
-✅ <strong>Case-insensitive check</strong>
+<p>❌ <strong>Case-sensitive check</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">if</span> <span class="n">naam</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'s'</span><span class="p">):</span>  <span class="c1"># FOUT! "Truus" != "truuS"</span>
+</span></code></pre></div>
+<p>✅ <strong>Case-insensitive check</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">if</span> <span class="n">naam</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'s'</span><span class="p">):</span>  <span class="c1"># GOED!</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
 <p>Na deze oefening heb je:</p>
 <ul>

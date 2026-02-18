@@ -4523,15 +4523,15 @@
 </span><span id="__span-7-39"><a id="__codelineno-7-39" name="__codelineno-7-39" href="#__codelineno-7-39"></a><span class="n">overzicht</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">bereken_overzicht</span><span class="p">()</span>
 </span><span id="__span-7-40"><a id="__codelineno-7-40" name="__codelineno-7-40" href="#__codelineno-7-40"></a><span class="nb">print</span><span class="p">(</span><span class="n">overzicht</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Output:
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
+<p>Output:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="s1">'klant_naam'</span><span class="p">:</span> <span class="s1">'Jan Jansen'</span><span class="p">,</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="s1">'aantal_producten'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="s1">'subtotaal'</span><span class="p">:</span> <span class="mf">825.49</span><span class="p">,</span>
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="s1">'btw'</span><span class="p">:</span> <span class="mf">173.35</span><span class="p">,</span>
 </span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="s1">'totaal'</span><span class="p">:</span> <span class="mf">998.84</span>
 </span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">}</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Dataclass → dict voor debugging</p>
 <p>Je kunt <code>asdict()</code> gebruiken om een dataclass automatisch naar een dict te converteren. Dit is vooral handig voor debugging:</p>
@@ -4592,8 +4592,8 @@
 </div>
 <h2 id="separation-of-concerns">Separation of concerns<a class="headerlink" href="#separation-of-concerns" title="Link naar deze sectie">¶</a></h2>
 <p>Goede code scheidt verantwoordelijkheden:</p>
-<p><strong>Business logic (modellen):</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nd">@dataclass</span>
+<p><strong>Business logic (modellen):</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nd">@dataclass</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">Order</span><span class="p">:</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="sd">"""Bevat business logic en data."""</span>
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="n">klant</span><span class="p">:</span> <span class="n">Customer</span>
@@ -4602,9 +4602,9 @@
 </span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">bereken_totaal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 </span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">        </span><span class="sd">"""Bereken totaal - RETURN data."""</span>
 </span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">"totaal"</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">prijs</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">producten</span><span class="p">)}</span>
-</span></code></pre></div><p></p>
-<p><strong>Presentation layer (routes):</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/order/&lt;int:id&gt;'</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Presentation layer (routes):</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/order/&lt;int:id&gt;'</span><span class="p">)</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">toon_order</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="sd">"""Haalt data op en presenteert het."""</span>
 </span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="n">order</span> <span class="o">=</span> <span class="n">get_order</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>  <span class="c1"># Haal op</span>
@@ -4614,7 +4614,7 @@
 </span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">'order.html'</span><span class="p">,</span>
 </span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>                         <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
 </span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>                         <span class="n">totaal</span><span class="o">=</span><span class="n">totaal_info</span><span class="p">)</span>
-</span></code></pre></div><p></p>
+</span></code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">Waarom scheiden?</p>
 <ul>

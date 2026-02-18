@@ -4710,18 +4710,22 @@
 </span><span id="__span-6-77"><a id="__codelineno-6-77" name="__codelineno-6-77" href="#__codelineno-6-77"></a>        <span class="p">}),</span> <span class="mi">500</span>
 </span></code></pre></div>
 <h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Link naar deze sectie">¶</a></h2>
-<p>✅ <strong>DOE WEL:</strong>
-- Gebruik specifieke exceptions (<code>IntegrityError</code>, <code>OperationalError</code>)
-- Log errors voor debugging (<code>logging.error()</code>)
-- Return None of lege lijst bij fouten (geen crash)
-- Gebruik type hints (<code>Optional[int]</code>, <code>list[Row]</code>)
-- Test error paths (wat gebeurt bij duplicates?)</p>
-<p>❌ <strong>DOE NIET:</strong>
-- Bare <code>except:</code> zonder exception type
-- Fouten negeren (silent failures)
-- Stack traces tonen aan gebruikers
-- Exceptions gebruiken voor flow control
-- Sensitive info in error messages (geen SQL queries!)</p>
+<p>✅ <strong>DOE WEL:</strong></p>
+<ul>
+<li>Gebruik specifieke exceptions (<code>IntegrityError</code>, <code>OperationalError</code>)</li>
+<li>Log errors voor debugging (<code>logging.error()</code>)</li>
+<li>Return None of lege lijst bij fouten (geen crash)</li>
+<li>Gebruik type hints (<code>Optional[int]</code>, <code>list[Row]</code>)</li>
+<li>Test error paths (wat gebeurt bij duplicates?)</li>
+</ul>
+<p>❌ <strong>DOE NIET:</strong></p>
+<ul>
+<li>Bare <code>except:</code> zonder exception type</li>
+<li>Fouten negeren (silent failures)</li>
+<li>Stack traces tonen aan gebruikers</li>
+<li>Exceptions gebruiken voor flow control</li>
+<li>Sensitive info in error messages (geen SQL queries!)</li>
+</ul>
 <h2 id="common-patterns">Common patterns<a class="headerlink" href="#common-patterns" title="Link naar deze sectie">¶</a></h2>
 <h3 id="pattern-1-try-except-met-return">Pattern 1: Try-except met return<a class="headerlink" href="#pattern-1-try-except-met-return" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">safe_operation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Row</span><span class="p">]:</span>

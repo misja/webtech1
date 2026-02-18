@@ -4569,10 +4569,12 @@
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
-<p><strong>Let op:</strong> <code>{{ url_for('static', filename='drums.jpg') }}</code>
-- Jinja2 syntax voor dynamische URL generatie
-- Beter dan hardcoded <code>../static/drums.jpg</code>
-- Werkt ook als je app in een subdirectory draait</p>
+<p><strong>Let op:</strong> <code>{{ url_for('static', filename='drums.jpg') }}</code></p>
+<ul>
+<li>Jinja2 syntax voor dynamische URL generatie</li>
+<li>Beter dan hardcoded <code>../static/drums.jpg</code></li>
+<li>Werkt ook als je app in een subdirectory draait</li>
+</ul>
 <h3 id="stap-2-render-de-template-in-flask">Stap 2: Render de template in Flask<a class="headerlink" href="#stap-2-render-de-template-in-flask" title="Link naar deze sectie">¶</a></h3>
 <p>Update <code>app.py</code>:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
@@ -4589,10 +4591,12 @@
 </span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
 </span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>Code uitleg:</strong>
-- <code>from flask import render_template</code> - Import render functie
-- <code>render_template("basic.html")</code> - Flask zoekt in <code>templates/</code> en rendert de HTML
-- Return type blijft <code>str</code> (render_template retourneert HTML string)</p>
+<p><strong>Code uitleg:</strong></p>
+<ul>
+<li><code>from flask import render_template</code> - Import render functie</li>
+<li><code>render_template("basic.html")</code> - Flask zoekt in <code>templates/</code> en rendert de HTML</li>
+<li>Return type blijft <code>str</code> (render_template retourneert HTML string)</li>
+</ul>
 <h3 id="stap-3-run-en-test">Stap 3: Run en test<a class="headerlink" href="#stap-3-run-en-test" title="Link naar deze sectie">¶</a></h3>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">uv run python app.py</span>
 </span></code></pre></div>
@@ -4625,10 +4629,12 @@
 </span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="n">cursist_id</span> <span class="o">=</span> <span class="mi">42</span>  <span class="c1"># Later: haal dit op uit database</span>
 </span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">"welkom.html"</span><span class="p">,</span> <span class="n">naam</span><span class="o">=</span><span class="n">naam</span><span class="p">,</span> <span class="n">cursist_id</span><span class="o">=</span><span class="n">cursist_id</span><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>Hoe werkt dit:</strong>
-- <code>{{ naam }}</code> in template wordt vervangen door waarde van <code>naam=naam</code>
-- <code>{{ cursist_id }}</code> wordt vervangen door <code>cursist_id=cursist_id</code>
-- Eerste <code>naam</code> = template variable, tweede <code>naam</code> = Python variable</p>
+<p><strong>Hoe werkt dit:</strong></p>
+<ul>
+<li><code>{{ naam }}</code> in template wordt vervangen door waarde van <code>naam=naam</code></li>
+<li><code>{{ cursist_id }}</code> wordt vervangen door <code>cursist_id=cursist_id</code></li>
+<li>Eerste <code>naam</code> = template variable, tweede <code>naam</code> = Python variable</li>
+</ul>
 <p><strong>Result:</strong> Navigeer naar <code>http://localhost:5000/cursist/Joyce</code></p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/template_cursist_Joyce.png" data-desc-position="bottom"><img alt="Template met variabelen" src="imgs/template_cursist_Joyce.png"></a></p>
 <h2 id="data-types-in-templates">Data types in templates<a class="headerlink" href="#data-types-in-templates" title="Link naar deze sectie">¶</a></h2>
@@ -4669,11 +4675,13 @@
 </span></code></pre></div>
 <p><strong>Result:</strong></p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/demo.png" data-desc-position="bottom"><img alt="Demo met verschillende types" src="imgs/demo.png"></a></p>
-<p>Je kunt Python syntax gebruiken in templates:
-- <code>letters[3:]</code> - List slicing
-- <code>cursist_dict['1234']</code> - Dictionary access
-- <code>naam.upper()</code> - String methods
-- En meer!</p>
+<p>Je kunt Python syntax gebruiken in templates:</p>
+<ul>
+<li><code>letters[3:]</code> - List slicing</li>
+<li><code>cursist_dict['1234']</code> - Dictionary access</li>
+<li><code>naam.upper()</code> - String methods</li>
+<li>En meer!</li>
+</ul>
 <h2 id="control-flow-in-templates">Control flow in templates<a class="headerlink" href="#control-flow-in-templates" title="Link naar deze sectie">¶</a></h2>
 <p>Jinja2 ondersteunt control flow met <code>{% ... %}</code> syntax.</p>
 <h3 id="for-loops">For loops<a class="headerlink" href="#for-loops" title="Link naar deze sectie">¶</a></h3>
@@ -4701,11 +4709,13 @@
 </span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
-<p><strong>Belangrijke punten:</strong>
-- <code>{% for ... %}</code> opent de loop
-- <code>{% endfor %}</code> sluit de loop
-- <code>{{ cursist }}</code> toont elke waarde
-- Geen <code>:</code> nodig zoals in Python!</p>
+<p><strong>Belangrijke punten:</strong></p>
+<ul>
+<li><code>{% for ... %}</code> opent de loop</li>
+<li><code>{% endfor %}</code> sluit de loop</li>
+<li><code>{{ cursist }}</code> toont elke waarde</li>
+<li>Geen <code>:</code> nodig zoals in Python!</li>
+</ul>
 <p><strong>Result:</strong></p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/cursisten.png" data-desc-position="bottom"><img alt="Cursisten lijst" src="imgs/cursisten.png"></a></p>
 <h3 id="if-statements">If statements<a class="headerlink" href="#if-statements" title="Link naar deze sectie">¶</a></h3>
@@ -4760,13 +4770,15 @@
 </span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ cursisten|length }} cursisten<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 </span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ cursisten|join(', ') }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>      <span class="cm">&lt;!-- Joyce, Sietse, Carla --&gt;</span>
 </span></code></pre></div>
-<p><strong>Veelgebruikte filters:</strong>
-- <code>|upper</code>, <code>|lower</code>, <code>|capitalize</code>, <code>|title</code> - String transformaties
-- <code>|length</code> - Lengte van list/string
-- <code>|default('waarde')</code> - Fallback als variabele None is
-- <code>|join(', ')</code> - Join list elementen
-- <code>|round(2)</code> - Rond float af
-- <code>|safe</code> - Mark HTML als veilig (voorkom escaping)</p>
+<p><strong>Veelgebruikte filters:</strong></p>
+<ul>
+<li><code>|upper</code>, <code>|lower</code>, <code>|capitalize</code>, <code>|title</code> - String transformaties</li>
+<li><code>|length</code> - Lengte van list/string</li>
+<li><code>|default('waarde')</code> - Fallback als variabele None is</li>
+<li><code>|join(', ')</code> - Join list elementen</li>
+<li><code>|round(2)</code> - Rond float af</li>
+<li><code>|safe</code> - Mark HTML als veilig (voorkom escaping)</li>
+</ul>
 <h2 id="template-inheritance-belangrijk">Template inheritance (belangrijk!)<a class="headerlink" href="#template-inheritance-belangrijk" title="Link naar deze sectie">¶</a></h2>
 <p>Voor grotere apps wil je niet steeds hetzelfde HTML herhalen. Gebruik <strong>template inheritance</strong>!</p>
 <h3 id="base-template">Base template<a class="headerlink" href="#base-template" title="Link naar deze sectie">¶</a></h3>

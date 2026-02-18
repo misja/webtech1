@@ -4445,28 +4445,42 @@
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></code></pre></div>
 <h3 id="code-uitleg-regel-voor-regel">Code uitleg regel voor regel<a class="headerlink" href="#code-uitleg-regel-voor-regel" title="Link naar deze sectie">¶</a></h3>
-<p><strong>Regel 1</strong>: <code>from flask import Flask</code>
-- Importeer de <code>Flask</code> class uit de flask module</p>
-<p><strong>Regel 3</strong>: <code>app = Flask(__name__)</code>
-- Maak een Flask applicatie instance
-- <code>__name__</code> vertelt Flask waar templates en static files staan</p>
-<p><strong>Regel 6</strong>: <code>@app.route("/")</code>
-- <strong>Decorator</strong> die de functie hieronder koppelt aan een route
-- <code>/</code> is de homepage (root URL)
-- Als gebruiker naar <code>http://127.0.0.1:5000/</code> gaat, wordt <code>index()</code> aangeroepen</p>
-<p><strong>Regel 7</strong>: <code>def index() -&gt; str:</code>
-- View function die HTML returnt
-- <code>-&gt; str</code> is een <strong>type hint</strong> (modern Python pattern!)
-- Docstring beschrijft wat de functie doet</p>
-<p><strong>Regel 9</strong>: <code>return "&lt;h1&gt;...&lt;/h1&gt;"</code>
-- HTML string die naar de browser wordt gestuurd
-- Later vervangen we dit door templates</p>
-<p><strong>Regel 12-13</strong>: <code>if __name__ == "__main__":</code>
-- Dit blok wordt alleen uitgevoerd als je dit bestand direct runt
-- Voorkomt dat de server start bij imports</p>
-<p><strong>Regel 13</strong>: <code>app.run(debug=True)</code>
-- Start de development server
-- <code>debug=True</code> activeert auto-reload en betere foutmeldingen</p>
+<p><strong>Regel 1</strong>: <code>from flask import Flask</code></p>
+<ul>
+<li>Importeer de <code>Flask</code> class uit de flask module</li>
+</ul>
+<p><strong>Regel 3</strong>: <code>app = Flask(__name__)</code></p>
+<ul>
+<li>Maak een Flask applicatie instance</li>
+<li><code>__name__</code> vertelt Flask waar templates en static files staan</li>
+</ul>
+<p><strong>Regel 6</strong>: <code>@app.route("/")</code></p>
+<ul>
+<li><strong>Decorator</strong> die de functie hieronder koppelt aan een route</li>
+<li><code>/</code> is de homepage (root URL)</li>
+<li>Als gebruiker naar <code>http://127.0.0.1:5000/</code> gaat, wordt <code>index()</code> aangeroepen</li>
+</ul>
+<p><strong>Regel 7</strong>: <code>def index() -&gt; str:</code></p>
+<ul>
+<li>View function die HTML returnt</li>
+<li><code>-&gt; str</code> is een <strong>type hint</strong> (modern Python pattern!)</li>
+<li>Docstring beschrijft wat de functie doet</li>
+</ul>
+<p><strong>Regel 9</strong>: <code>return "&lt;h1&gt;...&lt;/h1&gt;"</code></p>
+<ul>
+<li>HTML string die naar de browser wordt gestuurd</li>
+<li>Later vervangen we dit door templates</li>
+</ul>
+<p><strong>Regel 12-13</strong>: <code>if __name__ == "__main__":</code></p>
+<ul>
+<li>Dit blok wordt alleen uitgevoerd als je dit bestand direct runt</li>
+<li>Voorkomt dat de server start bij imports</li>
+</ul>
+<p><strong>Regel 13</strong>: <code>app.run(debug=True)</code></p>
+<ul>
+<li>Start de development server</li>
+<li><code>debug=True</code> activeert auto-reload en betere foutmeldingen</li>
+</ul>
 <div class="admonition tip">
 <p class="admonition-title">Type hints in Flask</p>
 <p>We gebruiken type hints (<code>-&gt; str</code>) bij alle Flask routes. Dit is modern Python en helpt editors met autocomplete en type checking!</p>
@@ -4516,10 +4530,12 @@
 </span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
 </span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Nu kun je naar drie verschillende URLs gaan:
-- <code>http://127.0.0.1:5000/</code> → Homepage
-- <code>http://127.0.0.1:5000/informatie</code> → Informatiepagina
-- <code>http://127.0.0.1:5000/contact</code> → Contactpagina</p>
+<p>Nu kun je naar drie verschillende URLs gaan:</p>
+<ul>
+<li><code>http://127.0.0.1:5000/</code> → Homepage</li>
+<li><code>http://127.0.0.1:5000/informatie</code> → Informatiepagina</li>
+<li><code>http://127.0.0.1:5000/contact</code> → Contactpagina</li>
+</ul>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/informatie.png" data-desc-position="bottom"><img alt="Een tweede pagina in Flask" src="imgs/informatie.png"></a></p>
 <div class="admonition info">
 <p class="admonition-title">Auto-reload met debug mode</p>
@@ -4542,14 +4558,18 @@
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="sd">    """</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;h1&gt;Dit is de pagina van </span><span class="si">{</span><span class="n">naam</span><span class="si">}</span><span class="s2">&lt;/h1&gt;"</span>
 </span></code></pre></div>
-<p><strong>Hoe werkt dit:</strong>
-- <code>&lt;naam&gt;</code> in de route is een <strong>variabele</strong>
-- De waarde wordt uit de URL gehaald en doorgegeven aan de functie
-- <code>naam: str</code> is de parameter met type hint</p>
-<p><strong>Voorbeelden:</strong>
-- <code>http://localhost:5000/cursist/Henk</code> → Pagina van Henk
-- <code>http://localhost:5000/cursist/Joyce</code> → Pagina van Joyce
-- <code>http://localhost:5000/cursist/Ralf</code> → Pagina van Ralf</p>
+<p><strong>Hoe werkt dit:</strong></p>
+<ul>
+<li><code>&lt;naam&gt;</code> in de route is een <strong>variabele</strong></li>
+<li>De waarde wordt uit de URL gehaald en doorgegeven aan de functie</li>
+<li><code>naam: str</code> is de parameter met type hint</li>
+</ul>
+<p><strong>Voorbeelden:</strong></p>
+<ul>
+<li><code>http://localhost:5000/cursist/Henk</code> → Pagina van Henk</li>
+<li><code>http://localhost:5000/cursist/Joyce</code> → Pagina van Joyce</li>
+<li><code>http://localhost:5000/cursist/Ralf</code> → Pagina van Ralf</li>
+</ul>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/cursist_Henk.png" data-desc-position="bottom"><img alt="De pagina van Henk" src="imgs/cursist_Henk.png"></a></p>
 <h3 id="url-parameters-met-types">URL parameters met types<a class="headerlink" href="#url-parameters-met-types" title="Link naar deze sectie">¶</a></h3>
 <p>Je kunt het type van URL parameters specificeren:</p>
@@ -4574,12 +4594,14 @@
 </span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>    <span class="n">totaal</span> <span class="o">=</span> <span class="n">bedrag</span> <span class="o">+</span> <span class="n">btw</span>
 </span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;p&gt;Excl: €</span><span class="si">{</span><span class="n">bedrag</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&lt;br&gt;BTW: €</span><span class="si">{</span><span class="n">btw</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&lt;br&gt;Totaal: €</span><span class="si">{</span><span class="n">totaal</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&lt;/p&gt;"</span>
 </span></code></pre></div>
-<p><strong>Beschikbare types:</strong>
-- <code>&lt;variabele&gt;</code> → string (default)
-- <code>&lt;int:variabele&gt;</code> → integer
-- <code>&lt;float:variabele&gt;</code> → float
-- <code>&lt;path:variabele&gt;</code> → string met slashes (voor file paths)
-- <code>&lt;uuid:variabele&gt;</code> → UUID string</p>
+<p><strong>Beschikbare types:</strong></p>
+<ul>
+<li><code>&lt;variabele&gt;</code> → string (default)</li>
+<li><code>&lt;int:variabele&gt;</code> → integer</li>
+<li><code>&lt;float:variabele&gt;</code> → float</li>
+<li><code>&lt;path:variabele&gt;</code> → string met slashes (voor file paths)</li>
+<li><code>&lt;uuid:variabele&gt;</code> → UUID string</li>
+</ul>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/product_123.png" data-desc-position="bottom"><img alt="URL met int parameter" src="imgs/product_123.png"></a></p>
 <h3 id="meerdere-parameters">Meerdere parameters<a class="headerlink" href="#meerdere-parameters" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/les/&lt;string:instrument&gt;/&lt;int:niveau&gt;"</span><span class="p">)</span>
@@ -4611,11 +4633,13 @@
 <p>Zet <code>debug=True</code> aan: <code>app.run(debug=True)</code></p>
 <p>Nu krijg je een <strong>interactieve debugger</strong>:</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/lengte_Joyce.png" data-desc-position="bottom"><img alt="Informatieve foutmelding" src="imgs/lengte_Joyce.png"></a></p>
-<p>Je ziet:
-- ✅ Exacte foutmelding (<code>IndexError: string index out of range</code>)
-- ✅ Stack trace met regelnummers
-- ✅ Code context (welke regel crashte)
-- ✅ Interactieve console (klik op console icoon, voer PIN in)</p>
+<p>Je ziet:</p>
+<ul>
+<li>✅ Exacte foutmelding (<code>IndexError: string index out of range</code>)</li>
+<li>✅ Stack trace met regelnummers</li>
+<li>✅ Code context (welke regel crashte)</li>
+<li>✅ Interactieve console (klik op console icoon, voer PIN in)</li>
+</ul>
 <div class="admonition danger">
 <p class="admonition-title">Debug mode in productie</p>
 <p>NOOIT <code>debug=True</code> gebruiken in productie! Het toont sourcecode en staat remote code execution toe (via de debug console).</p>
