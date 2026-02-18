@@ -149,13 +149,13 @@ class WebshopDatabase:
     def get_all_categories(self) -> list[Row]:
         """Haal alle categorieën op."""
 
-    def get_category_by_id(self, category_id: int) -> Optional[Row]:
+    def get_category_by_id(self, category_id: int) -> Row | None:
         """Haal één categorie op."""
 
     def get_products_by_category(self, category_id: int) -> list[Row]:
         """Haal producten van categorie op."""
 
-    def get_product_by_id(self, product_id: int) -> Optional[Row]:
+    def get_product_by_id(self, product_id: int) -> Row | None:
         """Haal product op met JOIN naar category."""
 ```
 

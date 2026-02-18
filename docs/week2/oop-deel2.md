@@ -87,20 +87,19 @@ print(f"Voorraadwaarde: €{laptop.bereken_voorraadwaarde():.2f}")
 
 Nu je dataclasses gebruikt, is het tijd om meer type hints te leren kennen.
 
-### Optional - waarden die None kunnen zijn
+### str | None - waarden die None kunnen zijn
 
-Soms mag een waarde `None` zijn:
+Soms mag een waarde `None` zijn. Dat geef je aan met `str | None`:
 
 ```python
 from dataclasses import dataclass
-from typing import Optional
 
 @dataclass
 class Product:
     naam: str
     prijs: float
     voorraad: int = 0
-    beschrijving: Optional[str] = None  # Mag None zijn
+    beschrijving: str | None = None  # Mag None zijn
 
 laptop = Product("Laptop", 799.99, 5, "Gaming laptop")
 muis = Product("Muis", 25.50, 10)  # Geen beschrijving
@@ -109,8 +108,8 @@ if laptop.beschrijving:
     print(laptop.beschrijving)
 ```
 
-!!! tip "Optional is een shortcut"
-    `Optional[str]` is hetzelfde als `str | None` (Python 3.10+). Het betekent: "een string OF None".
+!!! tip "str | None"
+    `beschrijving: str | None = None` betekent: "een string OF None". De `= None` is de standaardwaarde als je niets invult.
 
 ### List - lijsten met types
 
@@ -173,7 +172,6 @@ Een compleet voorbeeld met dataclasses:
 
 ```python
 from dataclasses import dataclass, field
-from typing import Optional
 
 @dataclass
 class Product:
@@ -262,7 +260,7 @@ print(f"Totaal: €{bestelling.bereken_totaal():.2f}")
 Je hebt nu gezien:
 
 - **Dataclasses**: Minder herhalende code (boilerplate) voor data containers met `@dataclass`
-- **Type hints**: `Optional[str]`, `list[Product]` voor complexere types
+- **Type hints**: `str | None`, `list[Product]` voor complexere types
 - **field()**: Voor mutable defaults met `default_factory`
 - **Preview**: Database modellen volgen hetzelfde patroon
 

@@ -173,7 +173,6 @@ Hier is een volledige class met exception handling:
 ```python
 import sqlite3
 from sqlite3 import Row
-from typing import Optional
 import logging
 
 # Setup logging
@@ -207,7 +206,7 @@ class ProductDatabase:
             logger.error(f"Fout bij aanmaken tabel: {e}")
             raise  # Re-raise omdat dit een kritieke fout is
 
-    def add(self, name: str, price: float, stock: int) -> Optional[int]:
+    def add(self, name: str, price: float, stock: int) -> int | None:
         """Voeg product toe met error handling."""
         try:
             with sqlite3.connect(self.db_path) as conn:
@@ -245,7 +244,7 @@ class ProductDatabase:
             logger.error(f"Fout bij ophalen producten: {e}")
             return []
 
-    def get_byid(self, productid: int) -> Optional[Row]:
+    def get_byid(self, productid: int) -> Row | None:
         """Haal één product op."""
         try:
             with sqlite3.connect(self.db_path) as conn:
@@ -426,7 +425,7 @@ def get_product(productid):
 - Gebruik specifieke exceptions (`IntegrityError`, `OperationalError`)
 - Log errors voor debugging (`logging.error()`)
 - Return None of lege lijst bij fouten (geen crash)
-- Gebruik type hints (`Optional[int]`, `list[Row]`)
+- Gebruik type hints (`int | None`, `list[Row]`)
 - Test error paths (wat gebeurt bij duplicates?)
 
 ❌ **DOE NIET:**
@@ -442,8 +441,8 @@ def get_product(productid):
 ### Pattern 1: Try-except met return
 
 ```python
-def safe_operation() -> Optional[Row]:
-    """Veilige operatie met Optional return."""
+def safe_operation() -> Row | None:
+    """Veilige operatie die Row of None teruggeeft."""
     try:
         # Database operatie
         return result

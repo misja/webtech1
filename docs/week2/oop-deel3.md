@@ -253,7 +253,6 @@ Hier een compleet voorbeeld met verschillende producttypes:
 
 ```python
 from dataclasses import dataclass
-from typing import Optional
 
 @dataclass
 class Product:
@@ -261,7 +260,7 @@ class Product:
     naam: str
     prijs: float
     voorraad: int = 0
-    beschrijving: Optional[str] = None
+    beschrijving: str | None = None
 
     def verkoop(self, aantal: int) -> bool:
         """Verkoop items. Geeft True terug bij succes."""

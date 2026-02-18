@@ -15,7 +15,7 @@ Maak een bestand `product.py` met een `Product` dataclass:
 - `naam` (str): Productnaam
 - `prijs` (float): Prijs in euro's
 - `voorraad` (int): Aantal op voorraad (default: 0)
-- `beschrijving` (Optional[str]): Een optionele beschrijving (default: None)
+- `beschrijving` (str | None): Een optionele beschrijving (default: None)
 
 **Methoden:**
 
@@ -26,7 +26,6 @@ Maak een bestand `product.py` met een `Product` dataclass:
 
 ```python
 from dataclasses import dataclass
-from typing import Optional
 
 @dataclass
 class Product:
@@ -34,8 +33,8 @@ class Product:
     pass
 ```
 
-!!! tip "Optional betekent: kan None zijn"
-    `beschrijving: Optional[str] = None` betekent dat beschrijving een string OF None kan zijn.
+!!! tip "str | None"
+    `beschrijving: str | None = None` betekent dat beschrijving een string OF None kan zijn.
 
 ### Test je Product
 
@@ -133,7 +132,7 @@ Nieuw totaal: €889.98
 Controleer voordat je klaar bent:
 
 - [ ] `Product` gebruikt `@dataclass` decorator (de `@`-aanduiding boven de klasse)
-- [ ] `Optional[str]` gebruikt voor beschrijving
+- [ ] `str | None` gebruikt voor beschrijving
 - [ ] `Winkelwagen` gebruikt `list[Product]` type hint
 - [ ] `field(default_factory=list)` gebruikt voor items
 - [ ] Alle methoden hebben return type annotations
@@ -142,7 +141,7 @@ Controleer voordat je klaar bent:
 ## Wat je geleerd hebt
 
 - `@dataclass` vermindert herhalende code (boilerplate)
-- `Optional[]` voor waarden die None kunnen zijn
+- `X | None` voor waarden die None kunnen zijn
 - `list[Type]` voor typed lists
 - `field(default_factory=list)` voor mutable defaults
 

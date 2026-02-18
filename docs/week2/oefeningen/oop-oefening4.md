@@ -106,7 +106,7 @@ Nu komt het allemaal samen. Maak een `Bestelling` dataclass die alle andere obje
 - `producten` (list[Product]): Lijst met producten
 - `betaalmethode` (Betaalmethode): Betaalmethode object
 - `verzendmethode` (Verzendmethode): Verzendmethode object
-- `kortingscode` (Optional[Kortingscode]): Optionele kortingscode (default: None)
+- `kortingscode` (Kortingscode | None): Optionele kortingscode (default: None)
 
 **Methoden:**
 
@@ -124,7 +124,6 @@ Nu komt het allemaal samen. Maak een `Bestelling` dataclass die alle andere obje
 
 ```python
 from dataclasses import dataclass, field
-from typing import Optional
 
 @dataclass
 class Bestelling:
@@ -132,7 +131,7 @@ class Bestelling:
     producten: list[Product] = field(default_factory=list)
     betaalmethode: Betaalmethode = None
     verzendmethode: Verzendmethode = None
-    kortingscode: Optional[Kortingscode] = None
+    kortingscode: Kortingscode | None = None
 
     def bereken_subtotaal(self) -> float:
         # Jouw code hier
@@ -265,7 +264,7 @@ print(overzicht)
 - [ ] Alle dataclasses gebruiken `@dataclass`
 - [ ] `Bestelling` gebruikt compositie (bevat andere objecten)
 - [ ] `bereken_totaal()` geeft dict terug voor templates
-- [ ] `Optional[Kortingscode]` gebruikt
+- [ ] `Kortingscode | None` gebruikt voor kortingscode
 - [ ] `list[Product]` met `field(default_factory=list)`
 - [ ] Gratis verzending boven €50 werkt
 - [ ] Type annotations overal
@@ -275,7 +274,7 @@ print(overzicht)
 
 - **Compositie**: Objecten die andere objecten bevatten (has-a relatie)
 - **Return dicts**: Gestructureerde data voor templates
-- **Optional**: Voor attributen die None kunnen zijn
+- **X | None**: Voor attributen die None kunnen zijn
 - **Complex data modeling**: Realistische webshop structuur
 
 **Preview:** Database relaties werken precies zo - een `Order` heeft een foreign key naar `Customer`, `Product`, etc.!

@@ -356,7 +356,7 @@ WARNING:__main__:Product 999 niet gevonden
 ✅ Database-specifieke exceptions gebruikt (`IntegrityError`, `OperationalError`)
 ✅ Error messages onderscheiden (UNIQUE, CHECK, NOT NULL)
 ✅ Logging gebruikt (`logger.info`, `logger.warning`, `logger.error`)
-✅ Type hints met `Optional` of `|` syntax
+✅ Type hints met `|` syntax gebruikt (`int | None`, `Row | None`)
 ✅ Return `None`, `False`, of lege lijst bij fouten (geen crash!)
 ✅ `cursor.rowcount` gebruikt om te checken of iets gewijzigd is
 ✅ Try/except patterns consequent toegepast
@@ -371,7 +371,7 @@ WARNING:__main__:Product 999 niet gevonden
 3. **Graceful degradation**: Return safe defaults (None, [], False) bij errors
 4. **Error message parsing**: Check `str(e)` voor specifieke constraint violations
 5. **Validatie**: Check input voor database operaties
-6. **Type hints**: `Optional[int]`, `list[Row]`, `bool` voor duidelijkheid
+6. **Type hints**: `int | None`, `list[Row]`, `bool` voor duidelijkheid
 7. **cursor.rowcount**: Controleer of UPDATE/DELETE iets veranderd heeft
 
 **Volgende stap:** In Week 6 leer je SQLAlchemy, een ORM die veel van deze error handling automatisch doet!

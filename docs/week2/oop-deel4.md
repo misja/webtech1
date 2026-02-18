@@ -94,7 +94,6 @@ In webapplicaties wil je vaak gestructureerde data teruggeven aan templates:
 
 ```python
 from dataclasses import dataclass
-from typing import Optional
 
 @dataclass
 class Customer:
@@ -172,7 +171,6 @@ Hier een realistisch voorbeeld met meerdere gecomponeerde objecten:
 
 ```python
 from dataclasses import dataclass, field
-from typing import Optional
 
 @dataclass
 class Customer:
@@ -216,9 +214,9 @@ class Order:
     """Complete order met alle relaties."""
     klant: Customer
     producten: list[Product] = field(default_factory=list)
-    betaalmethode: Optional[PaymentMethod] = None
-    verzendmethode: Optional[ShippingMethod] = None
-    kortingscode: Optional[DiscountCode] = None
+    betaalmethode: PaymentMethod | None = None
+    verzendmethode: ShippingMethod | None = None
+    kortingscode: DiscountCode | None = None
 
     def bereken_subtotaal(self) -> float:
         """Som van alle productprijzen."""
@@ -499,7 +497,7 @@ Controleer of je het volgende beheerst:
 
 - [ ] Compositie: objecten die andere objecten bevatten
 - [ ] `list[Object]` met `field(default_factory=list)`
-- [ ] `Optional[]` voor attributen die None kunnen zijn
+- [ ] `X | None` voor attributen die None kunnen zijn
 - [ ] Methoden die dicts teruggeven voor templates
 - [ ] Begrijpen: compositie in code = foreign keys in database
 - [ ] Scheiding van verantwoordelijkheden: bedrijfslogica vs presentatie
@@ -509,7 +507,7 @@ Controleer of je het volgende beheerst:
 In dit deel heb je geleerd:
 
 - **Compositie**: Objecten die andere objecten bevatten (heeft-een relatie)
-- **Type hints**: `list[Product]`, `Optional[Customer]`
+- **Type hints**: `list[Product]`, `Customer | None`
 - **Return dicts**: Gestructureerde data voor templates
 - **Database preview**: Compositie = foreign keys
 - **Scheiding van verantwoordelijkheden**: Bedrijfslogica apart van presentatie

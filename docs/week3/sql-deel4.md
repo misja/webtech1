@@ -18,7 +18,6 @@ Hier is een complete implementatie met alle patterns die je tot nu toe hebt gele
 ```python
 import sqlite3
 from sqlite3 import Row
-from typing import Optional
 
 
 class WebshopDatabase:
@@ -64,7 +63,7 @@ class WebshopDatabase:
             cursor = conn.execute(f"SELECT * FROM categories ORDER BY {order_by}")
             return cursor.fetchall()
 
-    def get_category_by_id(self, category_id: int) -> Optional[Row]:
+    def get_category_by_id(self, category_id: int) -> Row | None:
         """Haal één categorie op op basis van ID.
 
         Args:
@@ -114,7 +113,7 @@ class WebshopDatabase:
             """)
             return cursor.fetchall()
 
-    def get_product_by_id(self, product_id: int) -> Optional[Row]:
+    def get_product_by_id(self, product_id: int) -> Row | None:
         """Haal één product op op basis van ID.
 
         Args:
@@ -416,7 +415,7 @@ De underscore `_` geeft aan dat dit een interne method is.
 ### 2. Type hints overal
 
 ```python
-def get_product_by_id(self, product_id: int) -> Optional[Row]:
+def get_product_by_id(self, product_id: int) -> Row | None:
     #                              ↑ input type    ↑ return type
 ```
 
@@ -494,7 +493,7 @@ def update_stock(self, product_id: int, new_stock: int) -> bool:
 ### Error handling
 
 ```python
-def get_product_by_id(self, product_id: int) -> Optional[Row]:
+def get_product_by_id(self, product_id: int) -> Row | None:
     """Haal product op met error handling."""
     try:
         with self._get_connection() as conn:
