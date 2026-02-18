@@ -1,31 +1,31 @@
-"""Bestelling klasse voor de webshop - demonstratie van compositie."""
+"""Order klasse voor de webshop - demonstratie van compositie."""
 
 import datetime
 
 
-class Bestelling:
+class Order:
     """Klasse voor bestellingen in de webshop.
 
     Een bestelling is samengesteld uit:
-    - Een klant
-    - Een winkelwagen met producten
-    - Een betaalmethode
+    - Een klant (Customer)
+    - Een winkelwagen (Cart) met producten
+    - Een betaalmethode (PaymentMethod)
     - Verzendkosten
     """
 
     def __init__(
         self,
-        klant: 'Klant',
-        winkelwagen: 'Winkelwagen',
-        betaalmethode: 'Betaalmethode',
+        klant: 'Customer',
+        winkelwagen: 'Cart',
+        betaalmethode: 'PaymentMethod',
         verzendkosten: float = 5.95
     ):
         """Maak een nieuwe bestelling aan.
 
         Args:
-            klant: Klant object
-            winkelwagen: Winkelwagen object met producten
-            betaalmethode: Betaalmethode object
+            klant: Customer object
+            winkelwagen: Cart object met producten
+            betaalmethode: PaymentMethod object
             verzendkosten: Verzendkosten in euro's (default: 5.95)
         """
         self.klant = klant

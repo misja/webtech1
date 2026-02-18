@@ -1,8 +1,8 @@
-"""Betaalmethode-klasse voor de webshop"""
+"""PaymentMethod klasse voor de webshop."""
 
 
-class Betaalmethode:
-    """Klasse voor betaalmethoden"""
+class PaymentMethod:
+    """Klasse voor betaalmethoden."""
 
     def __init__(self, type_betaling, kosten=0.0):
         self.type = type_betaling
@@ -19,9 +19,9 @@ class Betaalmethode:
 
 if __name__ == '__main__':
     # Test betaalmethoden
-    ideal = Betaalmethode("iDEAL", kosten=0.0)
-    creditcard = Betaalmethode("Creditcard", kosten=2.50)
-    paypal = Betaalmethode("PayPal", kosten=1.00)
+    ideal = PaymentMethod("iDEAL", kosten=0.0)
+    creditcard = PaymentMethod("Creditcard", kosten=2.50)
+    paypal = PaymentMethod("PayPal", kosten=1.00)
 
     print("=== Test iDEAL ===")
     ideal.verwerk_betaling(99.99)

@@ -1,14 +1,13 @@
 # SQLite in Python: JOINs en Queries
 
-De music database heeft meerdere tabellen (artists, albums, songs) die met elkaar verbonden zijn via foreign keys. Met **JOIN** queries haal je data uit meerdere tabellen tegelijk op.
+De webshop database heeft meerdere tabellen (categories, products) die met elkaar verbonden zijn via foreign keys. Met **JOIN** queries haal je data uit meerdere tabellen tegelijk op.
 
-## De music database
+## De webshop database
 
-Download de [`music.sqlite`](bestanden/music.sqlite) database. Deze bevat drie tabellen die je ook bij OOP hebt gezien, maar nu met veel meer data:
+Download de [`webshop.sqlite`](bestanden/webshop.sqlite) database. Deze bevat twee tabellen met realistische e-commerce data:
 
-- `artists` - Artiesten (201 records)
-- `albums` - Albums (439 records)
-- `songs` - Songs (5350 records)
+- `categories` - Productcategorieën (10 records)
+- `products` - Producten (120 records)
 
 ### Database structuur inspecteren
 
@@ -18,7 +17,7 @@ Laten we eerst de database verkennen vanuit Python:
 import sqlite3
 from sqlite3 import Row
 
-def inspect_database(db_path: str = "music.sqlite") -> None:
+def inspect_database(db_path: str = "webshop.sqlite") -> None:
     """Toon database structuur en basisstatistieken."""
     with sqlite3.connect(db_path) as conn:
         conn.row_factory = Row
@@ -47,22 +46,20 @@ Output:
 ```
 Database tabellen:
 
-Tabel: artists
-Aantal records: 201
+Tabel: categories
+Aantal records: 10
 
-Tabel: albums
-Aantal records: 439
-
-Tabel: songs
-Aantal records: 5350
+Tabel: products
+Aantal records: 120
 ```
 
 !!! info "PRIMARY KEY AUTOINCREMENT"
     SQLite vult automatisch de primary key kolom `id` in wanneer je een nieuwe record toevoegt:
 
     ```python
-    cursor = conn.execute("INSERT INTO artists (name) VALUES (?)", ("Travis",))
-    newid = cursor.lastrowid  # 202
+    cursor = conn.execute("INSERT INTO categories (name, description) VALUES (?, ?)",
+                         ("Furniture", "Tables, chairs, and desks"))
+    newid = cursor.lastrowid  # 11
     ```
 
     Dit werkt hetzelfde als PostgreSQL's `SERIAL` type.
@@ -72,25 +69,25 @@ Aantal records: 5350
 Laten we beginnen met een paar eenvoudige queries om weer in te komen:
 
 ```python
-def get_album_byid(albumid: int, db_path: str = "music.sqlite") -> Row | None:
-    """Haal één album op op basis van ID."""
+def get_product_by_id(product_id: int, db_path: str = "webshop.sqlite") -> Row | None:
+    """Haal één product op op basis van ID."""
     with sqlite3.connect(db_path) as conn:
         conn.row_factory = Row
         cursor = conn.execute(
-            "SELECT * FROM albums WHERE id = ?",
-            (albumid,)
+            "SELECT * FROM products WHERE id = ?",
+            (product_id,)
         )
         return cursor.fetchone()
 
 # Gebruik
-album = get_album_byid(167)
-if album:
-    print(f"Album {album['id']}: {album['name']}")
+product = get_product_by_id(42)
+if product:
+    print(f"Product {product['id']}: {product['name']} - €{product['price']}")
 ```
 
 Output:
 ```
-Album 167: Blurring The Edges
+Product 42: Sneakers Nike - €89.99
 ```
 
 ### Sorteren met ORDER BY
@@ -98,29 +95,32 @@ Album 167: Blurring The Edges
 Je kunt resultaten sorteren met `ORDER BY`:
 
 ```python
-def get_artists_sorted(db_path: str = "music.sqlite", desc: bool = False) -> list[Row]:
-    """Haal alle artiesten op, gesorteerd op naam."""
+def get_products_sorted_by_price(
+    db_path: str = "webshop.sqlite",
+    desc: bool = False
+) -> list[Row]:
+    """Haal alle producten op, gesorteerd op prijs."""
     with sqlite3.connect(db_path) as conn:
         conn.row_factory = Row
 
         order = "DESC" if desc else "ASC"
-        cursor = conn.execute(f"SELECT * FROM artists ORDER BY name {order}")
+        cursor = conn.execute(f"SELECT * FROM products ORDER BY price {order}")
 
         return cursor.fetchall()
 
 # Gebruik
-artists = get_artists_sorted(desc=True)
-for artist in artists[:5]:  # Toon eerste 5
-    print(f"{artist['id']}: {artist['name']}")
+products = get_products_sorted_by_price(desc=True)
+for product in products[:5]:  # Toon eerste 5 (duurste)
+    print(f"{product['name']}: €{product['price']}")
 ```
 
 Output:
 ```
-23: ZZ Top
-179: Yngwie Malmsteen
-148: Yardbirds
-97: Yes
-14: Who
+Smartphone Samsung Galaxy: €699.99
+Tablet iPad Air: €599.99
+Monitor Dell 27 inch: €349.99
+4K Blu-ray Player: €199.99
+Smartwatch Fitbit: €199.99
 ```
 
 !!! warning "SQL injection bij ORDER BY"
@@ -130,45 +130,50 @@ Output:
     ```python
     # GEVAARLIJK - SQL injection risico!
     order = input("ASC or DESC? ")
-    cursor.execute(f"SELECT * FROM artists ORDER BY name {order}")
+    cursor.execute(f"SELECT * FROM products ORDER BY price {order}")
     ```
 
 ## JOINs: meerdere tabellen combineren
 
 Tot nu toe hebben we met één tabel gewerkt. Maar de echte kracht van SQL komt pas bij JOINs. Je kent dit al van PostgreSQL - in Python werkt het precies hetzelfde.
 
-### Simpele JOIN: Songs met Albums
+### Simpele JOIN: Products met Categories
 
-Laten we songs combineren met albums om te zien op welk album elke song staat:
+Laten we producten combineren met hun categorieën om een complete productlijst te maken:
 
 ```python
-def get_songs_with_albums(db_path: str = "music.sqlite") -> list[Row]:
-    """Haal alle songs op met hun album naam."""
+def get_products_with_categories(db_path: str = "webshop.sqlite") -> list[Row]:
+    """Haal alle producten op met hun categorie naam."""
     with sqlite3.connect(db_path) as conn:
         conn.row_factory = Row
 
         cursor = conn.execute("""
-            SELECT s.track, s.title, a.name AS album_name
-            FROM songs s
-            JOIN albums a ON s.album = a.id
-            ORDER BY s.title
+            SELECT p.name AS product, p.price, p.stock, c.name AS category
+            FROM products p
+            JOIN categories c ON p.category_id = c.id
+            ORDER BY c.name, p.name
         """)
 
         return cursor.fetchall()
 
 # Gebruik
-songs = get_songs_with_albums()
-for song in songs[:5]:  # Toon eerste 5
-    print(f"Track {song['track']}: {song['title']} (op {song['album_name']})")
+products = get_products_with_categories()
+for product in products[:10]:  # Toon eerste 10
+    print(f"{product['category']}: {product['product']} - €{product['price']} ({product['stock']} op voorraad)")
 ```
 
 Output:
 ```
-Track 4: #1 Zero (op The Colour And The Shape)
-Track 1: 'Desolation Row' (op Desire)
-Track 1: '74-'75 (op Sheer Heart Attack)
-Track 6: (I Can't Get No) Satisfaction (op The Big Come Up)
-Track 2: (I Can't Get No) Satisfaction (op Singles Collection: The London Years)
+Beauty: Electric Toothbrush - €79.99 (20 op voorraad)
+Beauty: Face Cream Anti-Aging - €34.99 (25 op voorraad)
+Beauty: Hair Dryer - €49.99 (22 op voorraad)
+Beauty: Lipstick Set (5 colors) - €29.99 (30 op voorraad)
+Beauty: Makeup Brush Set - €39.99 (28 op voorraad)
+Beauty: Nail Polish Kit - €19.99 (40 op voorraad)
+Beauty: Perfume Eau de Parfum 50ml - €59.99 (18 op voorraad)
+Beauty: Shampoo & Conditioner Set - €24.99 (35 op voorraad)
+Books: 1984 - €12.99 (45 op voorraad)
+Books: Algorithms Unlocked - €32.99 (25 op voorraad)
 ```
 
 !!! info "JOIN syntax"
@@ -180,146 +185,200 @@ Track 2: (I Can't Get No) Satisfaction (op Singles Collection: The London Years)
     JOIN tabel2 alias2 ON alias1.foreign_key = alias2.primary_key
     ```
 
-    - `s` en `a` zijn **aliases** (afkortingen)
+    - `p` en `c` zijn **aliases** (afkortingen)
     - `ON` specificeert de relatie tussen tabellen
-    - `a.name AS album_name` geeft de kolom een duidelijke naam
+    - `c.name AS category` geeft de kolom een duidelijke naam
 
-### JOIN met WHERE: Artiesten met Albums
+### JOIN met WHERE: Filteren op resultaten
 
-Nu gaan we artiesten ophalen met hun albums, alfabetisch gerangschikt:
-
-```python
-def get_artists_with_albums(db_path: str = "music.sqlite") -> list[Row]:
-    """Haal alle artiesten op met hun albums."""
-    with sqlite3.connect(db_path) as conn:
-        conn.row_factory = Row
-
-        cursor = conn.execute("""
-            SELECT ar.name AS artist, al.name AS album
-            FROM artists ar
-            JOIN albums al ON ar.id = al.artist
-            ORDER BY ar.name, al.name
-        """)
-
-        return cursor.fetchall()
-
-# Gebruik
-artists_albums = get_artists_with_albums()
-for item in artists_albums[:10]:  # Toon eerste 10
-    print(f"{item['artist']}: {item['album']}")
-```
-
-Output:
-```
-1000 Maniacs: Our Time in Eden
-10cc: The Best Of The Early Years
-AC DC: For Those About To Rock (We Salute You)
-AC DC: If You Want Blood You've Got It
-Aerosmith: Night In The Ruts
-Aerosmith: Rocks
-Alice Cooper: Beast Of Alice Cooper
-...
-```
-
-### Dubbele JOIN: Artiesten, Albums, Songs
-
-Nu wordt het interessanter: we combineren alle drie de tabellen. Hiervoor hebben we **twee JOINs** nodig:
+Nu gaan we producten ophalen uit een specifieke categorie, met extra filters:
 
 ```python
-def get_complete_music_catalog(db_path: str = "music.sqlite") -> list[Row]:
-    """Haal alle songs op met artiest en album informatie."""
-    with sqlite3.connect(db_path) as conn:
-        conn.row_factory = Row
-
-        cursor = conn.execute("""
-            SELECT
-                ar.name AS artist,
-                al.name AS album,
-                s.track,
-                s.title
-            FROM songs s
-            JOIN albums al ON s.album = al.id
-            JOIN artists ar ON al.artist = ar.id
-            ORDER BY ar.name, al.name, s.track
-        """)
-
-        return cursor.fetchall()
-
-# Gebruik
-catalog = get_complete_music_catalog()
-for item in catalog[:10]:
-    print(f"{item['artist']} - {item['album']} - Track {item['track']}: {item['title']}")
-```
-
-Output:
-```
-1000 Maniacs - Our Time in Eden - Track 1: These Are Days
-1000 Maniacs - Our Time in Eden - Track 2: Eat For Two
-1000 Maniacs - Our Time in Eden - Track 3: Candy Everybody Wants
-1000 Maniacs - Our Time in Eden - Track 4: Tolerance
-...
-```
-
-!!! tip "Meerdere JOINs"
-    Bij meerdere JOINs werk je **van binnen naar buiten**:
-
-    1. `songs` JOIN `albums` (via `s.album = al.id`)
-    2. `albums` JOIN `artists` (via `al.artist = ar.id`)
-
-    Dit is hetzelfde als bij PostgreSQL. De volgorde maakt uit!
-
-### JOIN met WHERE: Zoeken in resultaten
-
-We kunnen ook filteren op JOIN resultaten met een `WHERE` clausule. Bijvoorbeeld: zoek alle songs met "doctor" in de titel:
-
-```python
-def search_songs_by_title(
-    search_term: str,
-    db_path: str = "music.sqlite"
+def get_products_by_category(
+    category_name: str,
+    db_path: str = "webshop.sqlite"
 ) -> list[Row]:
-    """Zoek songs op basis van titel, inclusief artiest en album info."""
+    """Haal producten op uit een specifieke categorie."""
+    with sqlite3.connect(db_path) as conn:
+        conn.row_factory = Row
+
+        cursor = conn.execute("""
+            SELECT c.name AS category, p.name AS product, p.price, p.stock
+            FROM products p
+            JOIN categories c ON p.category_id = c.id
+            WHERE c.name = ?
+            ORDER BY p.name
+        """, (category_name,))
+
+        return cursor.fetchall()
+
+# Gebruik
+books = get_products_by_category("Books")
+print(f"Gevonden {len(books)} boeken:\n")
+for book in books[:5]:  # Toon eerste 5
+    print(f"{book['product']} - €{book['price']}")
+```
+
+Output:
+```
+Gevonden 20 boeken:
+
+1984 - €12.99
+Algorithms Unlocked - €32.99
+Atomic Habits - €18.99
+Clean Code - €34.99
+Design Patterns - €44.99
+```
+
+### JOIN met aggregatie: Producten tellen per categorie
+
+We kunnen JOINs combineren met aggregatiefuncties zoals `COUNT()` en `GROUP BY`:
+
+```python
+def get_category_statistics(db_path: str = "webshop.sqlite") -> list[Row]:
+    """Haal statistieken op per categorie."""
     with sqlite3.connect(db_path) as conn:
         conn.row_factory = Row
 
         cursor = conn.execute("""
             SELECT
-                ar.name AS artist,
-                al.name AS album,
-                s.track,
-                s.title
-            FROM songs s
-            JOIN albums al ON s.album = al.id
-            JOIN artists ar ON al.artist = ar.id
-            WHERE s.title LIKE ?
-            ORDER BY ar.name, al.name, s.title
+                c.name AS category,
+                COUNT(p.id) AS product_count,
+                AVG(p.price) AS avg_price,
+                SUM(p.stock) AS total_stock
+            FROM categories c
+            LEFT JOIN products p ON c.id = p.category_id
+            GROUP BY c.id, c.name
+            ORDER BY product_count DESC
+        """)
+
+        return cursor.fetchall()
+
+# Gebruik
+stats = get_category_statistics()
+print("Categorie statistieken:\n")
+for cat in stats:
+    print(f"{cat['category']}: {cat['product_count']} producten, "
+          f"gemiddelde prijs: €{cat['avg_price']:.2f}, "
+          f"totale voorraad: {cat['total_stock']}")
+```
+
+Output:
+```
+Categorie statistieken:
+
+Books: 20 producten, gemiddelde prijs: €24.34, totale voorraad: 703
+Clothing: 15 producten, gemiddelde prijs: €37.19, totale voorraad: 570
+Electronics: 15 producten, gemiddelde prijs: €189.32, totale voorraad: 413
+Home & Garden: 12 producten, gemiddelde prijs: €42.99, totale voorraad: 358
+Sports: 12 producten, gemiddelde prijs: €36.24, totale voorraad: 445
+...
+```
+
+!!! tip "LEFT JOIN vs JOIN"
+    We gebruiken hier `LEFT JOIN` in plaats van `JOIN`:
+
+    - `JOIN` (of `INNER JOIN`): alleen categorieën MET producten
+    - `LEFT JOIN`: ALLE categorieën, ook als ze geen producten hebben
+
+    Voor statistieken wil je vaak `LEFT JOIN` om lege categorieën ook te zien.
+
+### JOIN met WHERE en LIKE: Zoeken in resultaten
+
+We kunnen ook filteren op JOIN resultaten met een `WHERE` clausule. Bijvoorbeeld: zoek alle producten met "phone" in de naam:
+
+```python
+def search_products_by_name(
+    search_term: str,
+    db_path: str = "webshop.sqlite"
+) -> list[Row]:
+    """Zoek producten op basis van naam, inclusief categorie info."""
+    with sqlite3.connect(db_path) as conn:
+        conn.row_factory = Row
+
+        cursor = conn.execute("""
+            SELECT
+                c.name AS category,
+                p.name AS product,
+                p.price,
+                p.stock
+            FROM products p
+            JOIN categories c ON p.category_id = c.id
+            WHERE p.name LIKE ?
+            ORDER BY c.name, p.name
         """, (f"%{search_term}%",))
 
         return cursor.fetchall()
 
 # Gebruik
-doctor_songs = search_songs_by_title("doctor")
-print(f"Gevonden {len(doctor_songs)} songs met 'doctor' in de titel:\n")
-for song in doctor_songs:
-    print(f"{song['artist']}: {song['title']} (op {song['album']})")
+phone_products = search_products_by_name("phone")
+print(f"Gevonden {len(phone_products)} producten met 'phone' in de naam:\n")
+for product in phone_products:
+    print(f"{product['category']}: {product['product']} - €{product['price']} ({product['stock']} op voorraad)")
 ```
 
 Output:
 ```
-Gevonden 13 songs met 'doctor' in de titel:
+Gevonden 3 producten met 'phone' in de naam:
 
-Black Sabbath: Rock 'N' Roll Doctor (op Technical Ecstasy)
-Dr Feelgood: You Shouldn't Call The Doctor (If You Can't Afford The Bills) (op Malpractice)
-Dr Feelgood: Down At The Doctors (op Private Practice)
-Fleetwood Mac: Doctor Brown (op The Best of)
-...
+Electronics: Bluetooth Headphones Sony - €149.99 (18 op voorraad)
+Electronics: Smartphone Samsung Galaxy - €699.99 (8 op voorraad)
+Music & Movies: DJ Headphones - €89.99 (16 op voorraad)
 ```
 
 !!! info "LIKE operator en wildcard"
-    - `LIKE '%doctor%'` zoekt overal in de string
+    - `LIKE '%phone%'` zoekt overal in de string
     - `%` is een wildcard (= 0 of meer karakters)
     - We gebruiken `?` placeholder met `f"%{search_term}%"` voor veiligheid
 
     Dit is identiek aan PostgreSQL's `LIKE` operator.
+
+### Complexe WHERE clausules: Prijs en voorraad filteren
+
+Je kunt meerdere voorwaarden combineren met `AND` en `OR`:
+
+```python
+def get_affordable_in_stock_products(
+    max_price: float,
+    min_stock: int,
+    db_path: str = "webshop.sqlite"
+) -> list[Row]:
+    """Haal betaalbare producten op die op voorraad zijn."""
+    with sqlite3.connect(db_path) as conn:
+        conn.row_factory = Row
+
+        cursor = conn.execute("""
+            SELECT
+                c.name AS category,
+                p.name AS product,
+                p.price,
+                p.stock
+            FROM products p
+            JOIN categories c ON p.category_id = c.id
+            WHERE p.price <= ? AND p.stock >= ?
+            ORDER BY p.price ASC
+        """, (max_price, min_stock))
+
+        return cursor.fetchall()
+
+# Gebruik
+products = get_affordable_in_stock_products(max_price=30.0, min_stock=40)
+print(f"Gevonden {len(products)} betaalbare producten met voldoende voorraad:\n")
+for product in products[:10]:
+    print(f"{product['product']}: €{product['price']} ({product['stock']} op voorraad)")
+```
+
+Output:
+```
+Gevonden 21 betaalbare producten met voldoende voorraad:
+
+Card Game Uno: €9.99 (60 op voorraad)
+The Art of War: €9.99 (48 op voorraad)
+The Great Gatsby: €10.99 (50 op voorraad)
+Sticky Notes Pack: €11.99 (65 op voorraad)
+Honey Natural 500g: €11.99 (30 op voorraad)
+...
+```
 
 ## Views (optioneel)
 
@@ -336,34 +395,33 @@ Een **view** is een virtuele tabel - een opgeslagen query die je kunt gebruiken 
 
 ### View maken en gebruiken in Python
 
-Laten we een view maken voor de "doctor songs" query van eerder:
+Laten we een view maken voor de "producten op voorraad" query:
 
 ```python
-def create_doctor_songs_view(db_path: str = "music.sqlite") -> None:
-    """Maak een view voor songs met 'doctor' in de titel."""
+def create_in_stock_view(db_path: str = "webshop.sqlite") -> None:
+    """Maak een view voor producten die op voorraad zijn."""
     with sqlite3.connect(db_path) as conn:
         # Verwijder view als deze al bestaat
-        conn.execute("DROP VIEW IF EXISTS vDoctorSongs")
+        conn.execute("DROP VIEW IF EXISTS vInStockProducts")
 
         # Maak nieuwe view
         conn.execute("""
-            CREATE VIEW vDoctorSongs AS
+            CREATE VIEW vInStockProducts AS
             SELECT
-                ar.name AS artist,
-                al.name AS album,
-                s.track,
-                s.title
-            FROM songs s
-            JOIN albums al ON s.album = al.id
-            JOIN artists ar ON al.artist = ar.id
-            WHERE s.title LIKE '%doctor%'
-            ORDER BY ar.name, al.name, s.title
+                c.name AS category,
+                p.name AS product,
+                p.price,
+                p.stock
+            FROM products p
+            JOIN categories c ON p.category_id = c.id
+            WHERE p.stock > 0
+            ORDER BY c.name, p.name
         """)
 
         conn.commit()
-        print("View 'vDoctorSongs' aangemaakt")
+        print("View 'vInStockProducts' aangemaakt")
 
-def query_view(view_name: str, db_path: str = "music.sqlite") -> list[Row]:
+def query_view(view_name: str, db_path: str = "webshop.sqlite") -> list[Row]:
     """Haal data op uit een view."""
     with sqlite3.connect(db_path) as conn:
         conn.row_factory = Row
@@ -371,21 +429,22 @@ def query_view(view_name: str, db_path: str = "music.sqlite") -> list[Row]:
         return cursor.fetchall()
 
 # Gebruik
-create_doctor_songs_view()
+create_in_stock_view()
 
 # Query de view alsof het een tabel is
-doctor_songs = query_view("vDoctorSongs")
-for song in doctor_songs:
-    print(f"{song['artist']}: {song['title']}")
+products = query_view("vInStockProducts")
+for product in products[:10]:
+    print(f"{product['category']}: {product['product']} - €{product['price']}")
 ```
 
 Output:
 ```
-View 'vDoctorSongs' aangemaakt
-Black Sabbath: Rock 'N' Roll Doctor
-Dr Feelgood: You Shouldn't Call The Doctor (If You Can't Afford The Bills)
-Dr Feelgood: Down At The Doctors
-Fleetwood Mac: Doctor Brown
+View 'vInStockProducts' aangemaakt
+Beauty: Electric Toothbrush - €79.99
+Beauty: Face Cream Anti-Aging - €34.99
+Beauty: Hair Dryer - €49.99
+Beauty: Lipstick Set (5 colors) - €29.99
+Beauty: Makeup Brush Set - €39.99
 ...
 ```
 
@@ -396,28 +455,34 @@ Je kunt de view ook filteren, net als een normale tabel:
 ```python
 def search_in_view(
     view_name: str,
-    artist_filter: str,
-    db_path: str = "music.sqlite"
+    category_filter: str,
+    db_path: str = "webshop.sqlite"
 ) -> list[Row]:
     """Zoek in een view met extra filtering."""
     with sqlite3.connect(db_path) as conn:
         conn.row_factory = Row
         cursor = conn.execute(
-            f"SELECT * FROM {view_name} WHERE artist LIKE ?",
-            (f"%{artist_filter}%",)
+            f"SELECT * FROM {view_name} WHERE category LIKE ?",
+            (f"%{category_filter}%",)
         )
         return cursor.fetchall()
 
 # Gebruik
-feelgood_songs = search_in_view("vDoctorSongs", "feelgood")
-for song in feelgood_songs:
-    print(f"{song['artist']}: {song['title']} (op {song['album']})")
+electronics = search_in_view("vInStockProducts", "Electronics")
+print(f"\nElectronics op voorraad ({len(electronics)} producten):\n")
+for product in electronics[:5]:
+    print(f"{product['product']}: €{product['price']} ({product['stock']} op voorraad)")
 ```
 
 Output:
 ```
-Dr Feelgood: You Shouldn't Call The Doctor (If You Can't Afford The Bills) (op Malpractice)
-Dr Feelgood: Down At The Doctors (op Private Practice)
+Electronics op voorraad (15 producten):
+
+Bluetooth Headphones Sony: €149.99 (18 op voorraad)
+External SSD 1TB: €89.99 (40 op voorraad)
+Gaming Controller Xbox: €59.99 (20 op voorraad)
+HDMI Cable 2m: €12.99 (60 op voorraad)
+Keyboard Mechanical: €119.99 (22 op voorraad)
 ```
 
 !!! tip "Views bekijken"
@@ -437,9 +502,11 @@ Je hebt geleerd:
 
 - Database structuur inspecteren met `sqlite_master`
 - **JOINs** gebruiken om meerdere tabellen te combineren
-- Simpele JOIN (2 tabellen), dubbele JOIN (3 tabellen)
+- JOIN tussen products en categories
 - **WHERE** clausules combineren met JOINs
+- **Aggregatiefuncties** zoals `COUNT()`, `AVG()`, `SUM()` met `GROUP BY`
 - **LIKE** operator voor tekst zoeken met wildcards
+- **LEFT JOIN** vs **JOIN** voor inclusieve queries
 - **Views** maken en gebruiken (optioneel)
 - Placeholders gebruiken voor SQL injection preventie
 

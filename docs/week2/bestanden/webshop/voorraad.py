@@ -1,8 +1,8 @@
 import datetime
 
 
-class Voorraad:
-    """Klasse voor het bijhouden van productvoorraad"""
+class Inventory:
+    """Klasse voor het bijhouden van productvoorraad."""
 
     @staticmethod
     def _current_time():
@@ -18,13 +18,13 @@ class Voorraad:
     def bijbestellen(self, aantal):
         if aantal > 0:
             self.__aantal += aantal
-            self._mutatie_geschiedenis.append((Voorraad._current_time(), aantal))
+            self._mutatie_geschiedenis.append((Inventory._current_time(), aantal))
             self.toon_voorraad()
 
     def verkoop(self, aantal):
         if 0 < aantal <= self.__aantal:
             self.__aantal -= aantal
-            self._mutatie_geschiedenis.append((Voorraad._current_time(), -aantal))
+            self._mutatie_geschiedenis.append((Inventory._current_time(), -aantal))
         else:
             print("Het aantal dient groter dan nul (0) en maximaal gelijk aan de voorraad te zijn")
         self.toon_voorraad()

@@ -6,14 +6,14 @@ Tot nu toe zijn alle coderegels in één `app.py`-bestand ondergebracht. Voor gr
 
 Voor nog grotere toepassingen begint het logisch te worden om de bestanden te herstructureren en componenten te scheiden zoals forms, views en templates voor elke belangrijke component.
 
-In dit deel hebben we aandacht voor de wijze waarop de ontwikkelde applicatie van [oefening 1](../week6/oefeningen/flask-views-oefening1.md) *gerefactored* kan worden. Bij die oefening waren alle formulieren, views en templates in een enkel bestand of directory opgenomen. Zo maakte je een bestand `mentor_site.py`, waarin zowel het model als de verschillende routes waren opgenomen, en had je ook een bestand `forms.py`, waarin je de verschillende formulier-klassen had aangebracht. 
+In dit deel hebben we aandacht voor de wijze waarop de ontwikkelde applicatie van [oefening 1](../week6/oefeningen/flask-views-oefening1.md) *gerefactored* kan worden. Bij die oefening waren alle formulieren, views en templates in een enkel bestand of directory opgenomen. Zo maakte je een bestand `mentor_site.py`, waarin zowel het model als de verschillende routes waren opgenomen, en had je ook een bestand `forms.py`, waarin je de verschillende formulier-klassen had aangebracht.
 
 [Refactoren is een andere structuur aan code (of eigenlijk een hele *code-base*) geven](https://en.wikipedia.org/wiki/Code_refactoring). In dit geval wordt het bestand `mentor_site.py` (dat je bij de vorige oefening hebt gemaakt) opgesplitst in afzonderlijke componenten voor de hierboven genoemde aspecten. In plaats van `mentor_site.py` wordt vanaf nu `app.py ` gehanteerd.
 
 ![mentor_site.py opgesplitst tot twee componenten](imgs/structuur-flask-app.png)
 
 !!! Tip "Gebruik een bibliotheek"
-    De [`blueprints`]()-bibliotheek kan gebruikt worden om deze afzonderlijke modulaire componenten te verbinden met het hoofdbestand `app.py`. Hier komen we zo op terug.
+    De [`blueprints`](https://flask.palletsprojects.com/en/3.0.x/blueprints/)-bibliotheek kan gebruikt worden om deze afzonderlijke modulaire componenten te verbinden met het hoofdbestand `app.py`. Hier komen we zo op terug.
 
 Houd er rekening mee dat de `app.py` nog steeds een rol speelt, alleen verwijst het nu alleen nog naar de subcomponenten in plaats van zelf alle code te bevatten.
 

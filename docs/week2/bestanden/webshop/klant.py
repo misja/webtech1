@@ -1,4 +1,4 @@
-class Klant:
+class Customer:
     """Klasse voor klanten in de webshop met krediet en korting."""
 
     def __init__(self, naam: str, email: str):
@@ -71,8 +71,8 @@ class Klant:
 
 
 if __name__ == '__main__':
-    # Test de Klant klasse
-    jan = Klant("Jan Jansen", "jan@email.nl")
+    # Test de Customer klasse
+    jan = Customer("Jan Jansen", "jan@email.nl")
     print(jan)
 
     # Test properties

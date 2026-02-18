@@ -28,4 +28,4 @@ print("\n" + "="*50 + "\n")
 
 # Hier kun je tests toevoegen voor DigitaalProduct
 # Hier kun je tests toevoegen voor Boek
-# Hier kun je eventueel ook nog (extra) tests toevoegen voor Klant en Winkelwagen
+# Hier kun je eventueel ook nog (extra) tests toevoegen voor Customer en Cart

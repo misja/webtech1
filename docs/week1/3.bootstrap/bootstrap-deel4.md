@@ -8,7 +8,7 @@ Een standaard navigatiebalk wordt gemaakt met de `.navbar-klasse`, gevolgd door 
 
 Om een navigatiebalk toe te kunnen voegen worden er op de Bootstrap-site onder het kopje Components twee mogelijkheden aangeboden: [`Nav`](https://getbootstrap.com/docs/5.3/components/navs-tabs/) en [`Navbar`](https://getbootstrap.com/docs/5.3/components/navbar/). Onder `Nav` worden alle opties beschreven, aanlijning, wel of geen tabs, achtergrondkleur en nog veel meer. Uiteraard kan de corresponderende code weer overgezet worden naar de webpagina om daar aan de wensen aangepast te worden.
 
-Hier wordt gekozen voor de `Navbar`, waarom zal zo duidelijk worden. Navigatiebalken worden geleverd met ingebouwde ondersteuning voor een handvol sub componenten. 
+Hier wordt gekozen voor de `Navbar`, waarom zal zo duidelijk worden. Navigatiebalken worden geleverd met ingebouwde ondersteuning voor een handvol sub componenten.
 
 Component-classe  |  Uitleg
 ------------------|------------
@@ -71,7 +71,7 @@ Een keuze voor `Navbar` kent een tweetal voordelen:
 1.	Het logo van het bedrijf of product wordt getoond als BRAND.
 2.	Als het scherm verkleind wordt blijft in ieder geval het woord BRAND zichtbaar.
 
-Dat tweede punt vraagt misschien om toelichting. Als de schermgrootte te klein is om de inhoud van de webpagina te tonen, zorgt de `<div>` met de klassen `collapse navbar-collapse` ervoor dat het linker scherm in zicht is. Door een klik op de ‘hamburger’ verschijnt de navigatiebalk, nu verticaal opgebouwd. 
+Dat tweede punt vraagt misschien om toelichting. Als de schermgrootte te klein is om de inhoud van de webpagina te tonen, zorgt de `<div>` met de klassen `collapse navbar-collapse` ervoor dat het linker scherm in zicht is. Door een klik op de ‘hamburger’ verschijnt de navigatiebalk, nu verticaal opgebouwd.
 
 ```html
 <div class="collapse navbar-collapse" id="navbarSupportedContent">

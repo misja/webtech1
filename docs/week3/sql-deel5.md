@@ -138,18 +138,18 @@ Placeholders werken NIET voor tabel- of kolomnamen:
 
 ```python
 # FOUT - dit werkt niet!
-table_name = "users"
+table_name = "products"
 cursor.execute("SELECT * FROM ?", (table_name,))  # ERROR
 
 # Oplossing: whitelist validatie
-ALLOWED_TABLES = ["users", "products", "orders"]
+ALLOWED_TABLES = ["categories", "products"]
 
 def get_all_from_table(table_name: str) -> list[Row]:
     """Haal data op met veilige tabel selectie."""
     if table_name not in ALLOWED_TABLES:
         raise ValueError(f"Invalid table: {table_name}")
 
-    with sqlite3.connect("shop.db") as conn:
+    with sqlite3.connect("webshop.sqlite") as conn:
         conn.row_factory = Row
         # Nu is f-string veilig omdat we gevalideerd hebben
         cursor = conn.execute(f"SELECT * FROM {table_name}")
@@ -160,18 +160,18 @@ def get_all_from_table(table_name: str) -> list[Row]:
 
 ```python
 # FOUT - ORDER BY richting kan niet als placeholder
-cursor.execute("SELECT * FROM users ORDER BY name ?", ("DESC",))  # ERROR
+cursor.execute("SELECT * FROM products ORDER BY price ?", ("DESC",))  # ERROR
 
 # Oplossing: valideer input
-def get_users_sorted(desc: bool = False) -> list[Row]:
-    """Haal gebruikers gesorteerd op."""
+def get_products_sorted(desc: bool = False) -> list[Row]:
+    """Haal producten gesorteerd op."""
     # Controleer zelf welke waarde er komt
     order = "DESC" if desc else "ASC"
 
-    with sqlite3.connect("users.db") as conn:
+    with sqlite3.connect("webshop.sqlite") as conn:
         conn.row_factory = Row
         # Nu is f-string veilig
-        cursor = conn.execute(f"SELECT * FROM users ORDER BY name {order}")
+        cursor = conn.execute(f"SELECT * FROM products ORDER BY price {order}")
         return cursor.fetchall()
 ```
 
@@ -181,12 +181,12 @@ Deze werken meestal WEL als placeholders, maar niet in alle SQL databases:
 
 ```python
 # SQLite: dit werkt
-def get_users_paginated(limit: int, offset: int) -> list[Row]:
+def get_products_paginated(limit: int, offset: int) -> list[Row]:
     """Paginatie met placeholders (veilig in SQLite)."""
-    with sqlite3.connect("users.db") as conn:
+    with sqlite3.connect("webshop.sqlite") as conn:
         conn.row_factory = Row
         cursor = conn.execute(
-            "SELECT * FROM users LIMIT ? OFFSET ?",
+            "SELECT * FROM products LIMIT ? OFFSET ?",
             (limit, offset)
         )
         return cursor.fetchall()
@@ -200,96 +200,80 @@ Hier is een complete voorbeeld met alle veilige patterns:
 import sqlite3
 from sqlite3 import Row
 
-class UserDatabase:
-    """Veilige user database met SQL injection bescherming."""
+class ProductSearchDatabase:
+    """Veilige product search database met SQL injection bescherming."""
 
-    def __init__(self, db_path: str = "users.db"):
+    def __init__(self, db_path: str = "webshop.sqlite"):
         self.db_path = db_path
-        self._create_table()
 
-    def _create_table(self) -> None:
-        """Maak users tabel aan."""
+    def search_products(self, search_term: str) -> list[Row]:
+        """Zoek producten (veilig met placeholder in LIKE)."""
         with sqlite3.connect(self.db_path) as conn:
-            conn.execute("""
-                CREATE TABLE IF NOT EXISTS users (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    username TEXT NOT NULL UNIQUE,
-                    email TEXT NOT NULL,
-                    password TEXT NOT NULL
-                )
-            """)
-            conn.commit()
+            conn.row_factory = Row
+            cursor = conn.execute("""
+                SELECT p.id, p.name, p.price, p.stock, c.name AS category
+                FROM products p
+                JOIN categories c ON p.category_id = c.id
+                WHERE p.name LIKE ?
+                ORDER BY p.name
+            """, (f"%{search_term}%",))
+            return cursor.fetchall()
 
-    def add_user(self, username: str, email: str, password: str) -> int:
-        """Voeg user toe (altijd veilig met placeholders)."""
+    def get_products_by_price_range(
+        self,
+        min_price: float,
+        max_price: float
+    ) -> list[Row]:
+        """Haal producten op binnen prijsrange (veilig met placeholders)."""
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = Row
+            cursor = conn.execute("""
+                SELECT p.id, p.name, p.price, p.stock, c.name AS category
+                FROM products p
+                JOIN categories c ON p.category_id = c.id
+                WHERE p.price BETWEEN ? AND ?
+                ORDER BY p.price
+            """, (min_price, max_price))
+            return cursor.fetchall()
+
+    def update_stock(self, product_id: int, new_stock: int) -> bool:
+        """Update voorraad (veilig met placeholders)."""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.execute(
-                "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
-                (username, email, password)
+                "UPDATE products SET stock = ? WHERE id = ?",
+                (new_stock, product_id)
             )
             conn.commit()
-            return cursor.lastrowid
+            return cursor.rowcount > 0
 
-    def login(self, username: str, password: str) -> Row | None:
-        """Login user (veilig tegen SQL injection)."""
+    def get_products_in_category(self, category_id: int) -> list[Row]:
+        """Haal producten op per categorie (veilig met placeholder)."""
         with sqlite3.connect(self.db_path) as conn:
             conn.row_factory = Row
             cursor = conn.execute(
-                "SELECT * FROM users WHERE username = ? AND password = ?",
-                (username, password)
-            )
-            return cursor.fetchone()
-
-    def search_users(self, search_term: str) -> list[Row]:
-        """Zoek users (veilig met placeholder in LIKE)."""
-        with sqlite3.connect(self.db_path) as conn:
-            conn.row_factory = Row
-            cursor = conn.execute(
-                "SELECT id, username, email FROM users WHERE username LIKE ?",
-                (f"%{search_term}%",)
+                "SELECT * FROM products WHERE category_id = ? ORDER BY name",
+                (category_id,)
             )
             return cursor.fetchall()
 
-    def update_email(self, userid: int, new_email: str) -> bool:
-        """Update email (veilig met placeholders)."""
-        with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.execute(
-                "UPDATE users SET email = ? WHERE id = ?",
-                (new_email, userid)
-            )
-            conn.commit()
-            return cursor.rowcount > 0
-
-    def delete_user(self, userid: int) -> bool:
-        """Verwijder user (veilig met placeholder)."""
-        with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.execute(
-                "DELETE FROM users WHERE id = ?",
-                (userid,)
-            )
-            conn.commit()
-            return cursor.rowcount > 0
-
 
 # Gebruik (veilig tegen alle SQL injection pogingen)
-db = UserDatabase()
+db = ProductSearchDatabase()
 
 # Normale gebruik
-db.add_user("jan", "jan@email.nl", "geheim123")
+products = db.search_products("laptop")
+for product in products:
+    print(f"{product['name']}: €{product['price']}")
 
 # SQL injection pogingen worden onschadelijk gemaakt
-db.add_user("'; DROP TABLE users; --", "evil@hacker.com", "whatever")
-# Dit maakt gewoon een user met username "'; DROP TABLE users; --"
-# Geen gevaar!
-
-# Veilig inloggen
-user = db.login("jan", "geheim123")
-if user:
-    print(f"Ingelogd als {user['username']}")
-
-# Veilig zoeken
-users = db.search_users("'; DELETE FROM users; --")
+dangerous_products = db.search_products("'; DROP TABLE products; --")
 # Zoekt letterlijk naar die string, geen SQL executie
+print(f"Gevonden {len(dangerous_products)} producten")  # Waarschijnlijk 0
+
+# Veilig prijsfilter
+affordable = db.get_products_by_price_range(10.0, 50.0)
+for product in affordable[:5]:
+    print(f"{product['name']}: €{product['price']}")
 ```
 
 ## Flask en SQL injection
@@ -298,6 +282,8 @@ In Flask applicaties is SQL injection een groot risico omdat je direct met user 
 
 ```python
 from flask import Flask, request
+import sqlite3
+from sqlite3 import Row
 
 app = Flask(__name__)
 
@@ -310,7 +296,7 @@ def search():
     # results = conn.execute(f"SELECT * FROM products WHERE name LIKE '%{query}%'")
 
     # VEILIG - altijd placeholders gebruiken
-    with sqlite3.connect("shop.db") as conn:
+    with sqlite3.connect("webshop.sqlite") as conn:
         conn.row_factory = Row
         cursor = conn.execute(
             "SELECT * FROM products WHERE name LIKE ?",
