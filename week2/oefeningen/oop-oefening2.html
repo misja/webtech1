@@ -4176,7 +4176,7 @@
 <li><code>naam</code> (str): Productnaam</li>
 <li><code>prijs</code> (float): Prijs in euro's</li>
 <li><code>voorraad</code> (int): Aantal op voorraad (default: 0)</li>
-<li><code>beschrijving</code> (Optional[str]): Een optionele beschrijving (default: None)</li>
+<li><code>beschrijving</code> (str | None): Een optionele beschrijving (default: None)</li>
 </ul>
 <p><strong>Methoden:</strong></p>
 <ul>
@@ -4185,16 +4185,15 @@
 </ul>
 <h3 id="startcode">Startcode<a class="headerlink" href="#startcode" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nd">@dataclass</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">Product</span><span class="p">:</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="c1"># Jouw code hier</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="k">pass</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nd">@dataclass</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">Product</span><span class="p">:</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="c1"># Jouw code hier</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">pass</span>
 </span></code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Optional betekent: kan None zijn</p>
-<p><code>beschrijving: Optional[str] = None</code> betekent dat beschrijving een string OF None kan zijn.</p>
+<p class="admonition-title">str | None</p>
+<p><code>beschrijving: str | None = None</code> betekent dat beschrijving een string OF None kan zijn.</p>
 </div>
 <h3 id="test-je-product">Test je Product<a class="headerlink" href="#test-je-product" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">laptop</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="s2">"Laptop"</span><span class="p">,</span> <span class="mf">799.99</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">"Gaming laptop met RGB"</span><span class="p">)</span>
@@ -4275,7 +4274,7 @@
 <p>Controleer voordat je klaar bent:</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>Product</code> gebruikt <code>@dataclass</code> decorator (de <code>@</code>-aanduiding boven de klasse)</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>Optional[str]</code> gebruikt voor beschrijving</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>str | None</code> gebruikt voor beschrijving</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>Winkelwagen</code> gebruikt <code>list[Product]</code> type hint</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>field(default_factory=list)</code> gebruikt voor items</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Alle methoden hebben return type annotations</li>
@@ -4284,7 +4283,7 @@
 <h2 id="wat-je-geleerd-hebt">Wat je geleerd hebt<a class="headerlink" href="#wat-je-geleerd-hebt" title="Link naar deze sectie">¶</a></h2>
 <ul>
 <li><code>@dataclass</code> vermindert herhalende code (boilerplate)</li>
-<li><code>Optional[]</code> voor waarden die None kunnen zijn</li>
+<li><code>X | None</code> voor waarden die None kunnen zijn</li>
 <li><code>list[Type]</code> voor typed lists</li>
 <li><code>field(default_factory=list)</code> voor mutable defaults</li>
 </ul>

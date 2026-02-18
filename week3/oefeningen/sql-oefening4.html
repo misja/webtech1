@@ -4500,7 +4500,7 @@
 <p>✅ Database-specifieke exceptions gebruikt (<code>IntegrityError</code>, <code>OperationalError</code>)
 ✅ Error messages onderscheiden (UNIQUE, CHECK, NOT NULL)
 ✅ Logging gebruikt (<code>logger.info</code>, <code>logger.warning</code>, <code>logger.error</code>)
-✅ Type hints met <code>Optional</code> of <code>|</code> syntax
+✅ Type hints met <code>|</code> syntax gebruikt (<code>int | None</code>, <code>Row | None</code>)
 ✅ Return <code>None</code>, <code>False</code>, of lege lijst bij fouten (geen crash!)
 ✅ <code>cursor.rowcount</code> gebruikt om te checken of iets gewijzigd is
 ✅ Try/except patterns consequent toegepast
@@ -4514,7 +4514,7 @@
 <li><strong>Graceful degradation</strong>: Return safe defaults (None, [], False) bij errors</li>
 <li><strong>Error message parsing</strong>: Check <code>str(e)</code> voor specifieke constraint violations</li>
 <li><strong>Validatie</strong>: Check input voor database operaties</li>
-<li><strong>Type hints</strong>: <code>Optional[int]</code>, <code>list[Row]</code>, <code>bool</code> voor duidelijkheid</li>
+<li><strong>Type hints</strong>: <code>int | None</code>, <code>list[Row]</code>, <code>bool</code> voor duidelijkheid</li>
 <li><strong>cursor.rowcount</strong>: Controleer of UPDATE/DELETE iets veranderd heeft</li>
 </ol>
 <p><strong>Volgende stap:</strong> In Week 6 leer je SQLAlchemy, een ORM die veel van deze error handling automatisch doet!</p>
