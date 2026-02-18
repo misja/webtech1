@@ -1,11 +1,11 @@
 """
-Webshop met Product, Klant en Winkelwagen klassen
-Dit bestand demonstreert hoe meerdere klassen samenwerken
+Webshop met Product, Customer en Cart klassen.
+Dit bestand demonstreert hoe meerdere klassen samenwerken.
 """
 
 
 class Product:
-    """Klasse waarin productgegevens worden vastgelegd
+    """Klasse waarin productgegevens worden vastgelegd.
 
     Attributen:
         naam (str): De naam van het product.
@@ -22,12 +22,12 @@ class Product:
         return f"{self._naam} (€{self._prijs:.2f})"
 
 
-class Winkelwagen:
-    """Klasse voor een winkelwagen met producten
+class Cart:
+    """Klasse voor een winkelwagen met producten.
 
     Attributen:
         items (list): Een lijst met producten in de winkelwagen.
-        klant (Klant): De klant bij wie deze winkelwagen hoort.
+        klant (Customer): De klant bij wie deze winkelwagen hoort.
 
     Methods:
         voeg_toe: Voegt een product toe aan de winkelwagen.
@@ -80,8 +80,8 @@ class Winkelwagen:
             print(f"Totaal: €{self.bereken_totaal():.2f}")
 
 
-class Klant:
-    """Klasse om klantgegevens op te slaan
+class Customer:
+    """Klasse om klantgegevens op te slaan.
 
     Attributen:
         naam (str): De naam van de klant.
@@ -98,10 +98,10 @@ class Klant:
         self._bestellingen = []
 
     def plaats_bestelling(self, winkelwagen):
-        """Plaatst een bestelling
+        """Plaatst een bestelling.
 
         Parameters:
-            winkelwagen (Winkelwagen): De winkelwagen met producten
+            winkelwagen (Cart): De winkelwagen met producten
         """
         if not winkelwagen.items:
             print("Winkelwagen is leeg!")
@@ -139,8 +139,8 @@ if __name__ == '__main__':
     toetsenbord = Product("Mechanisch toetsenbord", 89.99, 15)
     monitor = Product("27-inch monitor", 299.99, 8)
 
-    jan = Klant("Jan Jansen", "jan@email.nl")
-    winkelmand = Winkelwagen(jan)
+    jan = Customer("Jan Jansen", "jan@email.nl")
+    winkelmand = Cart(jan)
 
     winkelmand.voeg_toe(laptop)
     winkelmand.voeg_toe(muis)
