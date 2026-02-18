@@ -1,8 +1,13 @@
 # Project information
 site_name: 'Webtechnologie 1'
 site_description: 'Onderwijsmateriaal voor de module Webtechnologie HBO-ICT jaar 1 semester 2'
-site_url: 'https://blackboard.hanze.nl/bbcswebdav/courses/itvt.1812.1-3-2019-20/webtech/index.html'
+site_url: 'https://misja.github.io/webtech1/'
 use_directory_urls: false
+
+# Repository
+repo_url: 'https://github.com/misja/webtech1'
+repo_name: 'misja/webtech1'
+edit_uri: 'edit/main/docs/'
 
 theme:
   name: 'material'
@@ -40,6 +45,8 @@ theme:
     # Content
     - content.code.copy         # Copy button bij code blocks
     - content.code.annotate     # Code annotations
+    - content.action.edit       # "Edit this page" knop
+    - content.action.view       # "View source" knop
 
 markdown_extensions:
   # Python Markdown extensions
@@ -88,5 +95,19 @@ plugins:
   - glightbox                   # Image zoom/lightbox (vervangt custom modal JS/CSS)
   - mknotebooks:
       execute: false
+
+# Copyright en extra links
+copyright: |
+  &copy; 2024 Hanzehogeschool Groningen -
+  <a href="https://github.com/misja/webtech1/issues/new" target="_blank">Meld een probleem of onduidelijkheid</a>
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/misja/webtech1
+      name: GitHub Repository
+    - icon: fontawesome/solid/bug
+      link: https://github.com/misja/webtech1/issues
+      name: Meld een probleem
 
 nav:
