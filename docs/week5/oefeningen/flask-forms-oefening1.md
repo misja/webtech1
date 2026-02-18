@@ -162,16 +162,19 @@ uv run python app.py
 ## Verwachte output
 
 **Leeg formulier:**
+
 - Twee invoervelden (voornaam, achternaam)
 - Een verzend knop
 - Geen flash messages zichtbaar
 
 **Validation error bij leeg formulier:**
+
 - Rode rand om lege verplichte velden
 - Formulier wordt niet verzonden
 - Blijft op dezelfde pagina
 
 **Success message na invullen:**
+
 - Groene flash message bovenaan: "Welkom, [voornaam] [achternaam]!"
 - Message is sluitbaar met X knop
 - Formulier velden zijn leeg (na redirect)
@@ -253,16 +256,20 @@ if form.validate_on_submit():
 ## Veelvoorkomende fouten
 
 **"CSRF token missing"**
+
 - Oplossing: Voeg `{{ form.hidden_tag() }}` toe in het formulier
 
 **Flash message verschijnt niet**
+
 - Check of je `flash()` aanroept vóór de redirect
 - Check of `get_flashed_messages()` in de template staat
 
 **Validators werken niet**
+
 - Check of `DataRequired()` in de validators list staat
 - Check of je `form.validate_on_submit()` gebruikt
 
 **Bootstrap styling werkt niet**
+
 - Check of Bootstrap CSS en JS links correct zijn
 - Check of `integrity` en `crossorigin` attributen aanwezig zijn

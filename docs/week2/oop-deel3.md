@@ -24,6 +24,7 @@ print(laptop.naam)  # Werkt! Overgenomen van Product
 ```
 
 **Terminologie:**
+
 - `Product` is de **parent class** (ook wel: superclass, base class)
 - `FysiekProduct` is de **child class** (ook wel: subclass, derived class)
 

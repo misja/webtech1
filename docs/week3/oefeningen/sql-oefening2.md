@@ -44,6 +44,7 @@ def get_products_by_category(self, category_name: str) -> list[Row]:
 ```
 
 Test:
+
 ```python
 db = WebshopDatabase()
 products = db.get_products_by_category("Electronics")
@@ -93,6 +94,7 @@ def get_products_in_price_range(self, min_price: float, max_price: float) -> lis
 ```
 
 Test:
+
 ```python
 products = db.get_products_in_price_range(20.0, 50.0)
 print(f"Gevonden {len(products)} producten tussen €20 en €50")
@@ -132,6 +134,7 @@ def get_average_price_per_category(self) -> list[Row]:
 ```
 
 Test:
+
 ```python
 stats = db.get_average_price_per_category()
 for cat in stats:
@@ -169,6 +172,7 @@ def get_inventory_value_per_category(self) -> list[Row]:
 ```
 
 Verwachte output format:
+
 ```
 Voorraadwaarde per categorie:
 1. Electronics: €15,432.50 (15 producten)

@@ -380,6 +380,7 @@ print(overzicht)
 ```
 
 Output:
+
 ```python
 {
     'klant_naam': 'Jan Jansen',
@@ -461,6 +462,7 @@ In je template (`producten.html`) kun je dan de objecten gebruiken:
 Goede code scheidt verantwoordelijkheden:
 
 **Business logic (modellen):**
+
 ```python
 @dataclass
 class Order:
@@ -474,6 +476,7 @@ class Order:
 ```
 
 **Presentation layer (routes):**
+
 ```python
 @app.route('/order/<int:id>')
 def toon_order(id):

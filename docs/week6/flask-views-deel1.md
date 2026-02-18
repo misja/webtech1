@@ -14,11 +14,11 @@ regel 3| | | |
 
 Voorbeeld met cursisten van de muziekschool. De eerste kolom is het sleutelveld (id) - deze waarde is uniek per rij:
 
-| id	|Voornaam|	Achternaam|	Plaats
+| id |Voornaam| Achternaam| Plaats
 |---|--------|------------|--------|
-1|	Joyce	|Rooth	|Groningen
-2	|Timo |Bijl	|Drachten
-3|	Fred|	Timmer|	Assen
+1| Joyce |Rooth |Groningen
+2 |Timo |Bijl |Drachten
+3| Fred| Timmer| Assen
 
 In SQL haal je deze gegevens op met `SELECT`:
 
@@ -55,7 +55,7 @@ operatie | Beschrijving
 ---|---
 `CREATE` | Nieuwe records toevoegen
 `READ`   | Gegevens opvragen (`SELECT`)
-`UPDATE `| Gegevens wijzigen
+`UPDATE`| Gegevens wijzigen
 `DELETE` | Gegevens verwijderen
 
 ## Werkwijze

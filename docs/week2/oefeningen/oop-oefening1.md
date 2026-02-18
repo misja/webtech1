@@ -9,6 +9,7 @@ Maak een bestand `klant.py` met een `Klant` klasse die het volgende kan:
 ### a. Basis klasse opzetten
 
 De klasse moet deze attributen hebben:
+
 - `naam` (str): De naam van de klant
 - `email` (str): Het emailadres
 - `korting_percentage` (float): Het kortingspercentage (default: 0.0)
@@ -57,6 +58,7 @@ print(f"Prijs na korting: €{marie.bereken_prijs_na_korting(prijs):.2f}")
 ```
 
 **Verwachte output:**
+
 ```
 Klant: Jan Jansen (jan@email.nl) - 10.0% korting
 Korting op €100.00: €10.00

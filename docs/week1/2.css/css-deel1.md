@@ -33,7 +33,6 @@ Je kunt CSS in het html-bestand zelf schrijven, maar je kunt het ook in een sepa
 
 ![Een eenvoudige stylesheet](imgs/styled_page.png)
 
-
 Alle tekst opgenomen binnen een paragraaf heeft daadwerkelijk een rode kleur gekregen.
 
 !!! info "External, Internal en Inline"
@@ -114,9 +113,3 @@ p {
 ```
 
 De `rgb()`-methode kent nog een variant, `rgba()`. De letter `a` staat voor alpha en bepaalt de *transparantie* van de opvulling. Alphawaarde 0 (nul) is volkomen transparant, alphawaarde 1 is volledig opaak.
-
-
-
-
-
-

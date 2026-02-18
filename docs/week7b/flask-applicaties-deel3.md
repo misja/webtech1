@@ -202,7 +202,7 @@ Voordat er getest kan worden dient de database aangemaakt te worden. Daarvoor zi
 1. Stel de omgevingsvariabele FLASK_APP in
     - Voor een MacOS / Linux-machine is dat `export FLASK_APP = app.py`
     - Voor een Windows-machine `set FLASK_APP = app.py`
-2. `flask db init `
+2. `flask db init`
 
 ## Resultaat
 
@@ -240,4 +240,3 @@ Deze structuur is professioneel en wordt gebruikt in productie-applicaties. In d
     - Het gebruik van blueprint-specifieke static files
     - Het implementeren van API endpoints in aparte `blueprints`
     - Het toevoegen van authentication met de `Flask-Login` bibliotheek
-

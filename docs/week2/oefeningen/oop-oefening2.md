@@ -11,12 +11,14 @@ Je hebt in oefening 1 waarschijnlijk een reguliere `Product` klasse gemaakt. Nu 
 Maak een bestand `product.py` met een `Product` dataclass:
 
 **Attributen:**
+
 - `naam` (str): Productnaam
 - `prijs` (float): Prijs in euro's
 - `voorraad` (int): Aantal op voorraad (default: 0)
 - `beschrijving` (Optional[str]): Een optionele beschrijving (default: None)
 
 **Methoden:**
+
 - `verkoop(aantal: int) -> bool`: Verkoop items, geeft True bij succes
 - `voorraad_waarde() -> float`: Bereken totale waarde van voorraad
 
@@ -49,6 +51,7 @@ print(laptop)
 ```
 
 **Verwachte output:**
+
 ```
 Product(naam='Laptop', prijs=799.99, voorraad=5, beschrijving='Gaming laptop met RGB')
 Voorraadwaarde: €3999.95
@@ -62,10 +65,12 @@ Maak een bestand `winkelwagen.py` met een `Winkelwagen` dataclass.
 ### Opdracht
 
 **Attributen:**
+
 - `klant_naam` (str): Naam van de klant
 - `items` (list[Product]): Lijst met producten
 
 **Methoden:**
+
 - `voeg_toe(product: Product) -> None`: Voeg product toe
 - `verwijder(product: Product) -> bool`: Verwijder product, geeft True als gelukt
 - `bereken_totaal() -> float`: Bereken totaalprijs
@@ -114,6 +119,7 @@ print(f"Nieuw totaal: €{wagen.bereken_totaal():.2f}")
 ```
 
 **Verwachte output:**
+
 ```
 Aantal items: 0
 Aantal items: 3

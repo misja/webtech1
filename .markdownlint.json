@@ -1,0 +1,18 @@
+{
+  "MD013": false,
+  "MD001": false,
+  "MD024": {
+    "siblings_only": true
+  },
+  "MD033": {
+    "allowed_elements": ["br", "small", "kbd", "sub", "sup", "details", "summary", "i", "id"]
+  },
+  "MD036": false,
+  "MD040": false,
+  "MD041": false,
+  "MD046": false,
+  "MD055": false,
+  "MD060": {
+    "style": "consistent"
+  }
+}

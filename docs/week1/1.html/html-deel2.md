@@ -38,8 +38,6 @@ De algemene vorm van een element is als volgt:
 
     Vaak zie je een dergelijk *void-element* afgesloten worden met een backslash ("/"), zoals `<img src="" ... />`. Deze slash binnen de tag zelf [is optioneel](https://html.spec.whatwg.org/multipage/syntax.html#start-tags).
 
-
-
 ### Een voorbeeld
 
 Hieronder staat een voorbeeld van een eenvoudige HTML-pagina. Dit voorbeeld laat de algemene structuur van een webpagina zien.
@@ -62,13 +60,10 @@ Hieronder staat een voorbeeld van een eenvoudige HTML-pagina. Dit voorbeeld laat
 
 Wanneer je deze code opslaat en opent in een browser, krijg je het onderstaande resultaat te zien:
 
-
 ![File in browser](imgs/file_in_browser.png)
-
 
 !!! info "Gebruik van het file system"
     Normaliter maken we gebruik van een webserver om bestanden in je browser te laten zien. In de eerste drie weken openen we de bestanden gewoon via het file system. Vanaf week 4, wanneer we met Flask gaan werken, zullen we daadwerkelijk met een (ontwikkel)server gaan werken.
-
 
 De eerste regel `<!DOCTYPE html>`, oftewel *Document Type Definition* (DTD) is bedoeld om aan te geven door welke versie van HTML het document is opgebouwd.
 
@@ -166,8 +161,3 @@ Het is ook mogelijk binnen tags andere tags in te voegen. Dit wordt *nesten* gen
 ![Nesten](imgs/strong.png)
 
 Belangrijk is wel dat de elementen op een juiste wijze genest worden: het element `<strong>` zal gesloten moeten zijn voordat het `<p>`-element wordt beëindigd. Wordt dat achterwege gelaten dan overlappen de elementen elkaar en zal de webbrowser een gok wagen wat er van hem gevraagd wordt, wat tot onverwachte resultaten kan leiden.
-
-
-
-
-

@@ -1,6 +1,6 @@
 ![Stage lopen met Gert](imgs/stage.jpeg)
 
-Binnen het HBO-onderwijs spelen stages een belangrijke rol. Het is daarom ook belangrijk om de gegevens van de stages goed vast te leggen. 
+Binnen het HBO-onderwijs spelen stages een belangrijke rol. Het is daarom ook belangrijk om de gegevens van de stages goed vast te leggen.
 
 Doel van deze opdracht is om hier een sterk vereenvoudigde webapplicatie aan te maken. De database zal beperkt worden tot een viertal tabellen die maar een paar attributen gaan bevatten.
 
@@ -18,7 +18,7 @@ Er zijn twee typen geregistreerde bezoekers van deze site. Allereerst studenten,
 
 ## Gevraagd
 
-Maak een sterk vereenvoudige webapplicatie waarbij deze gegevens kunnen worden geraadpleegd en bewerkt. Het is een DUO-opdracht. 
+Maak een sterk vereenvoudige webapplicatie waarbij deze gegevens kunnen worden geraadpleegd en bewerkt. Het is een DUO-opdracht.
 
 ## Tips
 

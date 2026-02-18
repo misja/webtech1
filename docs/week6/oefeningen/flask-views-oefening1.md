@@ -18,10 +18,12 @@ Maak een beheersysteem waarin docenten en studenten toegevoegd en verwijderd kun
 Twee modellen met een relatie:
 
 **Docent**:
+
 - `id` (primary key)
 - `naam`
 
 **Student**:
+
 - `id` (primary key)
 - `naam`
 - `mentor_id` (foreign key naar Docent)
@@ -56,10 +58,12 @@ Navigatiebalk met vijf links:
 Maak deze bestanden:
 
 **Python**:
+
 - `mentor_site.py` - Hoofd applicatie
 - `forms.py` - Drie formulieren
 
 **Templates**:
+
 - `base.html` - Basis template met navigatie
 - `home.html` - Homepage
 - `voeg_docent_toe.html`

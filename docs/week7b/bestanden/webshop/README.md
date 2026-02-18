@@ -13,12 +13,14 @@ In deze week refactoren we de monolithische Week 7a applicatie naar een **modula
 ## Wat zijn Blueprints?
 
 Blueprints zijn Flask's manier om een applicatie op te delen in **herbruikbare componenten**. Elk blueprint is een verzameling van:
+
 - Routes (`@blueprint.route()`)
 - Templates (in eigen `templates/` folder)
 - Forms (in eigen `forms.py`)
 - Static files (optioneel)
 
 **Voordelen:**
+
 - **Modulariteit**: Elke feature heeft eigen folder
 - **Schaalbaarheid**: Teams kunnen aan verschillende blueprints werken
 - **Herbruikbaarheid**: Blueprints kunnen in meerdere apps gebruikt worden
@@ -80,6 +82,7 @@ webshop/
 ### 1. Application Factory Pattern
 
 **Week 7a (Monolithisch):**
+
 ```python
 # app.py
 app = Flask(__name__)
@@ -92,6 +95,7 @@ def index():
 ```
 
 **Week 7b (Factory):**
+
 ```python
 # webshop_app/__init__.py
 def create_app(config_name='default'):
@@ -113,6 +117,7 @@ app = create_app()
 ```
 
 **Voordelen:**
+
 - Kan meerdere app instances maken (voor tests met verschillende config)
 - Extensions worden pas gebonden bij create_app() call
 - Config kan per environment verschillen
@@ -120,6 +125,7 @@ app = create_app()
 ### 2. Blueprint Routes
 
 **Route definitie in blueprint:**
+
 ```python
 # webshop_app/products/views.py
 from flask import Blueprint
@@ -142,6 +148,7 @@ def product(product_id):
 ```
 
 **Blueprint registratie met prefix:**
+
 ```python
 # webshop_app/__init__.py
 app.register_blueprint(products_bp)  # Geen prefix, routes beginnen bij /
@@ -150,6 +157,7 @@ app.register_blueprint(admin_bp, url_prefix='/admin')  # Routes beginnen bij /ad
 ```
 
 **Resultaat:**
+
 | Blueprint | Route | URL |
 |-----------|-------|-----|
 | products  | `@products_bp.route("/")` | `/` |
@@ -161,6 +169,7 @@ app.register_blueprint(admin_bp, url_prefix='/admin')  # Routes beginnen bij /ad
 ### 3. URL Generation met Blueprints
 
 **Week 7a:**
+
 ```python
 url_for('index')           # Naar index() functie
 url_for('login')           # Naar login() functie
@@ -168,6 +177,7 @@ url_for('admin_products')  # Naar admin_products() functie
 ```
 
 **Week 7b:**
+
 ```python
 url_for('products.index')        # Blueprint.view syntax!
 url_for('auth.login')            # auth blueprint, login view
@@ -176,6 +186,7 @@ url_for('products.category', category_id=1)  # Met parameters
 ```
 
 **In templates:**
+
 ```jinja
 <!-- base.html -->
 <a href="{{ url_for('products.index') }}">Home</a>
@@ -201,12 +212,14 @@ products_bp = Blueprint('products', __name__, template_folder='templates')
 ```
 
 **Flask zoekt templates in deze volgorde:**
+
 1. `webshop_app/templates/` (main app templates)
 2. `webshop_app/products/templates/` (products blueprint)
 3. `webshop_app/auth/templates/` (auth blueprint)
 4. `webshop_app/admin/templates/` (admin blueprint)
 
 **Best practice:** Gebruik subfolders met blueprint naam:
+
 ```
 products/templates/products/index.html  # Goed!
 products/templates/index.html           # Vermijd (kan conflicts geven)
@@ -215,6 +228,7 @@ products/templates/index.html           # Vermijd (kan conflicts geven)
 ### 5. Circular Import Prevention
 
 **Probleem:**
+
 ```python
 # models.py
 from webshop_app import db  # ❌ Circular import!
@@ -224,6 +238,7 @@ from webshop_app.models import Customer  # ❌ Circular import!
 ```
 
 **Oplossing:**
+
 ```python
 # models.py
 from flask_sqlalchemy import SQLAlchemy
@@ -275,21 +290,25 @@ app.register_blueprint(admin_bp, url_prefix='/admin')
 ## Installatie
 
 1. **Installeer dependencies:**
+
    ```bash
    pip install -r requirements.txt
    ```
 
 2. **Migreer data (optioneel):**
+
    ```bash
    python migrate_database.py
    ```
 
 3. **Start de applicatie:**
+
    ```bash
    python app.py
    ```
 
 4. **Open in browser:**
+
    ```
    http://127.0.0.1:5000
    ```
@@ -299,6 +318,7 @@ app.register_blueprint(admin_bp, url_prefix='/admin')
 ### Route Definitie
 
 **Week 7a:**
+
 ```python
 # app.py (alles in één bestand)
 @app.route("/")
@@ -320,6 +340,7 @@ def admin_products():
 ```
 
 **Week 7b:**
+
 ```python
 # products/views.py
 @products_bp.route("/")
@@ -345,6 +366,7 @@ def products():
 ### Imports
 
 **Week 7a:**
+
 ```python
 # app.py
 from flask import Flask, render_template
@@ -354,6 +376,7 @@ from forms import LoginForm, AddProductForm
 ```
 
 **Week 7b:**
+
 ```python
 # products/views.py
 from flask import Blueprint, render_template

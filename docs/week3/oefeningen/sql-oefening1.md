@@ -100,6 +100,7 @@ def update_naam(self, werknemerid: int, nieuwe_naam: str) -> bool:
 ```
 
 Test je code:
+
 - Wijzig het salaris van Aad (ID 1) naar 90000
 - Wijzig de naam van Bea (ID 2) naar "Beatrix"
 - Print telkens alle werknemers om te verifiëren

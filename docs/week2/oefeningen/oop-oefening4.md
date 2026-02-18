@@ -5,6 +5,7 @@ In deze oefening werk je met **compositie** - objecten die andere objecten bevat
 ## Achtergrond
 
 Een bestelling in een webshop is samengesteld uit meerdere objecten:
+
 - Een **Klant** (wie bestelt?)
 - Een lijst met **Producten** (wat wordt besteld?)
 - Een **Betaalmethode** (hoe betalen?)
@@ -20,10 +21,12 @@ Maak een `Betaalmethode` dataclass.
 ### Opdracht
 
 **Attributen:**
+
 - `type` (str): Type betaling ("iDEAL", "Creditcard", "PayPal")
 - `transactiekosten` (float): Kosten voor deze betaalmethode (default: 0.0)
 
 **Methoden:**
+
 - `bereken_totaal_met_kosten(bedrag: float) -> float`: Geef bedrag + transactiekosten terug
 
 ### Code
@@ -48,6 +51,7 @@ Maak een `Verzendmethode` dataclass.
 ### Opdracht
 
 **Attributen:**
+
 - `type` (str): Type verzending ("Standaard", "Express", "Afhalen")
 - `kosten` (float): Verzendkosten
 - `levertijd` (str): Verwachte levertijd (bijv. "2-3 werkdagen")
@@ -69,10 +73,12 @@ Maak een `Kortingscode` dataclass.
 ### Opdracht
 
 **Attributen:**
+
 - `code` (str): De kortingscode (bijv. "ZOMER2024")
 - `percentage` (float): Kortingspercentage (bijv. 15.0 voor 15%)
 
 **Methoden:**
+
 - `bereken_korting(bedrag: float) -> float`: Bereken kortingsbedrag
 
 ### Code
@@ -95,6 +101,7 @@ Nu komt het allemaal samen. Maak een `Bestelling` dataclass die alle andere obje
 ### Opdracht
 
 **Attributen:**
+
 - `klant` (Klant): Klant object
 - `producten` (list[Product]): Lijst met producten
 - `betaalmethode` (Betaalmethode): Betaalmethode object
@@ -205,6 +212,7 @@ print(f"Totaal: €{totaal_info['totaal']:.2f}")
 ```
 
 **Verwachte output:**
+
 ```
 Klant: Jan Jansen
 Aantal producten: 2
@@ -246,6 +254,7 @@ def maak_overzicht(self) -> dict:
 ```
 
 Test:
+
 ```python
 overzicht = bestelling.maak_overzicht()
 print(overzicht)

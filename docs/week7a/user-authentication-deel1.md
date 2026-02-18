@@ -34,7 +34,6 @@ Beiden kunnen zeer goed gebruikt worden in een Flask-applicatie om te kunnen ach
 
 Is Bcrypt aanwezig, is de eerste actie het importeren ervan. Daarna maken we een object aan van het type `BCrypt()` en gebruiken dat object om het wachtwoord te hashen:
 
-
 ```ipython
 
 In [1]: from flask_bcrypt import Bcrypt
@@ -62,6 +61,7 @@ Out[5]: False
 In [6]: bcrypt.check_password_hash(hashed_pass, 'supergeheimwachtwoord')
 Out[6]: True
 ```
+
 Precies in de lijn der verwachting.
 
 ### Werkzeug
@@ -84,7 +84,3 @@ Out[5]: True
 ```
 
 Het verschil tussen beiden is dat bij Werkzeug exact de juiste methoden binnengehaald worden en bij Bcrypt moet er soms een beetje over nagedacht worden. De keuze tussen deze pakketten is vrij arbitrair en ligt een beetje aan de voorkeuren van de ontwikkelaar.
-
-
-
-

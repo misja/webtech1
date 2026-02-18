@@ -53,6 +53,7 @@ uv init
 ```
 
 Dit maakt automatisch:
+
 - `pyproject.toml` - Project configuratie en dependencies
 - `.python-version` - Python versie voor dit project
 - `hello.py` - Een voorbeeld bestand (kun je verwijderen)
@@ -66,6 +67,7 @@ uv add flask
 ```
 
 Dit doet automatisch:
+
 - ✅ Installeert Flask
 - ✅ Maakt een virtual environment (`.venv/`)
 - ✅ Update `pyproject.toml` met Flask dependency
@@ -217,18 +219,21 @@ uv run flask --app app run --debug
 Of korter, maak een `run.sh` (macOS/Linux) of `run.bat` (Windows):
 
 **run.sh:**
+
 ```bash
 #!/bin/bash
 uv run flask --app app run --debug
 ```
 
 **run.bat:**
+
 ```batch
 @echo off
 uv run flask --app app run --debug
 ```
 
 Maak executable (macOS/Linux):
+
 ```console
 chmod +x run.sh
 ./run.sh
@@ -262,6 +267,7 @@ uv run pytest
 ### Project delen (Git)
 
 In je `.gitignore`:
+
 ```text
 .venv/
 __pycache__/
@@ -270,6 +276,7 @@ __pycache__/
 ```
 
 Commit deze bestanden WEL:
+
 ```text
 pyproject.toml
 uv.lock
@@ -277,6 +284,7 @@ uv.lock
 ```
 
 Anderen kunnen dan je project gebruiken met:
+
 ```console
 git clone <repo>
 cd <repo>
@@ -289,6 +297,7 @@ uv run app.py
 ### "uv: command not found"
 
 Installeer uv eerst:
+
 ```console
 pip install uv
 ```
@@ -296,12 +305,14 @@ pip install uv
 ### "Python version mismatch"
 
 Check je Python versie:
+
 ```console
 python --version
 uv python list
 ```
 
 Installeer een specifieke Python versie met uv:
+
 ```console
 uv python install 3.12
 ```
@@ -309,6 +320,7 @@ uv python install 3.12
 ### "Package conflict"
 
 Sync dependencies opnieuw:
+
 ```console
 uv sync --refresh
 ```
@@ -327,6 +339,7 @@ source .venv/bin/activate
 ```
 
 Deactiveren:
+
 ```console
 deactivate
 ```
@@ -344,4 +357,3 @@ Je hebt geleerd:
 - **Development workflow** zonder handmatige virtual environment activatie
 
 **Volgende stap:** [Deel 3](flask-deel3.md) - Routes en dynamische URLs.
-

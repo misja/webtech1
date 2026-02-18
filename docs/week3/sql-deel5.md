@@ -50,6 +50,7 @@ De aanvaller kan nu inloggen als admin **zonder het wachtwoord te weten**!
 SQL injection kan ook gebruikt worden voor:
 
 **Data diefstal:**
+
 ```python
 # User input: ' OR '1'='1
 query = f"SELECT * FROM users WHERE username = '{user_input}'"
@@ -58,6 +59,7 @@ query = f"SELECT * FROM users WHERE username = '{user_input}'"
 ```
 
 **Data vernietiging:**
+
 ```python
 # User input: '; DROP TABLE users; --
 query = f"DELETE FROM messages WHERE id = {messageid}"
@@ -123,6 +125,7 @@ users = search_users_safe("'; DROP TABLE users; --")
 ```
 
 De database driver escapet automatisch:
+
 - Enkele quotes (`'`) → `\'`
 - Dubbele quotes (`"`) → `\"`
 - Puntkomma's (`;`)
@@ -310,6 +313,7 @@ def search():
 ## Best practices samenvatting
 
 ✅ **DOE WEL:**
+
 - Gebruik **altijd** placeholders (`?`) voor values
 - Gebruik context managers (`with`)
 - Valideer input bij table/column names (whitelist)
@@ -317,6 +321,7 @@ def search():
 - Test met bekende SQL injection strings
 
 ❌ **DOE NIET:**
+
 - F-strings of string concatenatie met user input in SQL
 - User input direct in SQL queries
 - `executescript()` met user input
@@ -340,7 +345,7 @@ Je hebt geleerd:
 !!! tip "Test je beveiliging"
     Test je applicaties altijd met deze input strings:
     ```
-    ' OR '1'='1
+' OR '1'='1
     ' OR '1'='1' --
     '; DROP TABLE users; --
     1' AND '1'='2

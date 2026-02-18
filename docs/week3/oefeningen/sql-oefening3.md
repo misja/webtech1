@@ -89,6 +89,7 @@ print(f"Test 3: {user['username'] if user else 'Geen match'}")  # GEVAAR: ingelo
 <summary>Klik voor uitleg</summary>
 
 De query wordt:
+
 ```sql
 SELECT * FROM users WHERE username = 'admin' --' AND password = 'whatever'
 ```

@@ -43,6 +43,7 @@ inspect_database()
 ```
 
 Output:
+
 ```
 Database tabellen:
 
@@ -86,6 +87,7 @@ if product:
 ```
 
 Output:
+
 ```
 Product 42: Sneakers Nike - €89.99
 ```
@@ -115,6 +117,7 @@ for product in products[:5]:  # Toon eerste 5 (duurste)
 ```
 
 Output:
+
 ```
 Smartphone Samsung Galaxy: €699.99
 Tablet iPad Air: €599.99
@@ -163,6 +166,7 @@ for product in products[:10]:  # Toon eerste 10
 ```
 
 Output:
+
 ```
 Beauty: Electric Toothbrush - €79.99 (20 op voorraad)
 Beauty: Face Cream Anti-Aging - €34.99 (25 op voorraad)
@@ -220,6 +224,7 @@ for book in books[:5]:  # Toon eerste 5
 ```
 
 Output:
+
 ```
 Gevonden 20 boeken:
 
@@ -264,6 +269,7 @@ for cat in stats:
 ```
 
 Output:
+
 ```
 Categorie statistieken:
 
@@ -318,6 +324,7 @@ for product in phone_products:
 ```
 
 Output:
+
 ```
 Gevonden 3 producten met 'phone' in de naam:
 
@@ -369,6 +376,7 @@ for product in products[:10]:
 ```
 
 Output:
+
 ```
 Gevonden 21 betaalbare producten met voldoende voorraad:
 
@@ -438,6 +446,7 @@ for product in products[:10]:
 ```
 
 Output:
+
 ```
 View 'vInStockProducts' aangemaakt
 Beauty: Electric Toothbrush - €79.99
@@ -475,6 +484,7 @@ for product in electronics[:5]:
 ```
 
 Output:
+
 ```
 Electronics op voorraad (15 producten):
 

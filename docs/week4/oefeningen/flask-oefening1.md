@@ -15,6 +15,7 @@ De artiestennaam wordt als volgt gegenereerd:
 3. **Converteer naar hoofdletters** (de artiestennaam)
 
 **Voorbeelden:**
+
 - `Truus` → `TRUUSSY`
 - `Rob` → `ROBTEZY`
 - `Joyce` → `JOYCETEZY`
@@ -143,6 +144,7 @@ if __name__ == "__main__":
 ### Stap 4: Implementatie tips
 
 **Hint 1 - Check laatste letter:**
+
 ```python
 if naam.lower().endswith('s'):
     # Eindigt op 's'
@@ -151,16 +153,19 @@ else:
 ```
 
 **Hint 2 - String concatenatie:**
+
 ```python
 artiestennaam = naam + suffix
 ```
 
 **Hint 3 - Uppercase:**
+
 ```python
 artiestennaam = artiestennaam.upper()
 ```
 
 **Hint 4 - Template renderen:**
+
 ```python
 return render_template(
     "artiestennaam.html",
@@ -178,6 +183,7 @@ uv run python app.py
 ```
 
 Test met verschillende namen:
+
 - `http://localhost:5000/artiestennaam/Truus` → TRUUSSY
 - `http://localhost:5000/artiestennaam/Rob` → ROBTEZY
 - `http://localhost:5000/artiestennaam/Joyce` → JOYCETEZY
@@ -188,6 +194,7 @@ Test met verschillende namen:
 Maak de `/` route dynamischer met een template die voorbeelden toont:
 
 **`templates/index.html`:**
+
 ```html
 <!DOCTYPE html>
 <html lang="nl">
@@ -215,6 +222,7 @@ Maak de `/` route dynamischer met een template die voorbeelden toont:
 ```
 
 **Update `app.py`:**
+
 ```python
 @app.route("/")
 def index() -> str:
@@ -228,6 +236,7 @@ def index() -> str:
 Maak een `base.html` template en gebruik deze in beide pagina's:
 
 **`templates/base.html`:**
+
 ```html
 <!DOCTYPE html>
 <html lang="nl">
@@ -264,7 +273,7 @@ Update `artiestennaam.html` en `index.html` om `base.html` te extenden:
 {% endblock %}
 ```
 
-##Bonusopdracht 3: CSS styling
+## Bonusopdracht 3: CSS styling
 
 Maak `static/style.css`:
 
@@ -273,6 +282,7 @@ mkdir static
 ```
 
 **`static/style.css`:**
+
 ```css
 body {
     font-family: 'Arial', sans-serif;
@@ -311,6 +321,7 @@ a:hover {
 Voeg een formulier toe zodat gebruikers hun naam kunnen invoeren zonder URL aan te passen:
 
 **Update `index.html`:**
+
 ```html
 <form action="/genereer" method="POST">
     <label for="naam">Jouw naam:</label>
@@ -320,6 +331,7 @@ Voeg een formulier toe zodat gebruikers hun naam kunnen invoeren zonder URL aan 
 ```
 
 **Update `app.py`:**
+
 ```python
 from flask import Flask, render_template, request, redirect, url_for
 
@@ -343,6 +355,7 @@ def genereer() -> str:
 **URL:** `http://localhost:5000/artiestennaam/Truus`
 
 **Output:**
+
 ```
 🎤 Artiestennaam Generator 🎸
 
@@ -359,6 +372,7 @@ TRUUSSY
 ✅ Flask route op `/artiestennaam/<naam>`
 ✅ Type hints gebruikt (`naam: str`, `-> str`)
 ✅ Logica correct:
+
 - Naam eindigt op `s` → voeg `SY` toe
 - Anders → voeg `TEZY` toe
 - Converteer naar uppercase
@@ -369,28 +383,37 @@ TRUUSSY
 ## Veelvoorkomende fouten
 
 ❌ **HTML in string returnen**
+
 ```python
 return f"<h1>{artiestennaam}</h1>"  # FOUT!
 ```
+
 ✅ **Template gebruiken**
+
 ```python
 return render_template("artiestennaam.html", ...)  # GOED!
 ```
 
 ❌ **Geen type hints**
+
 ```python
 def artiestennaam(naam):  # FOUT!
 ```
+
 ✅ **Type hints toevoegen**
+
 ```python
 def artiestennaam(naam: str) -> str:  # GOED!
 ```
 
 ❌ **Case-sensitive check**
+
 ```python
 if naam.endswith('s'):  # FOUT! "Truus" != "truuS"
 ```
+
 ✅ **Case-insensitive check**
+
 ```python
 if naam.lower().endswith('s'):  # GOED!
 ```

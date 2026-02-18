@@ -230,7 +230,7 @@ naam = session['naam']
 </html>
 ```
 
-**` templates/bedankt.html`:**
+**`templates/bedankt.html`:**
 
 ```html
 <!DOCTYPE html>

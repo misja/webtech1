@@ -95,19 +95,23 @@ class Cursist(db.Model):
 ```
 
 **Class definitie**:
+
 - Erft van `db.Model` - dit maakt het een SQLAlchemy model
 - Standaard wordt de tabel ook `cursist` genoemd (kleine letter)
 
 **Kolommen**:
+
 - `id` - Integer, primary key (uniek nummer per cursist)
 - `naam` - Text veld
 - `leeftijd` - Integer
 
 **Constructor**:
+
 - Naam en leeftijd zijn verplicht bij aanmaken
 - ID wordt automatisch gegenereerd
 
 **`__repr__` methode**:
+
 - Geeft leesbare tekst bij printen van objecten
 - Handig bij debugging en queries
 
@@ -152,6 +156,7 @@ db.session.commit()
 ```
 
 **Stappen**:
+
 1. Maak Python objecten aan
 2. Voeg ze toe aan de database sessie met `add_all()`
 3. Commit de sessie - nu worden ze écht opgeslagen
@@ -182,6 +187,7 @@ Je hebt nu:
 2. **`setup_database.py`** - `db.create_all()` + initiële data
 
 Wanneer je `setup_database.py` runt:
+
 - Database bestand `data.sqlite` wordt aangemaakt
 - Tabel `cursist` wordt aangemaakt met drie kolommen
 - Twee records worden toegevoegd

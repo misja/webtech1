@@ -19,7 +19,7 @@ De voornaamste wijzigingen in de code zullen zijn:
 
 Nogmaals, in dit deel ligt de nadruk in het opzetten van een algemene structuur voor een applicatie. Daarom wordt er geen nieuwe applicatie vanaf scratch ontwikkeld maar wordt de inhoud van de vorige web-applicatie voornamelijk gekopieerd.
 
-## Stap 1: Het aanmaken van de structuur van de folderset.
+## Stap 1: Het aanmaken van de structuur van de folderset
 
 Het aanmaken van de structuur zal in gedeelten besproken worden, zodat nog een keer duidelijk wordt hoe het opzetten van een uitgebreide applicatie het beste kan geschieden.
 
@@ -65,8 +65,7 @@ De structuur van de folder `mijnproject` is dan als volgt:
 
 Voor zowel de docenten als de studenten wordt een eigen directory ingericht. Hierin kunnen de onderdelen worden opgenomen die van toepassing zijn voor de verschillende onderwerpen. Voor beide directories zijn formulieren, views en templates ontwikkeld die nu keurig van elkaar gescheiden worden ondergebracht in de applicatie. Voor beide domeinen (docenten en studenten) is een eigen folder gereserveerd waarin de specifieke HTML-bestanden voor ieder doel komen te staan.
 
-
-## Stap 2: Het toevoegen van de pagina’s die al ontwikkeld zijn.
+## Stap 2: Het toevoegen van de pagina’s die al ontwikkeld zijn
 
 De code van de diverse pagina’s zal nog een keer getoond worden zonder al te veel commentaar erbij.
 
@@ -232,8 +231,8 @@ Bovendien dienen er nog een aantal registraties voor de blueprints aan de code t
 
 Alleen de gegevens die van toepassing zijn op docenten worden overgenomen uit `forms.py`. De namen van de formulieren zijn aangepast zodat het een meer gangbaar karakter krijgt. Bovendien kan nu steeds dezelfde naam gebruikt worden omdat de formulieren in verschillende directories zijn ondergebracht. Voor toevoegen wordt nu `Add` gebruikt, voor verwijderen `Del`.
 
-
 ### `forms.py` uit de folder `docenten`
+
 ```python
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField

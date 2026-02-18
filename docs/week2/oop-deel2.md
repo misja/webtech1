@@ -243,11 +243,13 @@ print(f"Totaal: €{bestelling.bereken_totaal():.2f}")
 ## Wanneer dataclasses gebruiken?
 
 **Gebruik dataclasses:**
+
 - Voor klassen die vooral data bevatten
 - Veel attributen, weinig logica
 - Je wilt clean, leesbare code
 
 **Gebruik reguliere klassen:**
+
 - Complexe initialization logic nodig
 - Veel custom dunder methods (`__len__`, `__iter__`, etc.)
 - Geen data container maar echt gedrag

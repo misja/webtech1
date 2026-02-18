@@ -11,11 +11,10 @@ Voordelen van Bootstrap:
 - Mobiel-eerst benadering: in Bootstrap maken de mobile-first-stijlen deel uit van het kernraamwerk.
 - Compatibiliteit met browsers: Bootstrap 5 is compatibel met alle moderne browsers.
 
-
 Er zijn twee manieren om Bootstrap 5 te gebruiken voor een eigen website.
 
-1.	Maak gebruik van een CDN.
-2.	Downloaden van Bootstrap 5.
+1. Maak gebruik van een CDN.
+2. Downloaden van Bootstrap 5.
 
 !!! info "Content Delivery Network"
     Een *Content Delivery Network* (CDN) is een netwerk dat verspreid is over verschillende geografische locaties. Via dit netwerk wordt verschillende inhoud (*content*) aangeboden. Die content kan van alles zijn: video, plaatjes, maar dus ook css of programmacode.
@@ -47,7 +46,3 @@ Hieronder nog eeen voorbeeld van een schermontwerp gemaakt met Bootstrap dat bed
 ![Pricing](imgs/pricing.png)
 
 Er is, kortom, heel veel mogelijk met Bootstrap. Bestudeer de voorbeelden en de achterliggende HTML en CSS om een beeld te krijgen van hoe één en ander in z'n werk gaat.
-
-
-
-

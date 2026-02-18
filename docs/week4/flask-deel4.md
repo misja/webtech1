@@ -55,6 +55,7 @@ Maak `templates/basic.html`:
 ```
 
 **Let op:** `{{ url_for('static', filename='drums.jpg') }}`
+
 - Jinja2 syntax voor dynamische URL generatie
 - Beter dan hardcoded `../static/drums.jpg`
 - Werkt ook als je app in een subdirectory draait
@@ -80,6 +81,7 @@ if __name__ == "__main__":
 ```
 
 **Code uitleg:**
+
 - `from flask import render_template` - Import render functie
 - `render_template("basic.html")` - Flask zoekt in `templates/` en rendert de HTML
 - Return type blijft `str` (render_template retourneert HTML string)
@@ -131,6 +133,7 @@ def cursist(naam: str) -> str:
 ```
 
 **Hoe werkt dit:**
+
 - `{{ naam }}` in template wordt vervangen door waarde van `naam=naam`
 - `{{ cursist_id }}` wordt vervangen door `cursist_id=cursist_id`
 - Eerste `naam` = template variable, tweede `naam` = Python variable
@@ -189,6 +192,7 @@ def demo() -> str:
 ![Demo met verschillende types](imgs/demo.png)
 
 Je kunt Python syntax gebruiken in templates:
+
 - `letters[3:]` - List slicing
 - `cursist_dict['1234']` - Dictionary access
 - `naam.upper()` - String methods
@@ -231,6 +235,7 @@ def cursisten() -> str:
 ```
 
 **Belangrijke punten:**
+
 - `{% for ... %}` opent de loop
 - `{% endfor %}` sluit de loop
 - `{{ cursist }}` toont elke waarde
@@ -306,6 +311,7 @@ Jinja2 heeft ingebouwde **filters** om data te transformeren:
 ```
 
 **Veelgebruikte filters:**
+
 - `|upper`, `|lower`, `|capitalize`, `|title` - String transformaties
 - `|length` - Lengte van list/string
 - `|default('waarde')` - Fallback als variabele None is

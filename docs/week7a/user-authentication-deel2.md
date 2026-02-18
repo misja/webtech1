@@ -42,7 +42,6 @@ De onderste coderegel is nieuw. Waarschijnlijk zul je deze module separaat insta
 - Het zorgt voor een handige “Remember me"-functionaliteit.
 - Het helpt mee de sessiegegevens van de gebruikers te beschermen tegen diefstal door cookiedieven.
 
-
 Er zijn ook een aantal zaken die niet geregeld worden door de `Loginmanager`, maar daar wordt een oplossing voor geregeld tijdens het coderen.
 
 Zie de onderstaande code-listing voor een uitgewerkt voorbeeld:
@@ -103,7 +102,6 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(128))
 ```
 
-
 Achter de variabelen `email`, `username` en `password_hash` staat een getal genoteerd (64 of 128). Dat betreft het aantal posities dat voor die variabele beschikbaar is. Verder hebben `email` en `username` het kenmerk `unique` meegekregen. Op de primary key wordt automatisch gecontroleerd dat er geen dubbele waarden van voorkomen, maar het e-mailadres en de gebruikersnaam mogen natuurlijk ook maar één keer voorkomen in de database met inloggegevens.
 
 Nu is het weer de beurt aan `__init__()`. De volgorde waarin de coderegels worden opgenomen in de diverse bestanden heeft steeds eenzelfde stramien.
@@ -142,7 +140,6 @@ def check_password(self, password: str) -> bool:
 Er wordt gecontroleerd of het opgegeven password voldoet aan de hash-versie. Er wordt `True` of `False` als uitkomst geretourneerd.
 
 Als laatste nog een nieuwe vereiste methode. Deze nieuwe functie `load_user()` wordt in de code opgenomen net voor het definiëren van de klasse `User()`:
-
 
 ```python
 @login_manager.user_loader
@@ -216,6 +213,7 @@ def validate_email(self, field) -> None:
     if User.query.filter_by(email=field.data).first():
         raise ValidationError('Dit e-mailadres staat al geregistreerd!')
 ```
+
 De melding is al duidelijk genoeg, maar toch nog wat extra uitleg. Er wordt gecontroleerd of het opgegeven e-mailadres gevonden kan worden door de waarde ervan op te geven in de `query.filter.by(waarde).first()`. Geeft dit resultaat `True`, dan is er al een e-mailadres met een gelijke inhoud in de database te vinden – en dat mag niet. Er moet dan een melding getoond worden, hetgeen hier dus via de `ValidationError` geregeld is.
 
 De tweede methode is nagenoeg gelijk aan de eerste. Alleen moet er nu nagegaan worden of de gebruikersnaam al in de database voorkomt.

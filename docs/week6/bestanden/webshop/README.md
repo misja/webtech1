@@ -33,6 +33,7 @@ class Product(db.Model):
 ```
 
 **Voordelen:**
+
 - Type hints en autocompletion in je IDE
 - Automatische validatie
 - Relaties worden objecten (geen JOIN queries nodig)
@@ -48,6 +49,7 @@ class Category(db.Model):
 ```
 
 Nu kun je eenvoudig:
+
 ```python
 category = Category.query.get(1)
 for product in category.products:  # Automatisch alle producten!
@@ -55,6 +57,7 @@ for product in category.products:  # Automatisch alle producten!
 ```
 
 Of andersom:
+
 ```python
 product = Product.query.get(1)
 print(product.category.name)  # Via backref!
@@ -77,6 +80,7 @@ class OrderItem(db.Model):
 #### Week 3-5 (Raw SQL) vs Week 6 (ORM)
 
 **Alle producten ophalen:**
+
 ```python
 # Raw SQL (Week 3-5)
 cursor.execute("SELECT * FROM products")
@@ -87,6 +91,7 @@ products = Product.query.all()
 ```
 
 **Product filteren op categorie:**
+
 ```python
 # Raw SQL
 cursor.execute("SELECT * FROM products WHERE category_id = ?", (category_id,))
@@ -96,6 +101,7 @@ products = Product.query.filter_by(category_id=category_id).all()
 ```
 
 **Product met JOIN:**
+
 ```python
 # Raw SQL
 cursor.execute("""
@@ -111,6 +117,7 @@ print(product.category.name)  # Automatisch!
 ```
 
 **Product toevoegen:**
+
 ```python
 # Raw SQL
 cursor.execute(
@@ -126,6 +133,7 @@ db.session.commit()
 ```
 
 **Product updaten:**
+
 ```python
 # Raw SQL
 cursor.execute(
@@ -141,6 +149,7 @@ db.session.commit()  # Automatisch UPDATE!
 ```
 
 **Product verwijderen:**
+
 ```python
 # Raw SQL
 cursor.execute("DELETE FROM products WHERE id = ?", (product_id,))
@@ -171,6 +180,7 @@ class Product(db.Model):
 ```
 
 Gebruik in templates:
+
 ```jinja
 {% if product.in_stock %}
     <span class="badge bg-success">Op voorraad</span>
@@ -214,11 +224,13 @@ webshop/
 ## Installatie
 
 1. **Installeer dependencies:**
+
    ```bash
    pip install flask flask-sqlalchemy flask-wtf
    ```
 
 2. **Migreer data van Week 3 database:**
+
    ```bash
    python migrate_database.py
    ```
@@ -229,11 +241,13 @@ webshop/
    - Behoudt originele IDs
 
 3. **Start de applicatie:**
+
    ```bash
    python app.py
    ```
 
 4. **Open in browser:**
+
    ```
    http://127.0.0.1:5000
    ```
@@ -243,6 +257,7 @@ webshop/
 ### Voordelen
 
 1. **Pythonic Code**
+
    ```python
    # ORM is veel leesbaarder
    expensive_products = Product.query.filter(Product.price > 100).all()
@@ -252,12 +267,14 @@ webshop/
    ```
 
 2. **Type Safety**
+
    ```python
    product = Product.query.get(1)
    product.name  # IDE weet dat dit een string is!
    ```
 
 3. **Geen SQL Injection risico**
+
    ```python
    # ORM escaped automatisch
    Product.query.filter_by(name=user_input).first()
@@ -268,6 +285,7 @@ webshop/
    - Zelfde Python code blijft werken
 
 5. **Automatische Relaties**
+
    ```python
    # Geen JOIN queries schrijven
    product.category.name  # Werkt automatisch!
@@ -352,12 +370,14 @@ db.session.commit()
 In Week 7 bouwen we verder op deze ORM foundation:
 
 ### Week 7a: User Authentication
+
 - Customer login systeem
 - Flask-Login integratie
 - Password hashing met werkzeug
 - Admin vs Customer rechten
 
 ### Week 7b: Blueprints
+
 - Modulariseer de applicatie
 - `products/` blueprint voor catalog
 - `orders/` blueprint voor winkelwagen
@@ -367,23 +387,27 @@ In Week 7 bouwen we verder op deze ORM foundation:
 ## Tips & Best Practices
 
 1. **Gebruik altijd `with app.app_context()`** bij database operaties buiten routes
+
    ```python
    with app.app_context():
        db.create_all()
    ```
 
 2. **Commit na wijzigingen**
+
    ```python
    product.name = "Nieuwe naam"
    db.session.commit()  # Vergeet dit niet!
    ```
 
 3. **Gebruik `get_or_404()` in routes**
+
    ```python
    product = Product.query.get_or_404(product_id)  # Automatic 404!
    ```
 
 4. **Lazy loading vs Eager loading**
+
    ```python
    # Lazy (standaard) - query per product.category
    products = Product.query.all()
@@ -397,6 +421,7 @@ In Week 7 bouwen we verder op deze ORM foundation:
    ```
 
 5. **Gebruik `__repr__` voor debugging**
+
    ```python
    def __repr__(self) -> str:
        return f"<Product {self.id}: {self.name}>"
@@ -405,6 +430,7 @@ In Week 7 bouwen we verder op deze ORM foundation:
 ## Veelvoorkomende Fouten
 
 1. **Vergeten te committen**
+
    ```python
    product = Product(name="Test")
    db.session.add(product)
@@ -412,6 +438,7 @@ In Week 7 bouwen we verder op deze ORM foundation:
    ```
 
 2. **Fout relationship definiëren**
+
    ```python
    # ❌ Fout: string moet exact matchen met class naam
    products = db.relationship('Producten', ...)
@@ -421,6 +448,7 @@ In Week 7 bouwen we verder op deze ORM foundation:
    ```
 
 3. **N+1 queries**
+
    ```python
    # ❌ Slecht - 1 query voor categories + N queries voor products
    for category in Category.query.all():

@@ -11,10 +11,12 @@ Je combineert nu alle kennis: templates, formulieren, en database. Je bouwt een 
 Je maakt de volgende bestanden:
 
 **Python bestanden**:
+
 - `beheer_cursist.py` - Hoofd applicatie met routes
 - `forms.py` - Formulier definities
 
 **Templates directory**:
+
 - `base.html` - Basis template met navigatie
 - `home.html` - Homepage
 - `voegtoe_cur.html` - Cursist toevoegen
@@ -121,6 +123,7 @@ def add_cur() -> str:
 ```
 
 **Workflow**:
+
 1. GET request: Toon leeg formulier
 2. POST request: Naam opslaan in database, redirect naar lijst
 
@@ -165,6 +168,7 @@ def del_cur() -> str:
 ```
 
 **Workflow**:
+
 1. GET request: Toon leeg formulier
 2. POST request: Verwijder cursist op ID, redirect naar lijst
 
@@ -212,6 +216,7 @@ class VerwijderForm(FlaskForm):
 ```
 
 Twee eenvoudige formulieren:
+
 - **VoegtoeForm**: Naam (text veld) + submit
 - **VerwijderForm**: ID (nummer veld) + submit
 
@@ -408,16 +413,19 @@ Eén cursist over - Joyce met ID 1.
 Je hebt een complete CRUD webapp gemaakt:
 
 **Backend (Flask + SQLAlchemy)**:
+
 - Database setup met `db.Model`
 - Routes voor Create, Read, Delete
 - Formulieren met Flask-WTF
 
 **Frontend (Jinja2 + Bootstrap)**:
+
 - Basis template met navigatie
 - Formulier templates
 - Lijst template met data uit database
 
 **Database (SQLite)**:
+
 - Eén tabel (`cursisten`)
 - CRUD operaties via SQLAlchemy
 

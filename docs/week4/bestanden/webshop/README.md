@@ -31,16 +31,19 @@ webshop/
 ## Features
 
 ✅ **Routes:**
+
 - `/` - Homepage met alle categorieën
 - `/category/<id>` - Producten per categorie
 - `/product/<id>` - Product detail pagina
 
 ✅ **Database Integratie:**
+
 - Gebruikt `webshop.sqlite` uit Week 3
 - Hergebruikt SQL queries uit Week 3
 - Type hints en modern Python patterns
 
 ✅ **Templates:**
+
 - Bootstrap 5.3.0 voor styling
 - Template inheritance (`{% extends %}`)
 - Jinja2 loops en conditionals
@@ -60,6 +63,7 @@ uv add flask
 ### 2. Controleer database pad
 
 De `database.py` zoekt de database in:
+
 ```python
 db_path = "../../../week3/bestanden/webshop.sqlite"
 ```
@@ -160,6 +164,7 @@ Dit is een uitbreiding van de queries uit Week 3!
 ## Template Inheritance
 
 **base.html** bevat:
+
 - Navigation bar
 - Bootstrap 5.3.0 CDN links
 - Footer

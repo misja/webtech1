@@ -25,7 +25,7 @@ __Stap 1:__ html-document zonder koppeling naar Bootstrap.
 
 __Stap 2:__ Toevoegen links van Bootstrap.
 
-Ieder html-document dat gebruik wil maken van de faciliteiten die door Bootstrap aangeboden worden, dient de benodigde links in de `<head>`-sectie op te nemen. Deze links kunnen gekopieerd worden van de site https://getbootstrap.com/, [zoals we al besproken hebben](bootstrap-deel1.md).
+Ieder html-document dat gebruik wil maken van de faciliteiten die door Bootstrap aangeboden worden, dient de benodigde links in de `<head>`-sectie op te nemen. Deze links kunnen gekopieerd worden van de site <https://getbootstrap.com/>, [zoals we al besproken hebben](bootstrap-deel1.md).
 
 ```html
 <!DOCTYPE html>
@@ -157,13 +157,3 @@ In de html hieronder hebben we nog een paar wijzigingen aan onze geweldige site 
 ```
 
 ![bootstap 7](imgs/bootstrap7.png)
-
-
-
-
-
-
-
-
-
-

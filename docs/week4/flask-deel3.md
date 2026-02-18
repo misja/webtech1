@@ -36,31 +36,38 @@ if __name__ == "__main__":
 ### Code uitleg regel voor regel
 
 **Regel 1**: `from flask import Flask`
+
 - Importeer de `Flask` class uit de flask module
 
 **Regel 3**: `app = Flask(__name__)`
+
 - Maak een Flask applicatie instance
 - `__name__` vertelt Flask waar templates en static files staan
 
 **Regel 6**: `@app.route("/")`
+
 - **Decorator** die de functie hieronder koppelt aan een route
 - `/` is de homepage (root URL)
 - Als gebruiker naar `http://127.0.0.1:5000/` gaat, wordt `index()` aangeroepen
 
 **Regel 7**: `def index() -> str:`
+
 - View function die HTML returnt
 - `-> str` is een **type hint** (modern Python pattern!)
 - Docstring beschrijft wat de functie doet
 
 **Regel 9**: `return "<h1>...</h1>"`
+
 - HTML string die naar de browser wordt gestuurd
 - Later vervangen we dit door templates
 
 **Regel 12-13**: `if __name__ == "__main__":`
+
 - Dit blok wordt alleen uitgevoerd als je dit bestand direct runt
 - Voorkomt dat de server start bij imports
 
 **Regel 13**: `app.run(debug=True)`
+
 - Start de development server
 - `debug=True` activeert auto-reload en betere foutmeldingen
 
@@ -125,6 +132,7 @@ if __name__ == "__main__":
 ```
 
 Nu kun je naar drie verschillende URLs gaan:
+
 - `http://127.0.0.1:5000/` → Homepage
 - `http://127.0.0.1:5000/informatie` → Informatiepagina
 - `http://127.0.0.1:5000/contact` → Contactpagina
@@ -162,11 +170,13 @@ def cursist(naam: str) -> str:
 ```
 
 **Hoe werkt dit:**
+
 - `<naam>` in de route is een **variabele**
 - De waarde wordt uit de URL gehaald en doorgegeven aan de functie
 - `naam: str` is de parameter met type hint
 
 **Voorbeelden:**
+
 - `http://localhost:5000/cursist/Henk` → Pagina van Henk
 - `http://localhost:5000/cursist/Joyce` → Pagina van Joyce
 - `http://localhost:5000/cursist/Ralf` → Pagina van Ralf
@@ -201,6 +211,7 @@ def prijs(bedrag: float) -> str:
 ```
 
 **Beschikbare types:**
+
 - `<variabele>` → string (default)
 - `<int:variabele>` → integer
 - `<float:variabele>` → float
@@ -257,6 +268,7 @@ Nu krijg je een **interactieve debugger**:
 ![Informatieve foutmelding](imgs/lengte_Joyce.png)
 
 Je ziet:
+
 - ✅ Exacte foutmelding (`IndexError: string index out of range`)
 - ✅ Stack trace met regelnummers
 - ✅ Code context (welke regel crashte)

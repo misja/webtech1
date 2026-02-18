@@ -198,5 +198,3 @@ if __name__ == '__main__':
 ```
 
 Omdat er straks weer getest wordt, heeft debug de waarde `True` meegekregen zodat bij ieder foutje onmiddellijk in beeld verschijnt waar de fout gevonden kan worden. Werkt de applicatie feilloos en kan deze in productie genomen worden, mag debug zeker niet meer de status `True` hebben.
-
-

@@ -3,6 +3,7 @@
 Flask kan tijdelijke berichten tonen aan gebruikers - bijvoorbeeld een bevestiging na het verzenden van een formulier. Deze berichten heten **flash messages**.
 
 Flash messages zijn perfect voor:
+
 - Bevestigingen ("Formulier verzonden!")
 - Waarschuwingen ("Let op: dit veld is verplicht")
 - Errors ("Er ging iets mis")
@@ -161,6 +162,7 @@ In de template haal je categorie en message tegelijk op:
 ```
 
 Dit genereert automatisch de juiste Bootstrap classes:
+
 - `alert-success` (groen)
 - `alert-warning` (geel)
 - `alert-danger` (rood)

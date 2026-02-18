@@ -20,14 +20,17 @@ Deze modellen hebben relaties met elkaar:
 Elk model heeft een `id` kolom die de **primary key** is. Deze waarde is uniek per record en identificeert één specifieke rij.
 
 `Cursist`:
+
 - id (primary key, integer)
 - naam (text)
 
 `Instrument`:
+
 - id (primary key, integer)
 - naam (text)
 
 `Docent`:
+
 - id (primary key, integer)
 - naam (text)
 
@@ -117,6 +120,7 @@ class Cursist(db.Model):
 **Relaties uitleg**:
 
 **Één-op-veel (Cursist ↔ Instrumenten)**:
+
 ```python
 instrumenten = db.relationship('Instrument', backref='cursist', lazy='dynamic')
 ```
@@ -126,11 +130,13 @@ instrumenten = db.relationship('Instrument', backref='cursist', lazy='dynamic')
 - `lazy='dynamic'` - Laadt instrumenten pas wanneer je ze nodig hebt (efficiënt)
 
 Andere `lazy` opties:
+
 - `'select'` (of `True`) - Laadt direct bij query
 - `'joined'` (of `False`) - Gebruikt SQL JOIN
 - `'subquery'` - Gebruikt subquery
 
 **Één-op-één (Cursist ↔ Docent)**:
+
 ```python
 docent = db.relationship('Docent', backref='cursist', uselist=False)
 ```
@@ -214,6 +220,7 @@ Nu je `models.py` hebt met alle relaties, maak je de database aan:
     ```
 
 **2. Initialiseer migraties**:
+
 ```console
 flask db init
 ```
@@ -221,6 +228,7 @@ flask db init
 Dit maakt een `migrations/` directory aan.
 
 **3. Maak eerste migratie**:
+
 ```console
 flask db migrate -m "Initial migration"
 ```
@@ -228,6 +236,7 @@ flask db migrate -m "Initial migration"
 Flask-Migrate detecteert je models en maakt migratie scripts.
 
 **4. Voer migratie uit**:
+
 ```console
 flask db upgrade
 ```

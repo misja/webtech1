@@ -34,4 +34,3 @@ Uit een database kunnen titel en gebruikersnaam opgevraagd worden en worden inge
 Flask wordt dus een microframework genoemd. Het is ontworpen om de kern van de applicatie eenvoudig en schaalbaar te houden. In plaats van een abstractielaag voor database-ondersteuning, ondersteunt Flask uitbreidingen om dergelijke mogelijkheden aan de applicatie toe te voegen.
 
 **Volgende stap:** [Deel 2](flask-deel2.md) - Flask installeren met uv.
-

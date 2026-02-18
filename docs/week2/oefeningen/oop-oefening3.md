@@ -5,6 +5,7 @@ In deze oefening pas je **inheritance** (overerving) toe. Je maakt subklassen va
 ## Achtergrond
 
 In een webshop heb je verschillende soorten producten:
+
 - **Fysieke producten**: hebben gewicht en verzendkosten
 - **Digitale producten**: hebben bestandsgrootte en geen verzending
 
@@ -17,9 +18,11 @@ Maak een `FysiekProduct` klasse die erft van `Product`.
 ### Opdracht
 
 **Extra attributen:**
+
 - `gewicht` (float): Gewicht in kg
 
 **Extra methoden:**
+
 - `bereken_verzendkosten() -> float`: Bereken verzendkosten op basis van gewicht
   - Tot 1 kg: €3.95
   - Tot 5 kg: €6.95
@@ -61,6 +64,7 @@ print(f"Verzendkosten laptop: €{laptop.bereken_verzendkosten():.2f}")
 ```
 
 **Verwachte output:**
+
 ```
 FysiekProduct(naam='Python Crash Course', prijs=34.95, voorraad=8, beschrijving=None, gewicht=0.6)
 Verzendkosten: €3.95
@@ -74,13 +78,16 @@ Maak een `DigitaalProduct` klasse die erft van `Product`.
 ### Opdracht
 
 **Extra attributen:**
+
 - `bestandsgrootte` (float): Grootte in MB
 - `download_link` (str): URL voor download
 
 **Defaults:**
+
 - `voorraad`: 999 (digitale producten zijn bijna onbeperkt beschikbaar)
 
 **Extra methoden:**
+
 - `download() -> dict`: Simuleer een download
   - Verminder voorraad met 1
   - Geef een dict terug met info: `{"product": naam, "link": download_link, "grootte_mb": bestandsgrootte}`
@@ -122,10 +129,12 @@ Maak een `Boek` klasse die erft van `FysiekProduct`.
 ### Opdracht
 
 **Extra attributen:**
+
 - `auteur` (str): Naam van de auteur
 - `isbn` (str): ISBN nummer
 
 **Defaults:**
+
 - `gewicht`: 0.5 kg (boeken zijn meestal licht)
 
 **Override `__str__()`:**
@@ -167,6 +176,7 @@ print(f"Voorraad na verkoop: {python_boek.voorraad}")
 ## Extra uitdaging: Software klasse (optioneel)
 
 Maak een `Software` klasse die erft van `DigitaalProduct` met extra attributen:
+
 - `versie` (str): Versienummer
 - `besturingssysteem` (str): "Windows", "Mac", "Linux", etc.
 

@@ -18,16 +18,19 @@ Deze webshop applicatie bouwt voort op:
 ### Forms met Flask-WTF
 
 ✅ **AddProductForm** - Formulier om producten toe te voegen
+
 - Validators voor naam, prijs, voorraad
 - Dropdown voor categorie selectie
 - CSRF-beveiliging
 
 ✅ **EditProductForm** - Formulier om producten te bewerken
+
 - Pre-filled met huidige product data
 - Alle velden editable
 - Delete functionaliteit
 
 ✅ **ContactForm** - Contact formulier voor klanten
+
 - Naam, email, onderwerp, bericht
 - Email validatie
 - Flash messages na verzenden
@@ -42,6 +45,7 @@ Deze webshop applicatie bouwt voort op:
 ### Database Updates
 
 De `database.py` is uitgebreid met CRUD operaties:
+
 - `add_product()` - INSERT query
 - `update_product()` - UPDATE query
 - `delete_product()` - DELETE query
@@ -79,6 +83,7 @@ uv add flask flask-wtf
 ### 2. Controleer database pad
 
 De `database.py` zoekt de database in:
+
 ```python
 db_path = "../../../week3/bestanden/webshop.sqlite"
 ```
@@ -107,6 +112,7 @@ flash('Er ging iets mis.', 'danger')
 ```
 
 Bootstrap alert categories:
+
 - `success` - Groen (succes)
 - `danger` - Rood (error)
 - `warning` - Oranje (waarschuwing)
@@ -252,6 +258,7 @@ app.config['SECRET_KEY'] = 'webshop-secret-key-2025'
 ```
 
 Elke form heeft een hidden CSRF token:
+
 ```python
 {{ form.hidden_tag() }}
 ```
@@ -300,27 +307,32 @@ validators=[
 ### Form Flow
 
 1. **Create form instance**
+
    ```python
    form = AddProductForm()
    ```
 
 2. **Populate choices** (voor SelectField)
+
    ```python
    form.category_id.choices = db.get_category_choices()
    ```
 
 3. **Check validation**
+
    ```python
    if form.validate_on_submit():
        # Process form data
    ```
 
 4. **Access form data**
+
    ```python
    form.name.data  # User input
    ```
 
 5. **Flash message & redirect**
+
    ```python
    flash('Success!', 'success')
    return redirect(url_for('index'))
@@ -342,12 +354,14 @@ elif not form.is_submitted():
 Test alle formulieren:
 
 **Add Product:**
+
 1. Ga naar `/admin/product/add`
 2. Vul alle velden in
 3. Submit
 4. Check flash message & redirect
 
 **Edit Product:**
+
 1. Ga naar een product detail pagina
 2. Klik "Bewerken (Admin)"
 3. Wijzig velden
@@ -355,12 +369,14 @@ Test alle formulieren:
 5. Check updates
 
 **Delete Product:**
+
 1. Ga naar edit pagina
 2. Klik "Product Verwijderen"
 3. Bevestig dialog
 4. Check flash message & redirect
 
 **Contact Form:**
+
 1. Ga naar `/contact`
 2. Vul formulier in
 3. Test validators (lege velden, te korte tekst)
@@ -381,6 +397,7 @@ if form.errors:
 ### CSRF Errors
 
 Als je CSRF errors krijgt:
+
 1. Check of SECRET_KEY is geconfigureerd
 2. Check of `{{ form.hidden_tag() }}` in template staat
 3. Check of je POST gebruikt voor formulier
@@ -388,6 +405,7 @@ Als je CSRF errors krijgt:
 ## Volgende Stappen
 
 In Week 6 gaan we:
+
 - SQLAlchemy ORM gebruiken in plaats van raw SQL
 - Models maken voor Product, Category, Customer, Order
 - Relationships definiëren tussen models

@@ -17,6 +17,7 @@ We bouwen verder op Week 6 SQLAlchemy ORM en voegen authenticatie toe:
 ### 1. Flask-Login
 
 Flask-Login biedt gebruikerssessie beheer:
+
 - ID van actieve gebruiker wordt opgeslagen in sessie
 - Makkelijk inloggen/uitloggen
 - Views beperken tot ingelogde gebruikers
@@ -24,6 +25,7 @@ Flask-Login biedt gebruikerssessie beheer:
 - Bescherming tegen cookie diefstal
 
 **Wat Flask-Login NIET doet:**
+
 - Geen password hashing (dat doen we met Werkzeug)
 - Geen registration forms (dat doen we met Flask-WTF)
 - Geen database models (dat doen we met SQLAlchemy)
@@ -31,6 +33,7 @@ Flask-Login biedt gebruikerssessie beheer:
 ### 2. Password Hashing met Werkzeug
 
 **Waarom password hashing?**
+
 - Wachtwoorden NOOIT in plain text opslaan in database
 - Als database wordt gehackt, zijn wachtwoorden veilig
 - Zelfs database admins kunnen wachtwoorden niet zien
@@ -50,6 +53,7 @@ check_password_hash(hashed, 'fout')  # False
 ```
 
 **Belangrijke eigenschappen:**
+
 - Zelfde wachtwoord geeft elke keer andere hash (door salt)
 - Hash kan niet worden teruggerekend naar origineel wachtwoord
 - Check is snel, maar brute force is traag (door PBKDF2)
@@ -80,6 +84,7 @@ login_manager.login_view = "login"  # Waar heen bij @login_required
 ```
 
 **user_loader decorator:**
+
 ```python
 @login_manager.user_loader
 def load_user(user_id):
@@ -103,6 +108,7 @@ customer = Customer(name='Jan', email='jan@email.nl',
 ```
 
 **Admin checks in templates:**
+
 ```jinja
 {% if current_user.is_admin %}
     <a href="{{ url_for('admin_products') }}">Admin Panel</a>
@@ -110,6 +116,7 @@ customer = Customer(name='Jan', email='jan@email.nl',
 ```
 
 **Admin checks in routes:**
+
 ```python
 @app.route('/admin/products')
 @admin_required  # Custom decorator!
@@ -145,25 +152,29 @@ webshop/
 ## Installatie
 
 1. **Installeer dependencies:**
+
    ```bash
    pip install flask flask-sqlalchemy flask-wtf flask-login
    ```
 
 2. **Migreer data van Week 6 (optioneel):**
+
    ```bash
    python migrate_database.py
    ```
 
 3. **Start de applicatie:**
+
    ```bash
    python app.py
    ```
 
    Bij eerste start wordt automatisch een demo admin aangemaakt:
-   - **Email:** admin@webshop.nl
+   - **Email:** <admin@webshop.nl>
    - **Wachtwoord:** admin123
 
 4. **Open in browser:**
+
    ```
    http://127.0.0.1:5000
    ```
@@ -230,6 +241,7 @@ def login():
 ```
 
 **Hoe werkt de 'next' parameter?**
+
 ```
 1. User probeert /admin/products te bezoeken (niet ingelogd)
 2. @admin_required redirect naar /login?next=/admin/products
@@ -312,6 +324,7 @@ def admin_products():
 ```
 
 **Waarom `@wraps(f)`?**
+
 - Behoudt originele functienaam en docstring
 - Zonder `@wraps` zou `admin_products.__name__` = "decorated_function" zijn
 - Dit breekt `url_for()` en Flask's routing
@@ -345,17 +358,17 @@ Flask-Login maakt `current_user` automatisch beschikbaar in templates:
 1. Ga naar `http://127.0.0.1:5000/register`
 2. Vul formulier in:
    - Naam: Jan Jansen
-   - Email: jan@email.nl
+   - Email: <jan@email.nl>
    - Wachtwoord: test123 (2x)
 3. Klik "Registreren"
 4. Je wordt naar `/login` gestuurd
-5. Log in met jan@email.nl / test123
+5. Log in met <jan@email.nl> / test123
 6. Je ziet `/welcome` met je account info
 7. Probeer `/admin/products` te bezoeken → Access Denied!
 
 ### Scenario 2: Admin Account
 
-1. Log in met admin@webshop.nl / admin123
+1. Log in met <admin@webshop.nl> / admin123
 2. Je ziet "Admin" badge in navigation
 3. Klik "Admin → Alle Producten"
 4. Voeg nieuw product toe
@@ -385,6 +398,7 @@ password = PasswordField(
 ```
 
 **Voor productie:**
+
 - Minimaal 8 karakters
 - Verplicht cijfers/speciale tekens
 - Gebruik `zxcvbn` library voor strength check
@@ -402,6 +416,7 @@ app.config['SECRET_KEY'] = 'webshop-secret-key-2025'  # Verplicht!
 ```
 
 **Voor productie:**
+
 ```python
 import secrets
 app.config['SECRET_KEY'] = secrets.token_hex(32)  # Random key!
@@ -516,12 +531,14 @@ In Week 7b refactoren we de applicatie naar **Blueprints** voor betere modularit
 ## Tips
 
 1. **Test altijd met fresh database**
+
    ```bash
    rm webshop.db
    python app.py  # Maakt nieuwe DB aan met admin
    ```
 
 2. **Check wachtwoord hash in database**
+
    ```python
    from app import app, db, Customer
    with app.app_context():
@@ -531,6 +548,7 @@ In Week 7b refactoren we de applicatie naar **Blueprints** voor betere modularit
    ```
 
 3. **Debug login issues**
+
    ```python
    user = Customer.query.filter_by(email=form.email.data).first()
    if user:

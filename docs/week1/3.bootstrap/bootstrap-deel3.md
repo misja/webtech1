@@ -63,7 +63,7 @@ Het meeste uit het bovenstaande zal je bekend voorkomen uit de vorige paragrafen
 
 ![Forms 3](imgs/bootstrap_form3.png)
 
-### Keuzelijst met meerdere keuzemogelijkheden:
+### Keuzelijst met meerdere keuzemogelijkheden
 
 ```html
 <div class="mb-3">

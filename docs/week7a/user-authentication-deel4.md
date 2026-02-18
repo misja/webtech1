@@ -173,7 +173,7 @@ Na het runnen van `app.py`:
 
 ![home pagina vóór het inloggen](imgs/eerste-pagina.png)
 
-Registreren ('joyce@sessions.com' en het wachtwoord 'geheim'):
+Registreren ('<joyce@sessions.com>' en het wachtwoord 'geheim'):
 
 ![De registreer pagina](imgs/registreren.png)
 
@@ -195,17 +195,20 @@ Tot zover het testen. Er kunnen nog veel meer opties bekeken worden op hun gedra
 Je hebt nu een complete user authentication systeem gebouwd met Flask-Login. De belangrijkste onderdelen die je hebt geleerd zijn:
 
 ### Beveiliging
+
 - **Password hashing** met Werkzeug - wachtwoorden worden nooit in plain text opgeslagen
 - **CSRF protection** via Flask-WTF - automatische beveiliging tegen cross-site request forgery
 - **Session management** - Flask-Login beheert automatisch de ingelogde status
 
 ### Functionaliteit
+
 - **Registratie** - nieuwe gebruikers kunnen zich aanmelden
 - **Login** - gebruikers kunnen inloggen met email en wachtwoord
 - **Logout** - veilig uitloggen met sessie cleanup
 - **Protected routes** - pagina's die alleen toegankelijk zijn voor ingelogde gebruikers
 
 ### Flask-Login Features
+
 - `UserMixin` - standaard implementatie van user methoden
 - `@login_required` decorator - beveilig routes automatisch
 - `current_user` - altijd beschikbaar in templates en views
