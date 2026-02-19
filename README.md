@@ -35,6 +35,9 @@ uv sync
 # Voor docenten/ontwikkelaars: installeer ook dev dependencies
 # (inclusief Flask voor het testen van voorbeeldcode)
 uv sync --group dev
+
+# Activeer de pre-commit hook (eenmalig per machine)
+uv run pre-commit install
 ```
 
 ### Documentatie lokaal bekijken
@@ -106,7 +109,7 @@ Wijzigingen worden aangeboden als Pull Requests voor review door collega-docente
 1. Maak een nieuwe branch: `git checkout -b feature/beschrijving`
 2. Maak je wijzigingen
 3. Test lokaal met `mkdocs serve`
-4. Commit: `git commit -m "Beschrijving van wijziging"`
+4. Commit: `git commit -m "Beschrijving van wijziging"` (pre-commit hook lint automatisch alle gewijzigde docs)
 5. Push: `git push origin feature/beschrijving`
 6. Maak een Pull Request op GitHub
 
@@ -125,12 +128,12 @@ Wijzigingen worden aangeboden als Pull Requests voor review door collega-docente
 - `mknotebooks` - Jupyter notebook support
 
 ### Development
-- `ipython` - Interactive Python shell
-- `nbdime` - Jupyter notebook diff/merge
 - `flask` - Web framework (voor testen voorbeeldcode)
 - `flask-sqlalchemy` - ORM integration
 - `flask-login` - User session management
 - `flask-wtf` - Form handling met CSRF protection
+- `pymarkdownlnt` - Markdown linter
+- `pre-commit` - Git hook manager (markdown linting bij elke commit)
 
 Zie `pyproject.toml` voor exacte versies.
 
