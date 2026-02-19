@@ -276,7 +276,6 @@ Je ziet:
 
 !!! danger "Debug mode in productie"
     NOOIT `debug=True` gebruiken in productie! Het toont sourcecode en staat remote code execution toe (via de debug console).
-
     Productie setup:
     ```python
     if __name__ == "__main__":

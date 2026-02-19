@@ -66,7 +66,6 @@ Je kunt direct attributen ophalen zoals `cursist_twee.leeftijd` of `cursist_twee
 
 !!! info "Query API"
     SQLAlchemy biedt veel query methoden:
-
     - `Model.query.all()` - Alle records
     - `Model.query.get(id)` - Record op ID
     - `Model.query.filter_by(naam='Joyce')` - Filteren op attribuut
@@ -97,7 +96,6 @@ Vier stappen:
 
 !!! tip "Update zonder add"
     Je kunt `db.session.add()` ook weglaten bij updates. SQLAlchemy houdt bij welke objecten gewijzigd zijn:
-
     ```python
     cursist_joyce = Cursist.query.get(1)
     cursist_joyce.leeftijd = 40

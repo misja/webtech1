@@ -218,7 +218,6 @@ Dit authentication systeem vormt de basis voor grotere applicaties waar gebruike
 
 !!! tip "Volgende stappen"
     Met deze kennis kun je verder met:
-
     - **Role-based access control** - Admin vs normale gebruikers
     - **Password reset** - Gebruikers kunnen wachtwoord vergeten link gebruiken
     - **Email verificatie** - Bevestig email adressen bij registratie

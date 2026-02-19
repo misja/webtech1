@@ -12,17 +12,14 @@ pip install uv
 
 !!! tip "Alternatieve installatie methoden"
     Je kunt uv ook installeren met:
-
     **macOS/Linux (via curl):**
     ```console
     curl -LsSf https://astral.sh/uv/install.sh | sh
     ```
-
     **Windows (via PowerShell):**
     ```console
     powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
     ```
-
     Zie [uv documentatie](https://docs.astral.sh/uv/getting-started/installation/) voor meer opties.
 
 Controleer of uv correct is geïnstalleerd:

@@ -4,7 +4,6 @@ In het vak Databases heb je geleerd werken met PostgreSQL. In deze module gebrui
 
 !!! note "SQL syntax verschillen"
     SQLite gebruikt grotendeels dezelfde SQL syntax als PostgreSQL, met enkele verschillen:
-
     - Minder datatypes (TEXT, INTEGER, REAL, BLOB in plaats van VARCHAR, TIMESTAMP, etc.)
     - Geen `ALTER TABLE` voor het wijzigen van kolommen
     - Minder strikte type validatie
@@ -31,13 +30,11 @@ Handige punt-commando's (vergelijkbaar met `\d` commando's in psql):
 
 !!! tip "Visueel werken met DB Browser for SQLite"
     Als je liever visueel werkt (vergelijkbaar met pgAdmin voor PostgreSQL), gebruik dan [DB Browser for SQLite](https://sqlitebrowser.org/).
-
     **Voordelen:**
     - Tabellen visueel bekijken en bewerken
     - SQL queries runnen met syntax highlighting
     - Database structure inspecteren
     - Handig tijdens Flask development om snel data te checken
-
     **Download:** [sqlitebrowser.org](https://sqlitebrowser.org/)
 
 **Volgende stap:** [Deel 2](sql-deel2.md) - SQLite vanuit Python.

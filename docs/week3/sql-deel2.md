@@ -73,17 +73,14 @@ print(f"Sara toegevoegd met ID: {sara_id}")
 
 !!! warning "SQL Injection voorkomen met placeholders"
     Gebruik **altijd** `?` placeholders in plaats van f-strings:
-
     **Goed:**
     ```python
     cursor.execute("SELECT * FROM contacts WHERE name = ?", (name,))
     ```
-
     **FOUT (SQL injection risico!):**
     ```python
     cursor.execute(f"SELECT * FROM contacts WHERE name = '{name}'")
     ```
-
     Dit wordt uitgebreid besproken in Deel 5 over SQL injection.
 
 ## Select: Data ophalen
@@ -114,7 +111,7 @@ for contact in contacts:
 
 Output:
 
-```
+```text
 Jan Jansen: jan@email.nl
 Sara de Vries: sara@email.nl
 ```
@@ -187,7 +184,6 @@ else:
 
 !!! warning "Altijd WHERE clausule bij UPDATE"
     Zonder `WHERE` clausule worden **alle** rijen geüpdatet:
-
     ```python
     # GEVAARLIJK - iedereen krijgt hetzelfde telefoonnummer!
     conn.execute("UPDATE contacts SET phone = ?", (phone,))
@@ -229,7 +225,6 @@ else:
 
 !!! warning "Altijd WHERE clausule bij DELETE"
     Zonder `WHERE` clausule worden **alle** rijen verwijderd:
-
     ```python
     # GEVAARLIJK - ALLE contacten worden gewist!
     conn.execute("DELETE FROM contacts")
@@ -376,13 +371,11 @@ Je bent gewend aan PostgreSQL. Enkele verschillen met SQLite:
 
 !!! warning "SQLite type validatie is losjes"
     SQLite accepteert dit zonder error:
-
     ```python
     # phone is INTEGER, maar dit werkt:
     conn.execute("INSERT INTO contacts VALUES (?, ?, ?)",
                  ("Jan", 123, "tekst-in-integer-kolom"))
     ```
-
     PostgreSQL zou dit afwijzen. Zorg dus zelf voor correcte types!
 
 ## Samenvatting

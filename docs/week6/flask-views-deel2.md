@@ -117,7 +117,6 @@ class Cursist(db.Model):
 
 !!! tip "Custom tabelnaam"
     Wil je een andere tabelnaam dan de class naam? Voeg `__tablename__` toe:
-
     ```python
     class Cursist(db.Model):
         __tablename__ = 'cursisten'

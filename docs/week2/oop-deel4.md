@@ -35,9 +35,7 @@ print(f"{order.klant.naam} bestelde {order.product.naam}")
 
 !!! note "Compositie vs Inheritance"
     **Inheritance (is-een):** Een laptop **is een** product
-
     **Compositie (heeft-een):** Een order **heeft een** klant
-
     In databases: compositie = foreign keys!
 
 ## Waarom compositie?
@@ -147,7 +145,6 @@ print(f"Totaal: €{totaal_info['totaal']:.2f}")
 
 !!! info "Waarom dicts teruggeven?"
     Dicts zijn handig voor templates. In Flask kun je ze doorgeven aan Jinja2 templates:
-
     ```python
     @app.route('/order/<int:id>')
     def toon_order(id):
@@ -157,7 +154,6 @@ print(f"Totaal: €{totaal_info['totaal']:.2f}")
                              order=order,
                              totaal=totaal_info)
     ```
-
     In het template (`order.html`) kun je dan de dict gebruiken:
     ```html
     <p>Subtotaal: €{{ totaal.subtotaal }}</p>
@@ -389,15 +385,12 @@ Output:
 
 !!! tip "Dataclass → dict voor debugging"
     Je kunt `asdict()` gebruiken om een dataclass automatisch naar een dict te converteren. Dit is vooral handig voor debugging:
-
     ```python
     from dataclasses import asdict
-
     klant_dict = asdict(jan)
     print(klant_dict)
     # {'naam': 'Jan Jansen', 'email': 'jan@email.nl'}
     ```
-
     Let op: in productiecode maak je meestal zelf specifieke dicts met alleen de data die je template nodig heeft.
 
 ## Praktijk: Flask routes met templates

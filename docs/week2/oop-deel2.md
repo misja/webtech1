@@ -34,13 +34,10 @@ class Product:
 
 !!! info "Wat betekent `@dataclass`?"
     De `@` syntax is een **decorator** - een speciale aanduiding die functionaliteit toevoegt aan je klasse.
-
     Je hoeft nu niet precies te begrijpen hoe decorators werken. Belangrijk is dat `@dataclass` ervoor zorgt dat Python automatisch een aantal methoden voor je genereert:
-
     - `__init__()` - constructor met alle attributen als parameters
     - `__repr__()` - nette string representatie voor debugging
     - `__eq__()` - vergelijking tussen objecten
-
     Dit scheelt veel typwerk en voorkomt fouten. Later zie je meer decorators zoals `@app.route` in Flask.
 
 Je gebruikt de klasse precies hetzelfde:
@@ -141,7 +138,6 @@ print(f"Totaal: €{wagen.bereken_totaal():.2f}")
 
 !!! note "field(default_factory=list)"
     Voor **mutable** default waarden (lists, dicts) moet je `field(default_factory=list)` gebruiken in plaats van `= []`.
-
     **Waarom?** Een gewoon `= []` zou gedeeld worden tussen alle instanties: Python maakt die lijst eenmalig aan bij het laden van de klasse, niet bij elke aanmaak van een object. Met `default_factory` krijgt elke instantie zijn eigen lege lijst.
 
 ## Preview: Database modellen

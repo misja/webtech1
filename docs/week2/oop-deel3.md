@@ -36,7 +36,6 @@ Gebruik inheritance wanneer er een **"is een"** relatie is:
 
 !!! note "Is-een vs heeft-een"
     **Inheritance (is-een):** Een laptop is een product
-
     **Compositie (heeft-een):** Een bestelling heeft een klant (zie deel 4)
 
 ## Super() gebruiken
@@ -211,7 +210,6 @@ print(python_boek)
 
 !!! note "Inheritance hierarchie"
     `Boek` → `FysiekProduct` → `Product`
-
     Een `Boek` heeft toegang tot alle attributen en methoden van zowel `FysiekProduct` als `Product`.
 
 ## Preview: SQLAlchemy modellen
@@ -242,7 +240,6 @@ Door te erven van `db.Model` krijgen je klassen automatisch alle database functi
 
 !!! info "Waarom OOP voor SQLAlchemy?"
     SQLAlchemy gebruikt OOP omdat het perfect past bij database structuur:
-
     - Elke **klasse** = een database **tabel**
     - Elk **object** = een **rij** in de tabel
     - Inheritance geeft je de database functionaliteit

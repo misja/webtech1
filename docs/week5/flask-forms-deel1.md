@@ -107,7 +107,6 @@ if __name__ == '__main__':
 
 !!! warning "Secret key in productie"
     Hardcode nooit je secret key in productie! Gebruik environment variabelen:
-
     ```python
     import os
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-only')

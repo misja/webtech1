@@ -200,8 +200,8 @@ Het bestand `base.html` moet nog aangepast worden omdat de hyperlinks nu nog naa
 Voordat er getest kan worden dient de database aangemaakt te worden. Daarvoor zijn de vier inmiddels bekende stappen nodig:
 
 1. Stel de omgevingsvariabele FLASK_APP in
-    - Voor een MacOS / Linux-machine is dat `export FLASK_APP = app.py`
-    - Voor een Windows-machine `set FLASK_APP = app.py`
+   - Voor een MacOS / Linux-machine is dat `export FLASK_APP = app.py`
+   - Voor een Windows-machine `set FLASK_APP = app.py`
 2. `flask db init`
 
 ## Resultaat
@@ -235,7 +235,6 @@ Deze structuur is professioneel en wordt gebruikt in productie-applicaties. In d
 
 !!! tip "Volgende stappen"
     Nu je `blueprints` beheerst, kun je experimenteren met:
-
     - Het toevoegen van meer `blueprints` voor andere onderdelen
     - Het gebruik van blueprint-specifieke static files
     - Het implementeren van API endpoints (URLs die data teruggeven in plaats van HTML) in aparte `blueprints`

@@ -185,12 +185,10 @@ if __name__ == '__main__':
 
 !!! info "Flask application context"
     In moderne SQLAlchemy (3.0+) moet `db.create_all()` binnen een application context draaien:
-
     ```python
     with app.app_context():
         db.create_all()
     ```
-
     Dit zorgt ervoor dat SQLAlchemy toegang heeft tot de Flask configuratie.
 
 ## Stap 4: Formulieren definiëren

@@ -44,7 +44,7 @@ inspect_database()
 
 Output:
 
-```
+```text
 Database tabellen:
 
 Tabel: categories
@@ -56,13 +56,11 @@ Aantal records: 120
 
 !!! info "PRIMARY KEY AUTOINCREMENT"
     SQLite vult automatisch de primary key kolom `id` in wanneer je een nieuwe record toevoegt:
-
     ```python
     cursor = conn.execute("INSERT INTO categories (name, description) VALUES (?, ?)",
                          ("Furniture", "Tables, chairs, and desks"))
     newid = cursor.lastrowid  # 11
     ```
-
     Dit werkt hetzelfde als PostgreSQL's `SERIAL` type.
 
 ## Eenvoudige queries
@@ -88,7 +86,7 @@ if product:
 
 Output:
 
-```
+```text
 Product 42: Sneakers Nike - €89.99
 ```
 
@@ -118,7 +116,7 @@ for product in products[:5]:  # Toon eerste 5 (duurste)
 
 Output:
 
-```
+```text
 Smartphone Samsung Galaxy: €699.99
 Tablet iPad Air: €599.99
 Monitor Dell 27 inch: €349.99
@@ -128,7 +126,6 @@ Smartwatch Fitbit: €199.99
 
 !!! warning "SQL injection bij ORDER BY"
     In het voorbeeld hierboven gebruiken we f-string voor `order` (`ASC`/`DESC`). Dit is veilig omdat we de waarde zelf controleren (boolean → "ASC" of "DESC").
-
     Doe dit NOOIT met user input:
     ```python
     # GEVAARLIJK - SQL injection risico!
@@ -167,7 +164,7 @@ for product in products[:10]:  # Toon eerste 10
 
 Output:
 
-```
+```text
 Beauty: Electric Toothbrush - €79.99 (20 op voorraad)
 Beauty: Face Cream Anti-Aging - €34.99 (25 op voorraad)
 Beauty: Hair Dryer - €49.99 (22 op voorraad)
@@ -182,13 +179,11 @@ Books: Algorithms Unlocked - €32.99 (25 op voorraad)
 
 !!! info "JOIN syntax"
     De JOIN syntax is identiek aan PostgreSQL:
-
     ```sql
     SELECT kolommen
     FROM tabel1 alias1
     JOIN tabel2 alias2 ON alias1.foreign_key = alias2.primary_key
     ```
-
     - `p` en `c` zijn **aliases** (afkortingen)
     - `ON` specificeert de relatie tussen tabellen
     - `c.name AS category` geeft de kolom een duidelijke naam
@@ -225,7 +220,7 @@ for book in books[:5]:  # Toon eerste 5
 
 Output:
 
-```
+```text
 Gevonden 20 boeken:
 
 1984 - €12.99
@@ -270,7 +265,7 @@ for cat in stats:
 
 Output:
 
-```
+```text
 Categorie statistieken:
 
 Books: 20 producten, gemiddelde prijs: €24.34, totale voorraad: 703
@@ -283,10 +278,8 @@ Sports: 12 producten, gemiddelde prijs: €36.24, totale voorraad: 445
 
 !!! tip "LEFT JOIN vs JOIN"
     We gebruiken hier `LEFT JOIN` in plaats van `JOIN`:
-
     - `JOIN` (of `INNER JOIN`): alleen categorieën MET producten
     - `LEFT JOIN`: ALLE categorieën, ook als ze geen producten hebben
-
     Voor statistieken wil je vaak `LEFT JOIN` om lege categorieën ook te zien.
 
 ### JOIN met WHERE en LIKE: Zoeken in resultaten
@@ -325,7 +318,7 @@ for product in phone_products:
 
 Output:
 
-```
+```text
 Gevonden 3 producten met 'phone' in de naam:
 
 Electronics: Bluetooth Headphones Sony - €149.99 (18 op voorraad)
@@ -337,7 +330,6 @@ Music & Movies: DJ Headphones - €89.99 (16 op voorraad)
     - `LIKE '%phone%'` zoekt overal in de string
     - `%` is een wildcard (= 0 of meer karakters)
     - We gebruiken `?` placeholder met `f"%{search_term}%"` voor veiligheid
-
     Dit is identiek aan PostgreSQL's `LIKE` operator.
 
 ### Complexe WHERE clausules: Prijs en voorraad filteren
@@ -377,7 +369,7 @@ for product in products[:10]:
 
 Output:
 
-```
+```text
 Gevonden 21 betaalbare producten met voldoende voorraad:
 
 Card Game Uno: €9.99 (60 op voorraad)
@@ -398,7 +390,6 @@ Een **view** is een virtuele tabel - een opgeslagen query die je kunt gebruiken 
 
 !!! note "Views in modern Python apps"
     In Python/Flask apps gebruik je views minder vaak. Met een ORM zoals SQLAlchemy schrijf je queries direct in Python en gebruik je geen SQL views meer.
-
     Views zijn wel handig als je een database deelt met andere applicaties of rapportage tools.
 
 ### View maken en gebruiken in Python
@@ -447,7 +438,7 @@ for product in products[:10]:
 
 Output:
 
-```
+```text
 View 'vInStockProducts' aangemaakt
 Beauty: Electric Toothbrush - €79.99
 Beauty: Face Cream Anti-Aging - €34.99
@@ -485,7 +476,7 @@ for product in electronics[:5]:
 
 Output:
 
-```
+```text
 Electronics op voorraad (15 producten):
 
 Bluetooth Headphones Sony: €149.99 (18 op voorraad)
@@ -497,7 +488,6 @@ Keyboard Mechanical: €119.99 (22 op voorraad)
 
 !!! tip "Views bekijken"
     Je kunt alle views in de database opvragen:
-
     ```python
     cursor = conn.execute("""
         SELECT name, sql

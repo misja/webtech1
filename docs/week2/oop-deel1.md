@@ -40,11 +40,9 @@ De **type annotaties** (`: str`, `: float`, `: int`) geven aan welk datatype je 
 
 !!! info "Waarom type annotaties?"
     Type annotaties zijn nieuw voor je, maar hebben drie grote voordelen:
-
     1. Je ziet direct wat een functie verwacht - code wordt makkelijker te begrijpen
     2. Je editor helpt je met autocompletion en waarschuwt voor fouten
     3. Later (bij databases en webapplicaties) zijn ze vereist
-
     Vanaf nu gebruik je ze standaard in je code.
 
 ### De constructor: `__init__`
@@ -60,7 +58,6 @@ De `__init__` methode is de **constructor** - deze wordt automatisch aangeroepen
 
 !!! note "`self` - het object zelf"
     `self` verwijst naar het object zelf. Wanneer je `self.naam = naam` schrijft, maak je een **attribuut** aan dat bij dit specifieke object hoort.
-
     **Belangrijk:** Elke methode moet `self` als eerste parameter hebben - Python geeft het huidige object automatisch door.
 
 ### Objecten aanmaken
@@ -116,12 +113,9 @@ class Product:
 
 !!! warning "Print vs Return in webapplicaties"
     De `verkoop()` methode geeft een boolean terug in plaats van te printen. Dit is essentieel voor webapplicaties:
-
     - `print()` schrijft naar de console - de gebruiker ziet dit niet
     - `return` geeft data terug aan de aanroepende code
-
     In Flask geef je data terug aan de browser. Je `Product` klasse weet alleen van producten - feedback tonen aan gebruikers doet je Flask route:
-
     ```python
     # Later in een Flask route:
     if laptop.verkoop(2):
@@ -131,7 +125,6 @@ class Product:
         flash("Onvoldoende voorraad")
         return redirect('/producten')
     ```
-
     Dit heet **scheiding van verantwoordelijkheden** (separation of concerns): elke laag in je applicatie heeft zijn eigen verantwoordelijkheid.
 
 ## De `__str__` methode
