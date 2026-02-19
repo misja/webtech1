@@ -15,7 +15,7 @@ Dit is een perfect geval voor inheritance: beide zijn producten, maar met specif
 
 Maak een `FysiekProduct` klasse die erft van `Product`.
 
-### Opdracht
+### Opdracht a
 
 **Extra attributen:**
 
@@ -28,7 +28,7 @@ Maak een `FysiekProduct` klasse die erft van `Product`.
   - Tot 5 kg: €6.95
   - Meer dan 5 kg: €9.95
 
-### Startcode
+### Startcode a
 
 ```python
 from dataclasses import dataclass
@@ -75,7 +75,7 @@ Verzendkosten laptop: €6.95
 
 Maak een `DigitaalProduct` klasse die erft van `Product`.
 
-### Opdracht
+### Opdracht b
 
 **Extra attributen:**
 
@@ -92,7 +92,7 @@ Maak een `DigitaalProduct` klasse die erft van `Product`.
   - Verminder voorraad met 1
   - Geef een dict terug met info: `{"product": naam, "link": download_link, "grootte_mb": bestandsgrootte}`
 
-### Startcode
+### Startcode b
 
 ```python
 @dataclass
@@ -126,7 +126,7 @@ print(f"Voorraad na download: {photoshop.voorraad}")
 
 Maak een `Boek` klasse die erft van `FysiekProduct`.
 
-### Opdracht
+### Opdracht c
 
 **Extra attributen:**
 
@@ -140,7 +140,7 @@ Maak een `Boek` klasse die erft van `FysiekProduct`.
 **Override `__str__()`:**
 Maak een custom string representatie die ook auteur en ISBN toont.
 
-### Startcode
+### Startcode c
 
 ```python
 @dataclass

@@ -6,7 +6,7 @@ In deze oefening ga je werken met **dataclasses** en geavanceerde **type hints**
 
 Je hebt in oefening 1 waarschijnlijk een reguliere `Product` klasse gemaakt. Nu ga je deze omzetten naar een dataclass.
 
-### Opdracht
+### Opdracht a
 
 Maak een bestand `product.py` met een `Product` dataclass:
 
@@ -61,7 +61,7 @@ Product(naam='Laptop', prijs=799.99, voorraad=3, beschrijving='Gaming laptop met
 
 Maak een bestand `winkelwagen.py` met een `Winkelwagen` dataclass.
 
-### Opdracht
+### Opdracht b
 
 **Attributen:**
 

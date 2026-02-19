@@ -18,7 +18,7 @@ Dit is **compositie**: de `Bestelling` *heeft* een klant, *heeft* producten, etc
 
 Maak een `Betaalmethode` dataclass.
 
-### Opdracht
+### Opdracht a
 
 **Attributen:**
 
@@ -29,7 +29,7 @@ Maak een `Betaalmethode` dataclass.
 
 - `bereken_totaal_met_kosten(bedrag: float) -> float`: Geef bedrag + transactiekosten terug
 
-### Code
+### Code a
 
 ```python
 from dataclasses import dataclass
@@ -48,7 +48,7 @@ class Betaalmethode:
 
 Maak een `Verzendmethode` dataclass.
 
-### Opdracht
+### Opdracht b
 
 **Attributen:**
 
@@ -56,7 +56,7 @@ Maak een `Verzendmethode` dataclass.
 - `kosten` (float): Verzendkosten
 - `levertijd` (str): Verwachte levertijd (bijv. "2-3 werkdagen")
 
-### Code
+### Code b
 
 ```python
 @dataclass
@@ -70,7 +70,7 @@ class Verzendmethode:
 
 Maak een `Kortingscode` dataclass.
 
-### Opdracht
+### Opdracht c
 
 **Attributen:**
 
@@ -81,7 +81,7 @@ Maak een `Kortingscode` dataclass.
 
 - `bereken_korting(bedrag: float) -> float`: Bereken kortingsbedrag
 
-### Code
+### Code c
 
 ```python
 @dataclass
@@ -98,7 +98,7 @@ class Kortingscode:
 
 Nu komt het allemaal samen. Maak een `Bestelling` dataclass die alle andere objecten gebruikt.
 
-### Opdracht
+### Opdracht d
 
 **Attributen:**
 
@@ -120,7 +120,7 @@ Nu komt het allemaal samen. Maak een `Bestelling` dataclass die alle andere obje
 !!! warning "Return dict, geen print"
     De `bereken_totaal()` methode moet een **dictionary** teruggeven met alle bedragen. Zo kun je de data gemakkelijk aan templates doorgeven!
 
-### Startcode
+### Startcode d
 
 ```python
 from dataclasses import dataclass, field
