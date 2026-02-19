@@ -206,11 +206,11 @@ Gemiddeld salaris: €73333.33
 
 ## Checklist
 
-✅ Class met `__init__` en `_create_table`
-✅ CRUD methods: add, get_all, get_byid, update, delete
-✅ Placeholders (`?`) gebruikt
-✅ Context managers (`with`) gebruikt
-✅ Type hints op alle methods
-✅ row_factory = Row voor dict-like access
-✅ Error handling (try/except) waar nodig
-✅ main() functie die alles demonstreert
+- Class met `__init__` en `_create_table`
+- CRUD methods: add, get_all, get_byid, update, delete
+- Placeholders (`?`) gebruikt
+- Context managers (`with`) gebruikt
+- Type hints op alle methods
+- row_factory = Row voor dict-like access
+- Error handling (try/except) waar nodig
+- main() functie die alles demonstreert

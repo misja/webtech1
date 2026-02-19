@@ -312,7 +312,7 @@ def search():
 
 ## Best practices samenvatting
 
-✅ **DOE WEL:**
+**DOE WEL:**
 
 - Gebruik **altijd** placeholders (`?`) voor values
 - Gebruik context managers (`with`)
@@ -320,7 +320,7 @@ def search():
 - Gebruik type hints
 - Test met bekende SQL injection strings
 
-❌ **DOE NIET:**
+**DOE NIET:**
 
 - F-strings of string concatenatie met user input in SQL
 - User input direct in SQL queries

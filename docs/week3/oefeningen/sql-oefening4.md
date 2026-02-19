@@ -111,22 +111,22 @@ print("\n=== Met Error Handling ===")
 # Test 1: Succesvol
 productid = db.add_product("Laptop", 799.99, 10, "Electronics")
 if productid:
-    print(f"✅ Product toegevoegd met ID {productid}")
+    print(f"Product toegevoegd met ID {productid}")
 
 # Test 2: Duplicate - netjes afgevangen
 productid = db.add_product("Laptop", 899.99, 5, "Electronics")
 if not productid:
-    print("❌ Product niet toegevoegd (bestaat al)")
+    print("Product niet toegevoegd (bestaat al)")
 
 # Test 3: Negatieve prijs - netjes afgevangen
 productid = db.add_product("Monitor", -50.00, 3, "Electronics")
 if not productid:
-    print("❌ Product niet toegevoegd (ongeldige prijs)")
+    print("Product niet toegevoegd (ongeldige prijs)")
 
 # Test 4: Lege naam - netjes afgevangen
 productid = db.add_product("", 299.99, 2, "Electronics")
 if not productid:
-    print("❌ Product niet toegevoegd (naam is verplicht)")
+    print("Product niet toegevoegd (naam is verplicht)")
 ```
 
 ## Opgave 3: OperationalError Handling
@@ -180,15 +180,15 @@ print("\n=== Stock Updates ===")
 
 # Succesvolle update
 if db.update_stock(1, 15):
-    print("✅ Voorraad bijgewerkt")
+    print("Voorraad bijgewerkt")
 
 # Negatieve voorraad (validatiefout)
 if not db.update_stock(1, -5):
-    print("❌ Negatieve voorraad niet toegestaan")
+    print("Negatieve voorraad niet toegestaan")
 
 # Non-existent product
 if not db.update_stock(999, 10):
-    print("❌ Product niet gevonden")
+    print("Product niet gevonden")
 ```
 
 ## Opgave 5: Delete Met Error Handling
@@ -244,7 +244,7 @@ test_cases = [
 
 for name, price, stock, category in test_cases:
     success, message = db.safe_add_product(name, price, stock, category)
-    status = "✅" if success else "❌"
+    status = "OK" if success else "Fout"
     print(f"{status} {message}")
 ```
 
@@ -274,9 +274,9 @@ Gebruik:
 ```python
 try:
     db.add_product_custom("Laptop", 799.99, 10, "Electronics")
-    print("✅ Product toegevoegd")
+    print("Product toegevoegd")
 except ProductError as e:
-    print(f"❌ {e}")
+    print(f"Fout: {e}")
 ```
 
 ## Bonusopdracht 2: Transaction Error Handling
@@ -325,44 +325,44 @@ CRASH: NOT NULL constraint failed: products.name
 
 === Met Error Handling ===
 INFO:__main__:Product 'Laptop' toegevoegd met ID 1
-✅ Product toegevoegd met ID 1
+Product toegevoegd met ID 1
 WARNING:__main__:Product 'Laptop' bestaat al
-❌ Product niet toegevoegd (bestaat al)
+Product niet toegevoegd (bestaat al)
 WARNING:__main__:Ongeldige waarde voor 'Monitor': prijs=-50.0, stock=3
-❌ Product niet toegevoegd (ongeldige prijs)
+Product niet toegevoegd (ongeldige prijs)
 WARNING:__main__:Product '' kon niet worden toegevoegd
-❌ Product niet toegevoegd (naam is verplicht)
+Product niet toegevoegd (naam is verplicht)
 
 3 producten gevonden
 
 === Stock Updates ===
 INFO:__main__:Stock update voor product 1: 15
-✅ Voorraad bijgewerkt
+Voorraad bijgewerkt
 WARNING:__main__:Negatieve voorraad niet toegestaan: -5
-❌ Negatieve voorraad niet toegestaan
+Negatieve voorraad niet toegestaan
 WARNING:__main__:Product 999 niet gevonden
-❌ Product niet gevonden
+Product niet gevonden
 
 === Safe Add Product ===
-✅ Product toegevoegd met ID 2
-❌ Product naam bestaat al
-❌ Prijs moet positief zijn
-❌ Naam is verplicht
-❌ Voorraad kan niet negatief zijn
+OK Product toegevoegd met ID 2
+Fout Product naam bestaat al
+Fout Prijs moet positief zijn
+Fout Naam is verplicht
+Fout Voorraad kan niet negatief zijn
 ```
 
 ## Checklist
 
-✅ Database-specifieke exceptions gebruikt (`IntegrityError`, `OperationalError`)
-✅ Error messages onderscheiden (UNIQUE, CHECK, NOT NULL)
-✅ Logging gebruikt (`logger.info`, `logger.warning`, `logger.error`)
-✅ Type hints met `|` syntax gebruikt (`int | None`, `Row | None`)
-✅ Return `None`, `False`, of lege lijst bij fouten (geen crash!)
-✅ `cursor.rowcount` gebruikt om te checken of iets gewijzigd is
-✅ Try/except patterns consequent toegepast
-✅ Context managers gebruikt (`with sqlite3.connect()`)
-✅ Gebruiksvriendelijke error messages
-✅ Validatie VOOR database operaties waar mogelijk
+- Database-specifieke exceptions gebruikt (`IntegrityError`, `OperationalError`)
+- Error messages onderscheiden (UNIQUE, CHECK, NOT NULL)
+- Logging gebruikt (`logger.info`, `logger.warning`, `logger.error`)
+- Type hints met `|` syntax gebruikt (`int | None`, `Row | None`)
+- Return `None`, `False`, of lege lijst bij fouten (geen crash!)
+- `cursor.rowcount` gebruikt om te checken of iets gewijzigd is
+- Try/except patterns consequent toegepast
+- Context managers gebruikt (`with sqlite3.connect()`)
+- Gebruiksvriendelijke error messages
+- Validatie VOOR database operaties waar mogelijk
 
 ## Belangrijke Lessen
 

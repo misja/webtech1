@@ -30,19 +30,19 @@ webshop/
 
 ## Features
 
-✅ **Routes:**
+**Routes:**
 
 - `/` - Homepage met alle categorieën
 - `/category/<id>` - Producten per categorie
 - `/product/<id>` - Product detail pagina
 
-✅ **Database Integratie:**
+**Database Integratie:**
 
 - Gebruikt `webshop.sqlite` uit Week 3
 - Hergebruikt SQL queries uit Week 3
 - Type hints en modern Python patterns
 
-✅ **Templates:**
+**Templates:**
 
 - Bootstrap 5.3.0 voor styling
 - Template inheritance (`{% extends %}`)

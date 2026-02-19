@@ -231,10 +231,10 @@ products/templates/index.html           # Vermijd (kan conflicts geven)
 
 ```python
 # models.py
-from webshop_app import db  # ❌ Circular import!
+from webshop_app import db  # Circular import!
 
 # __init__.py
-from webshop_app.models import Customer  # ❌ Circular import!
+from webshop_app.models import Customer  # Circular import!
 ```
 
 **Oplossing:**
@@ -242,11 +242,11 @@ from webshop_app.models import Customer  # ❌ Circular import!
 ```python
 # models.py
 from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()  # ✅ Maak db hier aan
+db = SQLAlchemy()  # Maak db hier aan
 
 # __init__.py
-from webshop_app.models import db  # ✅ Import db
-db.init_app(app)  # ✅ Bind aan app in factory
+from webshop_app.models import db  # Import db
+db.init_app(app)  # Bind aan app in factory
 ```
 
 ## URL Prefix Voorbeelden
@@ -464,21 +464,21 @@ def test_auth_blueprint():
 ### 1. Verkeerde url_for() syntax
 
 ```python
-# ❌ Fout - geen blueprint prefix
+# Fout - geen blueprint prefix
 url_for('login')
 
-# ✅ Correct - met blueprint naam
+# Correct - met blueprint naam
 url_for('auth.login')
 ```
 
 ### 2. Template niet gevonden
 
 ```python
-# ❌ Fout - template in verkeerde folder
+# Fout - template in verkeerde folder
 # admin/templates/products.html
 return render_template('products.html')
 
-# ✅ Correct - met blueprint subfolder
+# Correct - met blueprint subfolder
 # admin/templates/admin/products.html
 return render_template('admin/products.html')
 ```
@@ -486,11 +486,11 @@ return render_template('admin/products.html')
 ### 3. Circular imports
 
 ```python
-# ❌ Fout - import bovenaan
+# Fout - import bovenaan
 # models.py
 from webshop_app import db
 
-# ✅ Correct - maak db in models.py
+# Correct - maak db in models.py
 # models.py
 db = SQLAlchemy()
 
@@ -502,12 +502,12 @@ db.init_app(app)
 ### 4. Blueprint registratie vergeten
 
 ```python
-# ❌ Fout - blueprint niet geregistreerd
+# Fout - blueprint niet geregistreerd
 # __init__.py
 from webshop_app.products.views import products_bp
 # Vergeet app.register_blueprint()
 
-# ✅ Correct - altijd registreren
+# Correct - altijd registreren
 from webshop_app.products.views import products_bp
 app.register_blueprint(products_bp)
 ```

@@ -9,7 +9,7 @@ Deze webshop applicatie bouwt voort op:
 - **Week 2 (OOP):** `Product`, `Customer`, `Order`, `Cart` classes
 - **Week 3 (SQL):** `webshop.sqlite` database met `products` en `categories`
 - **Week 4 (Flask):** Product catalog met routes en templates
-- **Week 5 (Forms):** ✅ WTForms voor product CRUD operaties
+- **Week 5 (Forms):** WTForms voor product CRUD operaties
 - **Week 6 (SQLAlchemy):** ORM models voor database (komt nog)
 - **Week 7 (Auth/Blueprints):** Login en gestructureerde app (komt nog)
 
@@ -17,19 +17,19 @@ Deze webshop applicatie bouwt voort op:
 
 ### Forms met Flask-WTF
 
-✅ **AddProductForm** - Formulier om producten toe te voegen
+- **AddProductForm** - Formulier om producten toe te voegen
 
 - Validators voor naam, prijs, voorraad
 - Dropdown voor categorie selectie
 - CSRF-beveiliging
 
-✅ **EditProductForm** - Formulier om producten te bewerken
+- **EditProductForm** - Formulier om producten te bewerken
 
 - Pre-filled met huidige product data
 - Alle velden editable
 - Delete functionaliteit
 
-✅ **ContactForm** - Contact formulier voor klanten
+- **ContactForm** - Contact formulier voor klanten
 
 - Naam, email, onderwerp, bericht
 - Email validatie

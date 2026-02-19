@@ -78,7 +78,7 @@ print(f"Test 1: {user['username'] if user else 'Geen match'}")
 user = db.login_unsafe("jan", "fout_wachtwoord")
 print(f"Test 2: {user['username'] if user else 'Geen match'}")
 
-# Test 3: SQL injection attack! ⚠️
+# Test 3: SQL injection attack!
 user = db.login_unsafe("admin' --", "whatever")
 print(f"Test 3: {user['username'] if user else 'Geen match'}")  # GEVAAR: ingelogd als admin!
 ```
@@ -113,9 +113,9 @@ print("\n=== SQL Injection Tests ===")
 for username, password in injection_tests:
     user = db.login_unsafe(username, password)
     if user:
-        print(f"⚠️  GEVAAR: Ingelogd als '{user['username']}' (admin={user['is_admin']})")
+        print(f"GEVAAR: Ingelogd als '{user['username']}' (admin={user['is_admin']})")
     else:
-        print(f"✅ Geblokkeerd: {username}")
+        print(f"Geblokkeerd: {username}")
 ```
 
 **Vraag:** Welke aanvallen werken? Probeer te begrijpen waarom.
@@ -142,9 +142,9 @@ print("\n=== Veilige Login Tests ===")
 for username, password in injection_tests:
     user = db.login_safe(username, password)
     if user:
-        print(f"⚠️  Ingelogd als '{user['username']}'")
+        print(f"Ingelogd als '{user['username']}'")
     else:
-        print(f"✅ Geblokkeerd: {username}")
+        print(f"Geblokkeerd: {username}")
 
 # Test normale login (moet nog steeds werken!)
 user = db.login_safe("jan", "geheim123")
@@ -209,7 +209,7 @@ print(f"\nUsers tabel: {len(users)} records")
 try:
     db.get_all_from_table("users; DROP TABLE users; --")
 except ValueError as e:
-    print(f"✅ Geblokkeerd: {e}")
+    print(f"Geblokkeerd: {e}")
 ```
 
 ## Bonusopdracht 1: Login Met Rate Limiting
@@ -268,14 +268,14 @@ Test 2: Geen match
 Test 3: admin  ← GEVAAR!
 
 === SQL Injection Tests ===
-⚠️  GEVAAR: Ingelogd als 'admin' (admin=1)
-⚠️  GEVAAR: Ingelogd als 'jan' (admin=0)
-⚠️  GEVAAR: Ingelogd als 'admin' (admin=1)
+GEVAAR: Ingelogd als 'admin' (admin=1)
+GEVAAR: Ingelogd als 'jan' (admin=0)
+GEVAAR: Ingelogd als 'admin' (admin=1)
 
 === Veilige Login Tests ===
-✅ Geblokkeerd: admin' --
-✅ Geblokkeerd: ' OR '1'='1
-✅ Geblokkeerd: admin' OR '1'='1' --
+Geblokkeerd: admin' --
+Geblokkeerd: ' OR '1'='1
+Geblokkeerd: admin' OR '1'='1' --
 
 Normale login: jan
 
@@ -283,19 +283,19 @@ Search 'jan': 1 resultaten
 Search met injection: 0 resultaten
 
 Users tabel: 2 records
-✅ Geblokkeerd: Invalid table: users; DROP TABLE users; --
+Geblokkeerd: Invalid table: users; DROP TABLE users; --
 ```
 
 ## Checklist
 
-✅ `login_unsafe()` geïmplementeerd (met f-string - FOUT!)
-✅ SQL injection aanvallen getest en begrepen
-✅ `login_safe()` geïmplementeerd (met placeholders)
-✅ `search_users()` met LIKE en placeholders
-✅ `get_all_from_table()` met whitelist validatie
-✅ Verschil tussen unsafe en safe begrepen
-✅ **Nooit** f-strings of concatenatie met user input in SQL
-✅ **Altijd** placeholders (`?`) voor values
+- `login_unsafe()` geïmplementeerd (met f-string - FOUT!)
+- SQL injection aanvallen getest en begrepen
+- `login_safe()` geïmplementeerd (met placeholders)
+- `search_users()` met LIKE en placeholders
+- `get_all_from_table()` met whitelist validatie
+- Verschil tussen unsafe en safe begrepen
+- **Nooit** f-strings of concatenatie met user input in SQL
+- **Altijd** placeholders (`?`) voor values
 
 ## Belangrijke Lessen
 

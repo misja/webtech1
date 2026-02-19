@@ -266,12 +266,12 @@ Totaal: 118 producten op voorraad
 
 ## Checklist
 
-✅ Alle queries gebruiken placeholders (`?`)
-✅ Context managers (`with`) gebruikt
-✅ Type hints op alle methods
-✅ row_factory = Row gebruikt
-✅ JOIN queries correct (INNER JOIN standaard)
-✅ Aggregatiefuncties: COUNT, AVG, SUM, MIN, MAX
-✅ GROUP BY voor groeperen
-✅ ORDER BY voor sortering
-✅ Helper method `_execute_query` gebruikt
+- Alle queries gebruiken placeholders (`?`)
+- Context managers (`with`) gebruikt
+- Type hints op alle methods
+- row_factory = Row gebruikt
+- JOIN queries correct (INNER JOIN standaard)
+- Aggregatiefuncties: COUNT, AVG, SUM, MIN, MAX
+- GROUP BY voor groeperen
+- ORDER BY voor sortering
+- Helper method `_execute_query` gebruikt

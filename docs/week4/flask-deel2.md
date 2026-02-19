@@ -65,10 +65,10 @@ uv add flask
 
 Dit doet automatisch:
 
-- ✅ Installeert Flask
-- ✅ Maakt een virtual environment (`.venv/`)
-- ✅ Update `pyproject.toml` met Flask dependency
-- ✅ Maakt `uv.lock` voor reproduceerbare builds
+- Installeert Flask
+- Maakt een virtual environment (`.venv/`)
+- Update `pyproject.toml` met Flask dependency
+- Maakt `uv.lock` voor reproduceerbare builds
 
 Je `pyproject.toml` ziet er nu ongeveer zo uit:
 

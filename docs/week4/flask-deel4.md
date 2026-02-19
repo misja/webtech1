@@ -266,9 +266,9 @@ Voeg conditionele logica toe aan templates:
 
         <h2>Komt Carla voor in de lijst?</h2>
         {% if 'Carla' in cursisten %}
-            <p class="success">✅ Carla komt in de lijst voor!</p>
+            <p class="success">Carla komt in de lijst voor!</p>
         {% else %}
-            <p class="error">❌ Carla komt niet in de lijst voor.</p>
+            <p class="error">Carla komt niet in de lijst voor.</p>
         {% endif %}
     </body>
 </html>

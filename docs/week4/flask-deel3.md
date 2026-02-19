@@ -269,10 +269,10 @@ Nu krijg je een **interactieve debugger**:
 
 Je ziet:
 
-- ✅ Exacte foutmelding (`IndexError: string index out of range`)
-- ✅ Stack trace met regelnummers
-- ✅ Code context (welke regel crashte)
-- ✅ Interactieve console (klik op console icoon, voer PIN in)
+- Exacte foutmelding (`IndexError: string index out of range`)
+- Stack trace met regelnummers
+- Code context (welke regel crashte)
+- Interactieve console (klik op console icoon, voer PIN in)
 
 !!! danger "Debug mode in productie"
     NOOIT `debug=True` gebruiken in productie! Het toont sourcecode en staat remote code execution toe (via de debug console).

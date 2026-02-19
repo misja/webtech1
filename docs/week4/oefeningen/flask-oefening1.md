@@ -27,11 +27,11 @@ Maak een Flask applicatie met een dynamische route die een artiestennaam generee
 
 ### Vereisten
 
-✅ **Route**: `http://localhost:5000/artiestennaam/<naam>`
-✅ **Template**: Gebruik Jinja2 template (niet HTML in string!)
-✅ **Type hints**: Gebruik moderne Python type hints
-✅ **Logica**: Implementeer de naam-generatie regels correct
-✅ **Project setup**: Gebruik `uv` zoals in Week 2/3/4
+- **Route**: `http://localhost:5000/artiestennaam/<naam>`
+- **Template**: Gebruik Jinja2 template (niet HTML in string!)
+- **Type hints**: Gebruik moderne Python type hints
+- **Logica**: Implementeer de naam-generatie regels correct
+- **Project setup**: Gebruik `uv` zoals in Week 2/3/4
 
 ## Stappenplan
 
@@ -367,52 +367,52 @@ TRUUSSY
 
 ## Checklist
 
-✅ Project aangemaakt met `uv init` en `uv add flask`
-✅ `templates/` directory met `artiestennaam.html`
-✅ Flask route op `/artiestennaam/<naam>`
-✅ Type hints gebruikt (`naam: str`, `-> str`)
-✅ Logica correct:
+- Project aangemaakt met `uv init` en `uv add flask`
+- `templates/` directory met `artiestennaam.html`
+- Flask route op `/artiestennaam/<naam>`
+- Type hints gebruikt (`naam: str`, `-> str`)
+- Logica correct:
 
 - Naam eindigt op `s` → voeg `SY` toe
 - Anders → voeg `TEZY` toe
 - Converteer naar uppercase
-✅ Template gebruikt (geen HTML in string!)
-✅ Docstring bij route functie
-✅ Werkt met verschillende namen
+- Template gebruikt (geen HTML in string!)
+- Docstring bij route functie
+- Werkt met verschillende namen
 
 ## Veelvoorkomende fouten
 
-❌ **HTML in string returnen**
+**HTML in string returnen**
 
 ```python
 return f"<h1>{artiestennaam}</h1>"  # FOUT!
 ```
 
-✅ **Template gebruiken**
+**Template gebruiken**
 
 ```python
 return render_template("artiestennaam.html", ...)  # GOED!
 ```
 
-❌ **Geen type hints**
+**Geen type hints**
 
 ```python
 def artiestennaam(naam):  # FOUT!
 ```
 
-✅ **Type hints toevoegen**
+**Type hints toevoegen**
 
 ```python
 def artiestennaam(naam: str) -> str:  # GOED!
 ```
 
-❌ **Case-sensitive check**
+**Case-sensitive check**
 
 ```python
 if naam.endswith('s'):  # FOUT! "Truus" != "truuS"
 ```
 
-✅ **Case-insensitive check**
+**Case-insensitive check**
 
 ```python
 if naam.lower().endswith('s'):  # GOED!
@@ -422,11 +422,11 @@ if naam.lower().endswith('s'):  # GOED!
 
 Na deze oefening heb je:
 
-- ✅ Een Flask project opgezet met `uv`
-- ✅ Dynamische routes gebruikt met URL parameters
-- ✅ Templates gemaakt met Jinja2
-- ✅ Type hints toegepast in Flask routes
-- ✅ String manipulatie in Python gedaan
-- ✅ Modern project structuur gebruikt (zoals Week 2/3)
+- Een Flask project opgezet met `uv`
+- Dynamische routes gebruikt met URL parameters
+- Templates gemaakt met Jinja2
+- Type hints toegepast in Flask routes
+- String manipulatie in Python gedaan
+- Modern project structuur gebruikt (zoals Week 2/3)
 
 **Tip:** Deze patterns gebruik je de rest van de cursus! In Week 5 leer je forms (gebruikersinput), en in Week 6 databases (SQLAlchemy).

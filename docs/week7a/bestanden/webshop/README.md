@@ -428,10 +428,10 @@ app.config['SECRET_KEY'] = secrets.token_hex(32)  # Random key!
 SQLAlchemy ORM voorkomt SQL injection automatisch:
 
 ```python
-# ✅ Veilig - ORM escaped automatisch
+# Veilig - ORM escaped automatisch
 Customer.query.filter_by(email=user_input).first()
 
-# ❌ GEVAARLIJK - nooit doen!
+# GEVAARLIJK - nooit doen!
 db.session.execute(f"SELECT * FROM customers WHERE email = '{user_input}'")
 ```
 
@@ -450,11 +450,11 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
 ### 1. Vergeten login_manager te initialiseren
 
 ```python
-# ❌ Fout
+# Fout
 login_manager = LoginManager()
 # Vergeet init_app!
 
-# ✅ Correct
+# Correct
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
@@ -463,11 +463,11 @@ login_manager.login_view = "login"
 ### 2. UserMixin verkeerde volgorde
 
 ```python
-# ❌ Fout - UserMixin moet TWEEDE zijn
+# Fout - UserMixin moet TWEEDE zijn
 class Customer(UserMixin, db.Model):
     pass
 
-# ✅ Correct
+# Correct
 class Customer(db.Model, UserMixin):
     pass
 ```
@@ -475,10 +475,10 @@ class Customer(db.Model, UserMixin):
 ### 3. Password niet hashen
 
 ```python
-# ❌ GEVAARLIJK - plain text password!
+# GEVAARLIJK - plain text password!
 customer.password_hash = form.password.data
 
-# ✅ Correct - hash in __init__
+# Correct - hash in __init__
 def __init__(self, name, email, password):
     self.name = name
     self.email = email
@@ -488,13 +488,13 @@ def __init__(self, name, email, password):
 ### 4. @login_required verkeerde volgorde
 
 ```python
-# ❌ Fout - route moet eerst
+# Fout - route moet eerst
 @login_required
 @app.route('/welcome')
 def welcome():
     pass
 
-# ✅ Correct - route altijd eerst!
+# Correct - route altijd eerst!
 @app.route('/welcome')
 @login_required
 def welcome():
@@ -504,11 +504,11 @@ def welcome():
 ### 5. Circular import in forms.py
 
 ```python
-# ❌ Fout - importeert Customer te vroeg
+# Fout - importeert Customer te vroeg
 from app import db
 from models import Customer  # Circular import!
 
-# ✅ Correct - import in functie
+# Correct - import in functie
 from flask_wtf import FlaskForm
 
 class RegistrationForm(FlaskForm):

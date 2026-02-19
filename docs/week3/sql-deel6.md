@@ -420,7 +420,7 @@ def get_product(productid):
 
 ## Best practices
 
-✅ **DOE WEL:**
+**DOE WEL:**
 
 - Gebruik specifieke exceptions (`IntegrityError`, `OperationalError`)
 - Log errors voor debugging (`logging.error()`)
@@ -428,7 +428,7 @@ def get_product(productid):
 - Gebruik type hints (`int | None`, `list[Row]`)
 - Test error paths (wat gebeurt bij duplicates?)
 
-❌ **DOE NIET:**
+**DOE NIET:**
 
 - Bare `except:` zonder exception type
 - Fouten negeren (silent failures)

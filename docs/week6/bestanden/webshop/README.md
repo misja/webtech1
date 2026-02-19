@@ -412,12 +412,12 @@ In Week 7 bouwen we verder op deze ORM foundation:
    # Lazy (standaard) - query per product.category
    products = Product.query.all()
    for p in products:
-       print(p.category.name)  # ❌ N+1 queries!
+       print(p.category.name)  # N+1 queries!
 
    # Eager - 1 query met JOIN
    products = Product.query.options(joinedload(Product.category)).all()
    for p in products:
-       print(p.category.name)  # ✅ Efficient!
+       print(p.category.name)  # Efficient!
    ```
 
 5. **Gebruik `__repr__` voor debugging**
@@ -434,27 +434,27 @@ In Week 7 bouwen we verder op deze ORM foundation:
    ```python
    product = Product(name="Test")
    db.session.add(product)
-   # ❌ Vergeet db.session.commit() niet!
+   # Vergeet db.session.commit() niet!
    ```
 
 2. **Fout relationship definiëren**
 
    ```python
-   # ❌ Fout: string moet exact matchen met class naam
+   # Fout: string moet exact matchen met class naam
    products = db.relationship('Producten', ...)
 
-   # ✅ Correct
+   # Correct
    products = db.relationship('Product', ...)
    ```
 
 3. **N+1 probleem**
 
    ```python
-   # ❌ Slecht - 1 query voor categories + N queries voor products
+   # Slecht - 1 query voor categories + N queries voor products
    for category in Category.query.all():
        print(len(category.products))
 
-   # ✅ Beter - gebruik eager loading of custom query
+   # Beter - gebruik eager loading of custom query
    categories = db.session.query(Category).options(joinedload(Category.products)).all()
    ```
 
