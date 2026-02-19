@@ -44,18 +44,18 @@ Totaal: €778.16
 
 ## d. Meerdere verzendadressen (nog een optionele uitdaging)
 
-In een echte webshop kunnen klanten meerdere adressen hebben (thuisadres, werkadres etc.). Maak een klasse `Adres` met velden voor straat, huisnummer, postcode en plaats. Pas de klasse `Klant` aan zodat een klant meerdere adressen kan hebben. Bij het aanmaken van een bestelling moet je dan kunnen kiezen naar welk adres verzonden moet worden.
+In een echte webshop kunnen klanten meerdere adressen hebben (thuisadres, werkadres etc.). Maak een klasse `Adres` met velden voor straat, huisnummer, en plaats. Pas de klasse `Klant` aan zodat een klant meerdere adressen kan hebben. Bij het aanmaken van een bestelling moet je dan kunnen kiezen naar welk adres verzonden moet worden.
 
 Als je dit is gelukt kun je jezelf feliciteren: je hebt nu een realistische webshop-structuur gemaakt met compositie!
 
 ## Testcode
 
-Hier is een voorbeeld hoe je de uitgebreide functionaliteit kunt testen:
+Hier is een voorbeeld hoe je de complete functionaliteit kunt testen:
 
 ```python
 from product import Product
 from klant import Klant
-from winkelwagen import Winkelwagen
+from webshop import Winkelwagen
 from bestelling import Bestelling, Verzendmethode, Kortingscode
 from betaalmethode import Betaalmethode
 
@@ -65,6 +65,8 @@ muis = Product("Draadloze muis", 25.50, 20)
 
 # Maak klant en winkelwagen
 jan = Klant("Jan Jansen", "jan@email.nl")
+jan.voeg_adres_toe("Bloemstraat", 1, "Groningen")
+jan.voeg_adres_toe("Zernikeplein", 11, "Groningen")
 wagen = Winkelwagen(jan)
 wagen.voeg_toe(laptop)
 wagen.voeg_toe(muis)
@@ -83,7 +85,7 @@ korting = Kortingscode("WELKOM10", 0.10)
 bestelling.pas_kortingscode_toe(korting)
 
 # Plaats bestelling
-bestelling.plaats_bestelling()
+bestelling.plaats_bestelling(adres_index=1)
 
 print(f"\nBestellingsnummer: {bestelling.nummer}")
 ```
