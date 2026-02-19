@@ -4707,11 +4707,11 @@
 </span></code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">Flask application context</p>
-<p>In moderne SQLAlchemy (3.0+) moet <code>db.create_all()</code> binnen een application context draaien:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+<p>In moderne SQLAlchemy (3.0+) moet <code>db.create_all()</code> binnen een application context draaien:
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
 </span></code></pre></div>
-<p>Dit zorgt ervoor dat SQLAlchemy toegang heeft tot de Flask configuratie.</p>
+Dit zorgt ervoor dat SQLAlchemy toegang heeft tot de Flask configuratie.<p></p>
 </div>
 <h2 id="stap-4-formulieren-definieren">Stap 4: Formulieren definiëren<a class="headerlink" href="#stap-4-formulieren-definieren" title="Link naar deze sectie">¶</a></h2>
 <p><strong><code>forms.py</code></strong> - Bestudeer het volledige bestand <a href="bestanden/forms.py"><code>forms.py</code></a>.</p>

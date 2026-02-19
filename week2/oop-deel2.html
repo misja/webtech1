@@ -4235,14 +4235,12 @@
 </span></code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">Wat betekent <code>@dataclass</code>?</p>
-<p>De <code>@</code> syntax is een <strong>decorator</strong> - een speciale aanduiding die functionaliteit toevoegt aan je klasse.</p>
-<p>Je hoeft nu niet precies te begrijpen hoe decorators werken. Belangrijk is dat <code>@dataclass</code> ervoor zorgt dat Python automatisch een aantal methoden voor je genereert:</p>
-<ul>
-<li><code>__init__()</code> - constructor met alle attributen als parameters</li>
-<li><code>__repr__()</code> - nette string representatie voor debugging</li>
-<li><code>__eq__()</code> - vergelijking tussen objecten</li>
-</ul>
-<p>Dit scheelt veel typwerk en voorkomt fouten. Later zie je meer decorators zoals <code>@app.route</code> in Flask.</p>
+<p>De <code>@</code> syntax is een <strong>decorator</strong> - een speciale aanduiding die functionaliteit toevoegt aan je klasse.
+Je hoeft nu niet precies te begrijpen hoe decorators werken. Belangrijk is dat <code>@dataclass</code> ervoor zorgt dat Python automatisch een aantal methoden voor je genereert:
+- <code>__init__()</code> - constructor met alle attributen als parameters
+- <code>__repr__()</code> - nette string representatie voor debugging
+- <code>__eq__()</code> - vergelijking tussen objecten
+Dit scheelt veel typwerk en voorkomt fouten. Later zie je meer decorators zoals <code>@app.route</code> in Flask.</p>
 </div>
 <p>Je gebruikt de klasse precies hetzelfde:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">laptop</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="s2">"Laptop"</span><span class="p">,</span> <span class="mf">799.99</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
@@ -4326,8 +4324,8 @@
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">field(default_factory=list)</p>
-<p>Voor <strong>mutable</strong> default waarden (lists, dicts) moet je <code>field(default_factory=list)</code> gebruiken in plaats van <code>= []</code>.</p>
-<p><strong>Waarom?</strong> Een gewoon <code>= []</code> zou gedeeld worden tussen alle instanties: Python maakt die lijst eenmalig aan bij het laden van de klasse, niet bij elke aanmaak van een object. Met <code>default_factory</code> krijgt elke instantie zijn eigen lege lijst.</p>
+<p>Voor <strong>mutable</strong> default waarden (lists, dicts) moet je <code>field(default_factory=list)</code> gebruiken in plaats van <code>= []</code>.
+<strong>Waarom?</strong> Een gewoon <code>= []</code> zou gedeeld worden tussen alle instanties: Python maakt die lijst eenmalig aan bij het laden van de klasse, niet bij elke aanmaak van een object. Met <code>default_factory</code> krijgt elke instantie zijn eigen lege lijst.</p>
 </div>
 <h2 id="preview-database-modellen">Preview: Database modellen<a class="headerlink" href="#preview-database-modellen" title="Link naar deze sectie">¶</a></h2>
 <p>Database modellen (die je later gaat maken) lijken erg op dataclasses:</p>

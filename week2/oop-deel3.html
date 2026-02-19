@@ -4208,8 +4208,8 @@
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Is-een vs heeft-een</p>
-<p><strong>Inheritance (is-een):</strong> Een laptop is een product</p>
-<p><strong>Compositie (heeft-een):</strong> Een bestelling heeft een klant (zie deel 4)</p>
+<p><strong>Inheritance (is-een):</strong> Een laptop is een product
+<strong>Compositie (heeft-een):</strong> Een bestelling heeft een klant (zie deel 4)</p>
 </div>
 <h2 id="super-gebruiken">Super() gebruiken<a class="headerlink" href="#super-gebruiken" title="Link naar deze sectie">¶</a></h2>
 <p><code>super()</code> roept de parent class aan. Dit gebruik je vooral in <code>__init__</code>:</p>
@@ -4366,8 +4366,8 @@
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Inheritance hierarchie</p>
-<p><code>Boek</code> → <code>FysiekProduct</code> → <code>Product</code></p>
-<p>Een <code>Boek</code> heeft toegang tot alle attributen en methoden van zowel <code>FysiekProduct</code> als <code>Product</code>.</p>
+<p><code>Boek</code> → <code>FysiekProduct</code> → <code>Product</code>
+Een <code>Boek</code> heeft toegang tot alle attributen en methoden van zowel <code>FysiekProduct</code> als <code>Product</code>.</p>
 </div>
 <h2 id="preview-sqlalchemy-modellen">Preview: SQLAlchemy modellen<a class="headerlink" href="#preview-sqlalchemy-modellen" title="Link naar deze sectie">¶</a></h2>
 <p>Dit is waarom je inheritance leert - straks in week 6 ga je database modellen maken:</p>
@@ -4392,12 +4392,10 @@
 <p>Door te erven van <code>db.Model</code> krijgen je klassen automatisch alle database functionaliteit: opslaan, opvragen, verwijderen, etc.</p>
 <div class="admonition info">
 <p class="admonition-title">Waarom OOP voor SQLAlchemy?</p>
-<p>SQLAlchemy gebruikt OOP omdat het perfect past bij database structuur:</p>
-<ul>
-<li>Elke <strong>klasse</strong> = een database <strong>tabel</strong></li>
-<li>Elk <strong>object</strong> = een <strong>rij</strong> in de tabel</li>
-<li>Inheritance geeft je de database functionaliteit</li>
-</ul>
+<p>SQLAlchemy gebruikt OOP omdat het perfect past bij database structuur:
+- Elke <strong>klasse</strong> = een database <strong>tabel</strong>
+- Elk <strong>object</strong> = een <strong>rij</strong> in de tabel
+- Inheritance geeft je de database functionaliteit</p>
 </div>
 <h2 id="praktijkvoorbeeld-producttypes">Praktijkvoorbeeld: Producttypes<a class="headerlink" href="#praktijkvoorbeeld-producttypes" title="Link naar deze sectie">¶</a></h2>
 <p>Hier een compleet voorbeeld met verschillende producttypes:</p>

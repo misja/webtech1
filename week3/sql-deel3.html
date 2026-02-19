@@ -4327,12 +4327,12 @@
 </span></code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">PRIMARY KEY AUTOINCREMENT</p>
-<p>SQLite vult automatisch de primary key kolom <code>id</code> in wanneer je een nieuwe record toevoegt:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"INSERT INTO categories (name, description) VALUES (?, ?)"</span><span class="p">,</span>
+<p>SQLite vult automatisch de primary key kolom <code>id</code> in wanneer je een nieuwe record toevoegt:
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"INSERT INTO categories (name, description) VALUES (?, ?)"</span><span class="p">,</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>                     <span class="p">(</span><span class="s2">"Furniture"</span><span class="p">,</span> <span class="s2">"Tables, chairs, and desks"</span><span class="p">))</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">newid</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span>  <span class="c1"># 11</span>
 </span></code></pre></div>
-<p>Dit werkt hetzelfde als PostgreSQL's <code>SERIAL</code> type.</p>
+Dit werkt hetzelfde als PostgreSQL's <code>SERIAL</code> type.<p></p>
 </div>
 <h2 id="eenvoudige-queries">Eenvoudige queries<a class="headerlink" href="#eenvoudige-queries" title="Link naar deze sectie">¶</a></h2>
 <p>Laten we beginnen met een paar eenvoudige queries om weer in te komen:</p>
@@ -4383,8 +4383,8 @@
 </span></code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">SQL injection bij ORDER BY</p>
-<p>In het voorbeeld hierboven gebruiken we f-string voor <code>order</code> (<code>ASC</code>/<code>DESC</code>). Dit is veilig omdat we de waarde zelf controleren (boolean → "ASC" of "DESC").</p>
-<p>Doe dit NOOIT met user input:
+<p>In het voorbeeld hierboven gebruiken we f-string voor <code>order</code> (<code>ASC</code>/<code>DESC</code>). Dit is veilig omdat we de waarde zelf controleren (boolean → "ASC" of "DESC").
+Doe dit NOOIT met user input:
 </p><div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># GEVAARLIJK - SQL injection risico!</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">order</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"ASC or DESC? "</span><span class="p">)</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">"SELECT * FROM products ORDER BY price </span><span class="si">{</span><span class="n">order</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -4427,16 +4427,14 @@
 </span></code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">JOIN syntax</p>
-<p>De JOIN syntax is identiek aan PostgreSQL:</p>
-<div class="language-sql highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">kolommen</span>
+<p>De JOIN syntax is identiek aan PostgreSQL:
+</p><div class="language-sql highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">kolommen</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">tabel1</span><span class="w"> </span><span class="n">alias1</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">JOIN</span><span class="w"> </span><span class="n">tabel2</span><span class="w"> </span><span class="n">alias2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">alias1</span><span class="p">.</span><span class="n">foreign_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alias2</span><span class="p">.</span><span class="n">primary_key</span>
 </span></code></pre></div>
-<ul>
-<li><code>p</code> en <code>c</code> zijn <strong>aliases</strong> (afkortingen)</li>
-<li><code>ON</code> specificeert de relatie tussen tabellen</li>
-<li><code>c.name AS category</code> geeft de kolom een duidelijke naam</li>
-</ul>
+- <code>p</code> en <code>c</code> zijn <strong>aliases</strong> (afkortingen)
+- <code>ON</code> specificeert de relatie tussen tabellen
+- <code>c.name AS category</code> geeft de kolom een duidelijke naam<p></p>
 </div>
 <h3 id="join-met-where-filteren-op-resultaten">JOIN met WHERE: Filteren op resultaten<a class="headerlink" href="#join-met-where-filteren-op-resultaten" title="Link naar deze sectie">¶</a></h3>
 <p>Nu gaan we producten ophalen uit een specifieke categorie, met extra filters:</p>
@@ -4514,12 +4512,10 @@
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">LEFT JOIN vs JOIN</p>
-<p>We gebruiken hier <code>LEFT JOIN</code> in plaats van <code>JOIN</code>:</p>
-<ul>
-<li><code>JOIN</code> (of <code>INNER JOIN</code>): alleen categorieën MET producten</li>
-<li><code>LEFT JOIN</code>: ALLE categorieën, ook als ze geen producten hebben</li>
-</ul>
-<p>Voor statistieken wil je vaak <code>LEFT JOIN</code> om lege categorieën ook te zien.</p>
+<p>We gebruiken hier <code>LEFT JOIN</code> in plaats van <code>JOIN</code>:
+- <code>JOIN</code> (of <code>INNER JOIN</code>): alleen categorieën MET producten
+- <code>LEFT JOIN</code>: ALLE categorieën, ook als ze geen producten hebben
+Voor statistieken wil je vaak <code>LEFT JOIN</code> om lege categorieën ook te zien.</p>
 </div>
 <h3 id="join-met-where-en-like-zoeken-in-resultaten">JOIN met WHERE en LIKE: Zoeken in resultaten<a class="headerlink" href="#join-met-where-en-like-zoeken-in-resultaten" title="Link naar deze sectie">¶</a></h3>
 <p>We kunnen ook filteren op JOIN resultaten met een <code>WHERE</code> clausule. Bijvoorbeeld: zoek alle producten met "phone" in de naam:</p>
@@ -4563,9 +4559,9 @@
 <ul>
 <li><code>LIKE '%phone%'</code> zoekt overal in de string</li>
 <li><code>%</code> is een wildcard (= 0 of meer karakters)</li>
-<li>We gebruiken <code>?</code> placeholder met <code>f"%{search_term}%"</code> voor veiligheid</li>
+<li>We gebruiken <code>?</code> placeholder met <code>f"%{search_term}%"</code> voor veiligheid
+Dit is identiek aan PostgreSQL's <code>LIKE</code> operator.</li>
 </ul>
-<p>Dit is identiek aan PostgreSQL's <code>LIKE</code> operator.</p>
 </div>
 <h3 id="complexe-where-clausules-prijs-en-voorraad-filteren">Complexe WHERE clausules: Prijs en voorraad filteren<a class="headerlink" href="#complexe-where-clausules-prijs-en-voorraad-filteren" title="Link naar deze sectie">¶</a></h3>
 <p>Je kunt meerdere voorwaarden combineren met <code>AND</code> en <code>OR</code>:</p>
@@ -4617,8 +4613,8 @@
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Views in modern Python apps</p>
-<p>In Python/Flask apps gebruik je views minder vaak. Met een ORM zoals SQLAlchemy schrijf je queries direct in Python en gebruik je geen SQL views meer.</p>
-<p>Views zijn wel handig als je een database deelt met andere applicaties of rapportage tools.</p>
+<p>In Python/Flask apps gebruik je views minder vaak. Met een ORM zoals SQLAlchemy schrijf je queries direct in Python en gebruik je geen SQL views meer.
+Views zijn wel handig als je een database deelt met andere applicaties of rapportage tools.</p>
 </div>
 <h3 id="view-maken-en-gebruiken-in-python">View maken en gebruiken in Python<a class="headerlink" href="#view-maken-en-gebruiken-in-python" title="Link naar deze sectie">¶</a></h3>
 <p>Laten we een view maken voor de "producten op voorraad" query:</p>
@@ -4702,13 +4698,13 @@
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Views bekijken</p>
-<p>Je kunt alle views in de database opvragen:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
+<p>Je kunt alle views in de database opvragen:
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
 </span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="s2">    SELECT name, sql</span>
 </span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="s2">    FROM sqlite_master</span>
 </span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="s2">    WHERE type='view'</span>
 </span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="s2">"""</span><span class="p">)</span>
-</span></code></pre></div>
+</span></code></pre></div><p></p>
 </div>
 <h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
 <p>Je hebt geleerd:</p>

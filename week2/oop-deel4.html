@@ -4196,9 +4196,9 @@
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Compositie vs Inheritance</p>
-<p><strong>Inheritance (is-een):</strong> Een laptop <strong>is een</strong> product</p>
-<p><strong>Compositie (heeft-een):</strong> Een order <strong>heeft een</strong> klant</p>
-<p>In databases: compositie = foreign keys!</p>
+<p><strong>Inheritance (is-een):</strong> Een laptop <strong>is een</strong> product
+<strong>Compositie (heeft-een):</strong> Een order <strong>heeft een</strong> klant
+In databases: compositie = foreign keys!</p>
 </div>
 <h2 id="waarom-compositie">Waarom compositie?<a class="headerlink" href="#waarom-compositie" title="Link naar deze sectie">¶</a></h2>
 <p>In webapplicaties heb je vaak objecten die aan elkaar gerelateerd zijn:</p>
@@ -4298,8 +4298,8 @@
 </span></code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">Waarom dicts teruggeven?</p>
-<p>Dicts zijn handig voor templates. In Flask kun je ze doorgeven aan Jinja2 templates:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/order/&lt;int:id&gt;'</span><span class="p">)</span>
+<p>Dicts zijn handig voor templates. In Flask kun je ze doorgeven aan Jinja2 templates:
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/order/&lt;int:id&gt;'</span><span class="p">)</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">toon_order</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">order</span> <span class="o">=</span> <span class="n">Order</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">totaal_info</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">bereken_totaal</span><span class="p">()</span>
@@ -4307,8 +4307,8 @@
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                         <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                         <span class="n">totaal</span><span class="o">=</span><span class="n">totaal_info</span><span class="p">)</span>
 </span></code></pre></div>
-<p>In het template (<code>order.html</code>) kun je dan de dict gebruiken:
-</p><div class="language-html highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Subtotaal: €{{ totaal.subtotaal }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+In het template (<code>order.html</code>) kun je dan de dict gebruiken:
+<div class="language-html highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Subtotaal: €{{ totaal.subtotaal }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Korting: -€{{ totaal.korting }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Totaal: €{{ totaal.totaal }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 </span></code></pre></div><p></p>
@@ -4525,14 +4525,13 @@
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Dataclass → dict voor debugging</p>
-<p>Je kunt <code>asdict()</code> gebruiken om een dataclass automatisch naar een dict te converteren. Dit is vooral handig voor debugging:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">asdict</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">klant_dict</span> <span class="o">=</span> <span class="n">asdict</span><span class="p">(</span><span class="n">jan</span><span class="p">)</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">klant_dict</span><span class="p">)</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># {'naam': 'Jan Jansen', 'email': 'jan@email.nl'}</span>
+<p>Je kunt <code>asdict()</code> gebruiken om een dataclass automatisch naar een dict te converteren. Dit is vooral handig voor debugging:
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">asdict</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">klant_dict</span> <span class="o">=</span> <span class="n">asdict</span><span class="p">(</span><span class="n">jan</span><span class="p">)</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">klant_dict</span><span class="p">)</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># {'naam': 'Jan Jansen', 'email': 'jan@email.nl'}</span>
 </span></code></pre></div>
-<p>Let op: in productiecode maak je meestal zelf specifieke dicts met alleen de data die je template nodig heeft.</p>
+Let op: in productiecode maak je meestal zelf specifieke dicts met alleen de data die je template nodig heeft.<p></p>
 </div>
 <h2 id="praktijk-flask-routes-met-templates">Praktijk: Flask routes met templates<a class="headerlink" href="#praktijk-flask-routes-met-templates" title="Link naar deze sectie">¶</a></h2>
 <p>Hier zie je hoe dit in een echte Flask applicatie werkt:</p>

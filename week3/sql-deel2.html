@@ -4221,14 +4221,14 @@
 </span></code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">SQL Injection voorkomen met placeholders</p>
-<p>Gebruik <strong>altijd</strong> <code>?</code> placeholders in plaats van f-strings:</p>
-<p><strong>Goed:</strong>
+<p>Gebruik <strong>altijd</strong> <code>?</code> placeholders in plaats van f-strings:
+<strong>Goed:</strong>
 </p><div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM contacts WHERE name = ?"</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,))</span>
-</span></code></pre></div><p></p>
-<p><strong>FOUT (SQL injection risico!):</strong>
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">"SELECT * FROM contacts WHERE name = '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
-</span></code></pre></div><p></p>
-<p>Dit wordt uitgebreid besproken in Deel 5 over SQL injection.</p>
+</span></code></pre></div>
+<strong>FOUT (SQL injection risico!):</strong>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">"SELECT * FROM contacts WHERE name = '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+</span></code></pre></div>
+Dit wordt uitgebreid besproken in Deel 5 over SQL injection.<p></p>
 </div>
 <h2 id="select-data-ophalen">Select: Data ophalen<a class="headerlink" href="#select-data-ophalen" title="Link naar deze sectie">¶</a></h2>
 <p>Haal data op met <code>SELECT</code> queries:</p>
@@ -4317,10 +4317,10 @@
 </span></code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Altijd WHERE clausule bij UPDATE</p>
-<p>Zonder <code>WHERE</code> clausule worden <strong>alle</strong> rijen geüpdatet:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># GEVAARLIJK - iedereen krijgt hetzelfde telefoonnummer!</span>
+<p>Zonder <code>WHERE</code> clausule worden <strong>alle</strong> rijen geüpdatet:
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># GEVAARLIJK - iedereen krijgt hetzelfde telefoonnummer!</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"UPDATE contacts SET phone = ?"</span><span class="p">,</span> <span class="p">(</span><span class="n">phone</span><span class="p">,))</span>
-</span></code></pre></div>
+</span></code></pre></div><p></p>
 </div>
 <h2 id="delete-data-verwijderen">Delete: Data verwijderen<a class="headerlink" href="#delete-data-verwijderen" title="Link naar deze sectie">¶</a></h2>
 <p>Verwijder records met <code>DELETE</code>:</p>
@@ -4354,10 +4354,10 @@
 </span></code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Altijd WHERE clausule bij DELETE</p>
-<p>Zonder <code>WHERE</code> clausule worden <strong>alle</strong> rijen verwijderd:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># GEVAARLIJK - ALLE contacten worden gewist!</span>
+<p>Zonder <code>WHERE</code> clausule worden <strong>alle</strong> rijen verwijderd:
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># GEVAARLIJK - ALLE contacten worden gewist!</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"DELETE FROM contacts"</span><span class="p">)</span>
-</span></code></pre></div>
+</span></code></pre></div><p></p>
 </div>
 <h2 id="context-managers-with-statement">Context managers (with statement)<a class="headerlink" href="#context-managers-with-statement" title="Link naar deze sectie">¶</a></h2>
 <p>Bovenstaande code heeft een probleem: als er een error optreedt, wordt <code>conn.close()</code> niet aangeroepen. Gebruik <code>with</code> voor automatic cleanup:</p>
@@ -4519,12 +4519,12 @@
 </table>
 <div class="admonition warning">
 <p class="admonition-title">SQLite type validatie is losjes</p>
-<p>SQLite accepteert dit zonder error:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># phone is INTEGER, maar dit werkt:</span>
+<p>SQLite accepteert dit zonder error:
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># phone is INTEGER, maar dit werkt:</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"INSERT INTO contacts VALUES (?, ?, ?)"</span><span class="p">,</span>
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>             <span class="p">(</span><span class="s2">"Jan"</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="s2">"tekst-in-integer-kolom"</span><span class="p">))</span>
 </span></code></pre></div>
-<p>PostgreSQL zou dit afwijzen. Zorg dus zelf voor correcte types!</p>
+PostgreSQL zou dit afwijzen. Zorg dus zelf voor correcte types!<p></p>
 </div>
 <h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
 <p>Je hebt geleerd:</p>

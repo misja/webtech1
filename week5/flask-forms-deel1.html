@@ -4255,10 +4255,10 @@
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Secret key in productie</p>
-<p>Hardcode nooit je secret key in productie! Gebruik environment variabelen:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<p>Hardcode nooit je secret key in productie! Gebruik environment variabelen:
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">'SECRET_KEY'</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'SECRET_KEY'</span><span class="p">,</span> <span class="s1">'dev-key-only'</span><span class="p">)</span>
-</span></code></pre></div>
+</span></code></pre></div><p></p>
 </div>
 <h3 id="template">Template<a class="headerlink" href="#template" title="Link naar deze sectie">¶</a></h3>
 <p><strong><code>templates/home.html</code>:</strong></p>

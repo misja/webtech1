@@ -4304,13 +4304,11 @@
 </ul>
 <div class="admonition info">
 <p class="admonition-title">Waarom type annotaties?</p>
-<p>Type annotaties zijn nieuw voor je, maar hebben drie grote voordelen:</p>
-<ol>
-<li>Je ziet direct wat een functie verwacht - code wordt makkelijker te begrijpen</li>
-<li>Je editor helpt je met autocompletion en waarschuwt voor fouten</li>
-<li>Later (bij databases en webapplicaties) zijn ze vereist</li>
-</ol>
-<p>Vanaf nu gebruik je ze standaard in je code.</p>
+<p>Type annotaties zijn nieuw voor je, maar hebben drie grote voordelen:
+1. Je ziet direct wat een functie verwacht - code wordt makkelijker te begrijpen
+2. Je editor helpt je met autocompletion en waarschuwt voor fouten
+3. Later (bij databases en webapplicaties) zijn ze vereist
+Vanaf nu gebruik je ze standaard in je code.</p>
 </div>
 <h3 id="de-constructor-__init__">De constructor: <code>__init__</code><a class="headerlink" href="#de-constructor-__init__" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">naam</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">prijs</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">voorraad</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
@@ -4321,8 +4319,8 @@
 <p>De <code>__init__</code> methode is de <strong>constructor</strong> - deze wordt automatisch aangeroepen wanneer je een nieuw object aanmaakt.</p>
 <div class="admonition note">
 <p class="admonition-title"><code>self</code> - het object zelf</p>
-<p><code>self</code> verwijst naar het object zelf. Wanneer je <code>self.naam = naam</code> schrijft, maak je een <strong>attribuut</strong> aan dat bij dit specifieke object hoort.</p>
-<p><strong>Belangrijk:</strong> Elke methode moet <code>self</code> als eerste parameter hebben - Python geeft het huidige object automatisch door.</p>
+<p><code>self</code> verwijst naar het object zelf. Wanneer je <code>self.naam = naam</code> schrijft, maak je een <strong>attribuut</strong> aan dat bij dit specifieke object hoort.
+<strong>Belangrijk:</strong> Elke methode moet <code>self</code> als eerste parameter hebben - Python geeft het huidige object automatisch door.</p>
 </div>
 <h3 id="objecten-aanmaken">Objecten aanmaken<a class="headerlink" href="#objecten-aanmaken" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">laptop</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="s2">"Laptop"</span><span class="p">,</span> <span class="mf">799.99</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
@@ -4388,13 +4386,11 @@
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">Print vs Return in webapplicaties</p>
-<p>De <code>verkoop()</code> methode geeft een boolean terug in plaats van te printen. Dit is essentieel voor webapplicaties:</p>
-<ul>
-<li><code>print()</code> schrijft naar de console - de gebruiker ziet dit niet</li>
-<li><code>return</code> geeft data terug aan de aanroepende code</li>
-</ul>
-<p>In Flask geef je data terug aan de browser. Je <code>Product</code> klasse weet alleen van producten - feedback tonen aan gebruikers doet je Flask route:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Later in een Flask route:</span>
+<p>De <code>verkoop()</code> methode geeft een boolean terug in plaats van te printen. Dit is essentieel voor webapplicaties:
+- <code>print()</code> schrijft naar de console - de gebruiker ziet dit niet
+- <code>return</code> geeft data terug aan de aanroepende code
+In Flask geef je data terug aan de browser. Je <code>Product</code> klasse weet alleen van producten - feedback tonen aan gebruikers doet je Flask route:
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Later in een Flask route:</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">if</span> <span class="n">laptop</span><span class="o">.</span><span class="n">verkoop</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="n">flash</span><span class="p">(</span><span class="s2">"Product verkocht!"</span><span class="p">)</span>
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">'/winkelwagen'</span><span class="p">)</span>
@@ -4402,7 +4398,7 @@
 </span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="n">flash</span><span class="p">(</span><span class="s2">"Onvoldoende voorraad"</span><span class="p">)</span>
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">'/producten'</span><span class="p">)</span>
 </span></code></pre></div>
-<p>Dit heet <strong>scheiding van verantwoordelijkheden</strong> (separation of concerns): elke laag in je applicatie heeft zijn eigen verantwoordelijkheid.</p>
+Dit heet <strong>scheiding van verantwoordelijkheden</strong> (separation of concerns): elke laag in je applicatie heeft zijn eigen verantwoordelijkheid.<p></p>
 </div>
 <h2 id="de-__str__-methode">De <code>__str__</code> methode<a class="headerlink" href="#de-__str__-methode" title="Link naar deze sectie">¶</a></h2>
 <p>Python heeft <strong>speciale methoden</strong> die beginnen en eindigen met dubbele underscores (<code>__</code>), ook wel "dunder methods" genoemd (van "double underscore").</p>
