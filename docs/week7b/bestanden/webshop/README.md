@@ -29,7 +29,7 @@ Blueprints zijn Flask's manier om een applicatie op te delen in **herbruikbare c
 
 ## Nieuwe Structuur
 
-```
+```text
 webshop/
 ├── app.py                      # Entry point
 ├── requirements.txt            # Dependencies
@@ -220,7 +220,7 @@ products_bp = Blueprint('products', __name__, template_folder='templates')
 
 **Best practice:** Gebruik subfolders met blueprint naam:
 
-```
+```text
 products/templates/products/index.html  # Goed!
 products/templates/index.html           # Vermijd (kan conflicts geven)
 ```
@@ -309,7 +309,7 @@ app.register_blueprint(admin_bp, url_prefix='/admin')
 
 4. **Open in browser:**
 
-   ```
+   ```text
    http://127.0.0.1:5000
    ```
 

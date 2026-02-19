@@ -262,7 +262,7 @@ class AuthDatabase:
 
 ## Verwachte Output
 
-```
+```text
 Test 1: jan
 Test 2: Geen match
 Test 3: admin  ← GEVAAR!

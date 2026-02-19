@@ -173,7 +173,7 @@ def get_inventory_value_per_category(self) -> list[Row]:
 
 Verwachte output format:
 
-```
+```text
 Voorraadwaarde per categorie:
 1. Electronics: €15,432.50 (15 producten)
 2. Books: €3,245.20 (20 producten)
@@ -246,7 +246,7 @@ if __name__ == "__main__":
 
 ## Verwachte Output Voorbeelden
 
-```
+```text
 === Opgave 1: Electronics Producten ===
 Bluetooth Headphones Sony: €149.99
 External SSD 1TB: €89.99

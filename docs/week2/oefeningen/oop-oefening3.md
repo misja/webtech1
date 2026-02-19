@@ -65,7 +65,7 @@ print(f"Verzendkosten laptop: €{laptop.bereken_verzendkosten():.2f}")
 
 **Verwachte output:**
 
-```
+```text
 FysiekProduct(naam='Python Crash Course', prijs=34.95, voorraad=8, beschrijving=None, gewicht=0.6)
 Verzendkosten: €3.95
 Verzendkosten laptop: €6.95

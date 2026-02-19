@@ -356,7 +356,7 @@ def genereer() -> str:
 
 **Output:**
 
-```
+```text
 🎤 Artiestennaam Generator 🎸
 
 Echte naam: Truus

@@ -51,7 +51,7 @@ print(laptop)
 
 **Verwachte output:**
 
-```
+```text
 Product(naam='Laptop', prijs=799.99, voorraad=5, beschrijving='Gaming laptop met RGB')
 Voorraadwaarde: €3999.95
 Product(naam='Laptop', prijs=799.99, voorraad=3, beschrijving='Gaming laptop met RGB')
@@ -119,7 +119,7 @@ print(f"Nieuw totaal: €{wagen.bereken_totaal():.2f}")
 
 **Verwachte output:**
 
-```
+```text
 Aantal items: 0
 Aantal items: 3
 Totaal: €915.48

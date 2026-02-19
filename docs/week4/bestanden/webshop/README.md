@@ -15,7 +15,7 @@ Deze webshop applicatie bouwt voort op:
 
 ## Structuur
 
-```
+```text
 webshop/
 ├── app.py                    # Main Flask applicatie met routes
 ├── database.py               # WebshopDatabase class voor queries
@@ -84,7 +84,7 @@ uv run flask run
 
 ### 4. Open in browser
 
-```
+```text
 http://127.0.0.1:5000/
 ```
 

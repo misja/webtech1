@@ -53,7 +53,7 @@ De `database.py` is uitgebreid met CRUD operaties:
 
 ## Structuur
 
-```
+```text
 webshop/
 ├── app.py                    # Flask app met formulier routes
 ├── database.py               # Database class met CRUD
@@ -98,7 +98,7 @@ uv run python app.py
 
 ### 4. Open in browser
 
-```
+```text
 http://127.0.0.1:5000/
 ```
 

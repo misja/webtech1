@@ -127,7 +127,7 @@ def admin_products():
 
 ## Bestanden Structuur
 
-```
+```text
 webshop/
 ├── app.py                  # Flask app met authentication routes
 ├── models.py               # Customer met UserMixin en password hashing
@@ -175,7 +175,7 @@ webshop/
 
 4. **Open in browser:**
 
-   ```
+   ```text
    http://127.0.0.1:5000
    ```
 
@@ -242,7 +242,7 @@ def login():
 
 **Hoe werkt de 'next' parameter?**
 
-```
+```text
 1. User probeert /admin/products te bezoeken (niet ingelogd)
 2. @admin_required redirect naar /login?next=/admin/products
 3. User logt in

@@ -177,7 +177,7 @@ def get_hoogste_salaris(self) -> Row | None:
 
 ## Verwachte Output
 
-```
+```text
 === Toevoegen ===
 Aad toegevoegd met ID 1
 Bea toegevoegd met ID 2

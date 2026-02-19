@@ -202,7 +202,7 @@ class Order(db.Model):
 
 ## Bestanden Structuur
 
-```
+```text
 webshop/
 ├── app.py                  # Flask app met ORM queries
 ├── models.py               # SQLAlchemy model definities
@@ -248,7 +248,7 @@ webshop/
 
 4. **Open in browser:**
 
-   ```
+   ```text
    http://127.0.0.1:5000
    ```
 

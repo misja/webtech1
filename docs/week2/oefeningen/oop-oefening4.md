@@ -212,7 +212,7 @@ print(f"Totaal: €{totaal_info['totaal']:.2f}")
 
 **Verwachte output:**
 
-```
+```text
 Klant: Jan Jansen
 Aantal producten: 2
 

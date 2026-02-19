@@ -316,7 +316,7 @@ for error in errors:
 
 ## Verwachte Output
 
-```
+```text
 INFO:__main__:Products tabel aangemaakt
 Product toegevoegd met ID 1
 CRASH: UNIQUE constraint failed: products.name

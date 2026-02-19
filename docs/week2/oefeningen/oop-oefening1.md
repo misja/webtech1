@@ -59,7 +59,7 @@ print(f"Prijs na korting: €{marie.bereken_prijs_na_korting(prijs):.2f}")
 
 **Verwachte output:**
 
-```
+```text
 Klant: Jan Jansen (jan@email.nl) - 10.0% korting
 Korting op €100.00: €10.00
 Prijs na korting: €90.00
