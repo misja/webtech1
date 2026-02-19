@@ -1,6 +1,6 @@
 # OOP Python – Oefening 2
 
-Maak binnen de file `product.py` een nieuwe klasse aan, `DigitaalProduct`, die een subklasse is van `Product`.
+Maak binnen de file [`product.py`](../bestanden/webshop/product.py) een nieuwe klasse aan, `DigitaalProduct`, die een subklasse is van `Product`.
 
 Digitale producten hebben geen verzendkosten maar wel een bestandsgrootte. Geef digitale producten een standaard voorraad van 999 (want ze zijn bijna onbeperkt beschikbaar) en voeg een attribuut `_bestandsgrootte` toe (in MB).
 

@@ -1,10 +1,10 @@
 # OOP Python – Oefening 3
 
-In deze oefening gaan we de `Bestelling` klasse uit deel 7 verder uitbreiden.
+In deze oefening gaan we de `Bestelling`-klasse uit deel 7 verder uitbreiden.
 
 ## a. Bestellingsnummer toevoegen
 
-Pas de code van `bestelling.py` zodanig aan dat elke bestelling automatisch een uniek bestellingsnummer krijgt. Je kunt hiervoor een class-attribuut gebruiken dat bij elke nieuwe bestelling opgehoogd wordt.
+Pas de code van [`bestelling.py`](../bestanden/webshop/bestelling.py) zodanig aan dat elke bestelling automatisch een uniek bestellingsnummer krijgt. Je kunt hiervoor een class-attribuut gebruiken dat bij elke nieuwe bestelling opgehoogd wordt.
 
 **Tip:** Een class-attribuut wordt gedefinieerd buiten de `__init__()` methode en wordt aangeroepen met de klassenaam ervoor, bijvoorbeeld: `Bestelling._volgend_nummer`.
 
