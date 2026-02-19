@@ -31,4 +31,8 @@ plugins.md033.allowed_elements = "!--,![CDATA[,!DOCTYPE,br,small,kbd,sub,sup,det
 plugins.md036.enabled = false
 plugins.md040.enabled = true
 plugins.md041.enabled = false
-plugins.md046.enabled = true
+# MD046 uitgeschakeld: pymarkdownlnt begrijpt de MkDocs Material tab- en
+# admonition-syntax niet. Ingesprongen inhoud (4 spaties) na een lege regel
+# wordt als indented code block gezien, wat valse positieven geeft bij tabs
+# met meerdere alinea's of lijsten.
+plugins.md046.enabled = false
