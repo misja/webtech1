@@ -86,6 +86,7 @@ markdown_extensions:
       alternate_style: true
   - pymdownx.tasklist:          # Task lists
       custom_checkbox: true
+      clickable_checkbox: true
   - pymdownx.tilde              # Subscript en delete
 
 plugins:
