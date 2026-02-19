@@ -54,11 +54,14 @@ class WebshopDatabase:
         """Haal alle categorieën op, gesorteerd.
 
         Args:
-            order_by: Kolom om op te sorteren (default: "name")
+            order_by: Kolom om op te sorteren: "id" of "name" (default: "name")
 
         Returns:
             Lijst met alle categorieën
         """
+        valid_columns = {"id", "name"}
+        if order_by not in valid_columns:
+            order_by = "name"
         with self._get_connection() as conn:
             cursor = conn.execute(f"SELECT * FROM categories ORDER BY {order_by}")
             return cursor.fetchall()

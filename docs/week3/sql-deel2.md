@@ -372,9 +372,8 @@ Je bent gewend aan PostgreSQL. Enkele verschillen met SQLite:
 !!! warning "SQLite type validatie is losjes"
     SQLite accepteert dit zonder error:
     ```python
-    # phone is INTEGER, maar dit werkt:
-    conn.execute("INSERT INTO contacts VALUES (?, ?, ?)",
-                 ("Jan", 123, "tekst-in-integer-kolom"))
+    conn.execute("CREATE TABLE IF NOT EXISTS test (id INTEGER, score INTEGER)")
+    conn.execute("INSERT INTO test VALUES (?, ?)", (1, "geen-integer"))  # string in INTEGER kolom
     ```
     PostgreSQL zou dit afwijzen. Zorg dus zelf voor correcte types!
 

@@ -448,6 +448,20 @@ Beauty: Makeup Brush Set - €39.99
 ...
 ```
 
+!!! warning "SQL injection bij view/tabelnamen"
+    In `query_view` gebruiken we een f-string voor `view_name`. Dit is een SQL injection risico als `view_name` uit user input komt:
+    ```python
+    # GEVAARLIJK - SQL injection risico!
+    view_name = request.args.get("view")
+    query_view(view_name)  # aanvaller kan eigen SQL injecteren
+    ```
+    Tabel- en viewnamen kunnen niet met `?` geparametriseerd worden. De veilige oplossing is een whitelist:
+    ```python
+    ALLOWED_VIEWS = {"vInStockProducts"}
+    if view_name not in ALLOWED_VIEWS:
+        raise ValueError(f"Ongeldige viewnaam: {view_name}")
+    ```
+
 ### View met filter
 
 Je kunt de view ook filteren, net als een normale tabel:
