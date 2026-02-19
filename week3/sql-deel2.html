@@ -4520,9 +4520,8 @@ Dit wordt uitgebreid besproken in Deel 5 over SQL injection.<p></p>
 <div class="admonition warning">
 <p class="admonition-title">SQLite type validatie is losjes</p>
 <p>SQLite accepteert dit zonder error:
-</p><div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># phone is INTEGER, maar dit werkt:</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"INSERT INTO contacts VALUES (?, ?, ?)"</span><span class="p">,</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>             <span class="p">(</span><span class="s2">"Jan"</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="s2">"tekst-in-integer-kolom"</span><span class="p">))</span>
+</p><div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"CREATE TABLE IF NOT EXISTS test (id INTEGER, score INTEGER)"</span><span class="p">)</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"INSERT INTO test VALUES (?, ?)"</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"geen-integer"</span><span class="p">))</span>  <span class="c1"># string in INTEGER kolom</span>
 </span></code></pre></div>
 PostgreSQL zou dit afwijzen. Zorg dus zelf voor correcte types!<p></p>
 </div>
