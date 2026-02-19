@@ -4418,11 +4418,13 @@
 <h2 id="opdracht">Opdracht<a class="headerlink" href="#opdracht" title="Link naar deze sectie">¶</a></h2>
 <p>Maak een Flask applicatie met een dynamische route die een artiestennaam genereert.</p>
 <h3 id="vereisten">Vereisten<a class="headerlink" href="#vereisten" title="Link naar deze sectie">¶</a></h3>
-<p>✅ <strong>Route</strong>: <code>http://localhost:5000/artiestennaam/&lt;naam&gt;</code>
-✅ <strong>Template</strong>: Gebruik Jinja2 template (niet HTML in string!)
-✅ <strong>Type hints</strong>: Gebruik moderne Python type hints
-✅ <strong>Logica</strong>: Implementeer de naam-generatie regels correct
-✅ <strong>Project setup</strong>: Gebruik <code>uv</code> zoals in Week ⅔/4</p>
+<ul>
+<li><strong>Route</strong>: <code>http://localhost:5000/artiestennaam/&lt;naam&gt;</code></li>
+<li><strong>Template</strong>: Gebruik Jinja2 template (niet HTML in string!)</li>
+<li><strong>Type hints</strong>: Gebruik moderne Python type hints</li>
+<li><strong>Logica</strong>: Implementeer de naam-generatie regels correct</li>
+<li><strong>Project setup</strong>: Gebruik <code>uv</code> zoals in Week ⅔/4</li>
+</ul>
 <h2 id="stappenplan">Stappenplan<a class="headerlink" href="#stappenplan" title="Link naar deze sectie">¶</a></h2>
 <h3 id="stap-1-project-setup">Stap 1: Project setup<a class="headerlink" href="#stap-1-project-setup" title="Link naar deze sectie">¶</a></h3>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">mkdir artiestennaam-generator</span>
@@ -4686,47 +4688,51 @@
 </span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>← Genereer een nieuwe naam
 </span></code></pre></div>
 <h2 id="checklist">Checklist<a class="headerlink" href="#checklist" title="Link naar deze sectie">¶</a></h2>
-<p>✅ Project aangemaakt met <code>uv init</code> en <code>uv add flask</code>
-✅ <code>templates/</code> directory met <code>artiestennaam.html</code>
-✅ Flask route op <code>/artiestennaam/&lt;naam&gt;</code>
-✅ Type hints gebruikt (<code>naam: str</code>, <code>-&gt; str</code>)
-✅ Logica correct:</p>
 <ul>
-<li>Naam eindigt op <code>s</code> → voeg <code>SY</code> toe</li>
+<li>Project aangemaakt met <code>uv init</code> en <code>uv add flask</code></li>
+<li><code>templates/</code> directory met <code>artiestennaam.html</code></li>
+<li>Flask route op <code>/artiestennaam/&lt;naam&gt;</code></li>
+<li>Type hints gebruikt (<code>naam: str</code>, <code>-&gt; str</code>)</li>
+<li>
+<p>Logica correct:</p>
+</li>
+<li>
+<p>Naam eindigt op <code>s</code> → voeg <code>SY</code> toe</p>
+</li>
 <li>Anders → voeg <code>TEZY</code> toe</li>
-<li>Converteer naar uppercase
-✅ Template gebruikt (geen HTML in string!)
-✅ Docstring bij route functie
-✅ Werkt met verschillende namen</li>
+<li>Converteer naar uppercase</li>
+<li>Template gebruikt (geen HTML in string!)</li>
+<li>Docstring bij route functie</li>
+<li>Werkt met verschillende namen</li>
 </ul>
 <h2 id="veelvoorkomende-fouten">Veelvoorkomende fouten<a class="headerlink" href="#veelvoorkomende-fouten" title="Link naar deze sectie">¶</a></h2>
-<p>❌ <strong>HTML in string returnen</strong></p>
+<p><strong>HTML in string returnen</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;h1&gt;</span><span class="si">{</span><span class="n">artiestennaam</span><span class="si">}</span><span class="s2">&lt;/h1&gt;"</span>  <span class="c1"># FOUT!</span>
 </span></code></pre></div>
-<p>✅ <strong>Template gebruiken</strong></p>
+<p><strong>Template gebruiken</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">"artiestennaam.html"</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>  <span class="c1"># GOED!</span>
 </span></code></pre></div>
-<p>❌ <strong>Geen type hints</strong></p>
+<p><strong>Geen type hints</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">artiestennaam</span><span class="p">(</span><span class="n">naam</span><span class="p">):</span>  <span class="c1"># FOUT!</span>
 </span></code></pre></div>
-<p>✅ <strong>Type hints toevoegen</strong></p>
+<p><strong>Type hints toevoegen</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">artiestennaam</span><span class="p">(</span><span class="n">naam</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># GOED!</span>
 </span></code></pre></div>
-<p>❌ <strong>Case-sensitive check</strong></p>
+<p><strong>Case-sensitive check</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">if</span> <span class="n">naam</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'s'</span><span class="p">):</span>  <span class="c1"># FOUT! "Truus" != "truuS"</span>
 </span></code></pre></div>
-<p>✅ <strong>Case-insensitive check</strong></p>
+<p><strong>Case-insensitive check</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">if</span> <span class="n">naam</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'s'</span><span class="p">):</span>  <span class="c1"># GOED!</span>
 </span></code></pre></div>
 <h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
 <p>Na deze oefening heb je:</p>
 <ul>
-<li>✅ Een Flask project opgezet met <code>uv</code></li>
-<li>✅ Dynamische routes gebruikt met URL parameters</li>
-<li>✅ Templates gemaakt met Jinja2</li>
-<li>✅ Type hints toegepast in Flask routes</li>
-<li>✅ String manipulatie in Python gedaan</li>
-<li>✅ Modern project structuur gebruikt (zoals Week ⅔)</li>
+<li>Een Flask project opgezet met <code>uv</code></li>
+<li>Dynamische routes gebruikt met URL parameters</li>
+<li>Templates gemaakt met Jinja2</li>
+<li>Type hints toegepast in Flask routes</li>
+<li>String manipulatie in Python gedaan</li>
+<li>Modern project structuur gebruikt (zoals Week ⅔)</li>
 </ul>
 <p><strong>Tip:</strong> Deze patterns gebruik je de rest van de cursus! In Week 5 leer je forms (gebruikersinput), en in Week 6 databases (SQLAlchemy).</p>
 

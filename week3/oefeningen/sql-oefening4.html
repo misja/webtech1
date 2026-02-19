@@ -4299,22 +4299,22 @@
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Test 1: Succesvol</span>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">productid</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">add_product</span><span class="p">(</span><span class="s2">"Laptop"</span><span class="p">,</span> <span class="mf">799.99</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">"Electronics"</span><span class="p">)</span>
 </span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="k">if</span> <span class="n">productid</span><span class="p">:</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Product toegevoegd met ID </span><span class="si">{</span><span class="n">productid</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Product toegevoegd met ID </span><span class="si">{</span><span class="n">productid</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1"># Test 2: Duplicate - netjes afgevangen</span>
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">productid</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">add_product</span><span class="p">(</span><span class="s2">"Laptop"</span><span class="p">,</span> <span class="mf">899.99</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">"Electronics"</span><span class="p">)</span>
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="k">if</span> <span class="ow">not</span> <span class="n">productid</span><span class="p">:</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"❌ Product niet toegevoegd (bestaat al)"</span><span class="p">)</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Product niet toegevoegd (bestaat al)"</span><span class="p">)</span>
 </span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
 </span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1"># Test 3: Negatieve prijs - netjes afgevangen</span>
 </span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="n">productid</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">add_product</span><span class="p">(</span><span class="s2">"Monitor"</span><span class="p">,</span> <span class="o">-</span><span class="mf">50.00</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"Electronics"</span><span class="p">)</span>
 </span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="k">if</span> <span class="ow">not</span> <span class="n">productid</span><span class="p">:</span>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"❌ Product niet toegevoegd (ongeldige prijs)"</span><span class="p">)</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Product niet toegevoegd (ongeldige prijs)"</span><span class="p">)</span>
 </span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
 </span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="c1"># Test 4: Lege naam - netjes afgevangen</span>
 </span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="n">productid</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">add_product</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="mf">299.99</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"Electronics"</span><span class="p">)</span>
 </span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="k">if</span> <span class="ow">not</span> <span class="n">productid</span><span class="p">:</span>
-</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"❌ Product niet toegevoegd (naam is verplicht)"</span><span class="p">)</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Product niet toegevoegd (naam is verplicht)"</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="opgave-3-operationalerror-handling">Opgave 3: OperationalError Handling<a class="headerlink" href="#opgave-3-operationalerror-handling" title="Link naar deze sectie">¶</a></h2>
 <p>Implementeer een method om producten op te halen met error handling voor database problemen:</p>
@@ -4354,15 +4354,15 @@
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># Succesvolle update</span>
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="k">if</span> <span class="n">db</span><span class="o">.</span><span class="n">update_stock</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">):</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"✅ Voorraad bijgewerkt"</span><span class="p">)</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Voorraad bijgewerkt"</span><span class="p">)</span>
 </span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
 </span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1"># Negatieve voorraad (validatiefout)</span>
 </span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="k">if</span> <span class="ow">not</span> <span class="n">db</span><span class="o">.</span><span class="n">update_stock</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">):</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"❌ Negatieve voorraad niet toegestaan"</span><span class="p">)</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Negatieve voorraad niet toegestaan"</span><span class="p">)</span>
 </span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
 </span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="c1"># Non-existent product</span>
 </span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="k">if</span> <span class="ow">not</span> <span class="n">db</span><span class="o">.</span><span class="n">update_stock</span><span class="p">(</span><span class="mi">999</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
-</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"❌ Product niet gevonden"</span><span class="p">)</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Product niet gevonden"</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="opgave-5-delete-met-error-handling">Opgave 5: Delete Met Error Handling<a class="headerlink" href="#opgave-5-delete-met-error-handling" title="Link naar deze sectie">¶</a></h2>
 <p>Implementeer een delete method:</p>
@@ -4407,7 +4407,7 @@
 </span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
 </span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">stock</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">test_cases</span><span class="p">:</span>
 </span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>    <span class="n">success</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">safe_add_product</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">stock</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
-</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>    <span class="n">status</span> <span class="o">=</span> <span class="s2">"✅"</span> <span class="k">if</span> <span class="n">success</span> <span class="k">else</span> <span class="s2">"❌"</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>    <span class="n">status</span> <span class="o">=</span> <span class="s2">"OK"</span> <span class="k">if</span> <span class="n">success</span> <span class="k">else</span> <span class="s2">"Fout"</span>
 </span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="bonusopdracht-1-custom-exception-class">Bonusopdracht 1: Custom Exception Class<a class="headerlink" href="#bonusopdracht-1-custom-exception-class" title="Link naar deze sectie">¶</a></h2>
@@ -4430,9 +4430,9 @@
 <p>Gebruik:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">try</span><span class="p">:</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="n">db</span><span class="o">.</span><span class="n">add_product_custom</span><span class="p">(</span><span class="s2">"Laptop"</span><span class="p">,</span> <span class="mf">799.99</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">"Electronics"</span><span class="p">)</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"✅ Product toegevoegd"</span><span class="p">)</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">"Product toegevoegd"</span><span class="p">)</span>
 </span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="k">except</span> <span class="n">ProductError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"❌ </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Fout: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="bonusopdracht-2-transaction-error-handling">Bonusopdracht 2: Transaction Error Handling<a class="headerlink" href="#bonusopdracht-2-transaction-error-handling" title="Link naar deze sectie">¶</a></h2>
 <p>Implementeer een method die meerdere producten toevoegt in een transactie:</p>
@@ -4471,42 +4471,44 @@
 </span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
 </span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>=== Met Error Handling ===
 </span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>INFO:__main__:Product 'Laptop' toegevoegd met ID 1
-</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>✅ Product toegevoegd met ID 1
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>Product toegevoegd met ID 1
 </span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>WARNING:__main__:Product 'Laptop' bestaat al
-</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>❌ Product niet toegevoegd (bestaat al)
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>Product niet toegevoegd (bestaat al)
 </span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>WARNING:__main__:Ongeldige waarde voor 'Monitor': prijs=-50.0, stock=3
-</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>❌ Product niet toegevoegd (ongeldige prijs)
+</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>Product niet toegevoegd (ongeldige prijs)
 </span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>WARNING:__main__:Product '' kon niet worden toegevoegd
-</span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>❌ Product niet toegevoegd (naam is verplicht)
+</span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>Product niet toegevoegd (naam is verplicht)
 </span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>
 </span><span id="__span-16-17"><a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>3 producten gevonden
 </span><span id="__span-16-18"><a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>
 </span><span id="__span-16-19"><a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>=== Stock Updates ===
 </span><span id="__span-16-20"><a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>INFO:__main__:Stock update voor product 1: 15
-</span><span id="__span-16-21"><a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a>✅ Voorraad bijgewerkt
+</span><span id="__span-16-21"><a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a>Voorraad bijgewerkt
 </span><span id="__span-16-22"><a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a>WARNING:__main__:Negatieve voorraad niet toegestaan: -5
-</span><span id="__span-16-23"><a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a>❌ Negatieve voorraad niet toegestaan
+</span><span id="__span-16-23"><a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a>Negatieve voorraad niet toegestaan
 </span><span id="__span-16-24"><a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a>WARNING:__main__:Product 999 niet gevonden
-</span><span id="__span-16-25"><a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a>❌ Product niet gevonden
+</span><span id="__span-16-25"><a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a>Product niet gevonden
 </span><span id="__span-16-26"><a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a>
 </span><span id="__span-16-27"><a id="__codelineno-16-27" name="__codelineno-16-27" href="#__codelineno-16-27"></a>=== Safe Add Product ===
-</span><span id="__span-16-28"><a id="__codelineno-16-28" name="__codelineno-16-28" href="#__codelineno-16-28"></a>✅ Product toegevoegd met ID 2
-</span><span id="__span-16-29"><a id="__codelineno-16-29" name="__codelineno-16-29" href="#__codelineno-16-29"></a>❌ Product naam bestaat al
-</span><span id="__span-16-30"><a id="__codelineno-16-30" name="__codelineno-16-30" href="#__codelineno-16-30"></a>❌ Prijs moet positief zijn
-</span><span id="__span-16-31"><a id="__codelineno-16-31" name="__codelineno-16-31" href="#__codelineno-16-31"></a>❌ Naam is verplicht
-</span><span id="__span-16-32"><a id="__codelineno-16-32" name="__codelineno-16-32" href="#__codelineno-16-32"></a>❌ Voorraad kan niet negatief zijn
+</span><span id="__span-16-28"><a id="__codelineno-16-28" name="__codelineno-16-28" href="#__codelineno-16-28"></a>OK Product toegevoegd met ID 2
+</span><span id="__span-16-29"><a id="__codelineno-16-29" name="__codelineno-16-29" href="#__codelineno-16-29"></a>Fout Product naam bestaat al
+</span><span id="__span-16-30"><a id="__codelineno-16-30" name="__codelineno-16-30" href="#__codelineno-16-30"></a>Fout Prijs moet positief zijn
+</span><span id="__span-16-31"><a id="__codelineno-16-31" name="__codelineno-16-31" href="#__codelineno-16-31"></a>Fout Naam is verplicht
+</span><span id="__span-16-32"><a id="__codelineno-16-32" name="__codelineno-16-32" href="#__codelineno-16-32"></a>Fout Voorraad kan niet negatief zijn
 </span></code></pre></div>
 <h2 id="checklist">Checklist<a class="headerlink" href="#checklist" title="Link naar deze sectie">¶</a></h2>
-<p>✅ Database-specifieke exceptions gebruikt (<code>IntegrityError</code>, <code>OperationalError</code>)
-✅ Error messages onderscheiden (UNIQUE, CHECK, NOT NULL)
-✅ Logging gebruikt (<code>logger.info</code>, <code>logger.warning</code>, <code>logger.error</code>)
-✅ Type hints met <code>|</code> syntax gebruikt (<code>int | None</code>, <code>Row | None</code>)
-✅ Return <code>None</code>, <code>False</code>, of lege lijst bij fouten (geen crash!)
-✅ <code>cursor.rowcount</code> gebruikt om te checken of iets gewijzigd is
-✅ Try/except patterns consequent toegepast
-✅ Context managers gebruikt (<code>with sqlite3.connect()</code>)
-✅ Gebruiksvriendelijke error messages
-✅ Validatie VOOR database operaties waar mogelijk</p>
+<ul>
+<li>Database-specifieke exceptions gebruikt (<code>IntegrityError</code>, <code>OperationalError</code>)</li>
+<li>Error messages onderscheiden (UNIQUE, CHECK, NOT NULL)</li>
+<li>Logging gebruikt (<code>logger.info</code>, <code>logger.warning</code>, <code>logger.error</code>)</li>
+<li>Type hints met <code>|</code> syntax gebruikt (<code>int | None</code>, <code>Row | None</code>)</li>
+<li>Return <code>None</code>, <code>False</code>, of lege lijst bij fouten (geen crash!)</li>
+<li><code>cursor.rowcount</code> gebruikt om te checken of iets gewijzigd is</li>
+<li>Try/except patterns consequent toegepast</li>
+<li>Context managers gebruikt (<code>with sqlite3.connect()</code>)</li>
+<li>Gebruiksvriendelijke error messages</li>
+<li>Validatie VOOR database operaties waar mogelijk</li>
+</ul>
 <h2 id="belangrijke-lessen">Belangrijke Lessen<a class="headerlink" href="#belangrijke-lessen" title="Link naar deze sectie">¶</a></h2>
 <ol>
 <li><strong>Specifieke exceptions</strong>: Gebruik <code>IntegrityError</code>, <code>OperationalError</code>, niet alleen <code>Exception</code></li>

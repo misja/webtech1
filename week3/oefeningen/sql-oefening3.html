@@ -4251,7 +4251,7 @@
 </span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="n">user</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">login_unsafe</span><span class="p">(</span><span class="s2">"jan"</span><span class="p">,</span> <span class="s2">"fout_wachtwoord"</span><span class="p">)</span>
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Test 2: </span><span class="si">{</span><span class="n">user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'Geen match'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c1"># Test 3: SQL injection attack! ⚠️</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c1"># Test 3: SQL injection attack!</span>
 </span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="n">user</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">login_unsafe</span><span class="p">(</span><span class="s2">"admin' --"</span><span class="p">,</span> <span class="s2">"whatever"</span><span class="p">)</span>
 </span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Test 3: </span><span class="si">{</span><span class="n">user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'Geen match'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># GEVAAR: ingelogd als admin!</span>
 </span></code></pre></div>
@@ -4280,9 +4280,9 @@ De `--` maakt alles daarna commentaar, dus de password check wordt overgeslagen!
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="k">for</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span> <span class="ow">in</span> <span class="n">injection_tests</span><span class="p">:</span>
 </span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="n">user</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">login_unsafe</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
 </span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="k">if</span> <span class="n">user</span><span class="p">:</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"⚠️  GEVAAR: Ingelogd als '</span><span class="si">{</span><span class="n">user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span><span class="si">}</span><span class="s2">' (admin=</span><span class="si">{</span><span class="n">user</span><span class="p">[</span><span class="s1">'is_admin'</span><span class="p">]</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"GEVAAR: Ingelogd als '</span><span class="si">{</span><span class="n">user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span><span class="si">}</span><span class="s2">' (admin=</span><span class="si">{</span><span class="n">user</span><span class="p">[</span><span class="s1">'is_admin'</span><span class="p">]</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 </span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Geblokkeerd: </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Geblokkeerd: </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
 <p><strong>Vraag:</strong> Welke aanvallen werken? Probeer te begrijpen waarom.</p>
 <h2 id="opgave-3-veilige-login-method">Opgave 3: Veilige Login Method<a class="headerlink" href="#opgave-3-veilige-login-method" title="Link naar deze sectie">¶</a></h2>
@@ -4301,9 +4301,9 @@ De `--` maakt alles daarna commentaar, dus de password check wordt overgeslagen!
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">for</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span> <span class="ow">in</span> <span class="n">injection_tests</span><span class="p">:</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">user</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">login_safe</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">if</span> <span class="n">user</span><span class="p">:</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"⚠️  Ingelogd als '</span><span class="si">{</span><span class="n">user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Ingelogd als '</span><span class="si">{</span><span class="n">user</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
 </span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Geblokkeerd: </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Geblokkeerd: </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
 </span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="c1"># Test normale login (moet nog steeds werken!)</span>
 </span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">user</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">login_safe</span><span class="p">(</span><span class="s2">"jan"</span><span class="p">,</span> <span class="s2">"geheim123"</span><span class="p">)</span>
@@ -4352,7 +4352,7 @@ De `--` maakt alles daarna commentaar, dus de password check wordt overgeslagen!
 </span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="k">try</span><span class="p">:</span>
 </span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="n">db</span><span class="o">.</span><span class="n">get_all_from_table</span><span class="p">(</span><span class="s2">"users; DROP TABLE users; --"</span><span class="p">)</span>
 </span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ Geblokkeerd: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Geblokkeerd: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="bonusopdracht-1-login-met-rate-limiting">Bonusopdracht 1: Login Met Rate Limiting<a class="headerlink" href="#bonusopdracht-1-login-met-rate-limiting" title="Link naar deze sectie">¶</a></h2>
 <p>Voeg een simpele vorm van rate limiting toe om brute force aanvallen te voorkomen:</p>
@@ -4399,14 +4399,14 @@ De `--` maakt alles daarna commentaar, dus de password check wordt overgeslagen!
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>Test 3: admin  ← GEVAAR!
 </span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
 </span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>=== SQL Injection Tests ===
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>⚠️  GEVAAR: Ingelogd als 'admin' (admin=1)
-</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>⚠️  GEVAAR: Ingelogd als 'jan' (admin=0)
-</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>⚠️  GEVAAR: Ingelogd als 'admin' (admin=1)
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>GEVAAR: Ingelogd als 'admin' (admin=1)
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>GEVAAR: Ingelogd als 'jan' (admin=0)
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>GEVAAR: Ingelogd als 'admin' (admin=1)
 </span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
 </span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>=== Veilige Login Tests ===
-</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>✅ Geblokkeerd: admin' --
-</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>✅ Geblokkeerd: ' OR '1'='1
-</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>✅ Geblokkeerd: admin' OR '1'='1' --
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>Geblokkeerd: admin' --
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>Geblokkeerd: ' OR '1'='1
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>Geblokkeerd: admin' OR '1'='1' --
 </span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
 </span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>Normale login: jan
 </span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>
@@ -4414,17 +4414,19 @@ De `--` maakt alles daarna commentaar, dus de password check wordt overgeslagen!
 </span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>Search met injection: 0 resultaten
 </span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>
 </span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>Users tabel: 2 records
-</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>✅ Geblokkeerd: Invalid table: users; DROP TABLE users; --
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>Geblokkeerd: Invalid table: users; DROP TABLE users; --
 </span></code></pre></div>
 <h2 id="checklist">Checklist<a class="headerlink" href="#checklist" title="Link naar deze sectie">¶</a></h2>
-<p>✅ <code>login_unsafe()</code> geïmplementeerd (met f-string - FOUT!)
-✅ SQL injection aanvallen getest en begrepen
-✅ <code>login_safe()</code> geïmplementeerd (met placeholders)
-✅ <code>search_users()</code> met LIKE en placeholders
-✅ <code>get_all_from_table()</code> met whitelist validatie
-✅ Verschil tussen unsafe en safe begrepen
-✅ <strong>Nooit</strong> f-strings of concatenatie met user input in SQL
-✅ <strong>Altijd</strong> placeholders (<code>?</code>) voor values</p>
+<ul>
+<li><code>login_unsafe()</code> geïmplementeerd (met f-string - FOUT!)</li>
+<li>SQL injection aanvallen getest en begrepen</li>
+<li><code>login_safe()</code> geïmplementeerd (met placeholders)</li>
+<li><code>search_users()</code> met LIKE en placeholders</li>
+<li><code>get_all_from_table()</code> met whitelist validatie</li>
+<li>Verschil tussen unsafe en safe begrepen</li>
+<li><strong>Nooit</strong> f-strings of concatenatie met user input in SQL</li>
+<li><strong>Altijd</strong> placeholders (<code>?</code>) voor values</li>
+</ul>
 <h2 id="belangrijke-lessen">Belangrijke Lessen<a class="headerlink" href="#belangrijke-lessen" title="Link naar deze sectie">¶</a></h2>
 <ol>
 <li><strong>Placeholders zijn de ENIGE veilige methode</strong> voor values in SQL</li>
