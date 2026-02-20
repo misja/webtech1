@@ -75,6 +75,8 @@ Als eerste `models.py`:
 
 ```python
 # from mijnproject import db
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import ForeignKey
 
 
 class Docent(db.Model):
@@ -88,9 +90,9 @@ class Docent(db.Model):
     """
 
     __tablename__ = 'docenten'
-    id = db.Column(db.Integer, primary_key=True)
-    naam = db.Column(db.Text)
-    student = db.relationship('Student', backref='docent', uselist=False)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
+    student: Mapped['Student | None'] = relationship(back_populates='docent')
 
     def __init__(self, naam: str) -> None:
         """
@@ -126,9 +128,10 @@ class Student(db.Model):
 
     __tablename__ = 'studenten'
 
-    id = db.Column(db.Integer, primary_key=True)
-    naam = db.Column(db.Text)
-    docent_id = db.Column(db.Integer, db.ForeignKey('docenten.id'))
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
+    docent_id: Mapped[int | None] = mapped_column(ForeignKey('docenten.id'))
+    docent: Mapped['Docent | None'] = relationship(back_populates='student')
 
     def __init__(self, naam: str, docent_id: int) -> None:
         """

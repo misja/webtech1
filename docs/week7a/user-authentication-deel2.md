@@ -87,6 +87,9 @@ Nu kan de gebruikersklasse aangemaakt worden. De naam van de klasse wordt `User`
 De klasse `User()` erft eigenschappen van `dbModel` en `UserMixin`:
 
 ```python
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String
+
 class User(db.Model, UserMixin):
     """User model voor authenticatie.
 
@@ -96,10 +99,10 @@ class User(db.Model, UserMixin):
     """
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(64), unique=True, index=True)
-    username = db.Column(db.String(64), unique=True, index=True)
-    password_hash = db.Column(db.String(128))
+    id: Mapped[int] = mapped_column(primary_key=True)
+    email: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    username: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    password_hash: Mapped[str | None] = mapped_column(String(128))
 ```
 
 Achter de variabelen `email`, `username` en `password_hash` staat een getal genoteerd (64 of 128). Dat betreft het aantal posities dat voor die variabele beschikbaar is. Verder hebben `email` en `username` het kenmerk `unique` meegekregen. Op de primary key wordt automatisch gecontroleerd dat er geen dubbele waarden van voorkomen, maar het e-mailadres en de gebruikersnaam mogen natuurlijk ook maar één keer voorkomen in de database met inloggegevens.
@@ -155,7 +158,7 @@ def load_user(user_id: int) -> User | None:
     Returns:
         De User instantie als gevonden, anders None
     """
-    return User.query.get(user_id)
+    return db.session.get(User, int(user_id))
 ```
 
 De `user_loader` decorator geeft `Flask-login` toestemming om de gegevens van de huidige gebruiker te laden en het bijbehorende ID te gebruiken. Daarmee kan de gebruiker pagina’s bekijken die bij zijn profiel horen, zoals onder andere het beheren van de eigen gegevens en eigen blogberichten. En na een succesvolle aanmelding kan de naam van de gebruiker aan een welkomstwoord gekoppeld worden.

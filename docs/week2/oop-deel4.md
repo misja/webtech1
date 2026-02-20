@@ -148,7 +148,7 @@ print(f"Totaal: €{totaal_info['totaal']:.2f}")
     ```python
     @app.route('/order/<int:id>')
     def toon_order(id):
-        order = Order.query.get(id)
+        order = db.session.get(Order, id)
         totaal_info = order.bereken_totaal()
         return render_template('order.html',
                              order=order,
@@ -286,31 +286,36 @@ Dit is waarom je compositie leert - in databases werk je zo met gerelateerde tab
 
 ```python
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import String, ForeignKey
 
 db = SQLAlchemy()
 
 class User(db.Model):
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), nullable=False)
-    email = db.Column(db.String(120), nullable=False)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    username: Mapped[str] = mapped_column(String(80))
+    email: Mapped[str] = mapped_column(String(120))
+
+    # Relationship
+    posts: Mapped[list['BlogPost']] = relationship(back_populates='author')
 
 class BlogPost(db.Model):
     __tablename__ = 'posts'
 
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False)
-    content = db.Column(db.Text, nullable=False)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    title: Mapped[str] = mapped_column(String(200))
+    content: Mapped[str]
 
     # Foreign key: elke post HEEFT EEN auteur
-    author_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    author_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
 
     # Relationship: geeft toegang tot het User object
-    author = db.relationship('User', backref='posts')
+    author: Mapped['User'] = relationship(back_populates='posts')
 
 # Gebruik (week 6!)
-user = User.query.get(1)
+user = db.session.get(User, 1)
 post = BlogPost(title="Mijn blog", content="...", author=user)
 db.session.add(post)
 db.session.commit()

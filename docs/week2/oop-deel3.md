@@ -218,22 +218,24 @@ Dit is waarom je inheritance leert - straks in week 6 ga je database modellen ma
 
 ```python
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String
 
 db = SQLAlchemy()
 
 class User(db.Model):  # Erft van db.Model!
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), nullable=False)
-    email = db.Column(db.String(120), nullable=False)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    username: Mapped[str] = mapped_column(String(80))
+    email: Mapped[str] = mapped_column(String(120))
 
 class Product(db.Model):  # Erft van db.Model!
     __tablename__ = 'products'
 
-    id = db.Column(db.Integer, primary_key=True)
-    naam = db.Column(db.String(100), nullable=False)
-    prijs = db.Column(db.Float, nullable=False)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str] = mapped_column(String(100))
+    prijs: Mapped[float]
 ```
 
 Door te erven van `db.Model` krijgen je klassen automatisch alle database functionaliteit: opslaan, opvragen, verwijderen, etc.

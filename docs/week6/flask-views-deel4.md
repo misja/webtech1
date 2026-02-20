@@ -63,6 +63,8 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import ForeignKey
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -84,14 +86,14 @@ class Cursist(db.Model):
 
     __tablename__ = 'cursisten'
 
-    id = db.Column(db.Integer, primary_key=True)
-    naam = db.Column(db.Text)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
 
     # Één-op-veel relatie met instrumenten
-    instrumenten = db.relationship('Instrument', backref='cursist', lazy='dynamic')
+    instrumenten: Mapped[list['Instrument']] = relationship(back_populates='cursist')
 
     # Één-op-één relatie met docent
-    docent = db.relationship('Docent', backref='cursist', uselist=False)
+    docent: Mapped['Docent | None'] = relationship(back_populates='cursist')
 
     def __init__(self, naam: str):
         """Maak nieuwe cursist aan.
@@ -122,26 +124,19 @@ class Cursist(db.Model):
 **Één-op-veel (Cursist ↔ Instrumenten)**:
 
 ```python
-instrumenten = db.relationship('Instrument', backref='cursist', lazy='dynamic')
+instrumenten: Mapped[list['Instrument']] = relationship(back_populates='cursist')
 ```
 
-- `'Instrument'` - Verwijst naar `Instrument` model
-- `backref='cursist'` - Maakt automatisch `instrument.cursist` attribuut
-- `lazy='dynamic'` - Laadt instrumenten pas wanneer je ze nodig hebt (efficiënt)
-
-Andere `lazy` opties:
-
-- `'select'` (of `True`) - Laadt direct bij query
-- `'joined'` (of `False`) - Gebruikt SQL JOIN
-- `'subquery'` - Gebruikt subquery
+- `Mapped[list['Instrument']]` - Lijst van Instrument objecten (één-op-veel)
+- `back_populates='cursist'` - Koppelt aan de `cursist` relatie in het `Instrument` model
 
 **Één-op-één (Cursist ↔ Docent)**:
 
 ```python
-docent = db.relationship('Docent', backref='cursist', uselist=False)
+docent: Mapped['Docent | None'] = relationship(back_populates='cursist')
 ```
 
-- `uselist=False` - Eén object, geen lijst
+- `Mapped['Docent | None']` - Eén object of None (één-op-één)
 
 !!! note "Return values in plaats van print"
     De `overzicht_instrumenten()` methode **geeft een lijst terug** in plaats van printen. Dit kun je gebruiken in routes en templates.
@@ -154,11 +149,12 @@ class Instrument(db.Model):
 
     __tablename__ = 'instrumenten'
 
-    id = db.Column(db.Integer, primary_key=True)
-    naam = db.Column(db.Text)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
 
     # Foreign key naar cursisten tabel
-    cursist_id = db.Column(db.Integer, db.ForeignKey('cursisten.id'))
+    cursist_id: Mapped[int | None] = mapped_column(ForeignKey('cursisten.id'))
+    cursist: Mapped['Cursist | None'] = relationship(back_populates='instrumenten')
 
     def __init__(self, naam: str, cursist_id: int):
         """Maak nieuw instrument aan.
@@ -171,7 +167,7 @@ class Instrument(db.Model):
         self.cursist_id = cursist_id
 ```
 
-**Foreign key**: `db.ForeignKey('cursisten.id')` verwijst naar de **tabelnaam** (`cursisten`), niet de class naam.
+**Foreign key**: `ForeignKey('cursisten.id')` verwijst naar de **tabelnaam** (`cursisten`), niet de class naam.
 
 ### Docent model
 
@@ -181,11 +177,12 @@ class Docent(db.Model):
 
     __tablename__ = 'docenten'
 
-    id = db.Column(db.Integer, primary_key=True)
-    naam = db.Column(db.Text)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
 
     # Foreign key naar cursisten tabel
-    cursist_id = db.Column(db.Integer, db.ForeignKey('cursisten.id'))
+    cursist_id: Mapped[int | None] = mapped_column(ForeignKey('cursisten.id'))
+    cursist: Mapped['Cursist | None'] = relationship(back_populates='docent')
 
     def __init__(self, naam: str, cursist_id: int):
         """Maak nieuwe docent aan.
@@ -258,12 +255,12 @@ db.session.add_all([joyce, bram])
 db.session.commit()
 
 # Controleer
-print(Cursist.query.all())
+print(db.session.execute(db.select(Cursist)).scalars().all())
 # [Cursist Joyce heeft nog geen docent toegewezen gekregen,
 #  Cursist Bram heeft nog geen docent toegewezen gekregen]
 
 # Zoek Joyce op
-joyce = Cursist.query.filter_by(naam='Joyce').first()
+joyce = db.session.execute(db.select(Cursist).filter_by(naam='Joyce')).scalar_one_or_none()
 
 # Voeg docent toe voor Joyce
 david = Docent("David", joyce.id)
@@ -276,7 +273,7 @@ db.session.add_all([david, instr1, instr2])
 db.session.commit()
 
 # Check de relaties
-joyce = Cursist.query.filter_by(naam='Joyce').first()
+joyce = db.session.execute(db.select(Cursist).filter_by(naam='Joyce')).scalar_one_or_none()
 print(joyce)
 # Cursist Joyce heeft David als docent
 
@@ -293,9 +290,9 @@ Cursist Joyce heeft David als docent
 ```
 
 !!! tip "Query methoden"
-    - `query.all()` - Alle records
-    - `query.first()` - Eerste record
-    - `query.filter_by(naam='Joyce')` - Filter op naam
+    - `db.session.execute(db.select(Model)).scalars().all()` - Alle records
+    - `db.session.execute(db.select(Model).filter_by(naam='Joyce')).scalar_one_or_none()` - Filter op naam
+    - `db.session.get(Model, id)` - Zoek op primary key
 
 De database structuur:
 
@@ -303,14 +300,14 @@ De database structuur:
 
 ## Relaties gebruiken
 
-Via de `backref` parameter kun je in beide richtingen navigeren:
+Via de `back_populates` parameter kun je in beide richtingen navigeren:
 
 ```python
 # Van cursist naar instrumenten
 joyce.instrumenten  # Alle instrumenten van Joyce
 
-# Van instrument naar cursist (via backref)
-drums = Instrument.query.filter_by(naam='Drums').first()
+# Van instrument naar cursist (via back_populates)
+drums = db.session.execute(db.select(Instrument).filter_by(naam='Drums')).scalar_one_or_none()
 drums.cursist  # Geeft Joyce object terug
 drums.cursist.naam  # "Joyce"
 ```

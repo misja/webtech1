@@ -76,17 +76,20 @@ Maak deze bestanden:
 ### Models
 
 ```python
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import ForeignKey
+
 class Docent(db.Model):
     __tablename__ = 'docenten'
 
-    id = db.Column(db.Integer, primary_key=True)
-    naam = db.Column(db.Text)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
 
     # Relatie naar studenten
-    studenten = db.relationship('Student', backref='mentor', lazy='dynamic')
+    studenten: Mapped[list['Student']] = relationship(back_populates='mentor')
 ```
 
-De `backref='mentor'` zorgt dat je via `student.mentor` de docent kunt opvragen.
+De `back_populates='mentor'` koppelt aan `mentor: Mapped['Docent | None'] = relationship(back_populates='studenten')` in het `Student` model. Via `student.mentor` krijg je het Docent object.
 
 ### Student formulier
 
@@ -148,8 +151,8 @@ Gebruik een for-loop om alle studenten te tonen met hun mentor:
 ## Aandachtspunten
 
 - **Naamgeving**: Let op typo's in variabelen en template namen
-- **Foreign keys**: Gebruik `db.ForeignKey('docenten.id')` (tabelnaam, niet class naam)
-- **Backref**: Via `student.mentor` krijg je het Docent object
+- **Foreign keys**: Gebruik `ForeignKey('docenten.id')` (tabelnaam, niet class naam)
+- **back_populates**: Via `student.mentor` krijg je het Docent object
 - **Bootstrap 5**: Gebruik moderne Bootstrap classes
 
 ## Uitbreidingen (optioneel)

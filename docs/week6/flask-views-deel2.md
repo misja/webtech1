@@ -20,6 +20,7 @@ Bestudeer het volledige bestand [`basic_model_app.py`](bestanden/crud/basic_mode
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import Mapped, mapped_column
 ```
 
 De `os` module gebruik je om automatisch het juiste pad naar je database te bepalen.
@@ -75,9 +76,9 @@ Een **model** is een Python class die een database tabel representeert. Je schri
 class Cursist(db.Model):
     """Model voor cursisten van de muziekschool."""
 
-    id = db.Column(db.Integer, primary_key=True)
-    naam = db.Column(db.Text)
-    leeftijd = db.Column(db.Integer)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
+    leeftijd: Mapped[int | None]
 
     def __init__(self, naam: str, leeftijd: int):
         """Maak nieuwe cursist aan.

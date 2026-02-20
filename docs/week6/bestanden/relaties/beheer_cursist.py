@@ -3,6 +3,7 @@ from forms import VoegtoeForm, VerwijderForm
 from flask import Flask, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from sqlalchemy.orm import Mapped, mapped_column
 
 app = Flask(__name__)
 
@@ -23,8 +24,9 @@ class Cursist(db.Model):
     """Model voor cursisten van de muziekschool."""
 
     __tablename__ = 'cursisten'
-    id = db.Column(db.Integer, primary_key=True)
-    naam = db.Column(db.Text)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    naam: Mapped[str | None]
 
     def __init__(self, naam: str):
         """Maak nieuwe cursist aan.
@@ -82,7 +84,7 @@ def list_cur() -> str:
         Template met lijst van cursisten
     """
     # Selecteer alle cursisten uit de database met een query
-    cursisten = Cursist.query.all()
+    cursisten = db.session.execute(db.select(Cursist)).scalars().all()
     return render_template('toon_cur.html', cursisten=cursisten)
 
 
@@ -98,7 +100,7 @@ def del_cur() -> str:
 
     if form.validate_on_submit():
         id = form.id.data
-        cur = Cursist.query.get(id)
+        cur = db.session.get(Cursist, id)
         db.session.delete(cur)
         db.session.commit()
 
