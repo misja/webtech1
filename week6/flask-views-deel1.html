@@ -3513,82 +3513,15 @@
 
 <h1 id="flask-en-sqlalchemy-theorie">Flask en SQLAlchemy - Theorie<a class="headerlink" href="#flask-en-sqlalchemy-theorie" title="Link naar deze sectie">¶</a></h1>
 <h2 id="database-koppeling">Database koppeling<a class="headerlink" href="#database-koppeling" title="Link naar deze sectie">¶</a></h2>
-<p>Je hebt formulieren gemaakt met Flask-WTF om gebruikersinput te verzamelen. De volgende stap is het opslaan van deze data in een database.</p>
-<p>SQLite slaat gegevens op in tabelvorm:</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Kolom 1</th>
-<th>Kolom 2</th>
-<th>Kolom 3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>regel 1</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>regel 2</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>regel 3</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Voorbeeld met cursisten van de muziekschool. De eerste kolom is het sleutelveld (id) - deze waarde is uniek per rij:</p>
-<table>
-<thead>
-<tr>
-<th>id</th>
-<th>Voornaam</th>
-<th>Achternaam</th>
-<th>Plaats</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Joyce</td>
-<td>Rooth</td>
-<td>Groningen</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Timo</td>
-<td>Bijl</td>
-<td>Drachten</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Fred</td>
-<td>Timmer</td>
-<td>Assen</td>
-</tr>
-</tbody>
-</table>
-<p>In SQL haal je deze gegevens op met <code>SELECT</code>:</p>
-<div class="language-sql highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="p">(</span><span class="err">éé</span><span class="n">n</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">meer</span><span class="w"> </span><span class="n">velden</span><span class="p">)</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">FROM</span><span class="w"> </span><span class="p">(</span><span class="n">naam</span><span class="w"> </span><span class="n">tabel</span><span class="p">)</span>
-</span></code></pre></div>
+<p>Je hebt in week 3 al met SQLite gewerkt: tabellen, rijen, kolommen en SQL queries. Die kennis is hier direct van toepassing. Het verschil is de aanpak: in week 3 schreef je de SQL zelf, hier gebruik je een ORM.</p>
 <h2 id="orm-object-relational-mapper">ORM - Object Relational Mapper<a class="headerlink" href="#orm-object-relational-mapper" title="Link naar deze sectie">¶</a></h2>
-<p>Flask kan met verschillende SQL databases werken: PostgreSQL, MySQL, SQLite en anderen. Je gebruikt SQLite (hetzelfde als in Week 3).</p>
-<p>Om Python en SQL te verbinden gebruik je een <strong>Object Relational Mapper (ORM)</strong>. Een ORM vertaalt tussen Python objecten en database tabellen. Je schrijft Python code, de ORM genereert de SQL.</p>
-<p>De meest gebruikte ORM voor Python is <strong>SQLAlchemy</strong>. Voor Flask bestaat er een extensie: <strong>Flask-SQLAlchemy</strong>.</p>
+<p>Een <strong>Object Relational Mapper (ORM)</strong> is een abstractielaag tussen Python en de database. Je beschrijft je data als Python klassen en objecten, de ORM vertaalt dat naar SQL.</p>
+<p>De meest gebruikte ORM voor Python is <strong>SQLAlchemy</strong>. Voor Flask bestaat er een extensie: <strong>Flask-SQLAlchemy</strong>. Flask kan daarmee met verschillende SQL databases werken: PostgreSQL, MySQL, SQLite en anderen.</p>
 <p>SQLAlchemy voegt een extra laag toe aan je applicatie architectuur:</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/architectuur.png" data-desc-position="bottom"><img alt="Complete architectuur van de webapp" src="imgs/architectuur.png"></a></p>
 <h2 id="installatie">Installatie<a class="headerlink" href="#installatie" title="Link naar deze sectie">¶</a></h2>
 <p>Voeg Flask-SQLAlchemy toe aan je project:</p>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">uv add flask-sqlalchemy</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">uv add flask-sqlalchemy</span>
 </span></code></pre></div>
 <h2 id="crud-operaties">CRUD operaties<a class="headerlink" href="#crud-operaties" title="Link naar deze sectie">¶</a></h2>
 <p>Met een database voer je vier basis operaties uit - <strong>CRUD</strong>:</p>
@@ -3619,7 +3552,6 @@
 </tbody>
 </table>
 <h2 id="werkwijze">Werkwijze<a class="headerlink" href="#werkwijze" title="Link naar deze sectie">¶</a></h2>
-<p>Om databases in Flask te gebruiken doorloop je deze stappen:</p>
 <h3 id="1-database-configuratie">1. Database configuratie<a class="headerlink" href="#1-database-configuratie" title="Link naar deze sectie">¶</a></h3>
 <ul>
 <li>Flask app aanmaken</li>
@@ -3639,7 +3571,6 @@
 </ol>
 <h3 id="3-crud-operaties-uitvoeren">3. CRUD operaties uitvoeren<a class="headerlink" href="#3-crud-operaties-uitvoeren" title="Link naar deze sectie">¶</a></h3>
 <p>Je gebruikt SQLAlchemy methoden om records toe te voegen, op te vragen, te wijzigen en te verwijderen.</p>
-<p>In de volgende delen zie je concrete voorbeelden van deze stappen.</p>
 <p><strong>Volgende stap:</strong> <a href="flask-views-deel2.html">Deel 2</a> - Database setup en models.</p>
 
 
