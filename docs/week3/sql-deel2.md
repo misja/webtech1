@@ -255,6 +255,8 @@ except sqlite3.IntegrityError:
     print("Email bestaat al (UNIQUE constraint)")
 ```
 
+`sqlite3.IntegrityError` is een exception die sqlite3 gooit als een database-constraint wordt geschonden - hier de UNIQUE constraint op het email-veld.
+
 !!! tip "Altijd with gebruiken"
     De `with` statement zorgt dat de connectie altijd wordt gesloten, ook bij errors. Dit is de **aangeraden manier** om met databases te werken.
 

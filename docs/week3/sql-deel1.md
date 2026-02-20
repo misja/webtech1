@@ -50,4 +50,4 @@ Handige punt-commando's (vergelijkbaar met `\d` commando's in psql):
     - Handig tijdens Flask development om snel data te checken
     **Download:** [sqlitebrowser.org](https://sqlitebrowser.org/)
 
-**Volgende stap:** [Deel 2](sql-deel2.md) - SQLite vanuit Python.
+**Volgende stap:** [Python exceptions](python-exceptions.md) - nodig voor deel 2.

@@ -109,3 +109,84 @@ extra:
       name: Meld een probleem
 
 nav:
+  - Start: index.md
+  - Week 1 - HTML/CSS/Bootstrap:
+    - HTML:
+      - week1/1.html/html-deel1.md
+      - week1/1.html/html-deel2.md
+      - week1/1.html/html-deel3.md
+      - week1/1.html/html-deel4.md
+    - CSS:
+      - week1/2.css/css-deel1.md
+      - week1/2.css/css-deel2.md
+      - week1/2.css/css-deel3.md
+    - Bootstrap:
+      - week1/3.bootstrap/bootstrap-deel1.md
+      - week1/3.bootstrap/bootstrap-deel2.md
+      - week1/3.bootstrap/bootstrap-deel3.md
+      - week1/3.bootstrap/bootstrap-deel4.md
+    - Oefeningen:
+      - week1/oefeningen/wk1oefening1.md
+      - week1/oefeningen/wk1oefening2.md
+      - week1/oefeningen/wk1oefening3.md
+      - week1/oefeningen/wk1oefening4.md
+      - week1/oefeningen/wk1oefening5.md
+  - Week 2 - OOP:
+    - week2/oop-deel1.md
+    - week2/oop-deel2.md
+    - week2/oop-deel3.md
+    - week2/oop-deel4.md
+    - Oefeningen:
+      - week2/oefeningen/oop-oefening1.md
+      - week2/oefeningen/oop-oefening2.md
+      - week2/oefeningen/oop-oefening3.md
+      - week2/oefeningen/oop-oefening4.md
+  - Week 3 - SQLite:
+    - week3/sql-deel1.md
+    - week3/python-exceptions.md
+    - week3/sql-deel2.md
+    - week3/sql-deel3.md
+    - week3/sql-deel4.md
+    - week3/sql-deel5.md
+    - week3/sql-deel6.md
+    - Oefeningen:
+      - week3/oefeningen/sql-oefening1.md
+      - week3/oefeningen/sql-oefening2.md
+      - week3/oefeningen/sql-oefening3.md
+      - week3/oefeningen/sql-oefening4.md
+  - Week 4 - Flask:
+    - week4/flask-deel1.md
+    - week4/flask-deel2.md
+    - week4/flask-deel3.md
+    - week4/flask-deel4.md
+    - Oefeningen:
+      - week4/oefeningen/flask-oefening1.md
+  - Week 5 - Flask Forms:
+    - week5/flask-forms-deel1.md
+    - week5/flask-forms-deel2.md
+    - week5/flask-forms-deel3.md
+    - Oefeningen:
+      - week5/oefeningen/flask-forms-oefening1.md
+  - Week 6 - Flask Views:
+    - week6/flask-views-deel1.md
+    - week6/flask-views-deel2.md
+    - week6/flask-views-deel3.md
+    - week6/flask-views-deel4.md
+    - week6/flask-views-deel5.md
+    - Oefeningen:
+      - week6/oefeningen/flask-views-oefening1.md
+  - Week 7a - User Authentication:
+    - week7a/user-authentication-deel1.md
+    - week7a/user-authentication-deel2.md
+    - week7a/user-authentication-deel3.md
+    - week7a/user-authentication-deel4.md
+  - Week 7b - Flask Applicaties:
+    - week7b/flask-applicaties-deel1.md
+    - week7b/flask-applicaties-deel2.md
+    - week7b/flask-applicaties-deel3.md
+  - Projecten:
+    - projecten/index.md
+    - projecten/bungalowpark.md
+    - projecten/filmfan.md
+    - projecten/programmeerles.md
+    - projecten/stage.md
