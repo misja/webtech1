@@ -92,8 +92,8 @@ def verify_migration():
     print("\n=== Verificatie ===\n")
 
     with app.app_context():
-        categories = Category.query.all()
-        products = Product.query.all()
+        categories = db.session.execute(db.select(Category)).scalars().all()
+        products = db.session.execute(db.select(Product)).scalars().all()
 
         print(f"Categories in database: {len(categories)}")
         print(f"Products in database: {len(products)}")

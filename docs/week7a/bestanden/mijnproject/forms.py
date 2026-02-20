@@ -3,6 +3,8 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms import ValidationError
 from mijnproject.models import User
+from mijnproject import db
+from sqlalchemy import select
 
 
 class LoginForm(FlaskForm):
@@ -32,7 +34,7 @@ class RegistrationForm(FlaskForm):
         Raises:
             ValidationError: Als email al bestaat in database
         """
-        if User.query.filter_by(email=field.data).first():
+        if db.session.execute(select(User).filter_by(email=field.data)).scalar_one_or_none():
             raise ValidationError('Dit e-mailadres staat al geregistreerd!')
 
     def check_username(self, field):
@@ -44,5 +46,5 @@ class RegistrationForm(FlaskForm):
         Raises:
             ValidationError: Als username al bestaat in database
         """
-        if User.query.filter_by(username=field.data).first():
+        if db.session.execute(select(User).filter_by(username=field.data)).scalar_one_or_none():
             raise ValidationError('Deze gebruikersnaam is al vergeven, kies een andere naam!')

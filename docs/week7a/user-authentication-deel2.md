@@ -213,11 +213,11 @@ def validate_email(self, field) -> None:
     Raises:
         ValidationError: Als het e-mailadres al geregistreerd is
     """
-    if User.query.filter_by(email=field.data).first():
+    if db.session.execute(db.select(User).filter_by(email=field.data)).scalar_one_or_none():
         raise ValidationError('Dit e-mailadres staat al geregistreerd!')
 ```
 
-De melding is al duidelijk genoeg, maar toch nog wat extra uitleg. Er wordt gecontroleerd of het opgegeven e-mailadres gevonden kan worden door de waarde ervan op te geven in de `query.filter.by(waarde).first()`. Geeft dit resultaat `True`, dan is er al een e-mailadres met een gelijke inhoud in de database te vinden, en dat mag niet. Er moet dan een melding getoond worden, hetgeen hier dus via de `ValidationError` geregeld is.
+De melding is al duidelijk genoeg, maar toch nog wat extra uitleg. Er wordt gecontroleerd of het opgegeven e-mailadres gevonden kan worden door de waarde ervan op te geven in `db.session.execute(db.select(User).filter_by(email=field.data)).scalar_one_or_none()`. Geeft dit resultaat niet `None`, dan is er al een e-mailadres met een gelijke inhoud in de database te vinden, en dat mag niet. Er moet dan een melding getoond worden, hetgeen hier dus via de `ValidationError` geregeld is.
 
 De tweede methode is nagenoeg gelijk aan de eerste. Alleen moet er nu nagegaan worden of de gebruikersnaam al in de database voorkomt.
 
@@ -231,7 +231,7 @@ def validate_username(self, field) -> None:
     Raises:
         ValidationError: Als de gebruikersnaam al bestaat
     """
-    if User.query.filter_by(username=field.data).first():
+    if db.session.execute(db.select(User).filter_by(username=field.data)).scalar_one_or_none():
         raise ValidationError('Deze gebruikersnaam is al vergeven, probeer een ander naam!')
 ```
 

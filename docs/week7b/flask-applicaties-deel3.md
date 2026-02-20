@@ -103,7 +103,7 @@ def list() -> str:
     Returns:
         Gerenderde template met docenten lijst
     """
-    docenten = Docent.query.all()
+    docenten = db.session.execute(db.select(Docent)).scalars().all()
     return render_template('docenten/list.html', docenten=docenten)
 
 
@@ -119,7 +119,7 @@ def delete() -> str | Response:
 
     if form.validate_on_submit():
         id = form.id.data
-        doc = Docent.query.get(id)
+        doc = db.session.get(Docent, id)
         db.session.delete(doc)
         db.session.commit()
 

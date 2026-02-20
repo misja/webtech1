@@ -6,7 +6,7 @@ Bevat formulieren voor authentication: login en registratie.
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from webshop_app.models import Customer
+from webshop_app.models import db, Customer
 
 
 class LoginForm(FlaskForm):
@@ -74,5 +74,5 @@ class RegistrationForm(FlaskForm):
         Raises:
             ValidationError: Als het e-mailadres al geregistreerd is
         """
-        if Customer.query.filter_by(email=field.data).first():
+        if db.session.execute(db.select(Customer).filter_by(email=field.data)).scalar_one_or_none():
             raise ValidationError('Dit e-mailadres staat al geregistreerd!')

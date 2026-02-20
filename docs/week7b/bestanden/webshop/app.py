@@ -19,7 +19,7 @@ if __name__ == "__main__":
         db.create_all()
 
         # Check if admin exists, anders maak demo admin aan
-        admin = Customer.query.filter_by(email='admin@webshop.nl').first()
+        admin = db.session.execute(db.select(Customer).filter_by(email='admin@webshop.nl')).scalar_one_or_none()
         if not admin:
             admin = Customer(
                 name='Admin',

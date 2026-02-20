@@ -10,7 +10,7 @@ We bouwen verder op dezelfde webshop uit Week 3-5, maar vervangen nu alle databa
 |------|--------|-------------------|
 | Week 3-4 | Raw SQL | `cursor.execute("SELECT * FROM products WHERE id = ?")` |
 | Week 5 | Raw SQL + Forms | `conn.execute("INSERT INTO products VALUES (?, ?, ?)")` |
-| **Week 6** | **SQLAlchemy ORM** | `Product.query.get_or_404(product_id)` |
+| **Week 6** | **SQLAlchemy ORM** | `db.get_or_404(Product, product_id)` |
 
 ## Belangrijkste Concepten
 
@@ -23,13 +23,13 @@ class Product(db.Model):
     """Model voor producten."""
     __tablename__ = 'products'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    stock = db.Column(db.Integer, nullable=False, default=0)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(200))
+    price: Mapped[float]
+    stock: Mapped[int] = mapped_column(default=0)
 
     # Foreign Key relatie
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
+    category_id: Mapped[int] = mapped_column(ForeignKey('categories.id'))
 ```
 
 **Voordelen:**
@@ -45,13 +45,13 @@ class Product(db.Model):
 ```python
 class Category(db.Model):
     # ...
-    products = db.relationship('Product', backref='category', lazy=True)
+    products: Mapped[list['Product']] = relationship(back_populates='category')
 ```
 
 Nu kun je eenvoudig:
 
 ```python
-category = Category.query.get(1)
+category = db.session.get(Category, 1)
 for product in category.products:  # Automatisch alle producten!
     print(product.name)
 ```
@@ -59,7 +59,7 @@ for product in category.products:  # Automatisch alle producten!
 Of andersom:
 
 ```python
-product = Product.query.get(1)
+product = db.session.get(Product, 1)
 print(product.category.name)  # Via backref!
 ```
 
@@ -67,12 +67,12 @@ print(product.category.name)  # Via backref!
 
 ```python
 class Order(db.Model):
-    order_items = db.relationship('OrderItem', backref='order', cascade='all, delete-orphan')
+    order_items: Mapped[list['OrderItem']] = relationship(back_populates='order', cascade='all, delete-orphan')
 
 class OrderItem(db.Model):
-    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
-    quantity = db.Column(db.Integer)
+    order_id: Mapped[int | None] = mapped_column(ForeignKey('orders.id'))
+    product_id: Mapped[int | None] = mapped_column(ForeignKey('products.id'))
+    quantity: Mapped[int | None]
 ```
 
 ### 3. Query Examples
@@ -87,7 +87,7 @@ cursor.execute("SELECT * FROM products")
 products = cursor.fetchall()
 
 # ORM (Week 6)
-products = Product.query.all()
+products = db.session.execute(db.select(Product)).scalars().all()
 ```
 
 **Product filteren op categorie:**
@@ -97,7 +97,7 @@ products = Product.query.all()
 cursor.execute("SELECT * FROM products WHERE category_id = ?", (category_id,))
 
 # ORM
-products = Product.query.filter_by(category_id=category_id).all()
+products = db.session.execute(db.select(Product).filter_by(category_id=category_id)).scalars().all()
 ```
 
 **Product met JOIN:**
@@ -112,7 +112,7 @@ cursor.execute("""
 """, (product_id,))
 
 # ORM - JOIN gebeurt automatisch via relationship!
-product = Product.query.get(product_id)
+product = db.session.get(Product, product_id)
 print(product.category.name)  # Automatisch!
 ```
 
@@ -142,7 +142,7 @@ cursor.execute(
 )
 
 # ORM
-product = Product.query.get(product_id)
+product = db.session.get(Product, product_id)
 product.name = new_name
 product.price = new_price
 db.session.commit()  # Automatisch UPDATE!
@@ -155,7 +155,7 @@ db.session.commit()  # Automatisch UPDATE!
 cursor.execute("DELETE FROM products WHERE id = ?", (product_id,))
 
 # ORM
-product = Product.query.get(product_id)
+product = db.session.get(Product, product_id)
 db.session.delete(product)
 db.session.commit()
 ```
@@ -193,10 +193,9 @@ Als je een Order verwijdert, verwijder je automatisch alle OrderItems:
 
 ```python
 class Order(db.Model):
-    order_items = db.relationship(
-        'OrderItem',
-        backref='order',
-        cascade='all, delete-orphan'  # 👈 Orphan items worden verwijderd
+    order_items: Mapped[list['OrderItem']] = relationship(
+        back_populates='order',
+        cascade='all, delete-orphan'
     )
 ```
 
@@ -260,7 +259,7 @@ webshop/
 
    ```python
    # ORM is veel leesbaarder
-   expensive_products = Product.query.filter(Product.price > 100).all()
+   expensive_products = db.session.execute(db.select(Product).filter(Product.price > 100)).scalars().all()
 
    # vs Raw SQL strings
    cursor.execute("SELECT * FROM products WHERE price > 100")
@@ -269,7 +268,7 @@ webshop/
 2. **Type Safety**
 
    ```python
-   product = Product.query.get(1)
+   product = db.session.get(Product, 1)
    product.name  # IDE weet dat dit een string is!
    ```
 
@@ -277,7 +276,7 @@ webshop/
 
    ```python
    # ORM escaped automatisch
-   Product.query.filter_by(name=user_input).first()
+   db.session.execute(db.select(Product).filter_by(name=user_input)).scalar_one_or_none()
    ```
 
 4. **Databaseonafhankelijk**
@@ -302,13 +301,13 @@ webshop/
 
 | Operatie | Raw SQL (Week 3-5) | ORM (Week 6) |
 |----------|-------------------|--------------|
-| **SELECT** | `cursor.execute("SELECT ...")` | `Model.query.all()` |
+| **SELECT** | `cursor.execute("SELECT ...")` | `db.session.execute(db.select(Model)).scalars().all()` |
 | **INSERT** | `cursor.execute("INSERT ...")` + `commit()` | `db.session.add()` + `commit()` |
 | **UPDATE** | `cursor.execute("UPDATE ...")` | `model.field = value` + `commit()` |
 | **DELETE** | `cursor.execute("DELETE ...")` | `db.session.delete()` + `commit()` |
 | **JOIN** | `SELECT * FROM a JOIN b ON ...` | `model.relationship_name` |
 | **Filter** | `WHERE column = ?` | `.filter_by(column=value)` |
-| **Count** | `SELECT COUNT(*) FROM ...` | `.query.count()` |
+| **Count** | `SELECT COUNT(*) FROM ...` | `db.session.execute(db.select(func.count()).select_from(Model)).scalar()` |
 
 ## Flask-SQLAlchemy Query API
 
@@ -316,30 +315,30 @@ Belangrijkste query methodes:
 
 ```python
 # Alle records ophalen
-Product.query.all()
+db.session.execute(db.select(Product)).scalars().all()
 
 # Eerste record ophalen
-Product.query.first()
+db.session.execute(db.select(Product)).scalar_one_or_none()
 
 # Record op primary key (of 404)
-Product.query.get_or_404(product_id)
+db.get_or_404(Product, product_id)
 
 # Filteren
-Product.query.filter_by(category_id=1).all()
-Product.query.filter(Product.price > 50).all()
+db.session.execute(db.select(Product).filter_by(category_id=1)).scalars().all()
+db.session.execute(db.select(Product).filter(Product.price > 50)).scalars().all()
 
 # Sorteren
-Product.query.order_by(Product.name).all()
-Product.query.order_by(Product.price.desc()).all()
+db.session.execute(db.select(Product).order_by(Product.name)).scalars().all()
+db.session.execute(db.select(Product).order_by(Product.price.desc())).scalars().all()
 
 # Limiet
-Product.query.limit(10).all()
+db.session.execute(db.select(Product).limit(10)).scalars().all()
 
 # Tellen
-Product.query.count()
+db.session.execute(db.select(func.count()).select_from(Product)).scalar()
 
 # Combineren
-Product.query.filter_by(category_id=1).order_by(Product.price).limit(5).all()
+db.session.execute(db.select(Product).filter_by(category_id=1).order_by(Product.price).limit(5)).scalars().all()
 ```
 
 ## Database Migratie
@@ -403,19 +402,19 @@ In Week 7 bouwen we verder op deze ORM foundation:
 3. **Gebruik `get_or_404()` in routes**
 
    ```python
-   product = Product.query.get_or_404(product_id)  # Automatic 404!
+   product = db.get_or_404(Product, product_id)  # Automatic 404!
    ```
 
 4. **Lazy loading vs Eager loading**
 
    ```python
    # Lazy (standaard) - query per product.category
-   products = Product.query.all()
+   products = db.session.execute(db.select(Product)).scalars().all()
    for p in products:
        print(p.category.name)  # N+1 queries!
 
    # Eager - 1 query met JOIN
-   products = Product.query.options(joinedload(Product.category)).all()
+   products = db.session.execute(db.select(Product).options(joinedload(Product.category))).scalars().all()
    for p in products:
        print(p.category.name)  # Efficient!
    ```
@@ -451,11 +450,11 @@ In Week 7 bouwen we verder op deze ORM foundation:
 
    ```python
    # Slecht - 1 query voor categories + N queries voor products
-   for category in Category.query.all():
+   for category in db.session.execute(db.select(Category)).scalars().all():
        print(len(category.products))
 
    # Beter - gebruik eager loading of custom query
-   categories = db.session.query(Category).options(joinedload(Category.products)).all()
+   categories = db.session.execute(db.select(Category).options(joinedload(Category.products))).scalars().all()
    ```
 
 ## Opdrachten

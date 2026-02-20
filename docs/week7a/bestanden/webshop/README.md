@@ -89,7 +89,7 @@ login_manager.login_view = "login"  # Waar heen bij @login_required
 @login_manager.user_loader
 def load_user(user_id):
     """Flask-Login gebruikt deze functie om user te laden uit sessie."""
-    return Customer.query.get(int(user_id))
+    return db.session.get(Customer, int(user_id))
 ```
 
 ### 5. Admin vs Customer Roles
@@ -98,7 +98,7 @@ We gebruiken een `is_admin` boolean field om te onderscheiden:
 
 ```python
 class Customer(db.Model, UserMixin):
-    is_admin = db.Column(db.Boolean, default=False)
+    is_admin: Mapped[bool] = mapped_column(default=False)
 
 # Bij aanmaken:
 admin = Customer(name='Admin', email='admin@webshop.nl',
@@ -223,7 +223,7 @@ def login():
 
     if form.validate_on_submit():
         # Zoek user op email
-        user = Customer.query.filter_by(email=form.email.data).first()
+        user = db.session.execute(db.select(Customer).filter_by(email=form.email.data)).scalar_one_or_none()
 
         # Check wachtwoord
         if user and user.check_password(form.password.data):
@@ -286,7 +286,7 @@ class RegistrationForm(FlaskForm):
 
     def validate_email(self, field):
         """WTForms roept validate_<fieldname> automatisch aan!"""
-        if Customer.query.filter_by(email=field.data).first():
+        if db.session.execute(db.select(Customer).filter_by(email=field.data)).scalar_one_or_none():
             raise ValidationError('Dit e-mailadres staat al geregistreerd!')
 ```
 
@@ -319,7 +319,7 @@ def admin_required(f):
 @app.route('/admin/products')
 @admin_required
 def admin_products():
-    products = Product.query.all()
+    products = db.session.execute(db.select(Product)).scalars().all()
     return render_template('admin_products.html', products=products)
 ```
 
@@ -429,7 +429,7 @@ SQLAlchemy ORM voorkomt SQL injection automatisch:
 
 ```python
 # Veilig - ORM escaped automatisch
-Customer.query.filter_by(email=user_input).first()
+db.session.execute(db.select(Customer).filter_by(email=user_input)).scalar_one_or_none()
 
 # GEVAARLIJK - nooit doen!
 db.session.execute(f"SELECT * FROM customers WHERE email = '{user_input}'")
@@ -515,7 +515,7 @@ class RegistrationForm(FlaskForm):
     def validate_email(self, field):
         # Import hier, niet bovenaan!
         from models import Customer
-        if Customer.query.filter_by(email=field.data).first():
+        if db.session.execute(db.select(Customer).filter_by(email=field.data)).scalar_one_or_none():
             raise ValidationError('Email al in gebruik!')
 ```
 
@@ -542,7 +542,7 @@ In Week 7b refactoren we de applicatie naar **Blueprints** voor betere modularit
    ```python
    from app import app, db, Customer
    with app.app_context():
-       admin = Customer.query.filter_by(email='admin@webshop.nl').first()
+       admin = db.session.execute(db.select(Customer).filter_by(email='admin@webshop.nl')).scalar_one_or_none()
        print(admin.password_hash)
        # pbkdf2:sha256:150000$...
    ```
@@ -550,7 +550,7 @@ In Week 7b refactoren we de applicatie naar **Blueprints** voor betere modularit
 3. **Debug login issues**
 
    ```python
-   user = Customer.query.filter_by(email=form.email.data).first()
+   user = db.session.execute(db.select(Customer).filter_by(email=form.email.data)).scalar_one_or_none()
    if user:
        print(f"User found: {user.name}")
        print(f"Password check: {user.check_password(form.password.data)}")

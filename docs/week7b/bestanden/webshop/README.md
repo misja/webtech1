@@ -323,7 +323,7 @@ app.register_blueprint(admin_bp, url_prefix='/admin')
 # app.py (alles in één bestand)
 @app.route("/")
 def index():
-    categories = Category.query.all()
+    categories = db.session.execute(db.select(Category)).scalars().all()
     return render_template("index.html", categories=categories)
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -335,7 +335,7 @@ def login():
 @app.route("/admin/products")
 @admin_required
 def admin_products():
-    products = Product.query.all()
+    products = db.session.execute(db.select(Product)).scalars().all()
     return render_template("admin_products.html", products=products)
 ```
 
@@ -345,7 +345,7 @@ def admin_products():
 # products/views.py
 @products_bp.route("/")
 def index():
-    categories = Category.query.all()
+    categories = db.session.execute(db.select(Category)).scalars().all()
     return render_template("products/index.html", categories=categories)
 
 # auth/views.py
@@ -359,7 +359,7 @@ def login():
 @admin_bp.route("/products")
 @admin_required
 def products():
-    all_products = Product.query.all()
+    all_products = db.session.execute(db.select(Product)).scalars().all()
     return render_template("admin/products.html", products=all_products)
 ```
 

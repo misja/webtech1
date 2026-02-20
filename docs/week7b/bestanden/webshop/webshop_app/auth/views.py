@@ -41,7 +41,7 @@ def login():
 
     if form.validate_on_submit():
         # Zoek user op email
-        user = Customer.query.filter_by(email=form.email.data).first()
+        user = db.session.execute(db.select(Customer).filter_by(email=form.email.data)).scalar_one_or_none()
 
         # Check wachtwoord
         if user is not None and user.check_password(form.password.data):

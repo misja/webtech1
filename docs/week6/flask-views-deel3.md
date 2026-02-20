@@ -31,11 +31,11 @@ Drie stappen: object maken, toevoegen aan sessie, committen.
 ### Alle records ophalen
 
 ```python
-alle_cursisten = Cursist.query.all()
+alle_cursisten = db.session.execute(db.select(Cursist)).scalars().all()
 print(*alle_cursisten, sep='\n')
 ```
 
-`Cursist.query.all()` geeft een lijst met alle cursisten terug. De tekst komt uit de `__repr__()` methode.
+`db.session.execute(db.select(Cursist)).scalars().all()` geeft een lijst met alle cursisten terug. De tekst komt uit de `__repr__()` methode.
 
 Output:
 
@@ -48,12 +48,12 @@ Cursist Elsje is 19 jaar oud
 ### Specifiek record ophalen op ID
 
 ```python
-cursist_twee = Cursist.query.get(2)
+cursist_twee = db.session.get(Cursist, 2)
 print(cursist_twee)
 print(cursist_twee.leeftijd)
 ```
 
-`Cursist.query.get(2)` haalt het record op met `id = 2`.
+`db.session.get(Cursist, 2)` haalt het record op met `id = 2`.
 
 Output:
 
@@ -66,16 +66,15 @@ Je kunt direct attributen ophalen zoals `cursist_twee.leeftijd` of `cursist_twee
 
 !!! info "Query API"
     SQLAlchemy biedt veel query methoden:
-    - `Model.query.all()` - Alle records
-    - `Model.query.get(id)` - Record op ID
-    - `Model.query.filter_by(naam='Joyce')` - Filteren op attribuut
-    - `Model.query.first()` - Eerste record
+    - `db.session.execute(db.select(Model)).scalars().all()` - Alle records
+    - `db.session.get(Model, id)` - Record op primaire sleutel
+    - `db.session.execute(db.select(Model).filter_by(naam='Joyce')).scalar_one_or_none()` - Filteren
 
 ## UPDATE - Gegevens wijzigen
 
 ```python
 # Haal record op
-cursist_joyce = Cursist.query.get(1)
+cursist_joyce = db.session.get(Cursist, 1)
 
 # Wijzig attribuut
 cursist_joyce.leeftijd = 40
@@ -89,7 +88,7 @@ db.session.commit()
 
 Vier stappen:
 
-1. Record ophalen met `query.get()`
+1. Record ophalen met `db.session.get()`
 2. Attribuut wijzigen
 3. Toevoegen aan sessie
 4. Committen
@@ -97,7 +96,7 @@ Vier stappen:
 !!! tip "Update zonder add"
     Je kunt `db.session.add()` ook weglaten bij updates. SQLAlchemy houdt bij welke objecten gewijzigd zijn:
     ```python
-    cursist_joyce = Cursist.query.get(1)
+    cursist_joyce = db.session.get(Cursist, 1)
     cursist_joyce.leeftijd = 40
     db.session.commit()  # Dit werkt ook
     ```
@@ -106,7 +105,7 @@ Vier stappen:
 
 ```python
 # Haal record op
-cursist_elsje = Cursist.query.get(3)
+cursist_elsje = db.session.get(Cursist, 3)
 
 # Verwijder uit database
 db.session.delete(cursist_elsje)
@@ -133,9 +132,9 @@ Cursist Bram is 24 jaar oud
 | Operatie | Code patroon |
 |----------|-------------|
 | **Create** | `obj = Model(...)`<br>`db.session.add(obj)`<br>`db.session.commit()` |
-| **Read** | `Model.query.all()`<br>`Model.query.get(id)` |
-| **Update** | `obj = Model.query.get(id)`<br>`obj.attribuut = nieuwe_waarde`<br>`db.session.commit()` |
-| **Delete** | `obj = Model.query.get(id)`<br>`db.session.delete(obj)`<br>`db.session.commit()` |
+| **Read** | `db.session.execute(db.select(Model)).scalars().all()`<br>`db.session.get(Model, id)` |
+| **Update** | `obj = db.session.get(Model, id)`<br>`obj.attribuut = nieuwe_waarde`<br>`db.session.commit()` |
+| **Delete** | `obj = db.session.get(Model, id)`<br>`db.session.delete(obj)`<br>`db.session.commit()` |
 
 !!! warning "Altijd committen"
     Vergeet `db.session.commit()` niet! Zonder commit worden wijzigingen niet opgeslagen in de database.

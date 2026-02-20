@@ -77,7 +77,7 @@ def login() -> str | Response:
 
     if form.validate_on_submit():
         # Zoek gebruiker op email
-        user = Customer.query.filter_by(email=form.email.data).first()
+        user = db.session.execute(db.select(Customer).filter_by(email=form.email.data)).scalar_one_or_none()
 
         # Check of gebruiker bestaat en wachtwoord klopt
         if user is not None and user.check_password(form.password.data):
@@ -171,7 +171,7 @@ def index() -> str:
         Rendered HTML template
     """
     # ORM Query: SELECT * FROM categories
-    categories = Category.query.all()
+    categories = db.session.execute(db.select(Category)).scalars().all()
     return render_template("index.html", categories=categories)
 
 
@@ -189,10 +189,10 @@ def category(category_id: int) -> str:
         404: Als categorie niet bestaat
     """
     # ORM Query: SELECT * FROM categories WHERE id = ?
-    category_info = Category.query.get_or_404(category_id)
+    category_info = db.get_or_404(Category, category_id)
 
     # ORM Query: SELECT * FROM products WHERE category_id = ?
-    products = Product.query.filter_by(category_id=category_id).all()
+    products = db.session.execute(db.select(Product).filter_by(category_id=category_id)).scalars().all()
 
     return render_template(
         "category.html",
@@ -215,7 +215,7 @@ def product(product_id: int) -> str:
         404: Als product niet bestaat
     """
     # ORM Query: SELECT * FROM products WHERE id = ?
-    product_info = Product.query.get_or_404(product_id)
+    product_info = db.get_or_404(Product, product_id)
 
     return render_template("product.html", product=product_info)
 
@@ -233,7 +233,7 @@ def admin_products() -> str:
         Rendered HTML template met product lijst
     """
     # ORM Query: SELECT * FROM products JOIN categories
-    products = Product.query.join(Category).all()
+    products = db.session.execute(db.select(Product).join(Category)).scalars().all()
     return render_template("admin_products.html", products=products)
 
 
@@ -254,7 +254,7 @@ def admin_add_product() -> str | Response:
     form = AddProductForm()
 
     # Populate category choices
-    form.category_id.choices = [(c.id, c.name) for c in Category.query.all()]
+    form.category_id.choices = [(c.id, c.name) for c in db.session.execute(db.select(Category)).scalars().all()]
 
     if form.validate_on_submit():
         # Create new product instance
@@ -297,12 +297,12 @@ def admin_edit_product(product_id: int) -> str | Response:
         404: Als product niet bestaat
     """
     # Get product or 404
-    product_info = Product.query.get_or_404(product_id)
+    product_info = db.get_or_404(Product, product_id)
 
     form = EditProductForm()
 
     # Populate category choices
-    form.category_id.choices = [(c.id, c.name) for c in Category.query.all()]
+    form.category_id.choices = [(c.id, c.name) for c in db.session.execute(db.select(Category)).scalars().all()]
 
     if form.validate_on_submit():
         # Update product attributes
@@ -353,7 +353,7 @@ def admin_delete_product(product_id: int) -> Response:
         404: Als product niet bestaat
     """
     # Get product or 404
-    product_info = Product.query.get_or_404(product_id)
+    product_info = db.get_or_404(Product, product_id)
 
     product_name = product_info.name
 
@@ -410,7 +410,7 @@ if __name__ == "__main__":
         db.create_all()
 
         # Check if admin exists, anders maak demo admin aan
-        admin = Customer.query.filter_by(email='admin@webshop.nl').first()
+        admin = db.session.execute(db.select(Customer).filter_by(email='admin@webshop.nl')).scalar_one_or_none()
         if not admin:
             admin = Customer(
                 name='Admin',

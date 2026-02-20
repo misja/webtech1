@@ -60,7 +60,7 @@ def products():
     Returns:
         Rendered HTML template met product lijst
     """
-    all_products = Product.query.join(Category).all()
+    all_products = db.session.execute(db.select(Product).join(Category)).scalars().all()
     return render_template("admin/products.html", products=all_products)
 
 
@@ -83,7 +83,7 @@ def add_product():
     form = AddProductForm()
 
     # Populate category choices
-    form.category_id.choices = [(c.id, c.name) for c in Category.query.all()]
+    form.category_id.choices = [(c.id, c.name) for c in db.session.execute(db.select(Category)).scalars().all()]
 
     if form.validate_on_submit():
         # Create new product instance
@@ -128,12 +128,12 @@ def edit_product(product_id: int):
         404: Als product niet bestaat
     """
     # Get product or 404
-    product_info = Product.query.get_or_404(product_id)
+    product_info = db.get_or_404(Product, product_id)
 
     form = EditProductForm()
 
     # Populate category choices
-    form.category_id.choices = [(c.id, c.name) for c in Category.query.all()]
+    form.category_id.choices = [(c.id, c.name) for c in db.session.execute(db.select(Category)).scalars().all()]
 
     if form.validate_on_submit():
         # Update product attributes
@@ -186,7 +186,7 @@ def delete_product(product_id: int):
         404: Als product niet bestaat
     """
     # Get product or 404
-    product_info = Product.query.get_or_404(product_id)
+    product_info = db.get_or_404(Product, product_id)
 
     product_name = product_info.name
 

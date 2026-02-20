@@ -29,7 +29,7 @@ def index():
     Returns:
         Rendered HTML template
     """
-    categories = Category.query.all()
+    categories = db.session.execute(db.select(Category)).scalars().all()
     return render_template("products/index.html", categories=categories)
 
 
@@ -46,8 +46,8 @@ def category(category_id: int):
     Raises:
         404: Als categorie niet bestaat
     """
-    category_info = Category.query.get_or_404(category_id)
-    products = Product.query.filter_by(category_id=category_id).all()
+    category_info = db.get_or_404(Category, category_id)
+    products = db.session.execute(db.select(Product).filter_by(category_id=category_id)).scalars().all()
 
     return render_template(
         "products/category.html",
@@ -69,7 +69,7 @@ def product(product_id: int):
     Raises:
         404: Als product niet bestaat
     """
-    product_info = Product.query.get_or_404(product_id)
+    product_info = db.get_or_404(Product, product_id)
     return render_template("products/product.html", product=product_info)
 
 

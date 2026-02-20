@@ -19,14 +19,14 @@ with db.app.app_context():
     db.session.commit()
 
     print("=== Cursisten aangemaakt ===")
-    print(Cursist.query.all())
+    print(db.session.execute(db.select(Cursist)).scalars().all())
     print()
 
     # Maak een docent aan voor Joyce (een-op-een relatie)
     david = Docent("David", joyce.id)
 
     # Zoek Joyce op uit de database
-    joyce = Cursist.query.filter_by(naam='Joyce').first()
+    joyce = db.session.execute(db.select(Cursist).filter_by(naam='Joyce')).scalar_one_or_none()
 
     # Geef aan welke instrumenten Joyce wil leren bespelen (een-op-veel relatie)
     instr1 = Instrument('Drums', joyce.id)
@@ -37,7 +37,7 @@ with db.app.app_context():
     db.session.commit()
 
     # Haal Joyce opnieuw op om relaties te tonen
-    joyce = Cursist.query.filter_by(naam='Joyce').first()
+    joyce = db.session.execute(db.select(Cursist).filter_by(naam='Joyce')).scalar_one_or_none()
     print("=== Joyce met relaties ===")
     print(joyce)
     print()
