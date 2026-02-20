@@ -524,4 +524,4 @@ Je hebt geleerd:
 
 **Volgende stap:** [Deel 5](sql-deel5.md) - SQL injection preventie.
 
-**Tip:** Gebruik deze WebshopDatabase class als template voor je eigen database classes in Flask applicaties!
+Deze class is een startpunt: je voegt zelf methoden toe voor de queries die jouw applicatie nodig heeft. Met SQLAlchemy schrijf je geen raw SQL meer, maar Python code die de queries automatisch genereert - dat zie je in week 6.

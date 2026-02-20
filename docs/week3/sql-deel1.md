@@ -43,11 +43,12 @@ Handige punt-commando's (vergelijkbaar met `\d` commando's in psql):
 
 !!! tip "Visueel werken met DB Browser for SQLite"
     Als je liever visueel werkt (vergelijkbaar met pgAdmin voor PostgreSQL), gebruik dan [DB Browser for SQLite](https://sqlitebrowser.org/).
+
     **Voordelen:**
+
     - Tabellen visueel bekijken en bewerken
-    - SQL queries runnen met syntax highlighting
-    - Database structure inspecteren
-    - Handig tijdens Flask development om snel data te checken
-    **Download:** [sqlitebrowser.org](https://sqlitebrowser.org/)
+    - SQL queries uitvoeren met syntax highlighting
+    - Database structuur inspecteren
+    - Handig tijdens Flask development om snel data te controleren
 
 **Volgende stap:** [Python exceptions](python-exceptions.md) - nodig voor deel 2.

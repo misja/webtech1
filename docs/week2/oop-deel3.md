@@ -244,6 +244,8 @@ Door te erven van `db.Model` krijgen je klassen automatisch alle database functi
     - Elk **object** = een **rij** in de tabel
     - Inheritance geeft je de database functionaliteit
 
+    SQLAlchemy vertaalt je Python code naar SQL. In week 3 schrijf je die SQL zelf - dat laat zien wat er achter de schermen gebeurt.
+
 ## Praktijkvoorbeeld: Producttypes
 
 Hier een compleet voorbeeld met verschillende producttypes:

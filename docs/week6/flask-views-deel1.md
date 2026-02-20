@@ -2,38 +2,13 @@
 
 ## Database koppeling
 
-Je hebt formulieren gemaakt met Flask-WTF om gebruikersinput te verzamelen. De volgende stap is het opslaan van deze data in een database.
-
-SQLite slaat gegevens op in tabelvorm:
-
-|   |Kolom 1| Kolom 2| Kolom 3
-|---|---|---|---|
-regel 1| | | |
-regel 2| | | |
-regel 3| | | |
-
-Voorbeeld met cursisten van de muziekschool. De eerste kolom is het sleutelveld (id) - deze waarde is uniek per rij:
-
-| id |Voornaam| Achternaam| Plaats
-|---|--------|------------|--------|
-1| Joyce |Rooth |Groningen
-2 |Timo |Bijl |Drachten
-3| Fred| Timmer| Assen
-
-In SQL haal je deze gegevens op met `SELECT`:
-
-```sql
-SELECT (één of meer velden)
-FROM (naam tabel)
-```
+Je hebt in week 3 al met SQLite gewerkt: tabellen, rijen, kolommen en SQL queries. Die kennis is hier direct van toepassing. Het verschil is de aanpak: in week 3 schreef je de SQL zelf, hier gebruik je een ORM.
 
 ## ORM - Object Relational Mapper
 
-Flask kan met verschillende SQL databases werken: PostgreSQL, MySQL, SQLite en anderen. Je gebruikt SQLite (hetzelfde als in Week 3).
+Een **Object Relational Mapper (ORM)** is een abstractielaag tussen Python en de database. Je beschrijft je data als Python klassen en objecten, de ORM vertaalt dat naar SQL.
 
-Om Python en SQL te verbinden gebruik je een **Object Relational Mapper (ORM)**. Een ORM vertaalt tussen Python objecten en database tabellen. Je schrijft Python code, de ORM genereert de SQL.
-
-De meest gebruikte ORM voor Python is **SQLAlchemy**. Voor Flask bestaat er een extensie: **Flask-SQLAlchemy**.
+De meest gebruikte ORM voor Python is **SQLAlchemy**. Voor Flask bestaat er een extensie: **Flask-SQLAlchemy**. Flask kan daarmee met verschillende SQL databases werken: PostgreSQL, MySQL, SQLite en anderen.
 
 SQLAlchemy voegt een extra laag toe aan je applicatie architectuur:
 
@@ -60,8 +35,6 @@ operatie | Beschrijving
 
 ## Werkwijze
 
-Om databases in Flask te gebruiken doorloop je deze stappen:
-
 ### 1. Database configuratie
 
 - Flask app aanmaken
@@ -85,7 +58,5 @@ Vergelijkbaar met `FlaskForm`, maar dan voor database tabellen:
 ### 3. CRUD operaties uitvoeren
 
 Je gebruikt SQLAlchemy methoden om records toe te voegen, op te vragen, te wijzigen en te verwijderen.
-
-In de volgende delen zie je concrete voorbeelden van deze stappen.
 
 **Volgende stap:** [Deel 2](flask-views-deel2.md) - Database setup en models.

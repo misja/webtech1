@@ -46,7 +46,9 @@ print(laptop)
 print(f"Voorraadwaarde: €{laptop.voorraad_waarde():.2f}")
 
 laptop.verkoop(2)
+
 print(laptop)
+print(f"Voorraadwaarde: €{laptop.voorraad_waarde():.2f}")
 ```
 
 **Verwachte output:**
@@ -55,6 +57,7 @@ print(laptop)
 Product(naam='Laptop', prijs=799.99, voorraad=5, beschrijving='Gaming laptop met RGB')
 Voorraadwaarde: €3999.95
 Product(naam='Laptop', prijs=799.99, voorraad=3, beschrijving='Gaming laptop met RGB')
+Voorraadwaarde: €2399.97
 ```
 
 ## Deel b: Winkelwagen met list type hint
