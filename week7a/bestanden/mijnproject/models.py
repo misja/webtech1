@@ -1,6 +1,8 @@
 from mijnproject import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String
 
 
 @login_manager.user_loader
@@ -16,7 +18,7 @@ def load_user(user_id: int):
     Returns:
         User object of None als niet gevonden
     """
-    return User.query.get(user_id)
+    return db.session.get(User, int(user_id))
 
 
 class User(db.Model, UserMixin):
@@ -24,10 +26,10 @@ class User(db.Model, UserMixin):
 
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(64), unique=True, index=True)
-    username = db.Column(db.String(64), unique=True, index=True)
-    password_hash = db.Column(db.String(128))
+    id: Mapped[int] = mapped_column(primary_key=True)
+    email: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    username: Mapped[str] = mapped_column(String(64), unique=True, index=True)
+    password_hash: Mapped[str | None] = mapped_column(String(128))
 
     def __init__(self, email: str, username: str, password: str):
         """Maak nieuwe gebruiker aan.

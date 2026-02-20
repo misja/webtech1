@@ -52,7 +52,7 @@ def login() -> str | Response:
     """
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = db.session.execute(db.select(User).filter_by(email=form.email.data)).scalar_one_or_none()
 
         if user is not None and user.check_password(form.password.data):
             login_user(user)

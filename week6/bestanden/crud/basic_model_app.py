@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import Mapped, mapped_column
 
 ######################################
 #### SET UP OUR SQLite DATABASE #####
@@ -29,11 +30,11 @@ class Cursist(db.Model):
     #########################################
 
     # Primary Key column, uniek voor iedere cursist
-    id = db.Column(db.Integer, primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True)
     # Naam van de cursist, als tekst
-    naam = db.Column(db.Text)
+    naam: Mapped[str | None]
     # Leeftijd van de cursist, als getal
-    leeftijd = db.Column(db.Integer)
+    leeftijd: Mapped[int | None]
 
     # Hier wordt aangegeven wat iedere instantie meekrijgt aan het begin
     # Merk op dat de ID later automatisch voor ons wordt aangemaakt, dus we voegen deze hier niet toe!

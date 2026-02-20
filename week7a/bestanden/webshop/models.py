@@ -2,7 +2,6 @@
 SQLAlchemy models voor de webshop applicatie met User Authentication (Week 7a).
 
 Dit bestand bevat alle database models (ORM) voor de webshop.
-We gebruiken SQLAlchemy in plaats van raw SQL queries.
 
 Week 7a toevoegingen:
 - Flask-Login integratie voor user authentication
@@ -17,10 +16,12 @@ Models:
 - Order: Bestellingen (met foreign key naar Customer)
 - OrderItem: Bestelregels (many-to-many tussen Order en Product)
 """
-from datetime import datetime
+from datetime import datetime, timezone
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import String, ForeignKey
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -39,7 +40,7 @@ def load_user(user_id: int) -> 'Customer | None':
     Returns:
         De Customer instantie als gevonden, anders None
     """
-    return Customer.query.get(int(user_id))
+    return db.session.get(Customer, int(user_id))
 
 
 class Category(db.Model):
@@ -50,12 +51,12 @@ class Category(db.Model):
     """
     __tablename__ = 'categories'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.Text)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(100))
+    description: Mapped[str | None]
 
     # Relationship
-    products = db.relationship('Product', backref='category', lazy=True)
+    products: Mapped[list['Product']] = relationship(back_populates='category')
 
     def __init__(self, name: str, description: str | None = None):
         """Maak nieuwe categorie aan.
@@ -93,22 +94,23 @@ class Product(db.Model):
         category_id: Foreign key naar Category
 
     Relationships:
-        category: Many-to-One naar Category (via backref)
+        category: Many-to-One naar Category
         order_items: One-to-Many naar OrderItem
     """
     __tablename__ = 'products'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    stock = db.Column(db.Integer, nullable=False, default=0)
-    description = db.Column(db.Text)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(200))
+    price: Mapped[float]
+    stock: Mapped[int] = mapped_column(default=0)
+    description: Mapped[str | None]
 
     # Foreign Key
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
+    category_id: Mapped[int] = mapped_column(ForeignKey('categories.id'))
 
-    # Relationship
-    order_items = db.relationship('OrderItem', backref='product', lazy=True)
+    # Relationships
+    category: Mapped['Category'] = relationship(back_populates='products')
+    order_items: Mapped[list['OrderItem']] = relationship(back_populates='product')
 
     def __init__(
         self,
@@ -167,15 +169,15 @@ class Customer(db.Model, UserMixin):
     """
     __tablename__ = 'customers'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False, index=True)
-    password_hash = db.Column(db.String(200))
-    is_admin = db.Column(db.Boolean, default=False)  # Admin vs Customer
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(100))
+    email: Mapped[str] = mapped_column(String(120), unique=True, index=True)
+    password_hash: Mapped[str | None] = mapped_column(String(200))
+    is_admin: Mapped[bool] = mapped_column(default=False)
+    created_at: Mapped[datetime] = mapped_column(default=lambda: datetime.now(timezone.utc))
 
     # Relationship
-    orders = db.relationship('Order', backref='customer', lazy=True)
+    orders: Mapped[list['Order']] = relationship(back_populates='customer')
 
     def __init__(self, name: str, email: str, password: str, is_admin: bool = False):
         """Maak nieuwe klant aan met authenticatie.
@@ -230,19 +232,22 @@ class Order(db.Model):
         total_amount: Totaalbedrag
 
     Relationships:
-        customer: Many-to-One naar Customer (via backref)
+        customer: Many-to-One naar Customer
         order_items: One-to-Many naar OrderItem
     """
     __tablename__ = 'orders'
 
-    id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'), nullable=False)
-    order_date = db.Column(db.DateTime, default=datetime.utcnow)
-    status = db.Column(db.String(50), default='Pending')  # Pending, Confirmed, Shipped, Delivered
-    total_amount = db.Column(db.Float, default=0.0)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    customer_id: Mapped[int] = mapped_column(ForeignKey('customers.id'))
+    order_date: Mapped[datetime] = mapped_column(default=lambda: datetime.now(timezone.utc))
+    status: Mapped[str] = mapped_column(String(50), default='Pending')  # Pending, Confirmed, Shipped, Delivered
+    total_amount: Mapped[float] = mapped_column(default=0.0)
 
-    # Relationship
-    order_items = db.relationship('OrderItem', backref='order', lazy=True, cascade='all, delete-orphan')
+    # Relationships
+    customer: Mapped['Customer'] = relationship(back_populates='orders')
+    order_items: Mapped[list['OrderItem']] = relationship(
+        back_populates='order', cascade='all, delete-orphan'
+    )
 
     def __init__(self, customer_id: int):
         """Maak nieuwe bestelling aan.
@@ -287,16 +292,20 @@ class OrderItem(db.Model):
         price: Prijs op moment van bestellen
 
     Relationships:
-        order: Many-to-One naar Order (via backref)
-        product: Many-to-One naar Product (via backref)
+        order: Many-to-One naar Order
+        product: Many-to-One naar Product
     """
     __tablename__ = 'order_items'
 
-    id = db.Column(db.Integer, primary_key=True)
-    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
-    quantity = db.Column(db.Integer, nullable=False, default=1)
-    price = db.Column(db.Float, nullable=False)  # Prijs op moment van bestellen
+    id: Mapped[int] = mapped_column(primary_key=True)
+    order_id: Mapped[int] = mapped_column(ForeignKey('orders.id'))
+    product_id: Mapped[int] = mapped_column(ForeignKey('products.id'))
+    quantity: Mapped[int] = mapped_column(default=1)
+    price: Mapped[float]  # Prijs op moment van bestellen
+
+    # Relationships
+    order: Mapped['Order'] = relationship(back_populates='order_items')
+    product: Mapped['Product'] = relationship(back_populates='order_items')
 
     def __init__(self, order_id: int, product_id: int, quantity: int, price: float):
         """Maak nieuwe bestelregel aan.
