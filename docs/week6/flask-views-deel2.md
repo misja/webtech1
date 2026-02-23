@@ -193,3 +193,17 @@ Wanneer je `setup_database.py` runt:
 - Twee records worden toegevoegd
 
 **Volgende stap:** [Deel 3](flask-views-deel3.md) - CRUD operaties uitvoeren.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **Basedir bepalen**: met `os.path.abspath(os.path.dirname(__file__))` stel je platformonafhankelijk het absolute pad in van de map waarin je bestand staat.
+- **Database-URI**: via `app.config['SQLALCHEMY_DATABASE_URI']` vertel je Flask waar het SQLite-bestand (`data.sqlite`) staat.
+- **SQLALCHEMY_TRACK_MODIFICATIONS**: deze instelling schakel je expliciet uit (op `False`) om onnodig geheugengebruik te vermijden.
+- **SQLAlchemy koppelen**: `db = SQLAlchemy(app)` maakt het `db`-object aan waarmee je alle database-operaties uitvoert.
+- **Model definiëren**: een modelklasse erft van `db.Model`, gebruikt `Mapped` en `mapped_column` voor kolomdefinities, en bevat een `__init__`- en een `__repr__`-methode.
+- **Tabelnaam aanpassen**: met het klasse-attribuut `__tablename__` geef je de databasetabel een andere naam dan de standaard (lowercase klassenaam).
+- **Tabellen aanmaken**: `db.create_all()` leest alle models en maakt de bijbehorende tabellen aan in de database.
+- **Records toevoegen**: met `db.session.add_all([...])` gevolgd door `db.session.commit()` voeg je meerdere objecten tegelijk toe en sla je ze definitief op.
+- **Automatische ID's**: primaire sleutels worden pas toegewezen na `db.session.commit()`; daarna zijn ze als attribuut op het object beschikbaar.

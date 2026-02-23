@@ -335,3 +335,16 @@ drums.cursist.naam  # "Joyce"
 ```
 
 **Volgende stap:** [Deel 5](flask-views-deel5.md) - Complete Flask applicatie met database.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **Primary key**: elke tabel heeft een uniek `id`-veld als primaire sleutel waarmee een rij eenduidig geïdentificeerd kan worden.
+- **Foreign key**: een relatie tussen tabellen leg je vast met een `ForeignKey`-kolom die verwijst naar de `id` van een andere tabel; je gebruikt de tabelnaam (bijv. `'cursisten.id'`), niet de klassenaam.
+- **Één-op-veel relatie**: door `Mapped[list['Model']]` te combineren met `relationship(back_populates=...)` koppel je één bovenliggende rij aan meerdere gerelateerde rijen.
+- **Één-op-één relatie**: `Mapped['Model | None']` samen met `relationship(back_populates=...)` koppelt twee rijen één-op-één aan elkaar.
+- **back_populates**: dit parameter synchroniseert de relatie in beide richtingen, zodat je zowel van de bovenliggende als van de onderliggende kant kunt navigeren.
+- **Flask-Migrate**: dit pakket beheert databaseschema-wijzigingen via migratiescripts en installeert met `uv add flask-migrate`; koppelen doe je via `Migrate(app, db)`.
+- **Migratieworkflow**: na modelwijzigingen voer je achtereenvolgens `flask db init`, `flask db migrate -m "..."` en `flask db upgrade` uit om de database bij te werken.
+- **Navigeren via relaties**: dankzij `back_populates` kun je vanuit een object direct gerelateerde objecten ophalen (bijv. `joyce.instrumenten`) of omgekeerd (bijv. `drums.cursist`).

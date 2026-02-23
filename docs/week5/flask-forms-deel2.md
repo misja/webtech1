@@ -345,3 +345,16 @@ return render_template('form.html', form=form)
 Als je na POST de template direct returnt, kan de gebruiker de pagina refreshen en het formulier opnieuw verzenden. Met redirect gaat de browser naar een GET request.
 
 **Volgende stap:** [Deel 3](flask-forms-deel3.md) - Flash messages.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **Validators**: invoercontroles die je als lijst meegeeft aan een veld, zoals `DataRequired()`, `Email()`, `Length(min, max)`, `EqualTo()` en `URL()`
+- **Field types**: WTForms biedt velden voor elk HTML-invoertype, waaronder `StringField`, `BooleanField`, `RadioField`, `SelectField`, `TextAreaField` en `PasswordField`
+- **RadioField en SelectField**: keuzevelden waarbij elke optie een tuple is van `(opgeslagen_waarde, weergave_tekst)`; de opgeslagen waarde is beschikbaar via `form.veld.data`
+- **Flask sessions**: tijdelijke opslag van data tussen requests via versleutelde client-side cookies; opslaan met `session['key'] = value` en uitlezen in templates via `{{ session['key'] }}`
+- **Sessions en SECRET_KEY**: session data wordt versleuteld met de `SECRET_KEY`; zonder geldige sleutel kan niemand de data lezen of aanpassen
+- **redirect en url_for**: na een POST-verzoek door sturen naar een andere route zodat de browser een GET-request uitvoert
+- **Post-Redirect-Get patroon**: na het verwerken van een formulier altijd redirecten om dubbele form submissions bij een pagina-refresh te voorkomen
+- **Validator feedback**: wanneer een verplicht veld leeg blijft blokkeert Flask-WTF het verzenden en toont de browser het formulier opnieuw met een foutindicatie

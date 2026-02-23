@@ -385,3 +385,15 @@ Bovendien worden er de nodige blueprints in de code opgenomen. Tot slot van deze
 │   └── models.py
 └── app.py
 ```
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **Mappenstructuur aanmaken**: de volledige directory-boom wordt stapsgewijs opgezet met mijnproject/, docenten/, studenten/, templates/ en de benodigde Python-bestanden
+- **`models.py`**: bevat de SQLAlchemy-modellen Docent en Student met typed mapped columns en een één-op-één relatie; de db-koppeling wordt later gelegd via `__init__.py`
+- **`__init__.py`**: initialiseert de Flask-app, configureert de SQLite-database en Flask-Migrate; bevat bewust geen routes, want die worden per subcomponent in eigen views.py-bestanden ondergebracht
+- **`forms.py` per module**: elke module (docenten, studenten) heeft een eigen forms.py met een AddForm; dezelfde klassenaam kan hergebruikt worden doordat de bestanden in aparte directories staan
+- **HTML-templates**: base.html en home.html op projectniveau; add.html, delete.html en list.html voor docenten; add.html voor studenten, elk geplaatst in een bijbehorende submap
+- **Copy-paste-strategie**: bestaande code van de vorige oefenopdracht wordt grotendeels overgenomen en op de juiste locatie in de nieuwe structuur gezet, zonder inhoudelijke wijzigingen
+- **Openstaande aandachtspunten**: blueprints moeten nog worden toegevoegd en de url_for()-links in de navigatiebalk moeten worden bijgewerkt naar de nieuwe structuur

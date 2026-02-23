@@ -250,4 +250,17 @@ class LoginForm(FlaskForm):
 
 Ook hier geldt dat het inlogformulier eigenschappen overneemt van `FlaskForm`. Verder is er niet zo veel bijzonders bij dit formulier te vermelden. Zoals al wel vaker gezegd, meer van hetzelfde.
 
-Het formulier kent twee velden, eentje om de gebruikersnaam in te geven en het tweede veld is beschikbaar voor het wachtwoord. Tenslotte kan het inloggen worden afgesloten door op de knop met het opschrift ‘Inloggen’ te klikken.
+Het formulier kent twee velden, eentje om de gebruikersnaam in te geven en het tweede veld is beschikbaar voor het wachtwoord. Tenslotte kan het inloggen worden afgesloten door op de knop met het opschrift 'Inloggen' te klikken.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **Flask-Login**: een bibliotheek die sessie- en gebruikersbeheer verzorgt, waaronder inloggen, uitloggen en het onthouden van gebruikerssessies
+- **LoginManager**: het centrale object uit Flask-Login dat via `init_app()` aan de app gekoppeld wordt en via `login_view` aangeeft waar gebruikers kunnen inloggen
+- **UserMixin**: een superklasse die de `User`-klasse standaardmethoden geeft zoals `is_authenticated()`, `is_active()`, `is_anonymous()` en `get_id()`
+- **Wachtwoord hashing in het model**: het wachtwoord wordt bij het aanmaken van een gebruiker direct gehashed opgeslagen; de plain-text variant wordt nergens bewaard
+- **`check_password()`-methode**: controleert bij het inloggen of het ingevoerde wachtwoord overeenkomt met de opgeslagen hash
+- **`user_loader`-decorator**: laadt de huidige gebruiker op basis van het sessie-ID, zodat Flask-Login de ingelogde gebruiker bij elke aanvraag automatisch kan opzoeken
+- **`RegistrationForm`**: een WTForms-formulier met validaties voor uniek e-mailadres, unieke gebruikersnaam en wachtwoordbevestiging via `EqualTo`
+- **`LoginForm`**: een eenvoudig formulier met een e-mailadres- en wachtwoordveld voor bestaande gebruikers

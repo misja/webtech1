@@ -338,3 +338,17 @@ def verzend_formulier(naam: str, email: str) -> None:
 ```
 
 **Volgende stap:** Maak nu [oefening 1](oefeningen/flask-forms-oefening1.md).
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **Flash messages**: tijdelijke berichten versturen naar de template met `flash('bericht')` vanuit een view function
+- **get_flashed_messages()**: haalt alle flash messages op in de template via een `{% for %}`-lus; berichten worden automatisch verwijderd na één keer tonen
+- **Flash categorieën**: een categorie meegeven als tweede argument aan `flash()`, zoals `'success'`, `'warning'`, `'danger'` of `'info'`, voor gedifferentieerde weergave
+- **with_categories**: met `get_flashed_messages(with_categories=true)` haal je zowel de categorie als het bericht op als tuple zodat je de stijl kunt afstemmen op het type bericht
+- **Bootstrap 5 integratie**: Bootstrap alert classes (`alert-success`, `alert-warning`, `alert-danger`, `alert-info`) koppelen aan de flash categorie voor automatische kleuropmaak via `alert-{{ category }}`
+- **alert-dismissible**: Bootstrap klasse die samen met `.btn-close` een sluitknopje toevoegt waarmee de gebruiker een melding handmatig kan verwijderen
+- **fade show**: Bootstrap klassen die een fade-animatie geven bij het sluiten van een alert
+- **ARIA-attributen**: `role="alert"` en `aria-label="Close"` maken Bootstrap-alerts toegankelijk voor schermlezers
+- **PRG-patroon met flash**: na een succesvolle formulierverwerking redirecten én een flash message toevoegen voorkomt dubbele submissions en geeft de gebruiker directe bevestiging

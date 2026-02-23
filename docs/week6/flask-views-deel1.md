@@ -66,3 +66,14 @@ Vergelijkbaar met `FlaskForm`, maar dan voor database tabellen:
 Je gebruikt SQLAlchemy methoden om records toe te voegen, op te vragen, te wijzigen en te verwijderen.
 
 **Volgende stap:** [Deel 2](flask-views-deel2.md) - Database setup en models.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **ORM**: een Object Relational Mapper is een abstractielaag waarmee je database-bewerkingen uitvoert via Python-objecten in plaats van rechtstreekse SQL.
+- **SQLAlchemy en Flask-SQLAlchemy**: SQLAlchemy is de meest gebruikte Python ORM; Flask-SQLAlchemy is de bijbehorende Flask-extensie die installeerbaar is via `uv add flask-sqlalchemy`.
+- **Architectuurlagen**: een Flask-applicatie met database werkt in lagen — browser → Flask (routes & templates) → SQLAlchemy ORM → SQL → SQLite.
+- **CRUD**: de vier basisoperaties op een database zijn Create, Read, Update en Delete.
+- **Models**: een model is een Python-klasse die erft van `db.Model` en een databasetabel representeert; kolommen worden als klasse-attributen gedefinieerd.
+- **Werkwijze in drie stappen**: eerst de database configureren, dan models definiëren, en ten slotte CRUD-operaties uitvoeren.

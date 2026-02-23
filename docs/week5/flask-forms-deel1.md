@@ -221,3 +221,16 @@ def index() -> str:
 ```
 
 **Volgende stap:** [Deel 2](flask-forms-deel2.md) - Validators en field types.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **Flask-WTF installeren**: via `uv add flask-wtf`, wat ook WTForms automatisch als dependency installeert
+- **Formulier componenten**: een WTForms formulier bestaat uit vier onderdelen: secret key configuratie, een form class, een view function en een template
+- **FlaskForm**: basisklasse voor alle WTForms formulieren; velden zoals `StringField` en `SubmitField` worden gedefinieerd als klasse-attributen
+- **SECRET_KEY**: verplichte configuratie voor CSRF-beveiliging en Flask sessions; nooit hardcoden in productie, gebruik in plaats daarvan een environment variabele
+- **validate_on_submit()**: controleert of het formulier via POST is ingediend én alle validaties doorstaan heeft; retourneert `False` bij een GET-request
+- **form.hidden_tag()**: voegt een verborgen CSRF token toe aan het formulier in de template; zonder dit token weigert Flask-WTF het formulier
+- **GET/POST request cycle**: bij een GET-request wordt het lege formulier getoond; bij een POST-request wordt de ingediende data uitgelezen via `form.veld.data`
+- **CSRF-beveiliging**: Flask-WTF valideert het CSRF token automatisch bij elke POST-request om Cross-Site Request Forgery aanvallen te voorkomen

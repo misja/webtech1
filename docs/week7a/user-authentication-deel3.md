@@ -198,3 +198,15 @@ if __name__ == '__main__':
 ```
 
 Omdat er straks weer getest wordt, heeft debug de waarde `True` meegekregen zodat bij ieder foutje onmiddellijk in beeld verschijnt waar de fout gevonden kan worden. Werkt de applicatie feilloos en kan deze in productie genomen worden, mag debug zeker niet meer de status `True` hebben.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **`login_required`-decorator**: beveiligt een view zodat alleen ingelogde gebruikers er toegang toe hebben; niet-ingelogde gebruikers worden automatisch doorgestuurd naar de loginpagina
+- **`login_user()`**: Flask-Login-functie die de gebruiker officieel inlogt en de sessiegegevens bijhoudt
+- **`logout_user()`**: Flask-Login-functie die de sessie beëindigt en de gebruiker uitlogt; de view is zelf ook beveiligd met `@login_required`
+- **`next`-parameter**: slaat de oorspronkelijk gevraagde URL op zodat de gebruiker na een succesvolle aanmelding automatisch teruggestuurd wordt naar de gewenste pagina
+- **Login-view**: verwerkt een POST-verzoek door het e-mailadres op te zoeken in de database en het wachtwoord te controleren via `check_password()`
+- **Registratie-view**: maakt na succesvolle formuliervalidatie een nieuw `User`-object aan en slaat dit op in de database, waarna de gebruiker wordt doorgestuurd naar de loginpagina
+- **`flash()`-berichten**: tonen een korte melding na acties zoals inloggen, uitloggen en registreren om de gebruiker te informeren over het resultaat

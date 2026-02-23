@@ -78,3 +78,15 @@ Tijd om de definitieve structuur aan te brengen voor deze applicatie. Let op, di
     Het vastzetten van modules en bijbehorende versienummers is een manier om een repliceerbare omgeving voor een applicatie te gegaranderen, bijvoorbeeld als het live op een server moet draaien of wanneer je met andere mensen aan een project gaat samenwerken.
 
 In de volgende paragraaf wordt een applicatie omgeschreven naar een meer overzichtelijke vorm. Als voorbeeld gebruiken we de applicatie van de oefening uit het deel waarin voor het eerst een website gebouwd is.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **Refactoring**: het herschikken van de codestructuur zonder de functionaliteit te wijzigen; een monolithisch bestand (mentor_site.py) wordt opgesplitst in afzonderlijke componenten
+- **Projectstructuur**: een Flask-applicatie krijgt een vaste hiërarchie met een hoofdbestand app.py en een projectmap met subfolders per domein (docenten, studenten)
+- **Scheiding van verantwoordelijkheden**: models, views, forms en templates worden elk in eigen bestanden en mappen per onderdeel ondergebracht
+- **`requirements.txt`**: bestand dat alle Python-afhankelijkheden inclusief versienummers vastlegt, zodat de omgeving reproduceerbaar is op andere machines of servers
+- **`pip freeze`**: commando om geïnstalleerde pakketten naar requirements.txt te exporteren; `pip install -r requirements.txt` installeert ze opnieuw in een nieuwe omgeving
+- **`static`-map**: vaste locatie binnen het project voor CSS, JavaScript, afbeeldingen en lettertypen
+- **Blueprints (preview)**: Flask-mechanisme waarmee modulaire subcomponenten straks aan de hoofdapplicatie gekoppeld kunnen worden via een url_prefix

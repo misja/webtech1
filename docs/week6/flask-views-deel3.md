@@ -140,3 +140,15 @@ Cursist Bram is 24 jaar oud
     Vergeet `db.session.commit()` niet! Zonder commit worden wijzigingen niet opgeslagen in de database.
 
 **Volgende stap:** [Deel 4](flask-views-deel4.md) - Relaties tussen tabellen.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **CREATE**: een nieuw record toevoeg je door een object aan te maken, het met `db.session.add()` aan de sessie toe te voegen en daarna `db.session.commit()` aan te roepen.
+- **READ (alle records)**: `db.session.execute(db.select(Model)).scalars().all()` geeft een lijst van alle records terug.
+- **READ (op primaire sleutel)**: `db.session.get(Model, id)` haalt één record op aan de hand van het ID.
+- **READ (filteren)**: met `.filter_by(attribuut=waarde)` gecombineerd met `.scalar_one_or_none()` zoek je op een specifieke kolomwaarde.
+- **UPDATE**: haal een record op, pas het gewenste attribuut aan en roep `db.session.commit()` aan; `db.session.add()` is optioneel omdat SQLAlchemy wijzigingen automatisch bijhoudt.
+- **DELETE**: haal een record op, roep `db.session.delete(obj)` aan en commit de sessie.
+- **Altijd committen**: zonder `db.session.commit()` worden wijzigingen niet definitief opgeslagen in de database.

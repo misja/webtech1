@@ -34,3 +34,14 @@ Uit een database kunnen titel en gebruikersnaam opgevraagd worden en worden inge
 Flask wordt dus een microframework genoemd. Het is ontworpen om de kern van de applicatie eenvoudig en schaalbaar te houden. In plaats van een abstractielaag voor database-ondersteuning, ondersteunt Flask uitbreidingen om dergelijke mogelijkheden aan de applicatie toe te voegen.
 
 **Volgende stap:** [Deel 2](flask-deel2.md) - Flask installeren met uv.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **Flask**: een Python microframework voor het bouwen van webapplicaties, met ingebouwde url-routing en een template-engine
+- **Microframework**: Flask houdt de kern klein en uitbreidbaar; functionaliteit zoals database-ondersteuning wordt via extensies toegevoegd in plaats van ingebouwd te zijn
+- **Web Application Framework**: een verzameling bibliotheken waarmee webapplicaties ontwikkeld worden zonder details op laag niveau zoals protocol- en threadbeheer
+- **WSGI**: de Web Server Gateway Interface, de standaard interface tussen webservers en Python-webapplicaties
+- **Werkzeug**: de WSGI-toolkit waarop Flask is gebouwd, die request- en response-afhandeling verzorgt
+- **Jinja2**: de template-engine van Flask, waarmee Python-variabelen in HTML-sjablonen ingevoegd worden via dubbele accolades (`{{ variabele }}`)

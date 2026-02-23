@@ -192,7 +192,7 @@ Tot zover het testen. Er kunnen nog veel meer opties bekeken worden op hun gedra
 
 ## Samenvatting
 
-Je hebt nu een complete user authentication systeem gebouwd met Flask-Login. De belangrijkste onderdelen die je hebt geleerd zijn:
+Je hebt nu een compleet user authentication systeem gebouwd met Flask-Login. De belangrijkste onderdelen die je hebt geleerd zijn:
 
 ### Beveiliging
 

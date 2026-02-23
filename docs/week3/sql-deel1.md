@@ -52,3 +52,14 @@ Handige punt-commando's (vergelijkbaar met `\d` commando's in psql):
     - Handig tijdens Flask development om snel data te controleren
 
 **Volgende stap:** [Python exceptions](python-exceptions.md) - nodig voor deel 2.
+
+## Samenvatting
+
+In deze les heb je geleerd:
+
+- **SQLite**: een lichtgewicht database die als één bestand werkt, zonder serverinstallatie, en standaard meegeleverd wordt met Python
+- **SQLite CLI op macOS/Linux**: de `sqlite3`-tool is standaard beschikbaar en direct te starten met `sqlite3 bestandsnaam.db`
+- **SQLite installeren op Windows**: via `winget install SQLite.SQLite` of handmatig downloaden en de map toevoegen aan de PATH-omgevingsvariabele
+- **Database openen via de CLI**: `sqlite3 <bestandsnaam>` opent een bestaande database of maakt een nieuw bestand aan
+- **Punt-commando's**: `.tables` toont alle tabellen, `.schema` toont de tabelstructuur, `.quit` sluit de CLI af
+- **DB Browser for SQLite**: een grafische tool om visueel met SQLite te werken, vergelijkbaar met pgAdmin voor PostgreSQL
