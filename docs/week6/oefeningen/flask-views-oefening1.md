@@ -9,7 +9,7 @@ Je bouwt een platform voor de Hanzehogeschool waar studenten aan mentoren gekopp
 
 Maak een beheersysteem waarin docenten en studenten toegevoegd en verwijderd kunnen worden, en waar de mentor-relaties zichtbaar zijn.
 
-![Uiterlijk van de website](../imgs/oefening-1-home.png)
+> **Verwacht resultaat:** Een homepage met Bootstrap navigatiebalk bovenaan met links naar alle secties (Home, Voeg docent toe, Voeg student toe, Toon overzicht, Verwijder). De pagina toont een welkomsttekst met een uitnodiging om een item uit de navigatiebalk te selecteren.
 
 ## Requirements
 

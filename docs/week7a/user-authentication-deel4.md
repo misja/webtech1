@@ -171,22 +171,22 @@ Tot zover alle code die nodig is om een inlogsysteem op te zetten. Nu komt weer 
 
 Na het runnen van `app.py`:
 
-![home pagina vóór het inloggen](imgs/eerste-pagina.png)
+> **Verwacht resultaat:** Een kaart met een welkomstbericht en knoppen/links om in te loggen of te registreren.
 
 Registreren ('<joyce@sessions.com>' en het wachtwoord 'geheim'):
 
-![De registreer pagina](imgs/registreren.png)
+> **Verwacht resultaat:** Een registratieformulier met velden voor e-mailadres, gebruikersnaam, wachtwoord en wachtwoordbevestiging.
 
 Inloggen:
 
-![De inlog pagina](imgs/inloggen.png)
+> **Verwacht resultaat:** Een inlogformulier met velden voor e-mailadres en wachtwoord.
 
 Na inloggen:
-![Het resultaat van welkom.html](imgs/na-inloggen.png)
+> **Verwacht resultaat:** Een welkomstpagina met de melding "Gefeliciteerd! Inloggen gelukt!"
 
 Een klik op Home:
 
-![De home pagina ná het inloggen](imgs/home-ingelogd.png)
+> **Verwacht resultaat:** De homepagina toont een gepersonaliseerde begroeting met de gebruikersnaam en een optie om uit te loggen in de navigatiebalk.
 
 Tot zover het testen. Er kunnen nog veel meer opties bekeken worden op hun gedrag, maar voor nu is dit even voldoende.
 

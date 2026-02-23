@@ -94,7 +94,7 @@ Je ziet output zoals:
 
 Open je browser en ga naar `http://127.0.0.1:5000/`:
 
-![De eerste Flask pagina](imgs/index.png)
+> **Verwacht resultaat:** De browser toont de homepage met de tekst "Welkom bij muziekschool Session" als grote kop (`<h1>`), zonder verdere opmaak of stijl.
 
 !!! warning "Development server"
     De Flask development server is ALLEEN voor development! Voor productie gebruik je een echte WSGI server zoals Gunicorn of uWSGI.
@@ -137,7 +137,7 @@ Nu kun je naar drie verschillende URLs gaan:
 - `http://127.0.0.1:5000/informatie` → Informatiepagina
 - `http://127.0.0.1:5000/contact` → Contactpagina
 
-![Een tweede pagina in Flask](imgs/informatie.png)
+> **Verwacht resultaat:** De browser toont de `/informatie` pagina met de kop "Dit hebben we jou te bieden:" gevolgd door de tekst "Piano, gitaar, drums, zang".
 
 !!! info "Auto-reload met debug mode"
     Met `debug=True` hoef je de server niet handmatig te herstarten. Flask detecteert wijzigingen en herstart automatisch!
@@ -146,7 +146,7 @@ Nu kun je naar drie verschillende URLs gaan:
 
 Als je naar een route gaat die niet bestaat (bijv. `http://127.0.0.1:5000/nope`), krijg je een 404 error:
 
-![Pagina die niet bestaat](imgs/bestaat-niet.png)
+> **Verwacht resultaat:** De browser toont de standaard Flask 404-foutpagina met de melding "Not Found" en de uitleg dat de gevraagde URL niet op de server bestaat.
 
 Je kunt custom error pages maken voor 404s.
 
@@ -181,7 +181,7 @@ def cursist(naam: str) -> str:
 - `http://localhost:5000/cursist/Joyce` → Pagina van Joyce
 - `http://localhost:5000/cursist/Ralf` → Pagina van Ralf
 
-![De pagina van Henk](imgs/cursist_Henk.png)
+> **Verwacht resultaat:** De browser toont de pagina voor de route `/cursist/Henk` met de tekst "Dit is de pagina van Henk" als grote kop.
 
 ### URL parameters met types
 
@@ -218,7 +218,7 @@ def prijs(bedrag: float) -> str:
 - `<path:variabele>` → string met slashes (voor file paths)
 - `<uuid:variabele>` → UUID string
 
-![URL met int parameter](imgs/product_123.png)
+> **Verwacht resultaat:** De browser toont de pagina voor `/product/123` met de kop "Product 123". Flask heeft de `<int:product_id>` parameter automatisch als integer verwerkt.
 
 ### Meerdere parameters
 
@@ -255,7 +255,7 @@ Start server ZONDER debug: `app.run()` (zonder `debug=True`)
 
 Navigeer naar `http://localhost:5000/fout/Jan` (3 karakters, geen 20e):
 
-![Niet-informatieve foutmelding](imgs/lengte_Karel.png)
+> **Verwacht resultaat:** De browser toont een generieke "500 Internal Server Error" pagina zonder verdere details. Er is geen uitleg over de oorzaak van de fout zichtbaar.
 
 Weinig informatie, moeilijk te debuggen!
 
@@ -265,7 +265,7 @@ Zet `debug=True` aan: `app.run(debug=True)`
 
 Nu krijg je een **interactieve debugger**:
 
-![Informatieve foutmelding](imgs/lengte_Joyce.png)
+> **Verwacht resultaat:** De browser toont de Flask interactieve debugger met de volledige stack trace, de exacte foutmelding (`IndexError: string index out of range`), en de regelnummer in de code waar de fout optrad.
 
 Je ziet:
 

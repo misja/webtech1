@@ -94,7 +94,7 @@ uv run python app.py
 
 Ga naar `http://127.0.0.1:5000/` - je ziet de template met afbeelding!
 
-![Template met drumstel](imgs/drumstel.png)
+> **Verwacht resultaat:** De browser toont de gerenderde template met de kop "Welkom bij muziekschool Session", een subkop "Dit drumstel wordt gebruikt tijdens de lessen", en een afbeelding van een drumstel.
 
 ## Variabelen doorgeven aan templates
 
@@ -140,7 +140,7 @@ def cursist(naam: str) -> str:
 
 **Result:** Navigeer naar `http://localhost:5000/cursist/Joyce`
 
-![Template met variabelen](imgs/template_cursist_Joyce.png)
+> **Verwacht resultaat:** De browser toont de pagina voor `/cursist/Joyce` met de kop "Hallo Joyce!" en de tekst "Je bent cursist nummer 42".
 
 ## Data types in templates
 
@@ -189,7 +189,7 @@ def demo() -> str:
 
 **Result:**
 
-![Demo met verschillende types](imgs/demo.png)
+> **Verwacht resultaat:** De browser toont de `/demo` pagina met de naam "Joyce", de letters als lijst (`['J', 'o', 'y', 'c', 'e']`), het cursistenwoordenboek, de laatste twee letters via slicing (`['c', 'e']`), en de waarde voor sleutel "1234" (`Sietse`).
 
 Je kunt Python syntax gebruiken in templates:
 
@@ -243,7 +243,7 @@ def cursisten() -> str:
 
 **Result:**
 
-![Cursisten lijst](imgs/cursisten.png)
+> **Verwacht resultaat:** De browser toont de `/cursisten` pagina met de kop "Onze cursisten" en een ongeordende lijst met de namen Joyce, Sietse, Carla en Henk als afzonderlijke items.
 
 ### If statements
 
@@ -276,7 +276,7 @@ Voeg conditionele logica toe aan templates:
 
 **Result:**
 
-![If statement in template](imgs/cursisten2.png)
+> **Verwacht resultaat:** De browser toont de cursistenlijst gevolgd door de subkop "Komt Carla voor in de lijst?" met daaronder de bevestigende tekst "Carla komt in de lijst voor!" omdat de `if`-conditie waar is.
 
 **If-elif-else:**
 

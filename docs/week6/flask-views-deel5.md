@@ -23,7 +23,17 @@ Je maakt de volgende bestanden:
 - `toon_cur.html` - Cursisten tonen
 - `verwijder_cur.html` - Cursist verwijderen
 
-![Het overzicht van de bestanden](imgs/5-bestanden.png)
+```text
+project/
+├── beheer_cursist.py
+├── forms.py
+└── templates/
+    ├── base.html
+    ├── home.html
+    ├── voegtoe_cur.html
+    ├── toon_cur.html
+    └── verwijder_cur.html
+```
 
 ## Stap 1: Database en model setup
 
@@ -359,51 +369,56 @@ uv run python beheer_cursist.py
 
 ### Homepage
 
-![Home pagina](imgs/home.png)
+> **Verwacht resultaat:** Een Bootstrap-pagina met een navigatiebalk bovenaan met links: Home, Voeg cursist toe, Toon cursisten, Verwijder cursist. De pagina toont een jumbotron-blok met de tekst "Welkom bij de beheersite van onze cursisten" en een instructie om een item uit de navigatiebalk te selecteren.
 
 ### Cursist toevoegen
 
 Klik "Voeg cursist toe":
 
-![Voeg een nieuwe cursist toe](imgs/voeg-cursist-toe.png)
+> **Verwacht resultaat:** Een formulierpagina met de titel "Heeft zich een nieuwe cursist aangemeld?", een tekstveld met het label "Vul de naam van de nieuwe cursist in:" en een knop "Voeg toe".
 
 Vul "Joyce" in en klik "Voeg toe":
 
-![Joyce wordt toegevoegd als nieuwe cursist](imgs/joyce-als-eerste.png)
+> **Verwacht resultaat:** Hetzelfde formulier als hierboven, maar nu met "Joyce" ingevuld in het naamveld.
 
 Na submit zie je de lijst:
 
-![Momenteel ingeschreven cursisten: alleen Joyce](imgs/joyce-toegevoegd.png)
+> **Verwacht resultaat:** De cursistenpagina met de titel "Dit zijn de momenteel ingeschreven cursisten" en één item in de lijst: "Naam van de cursist: Joyce" (id=1).
 
 ### Nog een cursist toevoegen
 
 Voeg "Bram" toe:
 
-![Bram wordt toegevoegd als cursist](imgs/bram-toevoegen.png)
+> **Verwacht resultaat:** Het toevoegformulier met "Bram" ingevuld in het naamveld.
 
 Lijst met twee cursisten:
 
-![Overzicht van de momenteel ingeschreven cursisten: Joyce en Bram](imgs/ingeschreven-cursisten.png)
+> **Verwacht resultaat:** De cursistenpagina met twee items in de lijst: "Naam van de cursist: Joyce" en "Naam van de cursist: Bram".
 
 ### Cursist verwijderen
 
 Klik "Verwijder cursist". Bram heeft `id=2` (zie in database of lijst):
 
-![De data die in de tabel staat](imgs/browse-data.png)
+| id | naam  |
+|----|-------|
+| 1  | Joyce |
+| 2  | Bram  |
 
 Vul ID 2 in:
 
-![Het afmelden van een cursist met id 2](imgs/afmelden.png)
+> **Verwacht resultaat:** De verwijderpagina met de titel "Afmelding binnen gekomen?" en een nummerveld met het label "Vul het ID van de cursist in die verwijderd gaat worden", met het getal "2" ingevuld.
 
 Na submit is Bram verwijderd:
 
-![Overzicht van de momenteel ingeschreven cursisten: alleen Joyce](imgs/verwijderen.png)
+> **Verwacht resultaat:** De cursistenpagina met nog maar één item in de lijst: "Naam van de cursist: Joyce". Bram is verwijderd.
 
 ### Database controleren
 
 Met DB Browser for SQLite:
 
-![De data die in de Tabel staat](imgs/database-huidig.png)
+| id | naam  |
+|----|-------|
+| 1  | Joyce |
 
 Eén cursist over - Joyce met ID 1.
 

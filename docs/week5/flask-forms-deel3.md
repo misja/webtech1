@@ -131,11 +131,11 @@ uv run python app.py
 
 Navigeer naar `http://127.0.0.1:5000/`:
 
-![Button zonder message](imgs/Button-met-klik-mij-tekst.png)
+> **Verwacht resultaat:** Je ziet een eenvoudige pagina met de koptekst "Flash Message Demo" en een blauwe knop met de tekst "Klik mij!". Er is nog geen melding zichtbaar.
 
 Klik op de knop:
 
-![Flash message verschijnt](imgs/button-met-melding.png)
+> **Verwacht resultaat:** Boven de knop verschijnt een gele Bootstrap-waarschuwingsmelding met de tekst "Je hebt zojuist de button geactiveerd!" en een sluitknopje (×) rechts in de melding.
 
 Klik op het X - het bericht verdwijnt.
 

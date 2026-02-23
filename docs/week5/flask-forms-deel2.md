@@ -266,21 +266,21 @@ uv run python app.py
 
 Navigeer naar `http://127.0.0.1:5000/`:
 
-![Enquête formulier](imgs/enquete-muziek.png)
+> **Verwacht resultaat:** Je ziet het enquêteformulier met de velden: een tekstveld voor de naam, een checkbox "Ben je een vrouw?", radio buttons voor het instrument (Gitaar of Drums), een dropdown voor de locatie (Assen, Drachten, Groningen), een tekstgebied voor opmerkingen en een knop "Verzend".
 
 Vul het formulier in:
 
-![Ingevuld enquête formulier](imgs/enquete-muziek-ingevuld.png)
+> **Verwacht resultaat:** Het formulier is volledig ingevuld met voorbeeldgegevens: een naam in het tekstveld, de checkbox aangevinkt, een instrument geselecteerd, een locatie gekozen en tekst ingevoerd in het feedbackveld.
 
 Klik Verzend - je wordt doorgestuurd naar `/bedankt`:
 
-![Bedankpagina met resultaten](imgs/enquete-muziek-na-button.png)
+> **Verwacht resultaat:** De bedankpagina toont de koptekst "Bedankt voor de moeite!" gevolgd door een lijst met de ingediende gegevens: naam, vrouw (true/false), instrument, locatie en feedback.
 
 ## Validators in actie
 
 Probeer het formulier te verzenden **zonder naam** in te vullen:
 
-![Validator error](imgs/enquete-muziek-validator.png)
+> **Verwacht resultaat:** Het formulier wordt opnieuw getoond met een rood kader rond het naamveld, wat aangeeft dat dit verplichte veld niet ingevuld is; de overige velden behouden hun eerder geselecteerde waarden.
 
 Een rood kader verschijnt rond het naam veld - de `DataRequired()` validator blokkeert het verzenden.
 

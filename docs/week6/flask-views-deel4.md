@@ -11,7 +11,11 @@ Deze modellen hebben relaties met elkaar:
 - Een cursist heeft **één docent** (één-op-één)
 - Een instrument wordt (in dit voorbeeld) door **één cursist** bespeeld
 
-![Strokendiagram van de database](imgs/strokendiagram.png)
+```mermaid
+erDiagram
+    Cursist ||--o{ Instrument : "bespeelt (cursist_id)"
+    Cursist ||--o| Docent : "begeleid door (cursist_id)"
+```
 
 ## Sleutels
 
@@ -296,7 +300,25 @@ Cursist Joyce heeft David als docent
 
 De database structuur:
 
-![De structuur van de database](imgs/structuur-database.png)
+```mermaid
+erDiagram
+    cursisten {
+        int id PK
+        string naam
+    }
+    instrumenten {
+        int id PK
+        string naam
+        int cursist_id FK
+    }
+    docenten {
+        int id PK
+        string naam
+        int cursist_id FK
+    }
+    cursisten ||--o{ instrumenten : "cursist_id"
+    cursisten ||--o| docenten : "cursist_id"
+```
 
 ## Relaties gebruiken
 

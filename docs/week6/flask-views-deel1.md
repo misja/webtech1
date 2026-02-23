@@ -12,7 +12,13 @@ De meest gebruikte ORM voor Python is **SQLAlchemy**. Voor Flask bestaat er een 
 
 SQLAlchemy voegt een extra laag toe aan je applicatie architectuur:
 
-![Complete architectuur van de webapp](imgs/architectuur.png)
+```mermaid
+flowchart TD
+    A["🌐 Browser"] --> B["Flask\n(routes & templates)"]
+    B --> C["SQLAlchemy ORM\n(Python objecten)"]
+    C --> D["SQL"]
+    D --> E[("SQLite\ndatabase")]
+```
 
 ## Installatie
 

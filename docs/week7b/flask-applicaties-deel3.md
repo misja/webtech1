@@ -210,17 +210,19 @@ Als alles naar behoren is gegaan kan er nu weer getest worden.
 
 Homepagina:
 
-![de homepagina van de website](imgs/homepagina.png)
+> **Verwacht resultaat:** De homepagina van de gerefactorde applicatie met een navigatiebalk met links naar de docenten- en studentenpagina's.
 
 Na het toevoegen van docent Bart:
 
-![Docent bart in het overzicht van de mentoren en studenten](imgs/docent-bart.png)
+> **Verwacht resultaat:** Het overzicht van mentoren en studenten met de nieuw toegevoegde docent "Bart" in de lijst.
 
 Docent Bart wordt mentor van Roos:
 
-![Docent Bart (met Id 1) wordt toegevoegd als mentor van student Roos](imgs/student-roos.png)
+> **Verwacht resultaat:** Het formulier om een student toe te voegen, met het ID van Docent Bart (1) ingevuld als mentor voor student Roos.
 
-![In het overzicht staat nu ook dat Docent Bart de mentor is van Roos](imgs/bart-mentor-roos.png)
+Na het klikken op "Voeg toe":
+
+> **Verwacht resultaat:** Het overzicht toont student Roos met "Docent Bart" als haar mentor.
 
 ## Samenvatting
 

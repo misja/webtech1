@@ -161,11 +161,11 @@ uv run python app.py
 
 Navigeer naar `http://127.0.0.1:5000/`:
 
-![Leeg formulier](imgs/formulier-1-html.png)
+> **Verwacht resultaat:** Je ziet een lege pagina met de tekst "Welkom bij muziekschool Session", een tekstveld met het label "Welk instrument wil je graag leren bespelen?" en een knop "Verzend".
 
 Vul "Gitaar" in en klik Verzend:
 
-![Formulier met antwoord](imgs/formulier-2-html.png)
+> **Verwacht resultaat:** De pagina toont nu de tekst "Het instrument van jouw keuze is Gitaar. De keuze kan gewijzigd worden in onderstaand formulier:", gevolgd door een leeg formulier waarmee een nieuw instrument ingevoerd kan worden.
 
 Het formulier toont nu de ingevoerde waarde en is opnieuw beschikbaar.
 

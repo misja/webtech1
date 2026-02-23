@@ -10,7 +10,23 @@ In dit deel hebben we aandacht voor de wijze waarop de ontwikkelde applicatie va
 
 [Refactoren is een andere structuur aan code (of eigenlijk een hele *code-base*) geven](https://en.wikipedia.org/wiki/Code_refactoring). In dit geval wordt het bestand `mentor_site.py` (dat je bij de vorige oefening hebt gemaakt) opgesplitst in afzonderlijke componenten voor de hierboven genoemde aspecten. In plaats van `mentor_site.py` wordt vanaf nu `app.py` gehanteerd.
 
-![mentor_site.py opgesplitst tot twee componenten](imgs/structuur-flask-app.png)
+```mermaid
+graph LR
+    A["mentor_site.py\n(monoliet)\n─────────────\nmodels\nroutes docenten\nroutes studenten"] -- refactoring --> B
+
+    subgraph B["Nieuwe structuur"]
+        direction TB
+        C["app.py\n(startpunt)"]
+        D["mijnproject/__init__.py\n(app + db + blueprint registratie)"]
+        E["mijnproject/models.py\n(Docent, Student)"]
+        F["mijnproject/docenten/\n─────────────\nforms.py\nviews.py\ntemplates/docenten/"]
+        G["mijnproject/studenten/\n─────────────\nforms.py\nviews.py\ntemplates/studenten/"]
+        C --> D
+        D --> E
+        D --> F
+        D --> G
+    end
+```
 
 !!! Tip "Gebruik een bibliotheek"
     De [`blueprints`](https://flask.palletsprojects.com/en/3.0.x/blueprints/)-bibliotheek kan gebruikt worden om deze afzonderlijke modulaire componenten te verbinden met het hoofdbestand `app.py`. Hier komen we zo op terug.
