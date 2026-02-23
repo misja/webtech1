@@ -3518,10 +3518,15 @@
 <p>Een <strong>Object Relational Mapper (ORM)</strong> is een abstractielaag tussen Python en de database. Je beschrijft je data als Python klassen en objecten, de ORM vertaalt dat naar SQL.</p>
 <p>De meest gebruikte ORM voor Python is <strong>SQLAlchemy</strong>. Voor Flask bestaat er een extensie: <strong>Flask-SQLAlchemy</strong>. Flask kan daarmee met verschillende SQL databases werken: PostgreSQL, MySQL, SQLite en anderen.</p>
 <p>SQLAlchemy voegt een extra laag toe aan je applicatie architectuur:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/architectuur.png" data-desc-position="bottom"><img alt="Complete architectuur van de webapp" src="imgs/architectuur.png"></a></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>flowchart TD
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    A["🌐 Browser"] --&gt; B["Flask\n(routes &amp; templates)"]
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    B --&gt; C["SQLAlchemy ORM\n(Python objecten)"]
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    C --&gt; D["SQL"]
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    D --&gt; E[("SQLite\ndatabase")]
+</span></code></pre></div>
 <h2 id="installatie">Installatie<a class="headerlink" href="#installatie" title="Link naar deze sectie">¶</a></h2>
 <p>Voeg Flask-SQLAlchemy toe aan je project:</p>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">uv add flask-sqlalchemy</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">uv add flask-sqlalchemy</span>
 </span></code></pre></div>
 <h2 id="crud-operaties">CRUD operaties<a class="headerlink" href="#crud-operaties" title="Link naar deze sectie">¶</a></h2>
 <p>Met een database voer je vier basis operaties uit - <strong>CRUD</strong>:</p>

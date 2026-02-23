@@ -3373,7 +3373,22 @@
 <p>Voor nog grotere toepassingen begint het logisch te worden om de bestanden te herstructureren en componenten te scheiden zoals forms, views en templates voor elke belangrijke component.</p>
 <p>In dit deel hebben we aandacht voor de wijze waarop de ontwikkelde applicatie van <a href="../week6/oefeningen/flask-views-oefening1.html">oefening 1</a> <em>gerefactored</em> kan worden. Bij die oefening waren alle formulieren, views en templates in een enkel bestand of directory opgenomen. Zo maakte je een bestand <code>mentor_site.py</code>, waarin zowel het model als de verschillende routes waren opgenomen, en had je ook een bestand <code>forms.py</code>, waarin je de verschillende formulier-klassen had aangebracht.</p>
 <p><a href="https://en.wikipedia.org/wiki/Code_refactoring">Refactoren is een andere structuur aan code (of eigenlijk een hele <em>code-base</em>) geven</a>. In dit geval wordt het bestand <code>mentor_site.py</code> (dat je bij de vorige oefening hebt gemaakt) opgesplitst in afzonderlijke componenten voor de hierboven genoemde aspecten. In plaats van <code>mentor_site.py</code> wordt vanaf nu <code>app.py</code> gehanteerd.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/structuur-flask-app.png" data-desc-position="bottom"><img alt="mentor_site.py opgesplitst tot twee componenten" src="imgs/structuur-flask-app.png"></a></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>graph LR
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    A["mentor_site.py\n(monoliet)\n─────────────\nmodels\nroutes docenten\nroutes studenten"] -- refactoring --&gt; B
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    subgraph B["Nieuwe structuur"]
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        direction TB
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        C["app.py\n(startpunt)"]
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        D["mijnproject/__init__.py\n(app + db + blueprint registratie)"]
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        E["mijnproject/models.py\n(Docent, Student)"]
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        F["mijnproject/docenten/\n─────────────\nforms.py\nviews.py\ntemplates/docenten/"]
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        G["mijnproject/studenten/\n─────────────\nforms.py\nviews.py\ntemplates/studenten/"]
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        C --&gt; D
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        D --&gt; E
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        D --&gt; F
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        D --&gt; G
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    end
+</span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Gebruik een bibliotheek</p>
 <p>De <a href="https://flask.palletsprojects.com/en/3.0.x/blueprints/"><code>blueprints</code></a>-bibliotheek kan gebruikt worden om deze afzonderlijke modulaire componenten te verbinden met het hoofdbestand <code>app.py</code>. Hier komen we zo op terug.</p>
@@ -3420,10 +3435,10 @@
 <div class="admonition info">
 <p class="admonition-title">requirements.txt</p>
 <p>In Python projecten zal je vaak een <code>requirements.txt</code> bestand zien. Dit is een bestand waar de afhankelijkheden (de gebruikte modules) van de applicatie zijn beschreven. Je kan met <code>pip</code> de geïnstalleerde modules als volgt naar dit bestand laten schrijven:</p>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">pip freeze &gt; requirements.txt</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">pip freeze &gt; requirements.txt</span>
 </span></code></pre></div>
 <p>Als je vervolgens de inhoud van <code>requirements.txt</code> bekijkt zal je zien dat het modules bevat inclusief versienummer, bijvoorbeeld <code>Flask==1.1.2</code>. Dit bestand wordt ook gebruikt om in bijvoorbeeld een nieuwe virtuele omgeving de vereiste modules te installeren, bijvoorbeeld:</p>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">pip install -r requirements.txt</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">pip install -r requirements.txt</span>
 </span></code></pre></div>
 <p>Het vastzetten van modules en bijbehorende versienummers is een manier om een repliceerbare omgeving voor een applicatie te gegaranderen, bijvoorbeeld als het live op een server moet draaien of wanneer je met andere mensen aan een project gaat samenwerken.</p>
 </div>

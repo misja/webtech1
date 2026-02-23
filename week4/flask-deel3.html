@@ -3891,7 +3891,9 @@
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go"> * Debugger is active!</span>
 </span></code></pre></div>
 <p>Open je browser en ga naar <code>http://127.0.0.1:5000/</code>:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/index.png" data-desc-position="bottom"><img alt="De eerste Flask pagina" src="imgs/index.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> De browser toont de homepage met de tekst "Welkom bij muziekschool Session" als grote kop (<code>&lt;h1&gt;</code>), zonder verdere opmaak of stijl.</p>
+</blockquote>
 <div class="admonition warning">
 <p class="admonition-title">Development server</p>
 <p>De Flask development server is ALLEEN voor development! Voor productie gebruik je een echte WSGI server zoals Gunicorn of uWSGI.</p>
@@ -3930,14 +3932,18 @@
 <li><code>http://127.0.0.1:5000/informatie</code> → Informatiepagina</li>
 <li><code>http://127.0.0.1:5000/contact</code> → Contactpagina</li>
 </ul>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/informatie.png" data-desc-position="bottom"><img alt="Een tweede pagina in Flask" src="imgs/informatie.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> De browser toont de <code>/informatie</code> pagina met de kop "Dit hebben we jou te bieden:" gevolgd door de tekst "Piano, gitaar, drums, zang".</p>
+</blockquote>
 <div class="admonition info">
 <p class="admonition-title">Auto-reload met debug mode</p>
 <p>Met <code>debug=True</code> hoef je de server niet handmatig te herstarten. Flask detecteert wijzigingen en herstart automatisch!</p>
 </div>
 <h2 id="404-pagina-niet-gevonden">404 - Pagina niet gevonden<a class="headerlink" href="#404-pagina-niet-gevonden" title="Link naar deze sectie">¶</a></h2>
 <p>Als je naar een route gaat die niet bestaat (bijv. <code>http://127.0.0.1:5000/nope</code>), krijg je een 404 error:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/bestaat-niet.png" data-desc-position="bottom"><img alt="Pagina die niet bestaat" src="imgs/bestaat-niet.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> De browser toont de standaard Flask 404-foutpagina met de melding "Not Found" en de uitleg dat de gevraagde URL niet op de server bestaat.</p>
+</blockquote>
 <p>Je kunt custom error pages maken voor 404s.</p>
 <h2 id="dynamische-routes">Dynamische routes<a class="headerlink" href="#dynamische-routes" title="Link naar deze sectie">¶</a></h2>
 <p>Wat als je honderden cursisten hebt, elk met hun eigen profielpagina? Je wilt niet voor elke cursist een aparte route schrijven!</p>
@@ -3964,7 +3970,9 @@
 <li><code>http://localhost:5000/cursist/Joyce</code> → Pagina van Joyce</li>
 <li><code>http://localhost:5000/cursist/Ralf</code> → Pagina van Ralf</li>
 </ul>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/cursist_Henk.png" data-desc-position="bottom"><img alt="De pagina van Henk" src="imgs/cursist_Henk.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> De browser toont de pagina voor de route <code>/cursist/Henk</code> met de tekst "Dit is de pagina van Henk" als grote kop.</p>
+</blockquote>
 <h3 id="url-parameters-met-types">URL parameters met types<a class="headerlink" href="#url-parameters-met-types" title="Link naar deze sectie">¶</a></h3>
 <p>Je kunt het type van URL parameters specificeren:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/product/&lt;int:product_id&gt;"</span><span class="p">)</span>
@@ -3996,7 +4004,9 @@
 <li><code>&lt;path:variabele&gt;</code> → string met slashes (voor file paths)</li>
 <li><code>&lt;uuid:variabele&gt;</code> → UUID string</li>
 </ul>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/product_123.png" data-desc-position="bottom"><img alt="URL met int parameter" src="imgs/product_123.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> De browser toont de pagina voor <code>/product/123</code> met de kop "Product 123". Flask heeft de <code>&lt;int:product_id&gt;</code> parameter automatisch als integer verwerkt.</p>
+</blockquote>
 <h3 id="meerdere-parameters">Meerdere parameters<a class="headerlink" href="#meerdere-parameters" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">"/les/&lt;string:instrument&gt;/&lt;int:niveau&gt;"</span><span class="p">)</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">les</span><span class="p">(</span><span class="n">instrument</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">niveau</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -4021,12 +4031,16 @@
 </span></code></pre></div>
 <p>Start server ZONDER debug: <code>app.run()</code> (zonder <code>debug=True</code>)</p>
 <p>Navigeer naar <code>http://localhost:5000/fout/Jan</code> (3 karakters, geen 20e):</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/lengte_Karel.png" data-desc-position="bottom"><img alt="Niet-informatieve foutmelding" src="imgs/lengte_Karel.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> De browser toont een generieke "500 Internal Server Error" pagina zonder verdere details. Er is geen uitleg over de oorzaak van de fout zichtbaar.</p>
+</blockquote>
 <p>Weinig informatie, moeilijk te debuggen!</p>
 <h3 id="met-debug-mode">Met debug mode<a class="headerlink" href="#met-debug-mode" title="Link naar deze sectie">¶</a></h3>
 <p>Zet <code>debug=True</code> aan: <code>app.run(debug=True)</code></p>
 <p>Nu krijg je een <strong>interactieve debugger</strong>:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/lengte_Joyce.png" data-desc-position="bottom"><img alt="Informatieve foutmelding" src="imgs/lengte_Joyce.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> De browser toont de Flask interactieve debugger met de volledige stack trace, de exacte foutmelding (<code>IndexError: string index out of range</code>), en de regelnummer in de code waar de fout optrad.</p>
+</blockquote>
 <p>Je ziet:</p>
 <ul>
 <li>Exacte foutmelding (<code>IndexError: string index out of range</code>)</li>

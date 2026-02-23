@@ -3995,7 +3995,9 @@
 <div class="language-console highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">uv run python app.py</span>
 </span></code></pre></div>
 <p>Ga naar <code>http://127.0.0.1:5000/</code> - je ziet de template met afbeelding!</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/drumstel.png" data-desc-position="bottom"><img alt="Template met drumstel" src="imgs/drumstel.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> De browser toont de gerenderde template met de kop "Welkom bij muziekschool Session", een subkop "Dit drumstel wordt gebruikt tijdens de lessen", en een afbeelding van een drumstel.</p>
+</blockquote>
 <h2 id="variabelen-doorgeven-aan-templates">Variabelen doorgeven aan templates<a class="headerlink" href="#variabelen-doorgeven-aan-templates" title="Link naar deze sectie">¶</a></h2>
 <p>De kracht van templates zit in <strong>dynamische data</strong>. Je geeft Python variabelen door aan de template:</p>
 <h3 id="basis-voorbeeld">Basis voorbeeld<a class="headerlink" href="#basis-voorbeeld" title="Link naar deze sectie">¶</a></h3>
@@ -4030,7 +4032,9 @@
 <li>Eerste <code>naam</code> = template variable, tweede <code>naam</code> = Python variable</li>
 </ul>
 <p><strong>Result:</strong> Navigeer naar <code>http://localhost:5000/cursist/Joyce</code></p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/template_cursist_Joyce.png" data-desc-position="bottom"><img alt="Template met variabelen" src="imgs/template_cursist_Joyce.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> De browser toont de pagina voor <code>/cursist/Joyce</code> met de kop "Hallo Joyce!" en de tekst "Je bent cursist nummer 42".</p>
+</blockquote>
 <h2 id="data-types-in-templates">Data types in templates<a class="headerlink" href="#data-types-in-templates" title="Link naar deze sectie">¶</a></h2>
 <p>Je kunt alle Python types doorgeven: strings, integers, lists, dictionaries, etc.</p>
 <h3 id="voorbeeld-met-meerdere-types">Voorbeeld met meerdere types<a class="headerlink" href="#voorbeeld-met-meerdere-types" title="Link naar deze sectie">¶</a></h3>
@@ -4068,7 +4072,9 @@
 </span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
 <p><strong>Result:</strong></p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/demo.png" data-desc-position="bottom"><img alt="Demo met verschillende types" src="imgs/demo.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> De browser toont de <code>/demo</code> pagina met de naam "Joyce", de letters als lijst (<code>['J', 'o', 'y', 'c', 'e']</code>), het cursistenwoordenboek, de laatste twee letters via slicing (<code>['c', 'e']</code>), en de waarde voor sleutel "1234" (<code>Sietse</code>).</p>
+</blockquote>
 <p>Je kunt Python syntax gebruiken in templates:</p>
 <ul>
 <li><code>letters[3:]</code> - List slicing</li>
@@ -4111,7 +4117,9 @@
 <li>Geen <code>:</code> nodig zoals in Python!</li>
 </ul>
 <p><strong>Result:</strong></p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/cursisten.png" data-desc-position="bottom"><img alt="Cursisten lijst" src="imgs/cursisten.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> De browser toont de <code>/cursisten</code> pagina met de kop "Onze cursisten" en een ongeordende lijst met de namen Joyce, Sietse, Carla en Henk als afzonderlijke items.</p>
+</blockquote>
 <h3 id="if-statements">If statements<a class="headerlink" href="#if-statements" title="Link naar deze sectie">¶</a></h3>
 <p>Voeg conditionele logica toe aan templates:</p>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
@@ -4138,7 +4146,9 @@
 </span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
 <p><strong>Result:</strong></p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/cursisten2.png" data-desc-position="bottom"><img alt="If statement in template" src="imgs/cursisten2.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> De browser toont de cursistenlijst gevolgd door de subkop "Komt Carla voor in de lijst?" met daaronder de bevestigende tekst "Carla komt in de lijst voor!" omdat de <code>if</code>-conditie waar is.</p>
+</blockquote>
 <p><strong>If-elif-else:</strong></p>
 <div class="language-html highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>{% if niveau == 1 %}
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Beginner cursus<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>

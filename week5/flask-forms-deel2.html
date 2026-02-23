@@ -3813,14 +3813,22 @@
 <div class="language-console highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">uv run python app.py</span>
 </span></code></pre></div>
 <p>Navigeer naar <code>http://127.0.0.1:5000/</code>:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/enquete-muziek.png" data-desc-position="bottom"><img alt="Enquête formulier" src="imgs/enquete-muziek.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> Je ziet het enquêteformulier met de velden: een tekstveld voor de naam, een checkbox "Ben je een vrouw?", radio buttons voor het instrument (Gitaar of Drums), een dropdown voor de locatie (Assen, Drachten, Groningen), een tekstgebied voor opmerkingen en een knop "Verzend".</p>
+</blockquote>
 <p>Vul het formulier in:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/enquete-muziek-ingevuld.png" data-desc-position="bottom"><img alt="Ingevuld enquête formulier" src="imgs/enquete-muziek-ingevuld.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> Het formulier is volledig ingevuld met voorbeeldgegevens: een naam in het tekstveld, de checkbox aangevinkt, een instrument geselecteerd, een locatie gekozen en tekst ingevoerd in het feedbackveld.</p>
+</blockquote>
 <p>Klik Verzend - je wordt doorgestuurd naar <code>/bedankt</code>:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/enquete-muziek-na-button.png" data-desc-position="bottom"><img alt="Bedankpagina met resultaten" src="imgs/enquete-muziek-na-button.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> De bedankpagina toont de koptekst "Bedankt voor de moeite!" gevolgd door een lijst met de ingediende gegevens: naam, vrouw (true/false), instrument, locatie en feedback.</p>
+</blockquote>
 <h2 id="validators-in-actie">Validators in actie<a class="headerlink" href="#validators-in-actie" title="Link naar deze sectie">¶</a></h2>
 <p>Probeer het formulier te verzenden <strong>zonder naam</strong> in te vullen:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="imgs/enquete-muziek-validator.png" data-desc-position="bottom"><img alt="Validator error" src="imgs/enquete-muziek-validator.png"></a></p>
+<blockquote>
+<p><strong>Verwacht resultaat:</strong> Het formulier wordt opnieuw getoond met een rood kader rond het naamveld, wat aangeeft dat dit verplichte veld niet ingevuld is; de overige velden behouden hun eerder geselecteerde waarden.</p>
+</blockquote>
 <p>Een rood kader verschijnt rond het naam veld - de <code>DataRequired()</code> validator blokkeert het verzenden.</p>
 <h2 id="radiofield-en-selectfield-choices">RadioField en SelectField choices<a class="headerlink" href="#radiofield-en-selectfield-choices" title="Link naar deze sectie">¶</a></h2>
 <p>Let op de tuple structuur:</p>
