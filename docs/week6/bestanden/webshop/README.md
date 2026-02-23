@@ -162,7 +162,7 @@ db.session.commit()
 
 ### 4. Model Properties
 
-Je kunt custom properties toevoegen aan models:
+Je kunt eigen properties toevoegen aan modellen:
 
 ```python
 class Product(db.Model):

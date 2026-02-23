@@ -86,7 +86,7 @@ print(f"Totaal: €{cart.bereken_totaal():.2f}")
 !!! warning "field(default_factory=list)"
     Voor een lijst als attribuut moet je altijd `field(default_factory=list)` gebruiken, anders delen alle instanties dezelfde lijst!
 
-## Return dicts voor gestructureerde data
+## Return dictionaries voor gestructureerde data
 
 In webapplicaties wil je vaak gestructureerde data teruggeven aan templates:
 
@@ -143,8 +143,8 @@ print(f"Verzendkosten: €{totaal_info['verzendkosten']:.2f}")
 print(f"Totaal: €{totaal_info['totaal']:.2f}")
 ```
 
-!!! info "Waarom dicts teruggeven?"
-    Dicts zijn handig voor templates. In Flask kun je ze doorgeven aan Jinja2 templates:
+!!! info "Waarom dictionaries teruggeven?"
+    Dictionaries zijn handig voor templates. In Flask kun je ze doorgeven aan Jinja2 templates:
     ```python
     @app.route('/order/<int:id>')
     def toon_order(id):
@@ -154,7 +154,7 @@ print(f"Totaal: €{totaal_info['totaal']:.2f}")
                              order=order,
                              totaal=totaal_info)
     ```
-    In het template (`order.html`) kun je dan de dict gebruiken:
+    In het template (`order.html`) kun je dan de dictionary gebruiken:
     ```html
     <p>Subtotaal: €{{ totaal.subtotaal }}</p>
     <p>Korting: -€{{ totaal.korting }}</p>
@@ -388,15 +388,15 @@ Output:
 }
 ```
 
-!!! tip "Dataclass → dict voor debugging"
-    Je kunt `asdict()` gebruiken om een dataclass automatisch naar een dict te converteren. Dit is vooral handig voor debugging:
+!!! tip "Dataclass → dictionary voor debugging"
+    Je kunt `asdict()` gebruiken om een dataclass automatisch naar een dictionary te converteren. Dit is vooral handig voor debugging:
     ```python
     from dataclasses import asdict
     klant_dict = asdict(jan)
     print(klant_dict)
     # {'naam': 'Jan Jansen', 'email': 'jan@email.nl'}
     ```
-    Let op: in productiecode maak je meestal zelf specifieke dicts met alleen de data die je template nodig heeft.
+    Let op: in productiecode maak je meestal zelf specifieke dictionaries met alleen de data die je template nodig heeft.
 
 ## Praktijk: Flask routes met templates
 
@@ -496,7 +496,7 @@ Controleer of je het volgende beheerst:
 - [ ] Compositie: objecten die andere objecten bevatten
 - [ ] `list[Object]` met `field(default_factory=list)`
 - [ ] `X | None` voor attributen die None kunnen zijn
-- [ ] Methoden die dicts teruggeven voor templates
+- [ ] Methoden die dictionaries teruggeven voor templates
 - [ ] Begrijpen: compositie in code = foreign keys in database
 - [ ] Scheiding van verantwoordelijkheden: bedrijfslogica vs presentatie
 
@@ -506,7 +506,7 @@ In dit deel heb je geleerd:
 
 - **Compositie**: Objecten die andere objecten bevatten (heeft-een relatie)
 - **Type hints**: `list[Product]`, `Customer | None`
-- **Return dicts**: Gestructureerde data voor templates
+- **Return dictionaries**: Gestructureerde data voor templates
 - **Database preview**: Compositie = foreign keys
 - **Scheiding van verantwoordelijkheden**: Bedrijfslogica apart van presentatie
 

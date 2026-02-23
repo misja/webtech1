@@ -148,7 +148,7 @@ Als je naar een route gaat die niet bestaat (bijv. `http://127.0.0.1:5000/nope`)
 
 > **Verwacht resultaat:** De browser toont de standaard Flask 404-foutpagina met de melding "Not Found" en de uitleg dat de gevraagde URL niet op de server bestaat.
 
-Je kunt custom error pages maken voor 404s.
+Je kunt eigen foutpagina's maken voor 404s.
 
 ## Dynamische routes
 

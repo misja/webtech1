@@ -1,6 +1,6 @@
 # OOP Python – Oefening 3
 
-In deze oefening pas je **inheritance** (overerving) toe. Je maakt subklassen van `Product` voor verschillende producttypen, wat je voorbereidt op het werken met database modellen die erven van `db.Model`.
+In deze oefening pas je **overerving** toe. Je maakt subklassen van `Product` voor verschillende producttypen, wat je voorbereidt op het werken met database modellen die erven van `db.Model`.
 
 ## Achtergrond
 
@@ -9,7 +9,7 @@ In een webshop heb je verschillende soorten producten:
 - **Fysieke producten**: hebben gewicht en verzendkosten
 - **Digitale producten**: hebben bestandsgrootte en geen verzending
 
-Dit is een perfect geval voor inheritance: beide zijn producten, maar met specifieke eigenschappen.
+Dit is een perfect geval voor overerving: beide zijn producten, maar met specifieke eigenschappen.
 
 ## Deel a: FysiekProduct
 
@@ -43,8 +43,8 @@ class FysiekProduct(Product):
         pass
 ```
 
-!!! tip "Werken met dataclass inheritance"
-    Bij dataclasses hoef je geen `super().__init__()` te gebruiken - de parent attributen worden automatisch overgenomen!
+!!! tip "Werken met dataclass overerving"
+    Bij dataclasses hoef je geen `super().__init__()` te gebruiken - de attributen van de bovenliggende klasse worden automatisch overgenomen!
 
 ### Test je FysiekProduct
 
@@ -90,7 +90,7 @@ Maak een `DigitaalProduct` klasse die erft van `Product`.
 
 - `download() -> dict`: Simuleer een download
   - Verminder voorraad met 1
-  - Geef een dict terug met info: `{"product": naam, "link": download_link, "grootte_mb": bestandsgrootte}`
+  - Geef een dictionary terug met info: `{"product": naam, "link": download_link, "grootte_mb": bestandsgrootte}`
 
 ### Startcode b
 
@@ -138,7 +138,7 @@ Maak een `Boek` klasse die erft van `FysiekProduct`.
 - `gewicht`: 0.5 kg (boeken zijn meestal licht)
 
 **Override `__str__()`:**
-Maak een custom string representatie die ook auteur en ISBN toont.
+Maak een eigen string-representatie die ook auteur en ISBN toont.
 
 ### Startcode c
 
@@ -190,17 +190,17 @@ Controleer voordat je klaar bent:
 - [ ] `DigitaalProduct` erft van `Product`
 - [ ] `Boek` erft van `FysiekProduct`
 - [ ] Alle type annotations aanwezig
-- [ ] `download()` geeft een dict terug (geen print)
+- [ ] `download()` geeft een dictionary terug (geen print)
 - [ ] `bereken_verzendkosten()` werkt correct
-- [ ] `__str__()` override in `Boek` klasse
+- [ ] `__str__()` overschreven in de `Boek`-klasse
 - [ ] Code werkt met alle testcode
 
 ## Wat je geleerd hebt
 
-- Inheritance met dataclasses
+- Overerving met dataclasses
 - Override van default waarden in subklassen
 - Override van methoden (`__str__`)
-- Inheritance hierarchie (Boek → FysiekProduct → Product)
+- Overerving hierarchie (Boek → FysiekProduct → Product)
 - Return dicts voor gestructureerde data
 
 **Preview:** Database modellen werken precies zo - je maakt klassen die erven van `db.Model`!

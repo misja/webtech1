@@ -250,7 +250,7 @@ for name, price, stock, category in test_cases:
 
 ## Bonusopdracht 1: Custom Exception Class
 
-Maak een custom exception voor product-specifieke fouten:
+Maak een eigen uitzondering voor product-specifieke fouten:
 
 ```python
 class ProductError(Exception):
@@ -260,7 +260,7 @@ class ProductError(Exception):
 
 class ProductDatabase:
     def add_product_custom(self, name: str, price: float, stock: int, category: str) -> int:
-        """Voeg product toe met custom exceptions."""
+        """Voeg product toe met eigen uitzonderingen."""
         # TODO: Implementeer met custom exceptions
         # - Raise ProductError("Product naam bestaat al") bij duplicate
         # - Raise ProductError("Prijs moet positief zijn") bij < 0

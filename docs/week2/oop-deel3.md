@@ -1,10 +1,10 @@
-# OOP Python – Inheritance
+# OOP Python – Overerving
 
-In dit deel leer je hoe **inheritance** (overerving) werkt in Python. Dit is een essentiële basis voor het werken met SQLAlchemy, waar je straks modellen maakt die erven van `db.Model`.
+In dit deel leer je hoe **overerving** werkt in Python. Dit is een essentiële basis voor het werken met SQLAlchemy, waar je straks modellen maakt die erven van `db.Model`.
 
-## Wat is inheritance?
+## Wat is overerving?
 
-Inheritance betekent dat een klasse eigenschappen en methoden overneemt van een andere klasse:
+Overerving betekent dat een klasse eigenschappen en methoden overneemt van een andere klasse:
 
 ```python
 class Product:
@@ -23,24 +23,24 @@ print(laptop.naam)  # Werkt! Overgenomen van Product
 
 **Terminologie:**
 
-- `Product` is de **parent class** (ook wel: superclass, base class)
-- `FysiekProduct` is de **child class** (ook wel: subclass, derived class)
+- `Product` is de **bovenliggende klasse** (ook wel: parent class, superclass)
+- `FysiekProduct` is de **subklasse** (ook wel: child class, derived class)
 
-## Wanneer gebruik je inheritance?
+## Wanneer gebruik je overerving?
 
-Gebruik inheritance wanneer er een **"is een"** relatie is:
+Gebruik overerving wanneer er een **"is een"** relatie is:
 
 - Een `FysiekProduct` **is een** `Product`
 - Een `DigitaalProduct` **is een** `Product`
 - Een `User` **is een** `db.Model` (SQLAlchemy!)
 
 !!! note "Is-een vs heeft-een"
-    **Inheritance (is-een):** Een laptop is een product
+    **Overerving (is-een):** Een laptop is een product
     **Compositie (heeft-een):** Een bestelling heeft een klant (zie deel 4)
 
-## Super() gebruiken
+## `super()` gebruiken
 
-`super()` roept de parent class aan. Dit gebruik je vooral in `__init__`:
+`super()` roept de bovenliggende klasse aan. Dit gebruik je vooral in `__init__`:
 
 ```python
 class Product:
@@ -57,11 +57,11 @@ class FysiekProduct(Product):
 ```
 
 !!! warning "super() is verplicht"
-    Als je `super().__init__()` vergeet, worden de parent attributen niet geïnitialiseerd. Je krijgt dan fouten als `AttributeError: 'FysiekProduct' object has no attribute 'naam'`.
+    Als je `super().__init__()` vergeet, worden de attributen van de bovenliggende klasse niet geïnitialiseerd. Je krijgt dan fouten als `AttributeError: 'FysiekProduct' object has no attribute 'naam'`.
 
-## Methoden overerven en overriden
+## Methoden overerven en overschrijven
 
-Child classes erven alle methoden van de parent:
+Subklassen erven alle methoden van de bovenliggende klasse:
 
 ```python
 class Product:
@@ -100,9 +100,9 @@ print(f"Voorraad: {boek.voorraad}")  # 7
 print(f"Verzendkosten: €{boek.bereken_verzendkosten():.2f}")  # €3.95
 ```
 
-### Methoden overriden
+### Methoden overschrijven
 
-Je kunt een parent methode vervangen door dezelfde methode in de child te definiëren:
+Je kunt een methode van de bovenliggende klasse vervangen door dezelfde methode in de child te definiëren:
 
 ```python
 class Product:
@@ -126,12 +126,12 @@ photoshop = DigitaalProduct("Photoshop", 29.99, 2480.0)
 print(photoshop)  # Gebruikt de overridden __str__
 ```
 
-!!! tip "Type annotations bij override"
-    Gebruik bij een override dezelfde type annotations als de parent methode. Dit houdt je code consistent en voorkomt fouten.
+!!! tip "Type annotations bij overschrijven"
+    Gebruik bij overschrijven dezelfde type annotations als de overschreven methode. Dit houdt je code consistent en voorkomt fouten.
 
-## Inheritance met dataclasses
+## Overerving met dataclasses
 
-Dataclasses maken inheritance nog eenvoudiger - je hoeft geen `super().__init__()` te gebruiken:
+Dataclasses maken overerving nog eenvoudiger - je hoeft geen `super().__init__()` te gebruiken:
 
 ```python
 from dataclasses import dataclass
@@ -167,11 +167,11 @@ print(laptop)
 ```
 
 !!! info "Parent attributen eerst"
-    Bij dataclass inheritance komen parent attributen automatisch eerst. Child attributen komen daarna. Je hoeft niets extra's te doen.
+    Bij dataclass overerving komen attributen van de bovenliggende klasse automatisch eerst. Attributen van de subklasse komen daarna. Je hoeft niets extra's te doen.
 
-## Meerdere niveaus inheritance
+## Overerving op meerdere niveaus
 
-Je kunt ook van een child class erven (inheritance hierarchie):
+Je kunt ook van een subklasse erven (overervingshiërarchie):
 
 ```python
 from dataclasses import dataclass
@@ -208,13 +208,13 @@ print(python_boek)
 # Python Crash Course door Eric Matthes (ISBN: 978-1593279288)
 ```
 
-!!! note "Inheritance hierarchie"
+!!! note "Overervingshiërarchie"
     `Boek` → `FysiekProduct` → `Product`
     Een `Boek` heeft toegang tot alle attributen en methoden van zowel `FysiekProduct` als `Product`.
 
 ## Preview: SQLAlchemy modellen
 
-Dit is waarom je inheritance leert - straks in week 6 ga je database modellen maken:
+Dit is waarom je overerving leert - straks in week 6 ga je database modellen maken:
 
 ```python
 from flask_sqlalchemy import SQLAlchemy
@@ -244,7 +244,7 @@ Door te erven van `db.Model` krijgen je klassen automatisch alle database functi
     SQLAlchemy gebruikt OOP omdat het perfect past bij database structuur:
     - Elke **klasse** = een database **tabel**
     - Elk **object** = een **rij** in de tabel
-    - Inheritance geeft je de database functionaliteit
+    - Overerving geeft je de database functionaliteit
 
     SQLAlchemy vertaalt je Python code naar SQL. In week 3 schrijf je die SQL zelf - dat laat zien wat er achter de schermen gebeurt.
 
@@ -323,25 +323,25 @@ print(f"Download: {info['product']} ({info['grootte_mb']} MB)")
 
 Controleer of je het volgende beheerst:
 
-- [ ] Begrijpen wanneer je inheritance gebruikt (is-een relatie)
+- [ ] Begrijpen wanneer je overerving gebruikt (is-een relatie)
 - [ ] `super().__init__()` correct gebruiken in reguliere klassen
-- [ ] Inheritance met dataclasses (automatische parent attributen)
-- [ ] Methoden overriden met dezelfde signature
-- [ ] Meerdere niveaus inheritance (Boek → FysiekProduct → Product)
+- [ ] Overerving met dataclasses (automatische parent attributen)
+- [ ] Methoden overschrijven met dezelfde signature
+- [ ] Meerdere niveaus overerving (Boek → FysiekProduct → Product)
 - [ ] Type annotations bij inherited en overridden methoden
-- [ ] Begrijpen waarom SQLAlchemy inheritance gebruikt
+- [ ] Begrijpen waarom SQLAlchemy overerving gebruikt
 
 ## Samenvatting
 
 In dit deel heb je geleerd:
 
-- **Inheritance**: Child class neemt eigenschappen over van parent class
-- **`super()`**: Roept parent class aan, vooral in `__init__()`
-- **Overriding**: Child kan parent methoden vervangen
-- **Dataclass inheritance**: Nog eenvoudiger dan reguliere klassen
-- **Hierarchie**: Meerdere niveaus inheritance mogelijk
+- **Overerving**: Een subklasse neemt eigenschappen over van de bovenliggende klasse
+- **`super()`**: Roept de bovenliggende klasse aan, vooral in `__init__()`
+- **Overschrijven**: Een subklasse kan methoden van de bovenliggende klasse vervangen
+- **Dataclass overerving**: Nog eenvoudiger dan reguliere klassen
+- **Hierarchie**: Meerdere niveaus overerving mogelijk
 - **SQLAlchemy preview**: Database modellen erven van `db.Model`
 
 **Volgende stap:** In deel 4 leer je over compositie - objecten die andere objecten bevatten. Dit is de basis voor foreign keys in databases.
 
-**Oefening:** Maak [Oefening 3](oefeningen/oop-oefening3.md) om inheritance te oefenen.
+**Oefening:** Maak [Oefening 3](oefeningen/oop-oefening3.md) om overerving te oefenen.

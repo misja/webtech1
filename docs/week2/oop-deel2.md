@@ -137,7 +137,7 @@ print(f"Totaal: €{wagen.bereken_totaal():.2f}")
 ```
 
 !!! note "field(default_factory=list)"
-    Voor **mutable** default waarden (lists, dicts) moet je `field(default_factory=list)` gebruiken in plaats van `= []`.
+    Voor **veranderbare** default waarden (lists, dicts) moet je `field(default_factory=list)` gebruiken in plaats van `= []`.
     **Waarom?** Een gewoon `= []` zou gedeeld worden tussen alle instanties: Python maakt die lijst eenmalig aan bij het laden van de klasse, niet bij elke aanmaak van een object. Met `default_factory` krijgt elke instantie zijn eigen lege lijst.
 
 ## Preview: Database modellen
@@ -244,12 +244,12 @@ print(f"Totaal: €{bestelling.bereken_totaal():.2f}")
 
 **Gebruik reguliere klassen:**
 
-- Complexe initialization logic nodig
-- Veel custom dunder methoden (speciale methoden met dubbele underscores, zoals `__len__`, `__iter__`)
+- Complexe initialisatielogica nodig
+- Veel eigen dunder-methoden (speciale methoden met dubbele underscores, zoals `__len__`, `__iter__`)
 - Geen data container maar echt gedrag
 
 !!! tip "Database modellen zijn dataclass-achtig"
-    SQLAlchemy modellen die je later maakt, gebruiken hetzelfde patroon: type annotaties met class attributen. Als je dataclasses begrijpt, begrijp je ook de moderne SQLAlchemy syntax.
+    SQLAlchemy modellen die je later maakt, gebruiken hetzelfde patroon: type annotaties met klasse-attributen. Als je dataclasses begrijpt, begrijp je ook de moderne SQLAlchemy syntax.
 
 ## Samenvatting
 
@@ -257,7 +257,7 @@ Je hebt nu gezien:
 
 - **Dataclasses**: Minder herhalende code (boilerplate) voor data containers met `@dataclass`
 - **Type hints**: `str | None`, `list[Product]` voor complexere types
-- **field()**: Voor mutable defaults met `default_factory`
+- **field()**: Voor veranderbare standaardwaarden met `default_factory`
 - **Preview**: Database modellen volgen hetzelfde patroon
 
 ### Belangrijkste voordelen dataclasses

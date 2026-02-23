@@ -78,7 +78,7 @@ Maak een bestand `winkelwagen.py` met een `Winkelwagen` dataclass.
 - `bereken_totaal() -> float`: Bereken totaalprijs
 - `aantal_items() -> int`: Geef aantal items terug
 
-!!! warning "Mutable defaults: gebruik field()"
+!!! warning "Veranderbare standaardwaarden: gebruik field()"
     Voor lists als default waarde **moet** je `field(default_factory=list)` gebruiken!
 
     ```python
@@ -146,6 +146,6 @@ Controleer voordat je klaar bent:
 - `@dataclass` vermindert herhalende code (boilerplate)
 - `X | None` voor waarden die None kunnen zijn
 - `list[Type]` voor typed lists
-- `field(default_factory=list)` voor mutable defaults
+- `field(default_factory=list)` voor veranderbare standaardwaarden
 
 **Tip:** Deze patterns zie je later terug in SQLAlchemy modellen!

@@ -58,7 +58,7 @@ Vergelijkbaar met `FlaskForm`, maar dan voor database tabellen:
 1. Maak een class
 2. Laat het erven van `db.Model`
 3. Geef optioneel een tabelnaam op
-4. Definieer kolommen als class attributen
+4. Definieer kolommen als klasse-attributen
 5. Voeg `__init__` en `__repr__` methoden toe
 
 ### 3. CRUD operaties uitvoeren
