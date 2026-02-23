@@ -15,7 +15,6 @@ class Product:
         self.naam = naam
         self.prijs = prijs
         self.voorraad = voorraad
-        self.beschikbaar = True
 
     def verkoop(self, aantal: int) -> bool:
         """Verkoop een aantal items van dit product.
@@ -30,7 +29,6 @@ class Product:
             self.voorraad -= aantal
             return True
         else:
-            self.beschikbaar = False
             return False
 
     def __str__(self) -> str:
