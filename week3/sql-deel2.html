@@ -3893,18 +3893,18 @@ Dit wordt uitgebreid besproken in Deel 5 over SQL injection.<p></p>
 <tbody>
 <tr>
 <td><strong>Datatypes</strong></td>
-<td>Veel types (VARCHAR, TIMESTAMP, etc.)</td>
-<td>Weinig types (TEXT, INTEGER, REAL, BLOB)</td>
+<td>Veel expliciete types (VARCHAR, TIMESTAMP, etc.)</td>
+<td>Type affinity: TEXT, INTEGER, REAL, BLOB, NULL — kolomtype is een hint, geen harde eis</td>
 </tr>
 <tr>
 <td><strong>Constraints</strong></td>
-<td>Alle constraints</td>
-<td>Beperkte constraint support</td>
+<td>Alle constraints, ook achteraf via ALTER TABLE</td>
+<td>Zelfde constraints bij <code>CREATE TABLE</code>; maar toevoegen of verwijderen van constraints achteraf is niet mogelijk</td>
 </tr>
 <tr>
 <td><strong>ALTER TABLE</strong></td>
-<td>Volledig support</td>
-<td>Zeer beperkt (meestal: nieuwe tabel maken)</td>
+<td>Volledig</td>
+<td><code>RENAME TABLE</code>, <code>RENAME COLUMN</code>, <code>ADD COLUMN</code> en <code>DROP COLUMN</code> worden ondersteund; kolomtype wijzigen vereist een nieuwe tabel</td>
 </tr>
 <tr>
 <td><strong>Type checking</strong></td>
@@ -3913,8 +3913,8 @@ Dit wordt uitgebreid besproken in Deel 5 over SQL injection.<p></p>
 </tr>
 <tr>
 <td><strong>Concurrent writes</strong></td>
-<td>Veel users tegelijk</td>
-<td>File locking (één writer tegelijk)</td>
+<td>Meerdere schrijvers tegelijk</td>
+<td>Één schrijver tegelijk; WAL-mode verbetert leesgelijktijdigheid, maar SQLite is bedoeld voor single-user gebruik</td>
 </tr>
 </tbody>
 </table>
