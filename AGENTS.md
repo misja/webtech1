@@ -468,6 +468,28 @@ product2 = Product("Product B", 20.0, 10)
 
 ## Pull Request Workflow
 
+> **Regel: commit nooit direct op `main`.** Maak altijd een feature branch vanaf `upstream/main`, werk daar op, en dien een PR in naar `hanze-hbo-ict/webtech1`. Zo kunnen collega-docenten reviewen en bepalen wanneer wijzigingen worden opgenomen.
+
+### Branches aanmaken
+
+```bash
+# Haal upstream op
+git fetch upstream
+
+# Maak feature branch vanaf upstream/main
+git checkout -b feature/oop-modernisering upstream/main
+
+# Wijzigingen aanbrengen, dan committen
+git add docs/week2/
+git commit -m "Herschrijf OOP deel 1: moderne Python + type annotations"
+
+# Push naar eigen fork
+git push -u origin feature/oop-modernisering
+
+# PR aanmaken naar upstream
+gh pr create --repo hanze-hbo-ict/webtech1 --base main
+```
+
 ### Branching
 
 ```
