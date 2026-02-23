@@ -2373,6 +2373,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3486,6 +3497,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3754,6 +3776,18 @@
 </span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">'home.html'</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">instrument</span><span class="o">=</span><span class="n">instrument</span><span class="p">)</span>
 </span></code></pre></div>
 <p><strong>Volgende stap:</strong> <a href="flask-forms-deel2.html">Deel 2</a> - Validators en field types.</p>
+<h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
+<p>In deze les heb je geleerd:</p>
+<ul>
+<li><strong>Flask-WTF installeren</strong>: via <code>uv add flask-wtf</code>, wat ook WTForms automatisch als dependency installeert</li>
+<li><strong>Formulier componenten</strong>: een WTForms formulier bestaat uit vier onderdelen: secret key configuratie, een form class, een view function en een template</li>
+<li><strong>FlaskForm</strong>: basisklasse voor alle WTForms formulieren; velden zoals <code>StringField</code> en <code>SubmitField</code> worden gedefinieerd als klasse-attributen</li>
+<li><strong>SECRET_KEY</strong>: verplichte configuratie voor CSRF-beveiliging en Flask sessions; nooit hardcoden in productie, gebruik in plaats daarvan een environment variabele</li>
+<li><strong>validate_on_submit()</strong>: controleert of het formulier via POST is ingediend én alle validaties doorstaan heeft; retourneert <code>False</code> bij een GET-request</li>
+<li><strong>form.hidden_tag()</strong>: voegt een verborgen CSRF token toe aan het formulier in de template; zonder dit token weigert Flask-WTF het formulier</li>
+<li><strong>GET/POST request cycle</strong>: bij een GET-request wordt het lege formulier getoond; bij een POST-request wordt de ingediende data uitgelezen via <code>form.veld.data</code></li>
+<li><strong>CSRF-beveiliging</strong>: Flask-WTF valideert het CSRF token automatisch bij elke POST-request om Cross-Site Request Forgery aanvallen te voorkomen</li>
+</ul>
 
 
 

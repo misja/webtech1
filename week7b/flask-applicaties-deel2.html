@@ -3110,6 +3110,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3490,6 +3501,17 @@
     <span class="md-ellipsis">
       
         Conclusie
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
       
     </span>
   </a>
@@ -3896,6 +3918,17 @@ Als tweede wordt de folder templates gevuld met de bestanden <code>base.html</co
 </span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>│&nbsp;&nbsp; └── models.py
 </span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>└── app.py
 </span></code></pre></div>
+<h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
+<p>In deze les heb je geleerd:</p>
+<ul>
+<li><strong>Mappenstructuur aanmaken</strong>: de volledige directory-boom wordt stapsgewijs opgezet met mijnproject/, docenten/, studenten/, templates/ en de benodigde Python-bestanden</li>
+<li><strong><code>models.py</code></strong>: bevat de SQLAlchemy-modellen Docent en Student met typed mapped columns en een één-op-één relatie; de db-koppeling wordt later gelegd via <code>__init__.py</code></li>
+<li><strong><code>__init__.py</code></strong>: initialiseert de Flask-app, configureert de SQLite-database en Flask-Migrate; bevat bewust geen routes, want die worden per subcomponent in eigen views.py-bestanden ondergebracht</li>
+<li><strong><code>forms.py</code> per module</strong>: elke module (docenten, studenten) heeft een eigen forms.py met een AddForm; dezelfde klassenaam kan hergebruikt worden doordat de bestanden in aparte directories staan</li>
+<li><strong>HTML-templates</strong>: base.html en home.html op projectniveau; add.html, delete.html en list.html voor docenten; add.html voor studenten, elk geplaatst in een bijbehorende submap</li>
+<li><strong>Copy-paste-strategie</strong>: bestaande code van de vorige oefenopdracht wordt grotendeels overgenomen en op de juiste locatie in de nieuwe structuur gezet, zonder inhoudelijke wijzigingen</li>
+<li><strong>Openstaande aandachtspunten</strong>: blueprints moeten nog worden toegevoegd en de url_for()-links in de navigatiebalk moeten worden bijgewerkt naar de nieuwe structuur</li>
+</ul>
 
 
 

@@ -2853,6 +2853,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3330,6 +3341,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3601,7 +3623,19 @@
 </span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">'Inloggen'</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Ook hier geldt dat het inlogformulier eigenschappen overneemt van <code>FlaskForm</code>. Verder is er niet zo veel bijzonders bij dit formulier te vermelden. Zoals al wel vaker gezegd, meer van hetzelfde.</p>
-<p>Het formulier kent twee velden, eentje om de gebruikersnaam in te geven en het tweede veld is beschikbaar voor het wachtwoord. Tenslotte kan het inloggen worden afgesloten door op de knop met het opschrift ‘Inloggen’ te klikken.</p>
+<p>Het formulier kent twee velden, eentje om de gebruikersnaam in te geven en het tweede veld is beschikbaar voor het wachtwoord. Tenslotte kan het inloggen worden afgesloten door op de knop met het opschrift 'Inloggen' te klikken.</p>
+<h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
+<p>In deze les heb je geleerd:</p>
+<ul>
+<li><strong>Flask-Login</strong>: een bibliotheek die sessie- en gebruikersbeheer verzorgt, waaronder inloggen, uitloggen en het onthouden van gebruikerssessies</li>
+<li><strong>LoginManager</strong>: het centrale object uit Flask-Login dat via <code>init_app()</code> aan de app gekoppeld wordt en via <code>login_view</code> aangeeft waar gebruikers kunnen inloggen</li>
+<li><strong>UserMixin</strong>: een superklasse die de <code>User</code>-klasse standaardmethoden geeft zoals <code>is_authenticated()</code>, <code>is_active()</code>, <code>is_anonymous()</code> en <code>get_id()</code></li>
+<li><strong>Wachtwoord hashing in het model</strong>: het wachtwoord wordt bij het aanmaken van een gebruiker direct gehashed opgeslagen; de plain-text variant wordt nergens bewaard</li>
+<li><strong><code>check_password()</code>-methode</strong>: controleert bij het inloggen of het ingevoerde wachtwoord overeenkomt met de opgeslagen hash</li>
+<li><strong><code>user_loader</code>-decorator</strong>: laadt de huidige gebruiker op basis van het sessie-ID, zodat Flask-Login de ingelogde gebruiker bij elke aanvraag automatisch kan opzoeken</li>
+<li><strong><code>RegistrationForm</code></strong>: een WTForms-formulier met validaties voor uniek e-mailadres, unieke gebruikersnaam en wachtwoordbevestiging via <code>EqualTo</code></li>
+<li><strong><code>LoginForm</code></strong>: een eenvoudig formulier met een e-mailadres- en wachtwoordveld voor bestaande gebruikers</li>
+</ul>
 
 
 

@@ -2406,6 +2406,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3496,6 +3507,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3875,6 +3897,18 @@
 </span></code></pre></div>
 <p>Als je na POST de template direct returnt, kan de gebruiker de pagina refreshen en het formulier opnieuw verzenden. Met redirect gaat de browser naar een GET request.</p>
 <p><strong>Volgende stap:</strong> <a href="flask-forms-deel3.html">Deel 3</a> - Flash messages.</p>
+<h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
+<p>In deze les heb je geleerd:</p>
+<ul>
+<li><strong>Validators</strong>: invoercontroles die je als lijst meegeeft aan een veld, zoals <code>DataRequired()</code>, <code>Email()</code>, <code>Length(min, max)</code>, <code>EqualTo()</code> en <code>URL()</code></li>
+<li><strong>Field types</strong>: WTForms biedt velden voor elk HTML-invoertype, waaronder <code>StringField</code>, <code>BooleanField</code>, <code>RadioField</code>, <code>SelectField</code>, <code>TextAreaField</code> en <code>PasswordField</code></li>
+<li><strong>RadioField en SelectField</strong>: keuzevelden waarbij elke optie een tuple is van <code>(opgeslagen_waarde, weergave_tekst)</code>; de opgeslagen waarde is beschikbaar via <code>form.veld.data</code></li>
+<li><strong>Flask sessions</strong>: tijdelijke opslag van data tussen requests via versleutelde client-side cookies; opslaan met <code>session['key'] = value</code> en uitlezen in templates via <code>{{ session['key'] }}</code></li>
+<li><strong>Sessions en SECRET_KEY</strong>: session data wordt versleuteld met de <code>SECRET_KEY</code>; zonder geldige sleutel kan niemand de data lezen of aanpassen</li>
+<li><strong>redirect en url_for</strong>: na een POST-verzoek door sturen naar een andere route zodat de browser een GET-request uitvoert</li>
+<li><strong>Post-Redirect-Get patroon</strong>: na het verwerken van een formulier altijd redirecten om dubbele form submissions bij een pagina-refresh te voorkomen</li>
+<li><strong>Validator feedback</strong>: wanneer een verplicht veld leeg blijft blokkeert Flask-WTF het verzenden en toont de browser het formulier opnieuw met een foutindicatie</li>
+</ul>
 
 
 

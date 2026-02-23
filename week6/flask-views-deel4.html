@@ -2718,6 +2718,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3530,6 +3541,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3888,6 +3910,18 @@
 </span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="n">drums</span><span class="o">.</span><span class="n">cursist</span><span class="o">.</span><span class="n">naam</span>  <span class="c1"># "Joyce"</span>
 </span></code></pre></div>
 <p><strong>Volgende stap:</strong> <a href="flask-views-deel5.html">Deel 5</a> - Complete Flask applicatie met database.</p>
+<h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
+<p>In deze les heb je geleerd:</p>
+<ul>
+<li><strong>Primary key</strong>: elke tabel heeft een uniek <code>id</code>-veld als primaire sleutel waarmee een rij eenduidig geïdentificeerd kan worden.</li>
+<li><strong>Foreign key</strong>: een relatie tussen tabellen leg je vast met een <code>ForeignKey</code>-kolom die verwijst naar de <code>id</code> van een andere tabel; je gebruikt de tabelnaam (bijv. <code>'cursisten.id'</code>), niet de klassenaam.</li>
+<li><strong>Één-op-veel relatie</strong>: door <code>Mapped[list['Model']]</code> te combineren met <code>relationship(back_populates=...)</code> koppel je één bovenliggende rij aan meerdere gerelateerde rijen.</li>
+<li><strong>Één-op-één relatie</strong>: <code>Mapped['Model | None']</code> samen met <code>relationship(back_populates=...)</code> koppelt twee rijen één-op-één aan elkaar.</li>
+<li><strong>back_populates</strong>: dit parameter synchroniseert de relatie in beide richtingen, zodat je zowel van de bovenliggende als van de onderliggende kant kunt navigeren.</li>
+<li><strong>Flask-Migrate</strong>: dit pakket beheert databaseschema-wijzigingen via migratiescripts en installeert met <code>uv add flask-migrate</code>; koppelen doe je via <code>Migrate(app, db)</code>.</li>
+<li><strong>Migratieworkflow</strong>: na modelwijzigingen voer je achtereenvolgens <code>flask db init</code>, <code>flask db migrate -m "..."</code> en <code>flask db upgrade</code> uit om de database bij te werken.</li>
+<li><strong>Navigeren via relaties</strong>: dankzij <code>back_populates</code> kun je vanuit een object direct gerelateerde objecten ophalen (bijv. <code>joyce.instrumenten</code>) of omgekeerd (bijv. <code>drums.cursist</code>).</li>
+</ul>
 
 
 

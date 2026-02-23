@@ -2640,6 +2640,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3430,6 +3441,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3641,6 +3663,17 @@
 <p>Vergeet <code>db.session.commit()</code> niet! Zonder commit worden wijzigingen niet opgeslagen in de database.</p>
 </div>
 <p><strong>Volgende stap:</strong> <a href="flask-views-deel4.html">Deel 4</a> - Relaties tussen tabellen.</p>
+<h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
+<p>In deze les heb je geleerd:</p>
+<ul>
+<li><strong>CREATE</strong>: een nieuw record toevoeg je door een object aan te maken, het met <code>db.session.add()</code> aan de sessie toe te voegen en daarna <code>db.session.commit()</code> aan te roepen.</li>
+<li><strong>READ (alle records)</strong>: <code>db.session.execute(db.select(Model)).scalars().all()</code> geeft een lijst van alle records terug.</li>
+<li><strong>READ (op primaire sleutel)</strong>: <code>db.session.get(Model, id)</code> haalt één record op aan de hand van het ID.</li>
+<li><strong>READ (filteren)</strong>: met <code>.filter_by(attribuut=waarde)</code> gecombineerd met <code>.scalar_one_or_none()</code> zoek je op een specifieke kolomwaarde.</li>
+<li><strong>UPDATE</strong>: haal een record op, pas het gewenste attribuut aan en roep <code>db.session.commit()</code> aan; <code>db.session.add()</code> is optioneel omdat SQLAlchemy wijzigingen automatisch bijhoudt.</li>
+<li><strong>DELETE</strong>: haal een record op, roep <code>db.session.delete(obj)</code> aan en commit de sessie.</li>
+<li><strong>Altijd committen</strong>: zonder <code>db.session.commit()</code> worden wijzigingen niet definitief opgeslagen in de database.</li>
+</ul>
 
 
 

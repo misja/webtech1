@@ -2429,6 +2429,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3486,6 +3497,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#samenvatting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Samenvatting
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3857,6 +3879,19 @@
 </span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="n">flash</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Bedankt, </span><span class="si">{</span><span class="n">naam</span><span class="si">}</span><span class="s1">! Bevestiging gestuurd naar </span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">)</span>
 </span></code></pre></div>
 <p><strong>Volgende stap:</strong> Maak nu <a href="oefeningen/flask-forms-oefening1.html">oefening 1</a>.</p>
+<h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
+<p>In deze les heb je geleerd:</p>
+<ul>
+<li><strong>Flash messages</strong>: tijdelijke berichten versturen naar de template met <code>flash('bericht')</code> vanuit een view function</li>
+<li><strong>get_flashed_messages()</strong>: haalt alle flash messages op in de template via een <code>{% for %}</code>-lus; berichten worden automatisch verwijderd na één keer tonen</li>
+<li><strong>Flash categorieën</strong>: een categorie meegeven als tweede argument aan <code>flash()</code>, zoals <code>'success'</code>, <code>'warning'</code>, <code>'danger'</code> of <code>'info'</code>, voor gedifferentieerde weergave</li>
+<li><strong>with_categories</strong>: met <code>get_flashed_messages(with_categories=true)</code> haal je zowel de categorie als het bericht op als tuple zodat je de stijl kunt afstemmen op het type bericht</li>
+<li><strong>Bootstrap 5 integratie</strong>: Bootstrap alert classes (<code>alert-success</code>, <code>alert-warning</code>, <code>alert-danger</code>, <code>alert-info</code>) koppelen aan de flash categorie voor automatische kleuropmaak via <code>alert-{{ category }}</code></li>
+<li><strong>alert-dismissible</strong>: Bootstrap klasse die samen met <code>.btn-close</code> een sluitknopje toevoegt waarmee de gebruiker een melding handmatig kan verwijderen</li>
+<li><strong>fade show</strong>: Bootstrap klassen die een fade-animatie geven bij het sluiten van een alert</li>
+<li><strong>ARIA-attributen</strong>: <code>role="alert"</code> en <code>aria-label="Close"</code> maken Bootstrap-alerts toegankelijk voor schermlezers</li>
+<li><strong>PRG-patroon met flash</strong>: na een succesvolle formulierverwerking redirecten én een flash message toevoegen voorkomt dubbele submissions en geeft de gebruiker directe bevestiging</li>
+</ul>
 
 
 
