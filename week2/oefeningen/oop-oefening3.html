@@ -1192,7 +1192,7 @@
   <span class="md-ellipsis">
     
   
-    OOP Python – Inheritance
+    OOP Python – Overerving
   
 
     
@@ -3732,14 +3732,14 @@
 
 
 <h1 id="oop-python-oefening-3">OOP Python – Oefening 3<a class="headerlink" href="#oop-python-oefening-3" title="Link naar deze sectie">¶</a></h1>
-<p>In deze oefening pas je <strong>inheritance</strong> (overerving) toe. Je maakt subklassen van <code>Product</code> voor verschillende producttypen, wat je voorbereidt op het werken met database modellen die erven van <code>db.Model</code>.</p>
+<p>In deze oefening pas je <strong>overerving</strong> toe. Je maakt subklassen van <code>Product</code> voor verschillende producttypen, wat je voorbereidt op het werken met database modellen die erven van <code>db.Model</code>.</p>
 <h2 id="achtergrond">Achtergrond<a class="headerlink" href="#achtergrond" title="Link naar deze sectie">¶</a></h2>
 <p>In een webshop heb je verschillende soorten producten:</p>
 <ul>
 <li><strong>Fysieke producten</strong>: hebben gewicht en verzendkosten</li>
 <li><strong>Digitale producten</strong>: hebben bestandsgrootte en geen verzending</li>
 </ul>
-<p>Dit is een perfect geval voor inheritance: beide zijn producten, maar met specifieke eigenschappen.</p>
+<p>Dit is een perfect geval voor overerving: beide zijn producten, maar met specifieke eigenschappen.</p>
 <h2 id="deel-a-fysiekproduct">Deel a: FysiekProduct<a class="headerlink" href="#deel-a-fysiekproduct" title="Link naar deze sectie">¶</a></h2>
 <p>Maak een <code>FysiekProduct</code> klasse die erft van <code>Product</code>.</p>
 <h3 id="opdracht-a">Opdracht a<a class="headerlink" href="#opdracht-a" title="Link naar deze sectie">¶</a></h3>
@@ -3767,8 +3767,8 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="k">pass</span>
 </span></code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Werken met dataclass inheritance</p>
-<p>Bij dataclasses hoef je geen <code>super().__init__()</code> te gebruiken - de parent attributen worden automatisch overgenomen!</p>
+<p class="admonition-title">Werken met dataclass overerving</p>
+<p>Bij dataclasses hoef je geen <code>super().__init__()</code> te gebruiken - de attributen van de bovenliggende klasse worden automatisch overgenomen!</p>
 </div>
 <h3 id="test-je-fysiekproduct">Test je FysiekProduct<a class="headerlink" href="#test-je-fysiekproduct" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">boek</span> <span class="o">=</span> <span class="n">FysiekProduct</span><span class="p">(</span>
@@ -3805,7 +3805,7 @@
 <ul>
 <li><code>download() -&gt; dict</code>: Simuleer een download</li>
 <li>Verminder voorraad met 1</li>
-<li>Geef een dict terug met info: <code>{"product": naam, "link": download_link, "grootte_mb": bestandsgrootte}</code></li>
+<li>Geef een dictionary terug met info: <code>{"product": naam, "link": download_link, "grootte_mb": bestandsgrootte}</code></li>
 </ul>
 <h3 id="startcode-b">Startcode b<a class="headerlink" href="#startcode-b" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@dataclass</span>
@@ -3844,7 +3844,7 @@
 <li><code>gewicht</code>: 0.5 kg (boeken zijn meestal licht)</li>
 </ul>
 <p><strong>Override <code>__str__()</code>:</strong>
-Maak een custom string representatie die ook auteur en ISBN toont.</p>
+Maak een eigen string-representatie die ook auteur en ISBN toont.</p>
 <h3 id="startcode-c">Startcode c<a class="headerlink" href="#startcode-c" title="Link naar deze sectie">¶</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nd">@dataclass</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">Boek</span><span class="p">(</span><span class="n">FysiekProduct</span><span class="p">):</span>
@@ -3886,17 +3886,17 @@ Maak een custom string representatie die ook auteur en ISBN toont.</p>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>DigitaalProduct</code> erft van <code>Product</code></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>Boek</code> erft van <code>FysiekProduct</code></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Alle type annotations aanwezig</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>download()</code> geeft een dict terug (geen print)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>download()</code> geeft een dictionary terug (geen print)</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>bereken_verzendkosten()</code> werkt correct</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>__str__()</code> override in <code>Boek</code> klasse</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>__str__()</code> overschreven in de <code>Boek</code>-klasse</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Code werkt met alle testcode</li>
 </ul>
 <h2 id="wat-je-geleerd-hebt">Wat je geleerd hebt<a class="headerlink" href="#wat-je-geleerd-hebt" title="Link naar deze sectie">¶</a></h2>
 <ul>
-<li>Inheritance met dataclasses</li>
+<li>Overerving met dataclasses</li>
 <li>Override van default waarden in subklassen</li>
 <li>Override van methoden (<code>__str__</code>)</li>
-<li>Inheritance hierarchie (Boek → FysiekProduct → Product)</li>
+<li>Overerving hierarchie (Boek → FysiekProduct → Product)</li>
 <li>Return dicts voor gestructureerde data</li>
 </ul>
 <p><strong>Preview:</strong> Database modellen werken precies zo - je maakt klassen die erven van <code>db.Model</code>!</p>

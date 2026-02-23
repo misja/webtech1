@@ -1192,7 +1192,7 @@
   <span class="md-ellipsis">
     
   
-    OOP Python – Inheritance
+    OOP Python – Overerving
   
 
     
@@ -3629,7 +3629,7 @@
 <li><code>aantal_items() -&gt; int</code>: Geef aantal items terug</li>
 </ul>
 <div class="admonition warning">
-<p class="admonition-title">Mutable defaults: gebruik field()</p>
+<p class="admonition-title">Veranderbare standaardwaarden: gebruik field()</p>
 <p>Voor lists als default waarde <strong>moet</strong> je <code>field(default_factory=list)</code> gebruiken!</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
@@ -3688,7 +3688,7 @@
 <li><code>@dataclass</code> vermindert herhalende code (boilerplate)</li>
 <li><code>X | None</code> voor waarden die None kunnen zijn</li>
 <li><code>list[Type]</code> voor typed lists</li>
-<li><code>field(default_factory=list)</code> voor mutable defaults</li>
+<li><code>field(default_factory=list)</code> voor veranderbare standaardwaarden</li>
 </ul>
 <p><strong>Tip:</strong> Deze patterns zie je later terug in SQLAlchemy modellen!</p>
 

@@ -1383,7 +1383,7 @@
   <span class="md-ellipsis">
     
   
-    OOP Python – Inheritance
+    OOP Python – Overerving
   
 
     
@@ -3724,7 +3724,7 @@ Dit scheelt veel typwerk en voorkomt fouten. Later zie je meer decorators zoals 
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">field(default_factory=list)</p>
-<p>Voor <strong>mutable</strong> default waarden (lists, dicts) moet je <code>field(default_factory=list)</code> gebruiken in plaats van <code>= []</code>.
+<p>Voor <strong>veranderbare</strong> default waarden (lists, dicts) moet je <code>field(default_factory=list)</code> gebruiken in plaats van <code>= []</code>.
 <strong>Waarom?</strong> Een gewoon <code>= []</code> zou gedeeld worden tussen alle instanties: Python maakt die lijst eenmalig aan bij het laden van de klasse, niet bij elke aanmaak van een object. Met <code>default_factory</code> krijgt elke instantie zijn eigen lege lijst.</p>
 </div>
 <h2 id="preview-database-modellen">Preview: Database modellen<a class="headerlink" href="#preview-database-modellen" title="Link naar deze sectie">¶</a></h2>
@@ -3821,20 +3821,20 @@ Dit scheelt veel typwerk en voorkomt fouten. Later zie je meer decorators zoals 
 </ul>
 <p><strong>Gebruik reguliere klassen:</strong></p>
 <ul>
-<li>Complexe initialization logic nodig</li>
-<li>Veel custom dunder methoden (speciale methoden met dubbele underscores, zoals <code>__len__</code>, <code>__iter__</code>)</li>
+<li>Complexe initialisatielogica nodig</li>
+<li>Veel eigen dunder-methoden (speciale methoden met dubbele underscores, zoals <code>__len__</code>, <code>__iter__</code>)</li>
 <li>Geen data container maar echt gedrag</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Database modellen zijn dataclass-achtig</p>
-<p>SQLAlchemy modellen die je later maakt, gebruiken hetzelfde patroon: type annotaties met class attributen. Als je dataclasses begrijpt, begrijp je ook de moderne SQLAlchemy syntax.</p>
+<p>SQLAlchemy modellen die je later maakt, gebruiken hetzelfde patroon: type annotaties met klasse-attributen. Als je dataclasses begrijpt, begrijp je ook de moderne SQLAlchemy syntax.</p>
 </div>
 <h2 id="samenvatting">Samenvatting<a class="headerlink" href="#samenvatting" title="Link naar deze sectie">¶</a></h2>
 <p>Je hebt nu gezien:</p>
 <ul>
 <li><strong>Dataclasses</strong>: Minder herhalende code (boilerplate) voor data containers met <code>@dataclass</code></li>
 <li><strong>Type hints</strong>: <code>str | None</code>, <code>list[Product]</code> voor complexere types</li>
-<li><strong>field()</strong>: Voor mutable defaults met <code>default_factory</code></li>
+<li><strong>field()</strong>: Voor veranderbare standaardwaarden met <code>default_factory</code></li>
 <li><strong>Preview</strong>: Database modellen volgen hetzelfde patroon</li>
 </ul>
 <h3 id="belangrijkste-voordelen-dataclasses">Belangrijkste voordelen dataclasses<a class="headerlink" href="#belangrijkste-voordelen-dataclasses" title="Link naar deze sectie">¶</a></h3>

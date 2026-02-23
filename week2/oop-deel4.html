@@ -1192,7 +1192,7 @@
   <span class="md-ellipsis">
     
   
-    OOP Python – Inheritance
+    OOP Python – Overerving
   
 
     
@@ -1306,10 +1306,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#return-dicts-voor-gestructureerde-data" class="md-nav__link">
+  <a href="#return-dictionaries-voor-gestructureerde-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Return dicts voor gestructureerde data
+        Return dictionaries voor gestructureerde data
       
     </span>
   </a>
@@ -3397,10 +3397,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#return-dicts-voor-gestructureerde-data" class="md-nav__link">
+  <a href="#return-dictionaries-voor-gestructureerde-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Return dicts voor gestructureerde data
+        Return dictionaries voor gestructureerde data
       
     </span>
   </a>
@@ -3643,7 +3643,7 @@ In databases: compositie = foreign keys!</p>
 <p class="admonition-title">field(default_factory=list)</p>
 <p>Voor een lijst als attribuut moet je altijd <code>field(default_factory=list)</code> gebruiken, anders delen alle instanties dezelfde lijst!</p>
 </div>
-<h2 id="return-dicts-voor-gestructureerde-data">Return dicts voor gestructureerde data<a class="headerlink" href="#return-dicts-voor-gestructureerde-data" title="Link naar deze sectie">¶</a></h2>
+<h2 id="return-dictionaries-voor-gestructureerde-data">Return dictionaries voor gestructureerde data<a class="headerlink" href="#return-dictionaries-voor-gestructureerde-data" title="Link naar deze sectie">¶</a></h2>
 <p>In webapplicaties wil je vaak gestructureerde data teruggeven aan templates:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
@@ -3697,8 +3697,8 @@ In databases: compositie = foreign keys!</p>
 </span><span id="__span-2-50"><a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Totaal: €</span><span class="si">{</span><span class="n">totaal_info</span><span class="p">[</span><span class="s1">'totaal'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
 <div class="admonition info">
-<p class="admonition-title">Waarom dicts teruggeven?</p>
-<p>Dicts zijn handig voor templates. In Flask kun je ze doorgeven aan Jinja2 templates:
+<p class="admonition-title">Waarom dictionaries teruggeven?</p>
+<p>Dictionaries zijn handig voor templates. In Flask kun je ze doorgeven aan Jinja2 templates:
 </p><div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">'/order/&lt;int:id&gt;'</span><span class="p">)</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">toon_order</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">order</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Order</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
@@ -3707,7 +3707,7 @@ In databases: compositie = foreign keys!</p>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                         <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                         <span class="n">totaal</span><span class="o">=</span><span class="n">totaal_info</span><span class="p">)</span>
 </span></code></pre></div>
-In het template (<code>order.html</code>) kun je dan de dict gebruiken:
+In het template (<code>order.html</code>) kun je dan de dictionary gebruiken:
 <div class="language-html highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Subtotaal: €{{ totaal.subtotaal }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Korting: -€{{ totaal.korting }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Totaal: €{{ totaal.totaal }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
@@ -3929,14 +3929,14 @@ In het template (<code>order.html</code>) kun je dan de dict gebruiken:
 </span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">}</span>
 </span></code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Dataclass → dict voor debugging</p>
-<p>Je kunt <code>asdict()</code> gebruiken om een dataclass automatisch naar een dict te converteren. Dit is vooral handig voor debugging:
+<p class="admonition-title">Dataclass → dictionary voor debugging</p>
+<p>Je kunt <code>asdict()</code> gebruiken om een dataclass automatisch naar een dictionary te converteren. Dit is vooral handig voor debugging:
 </p><div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">asdict</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">klant_dict</span> <span class="o">=</span> <span class="n">asdict</span><span class="p">(</span><span class="n">jan</span><span class="p">)</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">klant_dict</span><span class="p">)</span>
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># {'naam': 'Jan Jansen', 'email': 'jan@email.nl'}</span>
 </span></code></pre></div>
-Let op: in productiecode maak je meestal zelf specifieke dicts met alleen de data die je template nodig heeft.<p></p>
+Let op: in productiecode maak je meestal zelf specifieke dictionaries met alleen de data die je template nodig heeft.<p></p>
 </div>
 <h2 id="praktijk-flask-routes-met-templates">Praktijk: Flask routes met templates<a class="headerlink" href="#praktijk-flask-routes-met-templates" title="Link naar deze sectie">¶</a></h2>
 <p>Hier zie je hoe dit in een echte Flask applicatie werkt:</p>
@@ -4024,7 +4024,7 @@ Let op: in productiecode maak je meestal zelf specifieke dicts met alleen de dat
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Compositie: objecten die andere objecten bevatten</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>list[Object]</code> met <code>field(default_factory=list)</code></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>X | None</code> voor attributen die None kunnen zijn</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Methoden die dicts teruggeven voor templates</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Methoden die dictionaries teruggeven voor templates</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Begrijpen: compositie in code = foreign keys in database</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Scheiding van verantwoordelijkheden: bedrijfslogica vs presentatie</li>
 </ul>
@@ -4033,7 +4033,7 @@ Let op: in productiecode maak je meestal zelf specifieke dicts met alleen de dat
 <ul>
 <li><strong>Compositie</strong>: Objecten die andere objecten bevatten (heeft-een relatie)</li>
 <li><strong>Type hints</strong>: <code>list[Product]</code>, <code>Customer | None</code></li>
-<li><strong>Return dicts</strong>: Gestructureerde data voor templates</li>
+<li><strong>Return dictionaries</strong>: Gestructureerde data voor templates</li>
 <li><strong>Database preview</strong>: Compositie = foreign keys</li>
 <li><strong>Scheiding van verantwoordelijkheden</strong>: Bedrijfslogica apart van presentatie</li>
 </ul>
