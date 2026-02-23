@@ -365,11 +365,11 @@ Je bent gewend aan PostgreSQL. Enkele verschillen met SQLite:
 
 | Aspect | PostgreSQL | SQLite |
 |--------|-----------|--------|
-| **Datatypes** | Veel types (VARCHAR, TIMESTAMP, etc.) | Weinig types (TEXT, INTEGER, REAL, BLOB) |
-| **Constraints** | Alle constraints | Beperkte constraint support |
-| **ALTER TABLE** | Volledig support | Zeer beperkt (meestal: nieuwe tabel maken) |
+| **Datatypes** | Veel expliciete types (VARCHAR, TIMESTAMP, etc.) | Type affinity: TEXT, INTEGER, REAL, BLOB, NULL — kolomtype is een hint, geen harde eis |
+| **Constraints** | Alle constraints, ook achteraf via ALTER TABLE | Zelfde constraints bij `CREATE TABLE`; maar toevoegen of verwijderen van constraints achteraf is niet mogelijk |
+| **ALTER TABLE** | Volledig | `RENAME TABLE`, `RENAME COLUMN`, `ADD COLUMN` en `DROP COLUMN` worden ondersteund; kolomtype wijzigen vereist een nieuwe tabel |
 | **Type checking** | Strikt | Losjes (string in INTEGER kolom kan!) |
-| **Concurrent writes** | Veel users tegelijk | File locking (één writer tegelijk) |
+| **Concurrent writes** | Meerdere schrijvers tegelijk | Één schrijver tegelijk; WAL-mode verbetert leesgelijktijdigheid, maar SQLite is bedoeld voor single-user gebruik |
 
 !!! warning "SQLite type validatie is losjes"
     SQLite accepteert dit zonder error:
