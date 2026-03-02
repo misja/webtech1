@@ -3960,19 +3960,18 @@
 <li><strong>Flask specifieke risico's</strong> en oplossingen</li>
 <li><strong>Best practices</strong> voor veilige database code</li>
 </ul>
-<p><strong>Volgende stap:</strong> <a href="sql-deel6.html">Deel 6</a> - Database error handling.</p>
-<p><strong>Oefening:</strong> Maak nu <a href="oefeningen/sql-oefening2.html">oefening 2</a> over SQL injection.</p>
 <div class="admonition tip">
 <p class="admonition-title">Test je beveiliging</p>
 <p>Test je applicaties altijd met deze input strings:
-```</p>
+</p><div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>' OR '1'='1
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>' OR '1'='1' --
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>'; DROP TABLE users; --
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>1' AND '1'='2
+</span></code></pre></div>
+Als deze niet gewoon als letterlijke strings behandeld worden, heb je een probleem!<p></p>
 </div>
-<p>' OR '1'='1
-    ' OR '1'='1' --
-    '; DROP TABLE users; --
-    1' AND '1'='2
-    ```
-    Als deze niet gewoon als letterlijke strings behandeld worden, heb je een probleem!</p>
+<p><strong>Volgende stap:</strong> <a href="sql-deel6.html">Deel 6</a> - Database error handling.</p>
+<p><strong>Oefening:</strong> Maak nu <a href="oefeningen/sql-oefening2.html">oefening 2</a> over SQL injection.</p>
 
 
 
