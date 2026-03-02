@@ -3724,7 +3724,7 @@
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Aantal records: 120
 </span></code></pre></div>
 <div class="admonition info">
-<p class="admonition-title">PRIMARY KEY AUTOINCREMENT</p>
+<p class="admonition-title">PRIMARY KEY</p>
 <p>SQLite vult automatisch de primary key kolom <code>id</code> in wanneer je een nieuwe record toevoegt:
 </p><div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"INSERT INTO categories (name, description) VALUES (?, ?)"</span><span class="p">,</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>                     <span class="p">(</span><span class="s2">"Furniture"</span><span class="p">,</span> <span class="s2">"Tables, chairs, and desks"</span><span class="p">))</span>
@@ -3750,7 +3750,7 @@ Dit werkt hetzelfde als PostgreSQL's <code>SERIAL</code> type.<p></p>
 </span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Product </span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="si">}</span><span class="s2"> - €</span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'price'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Output:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Product 42: Sneakers Nike - €89.99
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Product 42: Polo Shirt White - €24.99
 </span></code></pre></div>
 <h3 id="sorteren-met-order-by">Sorteren met ORDER BY<a class="headerlink" href="#sorteren-met-order-by" title="Link naar deze sectie">¶</a></h3>
 <p>Je kunt resultaten sorteren met <code>ORDER BY</code>:</p>
@@ -3773,10 +3773,10 @@ Dit werkt hetzelfde als PostgreSQL's <code>SERIAL</code> type.<p></p>
 </span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="si">}</span><span class="s2">: €</span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'price'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Output:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Smartphone Samsung Galaxy: €699.99
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Tablet iPad Air: €599.99
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Monitor Dell 27 inch: €349.99
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>4K Blu-ray Player: €199.99
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Laptop HP EliteBook: €899.99
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Smartphone Samsung Galaxy: €699.99
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Tablet iPad Air: €599.99
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>Monitor Dell 27 inch: €349.99
 </span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>Smartwatch Fitbit: €199.99
 </span></code></pre></div>
 <div class="admonition warning">
@@ -3901,11 +3901,11 @@ Doe dit NOOIT met user input:
 <p>Output:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Categorie statistieken:
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>Books: 20 producten, gemiddelde prijs: €24.34, totale voorraad: 703
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>Clothing: 15 producten, gemiddelde prijs: €37.19, totale voorraad: 570
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>Electronics: 15 producten, gemiddelde prijs: €189.32, totale voorraad: 413
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>Home &amp; Garden: 12 producten, gemiddelde prijs: €42.99, totale voorraad: 358
-</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>Sports: 12 producten, gemiddelde prijs: €36.24, totale voorraad: 445
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>Books: 20 producten, gemiddelde prijs: €25.54, totale voorraad: 643
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>Electronics: 15 producten, gemiddelde prijs: €226.19, totale voorraad: 428
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>Clothing: 15 producten, gemiddelde prijs: €42.52, totale voorraad: 555
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>Home &amp; Garden: 12 producten, gemiddelde prijs: €50.66, totale voorraad: 338
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>Sports: 12 producten, gemiddelde prijs: €40.24, totale voorraad: 405
 </span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>...
 </span></code></pre></div>
 <div class="admonition tip">
@@ -3946,11 +3946,12 @@ Voor statistieken wil je vaak <code>LEFT JOIN</code> om lege categorieën ook te
 </span><span id="__span-15-27"><a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'category'</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'product'</span><span class="p">]</span><span class="si">}</span><span class="s2"> - €</span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'price'</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'stock'</span><span class="p">]</span><span class="si">}</span><span class="s2"> op voorraad)"</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Output:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>Gevonden 3 producten met 'phone' in de naam:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>Gevonden 4 producten met 'phone' in de naam:
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>Electronics: Bluetooth Headphones Sony - €149.99 (18 op voorraad)
 </span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>Electronics: Smartphone Samsung Galaxy - €699.99 (8 op voorraad)
 </span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>Music &amp; Movies: DJ Headphones - €89.99 (16 op voorraad)
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>Music &amp; Movies: Microphone USB - €69.99 (18 op voorraad)
 </span></code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">LIKE operator en wildcard</p>
@@ -3993,13 +3994,13 @@ Dit is identiek aan PostgreSQL's <code>LIKE</code> operator.</li>
 </span><span id="__span-17-28"><a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'product'</span><span class="p">]</span><span class="si">}</span><span class="s2">: €</span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'price'</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">product</span><span class="p">[</span><span class="s1">'stock'</span><span class="p">]</span><span class="si">}</span><span class="s2"> op voorraad)"</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Output:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>Gevonden 21 betaalbare producten met voldoende voorraad:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>Gevonden 37 betaalbare producten met voldoende voorraad:
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>Card Game Uno: €9.99 (60 op voorraad)
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>The Art of War: €9.99 (48 op voorraad)
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>The Great Gatsby: €10.99 (50 op voorraad)
-</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>Sticky Notes Pack: €11.99 (65 op voorraad)
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>Honey Natural 500g: €11.99 (30 op voorraad)
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>Chocolate Bar Dark 70%: €3.99 (100 op voorraad)
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>Highlighter Set (6): €7.99 (55 op voorraad)
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>Printer Paper 500 sheets: €8.99 (50 op voorraad)
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>The Art of War: €9.99 (48 op voorraad)
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>Card Game Uno: €9.99 (60 op voorraad)
 </span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>...
 </span></code></pre></div>
 <h2 id="views-optioneel">Views (optioneel)<a class="headerlink" href="#views-optioneel" title="Link naar deze sectie">¶</a></h2>
