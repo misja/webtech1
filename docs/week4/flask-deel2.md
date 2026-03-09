@@ -4,14 +4,6 @@
 
 ## uv installeren
 
-=== "macOS"
-    ```console
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-    ```
-=== "Linux"
-    ```console
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-    ```
 === "Windows"
     ```console
     winget install -e --id astral-sh.uv
@@ -20,6 +12,15 @@
     ```console
     powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
     ```
+=== "macOS"
+    ```console
+    brew install uv
+    ```
+=== "Linux"
+    ```console
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
+
 
 Zie [uv documentatie](https://docs.astral.sh/uv/getting-started/installation/) voor meer opties.
 
