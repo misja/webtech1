@@ -54,7 +54,7 @@ Dit maakt automatisch:
 
 - `pyproject.toml` - Project configuratie en dependencies
 - `.python-version` - Python versie voor dit project
-- `hello.py` - Een voorbeeld bestand (kun je verwijderen)
+- `main.py` - Een voorbeeld bestand (kun je verwijderen)
 
 ### Stap 3: Flask installeren
 
@@ -95,7 +95,7 @@ dependencies = [
 Verwijder het voorbeeld bestand en maak een nieuwe `app.py`:
 
 ```console
-rm hello.py
+rm main.py
 ```
 
 Maak `app.py` met deze inhoud:
